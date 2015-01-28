@@ -86,6 +86,10 @@
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
+    if([self.subjectTextField isFirstResponder]) {
+        return;
+    }
+    
     CGRect keyboardFrame = [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGFloat duration = [[notification.userInfo valueForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     UIViewAnimationCurve curve = [[notification.userInfo valueForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
@@ -95,21 +99,11 @@
     [UIView setAnimationDuration:duration];
     [UIView setAnimationCurve:curve];
     
-    if([self.subjectTextField isFirstResponder]) {
+    CGFloat offsetY = self.contentView.frame.origin.y + self.contentView.frame.size.height + keyboardFrame.size.height - self.view.frame.size.height;
+    if(offsetY > 0.0) {
         CGRect frame = self.view.frame;
-        frame.origin.y = !IOS_VERSION_7_OR_ABOVE ? 0.0 : (STATUS_BAR_HEIGHT + NAVIGATION_BAR_HEIGHT);
+        frame.origin.y -= offsetY + 15.0;
         self.view.frame = frame;
-    } else {
-        CGFloat offsetY = self.contentView.frame.origin.y + self.contentView.frame.size.height + keyboardFrame.size.height - self.view.frame.size.height;
-        if(offsetY > 0.0) {
-            CGRect frame = self.view.frame;
-            frame.origin.y -= offsetY;
-            self.view.frame = frame;
-        } else {
-            CGRect frame = self.view.frame;
-            frame.origin.y = !IOS_VERSION_7_OR_ABOVE ? 0.0 : (STATUS_BAR_HEIGHT + NAVIGATION_BAR_HEIGHT);
-            self.view.frame = frame;
-        }
     }
     
     [UIView commitAnimations];
@@ -132,6 +126,11 @@
     [UIView commitAnimations];
 }
 
+- (void)dismissKeyboard
+{
+    [self.contentTextView resignFirstResponder];
+}
+
 #pragma mark - Private Methods
 - (void)initView
 {
@@ -140,6 +139,14 @@
     [self.replyButton setBackgroundImage:[Util imageWithColor:RED_BUTTON_BG_NORMAL_COLOR] forState:UIControlStateNormal];
     [self.replyButton setBackgroundImage:[Util imageWithColor:RED_BUTTON_BG_HIGHLIGHTED_COLOR] forState:UIControlStateHighlighted];
     [self.replyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    UIToolbar *inputAccessoryView = [[UIToolbar alloc]initWithFrame:CGRectMake(0.0, 0.0, DEVICE_WIDTH, INPUT_ACCESSORY_VIEW_HEIGHT)];
+    inputAccessoryView.barStyle = UIBarStyleDefault;
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:BUTTON_TITLE_DONE style:UIBarButtonItemStyleDone target:self action:@selector(dismissKeyboard)];
+    NSArray *buttonArray = [NSArray arrayWithObjects:flexibleSpace, doneButton, nil];
+    inputAccessoryView.items = buttonArray;
+    self.contentTextView.inputAccessoryView = inputAccessoryView;
 }
 
 - (BOOL)checkValidity
@@ -164,11 +171,6 @@
 
 #pragma mark - UITextFieldDelegate Methods
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    return YES;
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     return YES;
 }

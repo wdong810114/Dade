@@ -16,6 +16,7 @@
                 <outlet property="sendButton" destination="uEP-PR-Kgo" id="eg3-0y-r7R"/>
                 <outlet property="senderLabel" destination="SP8-gP-gcg" id="tiI-TR-vCt"/>
                 <outlet property="subjectTextField" destination="ZU2-m3-PyE" id="1cU-33-4zh"/>
+                <outlet property="subjectView" destination="Jyl-UA-zP3" id="Dhe-xl-9RL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

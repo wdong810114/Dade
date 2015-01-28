@@ -85,10 +85,6 @@
 
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-    if(![self.contentTextView isFirstResponder]) {
-        return;
-    }
-    
     CGRect keyboardFrame = [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGFloat duration = [[notification.userInfo valueForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
     UIViewAnimationCurve curve = [[notification.userInfo valueForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
@@ -98,9 +94,16 @@
     [UIView setAnimationDuration:duration];
     [UIView setAnimationCurve:curve];
     
-    CGFloat offsetY = self.contentView.frame.origin.y + self.contentView.frame.size.height + keyboardFrame.size.height - self.mailDraftScrollView.frame.size.height;
-    if(offsetY > 0.0) {
-        [self.mailDraftScrollView setContentOffset:CGPointMake(0.0, self.contentView.frame.origin.y - 15.0)];
+    if([self.subjectTextField isFirstResponder]) {
+        CGFloat offsetY = self.subjectView.frame.origin.y + self.subjectView.frame.size.height + keyboardFrame.size.height - self.mailDraftScrollView.frame.size.height;
+        if(offsetY > 0.0) {
+            [self.mailDraftScrollView setContentOffset:CGPointMake(0.0, self.subjectView.frame.origin.y - 15.0)];
+        }
+    } else if([self.contentTextView isFirstResponder]) {
+        CGFloat offsetY = self.contentView.frame.origin.y + self.contentView.frame.size.height + keyboardFrame.size.height - self.mailDraftScrollView.frame.size.height;
+        if(offsetY > 0.0) {
+            [self.mailDraftScrollView setContentOffset:CGPointMake(0.0, self.contentView.frame.origin.y - 15.0)];
+        }
     }
 
     [UIView commitAnimations];
@@ -180,6 +183,12 @@
         [self.view endEditing:YES];
         
     }
+}
+
+#pragma mark - UIScrollViewDelegate Methods
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.view endEditing:YES];
 }
 
 #pragma mark - UITextFieldDelegate Methods
