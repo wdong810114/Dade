@@ -18,10 +18,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U8e-r8-p4g" userLabel="CaptchaView">
-                    <rect key="frame" x="20" y="15" width="280" height="40"/>
+                    <rect key="frame" x="20" y="15" width="280" height="44"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MHx-NT-71Z" userLabel="CaptchaTextField">
-                            <rect key="frame" x="10" y="12" width="170" height="17"/>
+                            <rect key="frame" x="10" y="13" width="170" height="19"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="19" id="vUJ-iY-0B5"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="done"/>
                             <connections>
@@ -29,7 +32,7 @@
                             </connections>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="短信验证码" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5vO-2T-cyS" userLabel="CaptchaLabel">
-                            <rect key="frame" x="180" y="0.0" width="100" height="40"/>
+                            <rect key="frame" x="180" y="0.0" width="100" height="44"/>
                             <color key="backgroundColor" red="0.82352941180000006" green="0.82352941180000006" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="k8y-Gg-IhE"/>
@@ -45,13 +48,13 @@
                         <constraint firstAttribute="height" secondItem="5vO-2T-cyS" secondAttribute="height" id="8xJ-BG-Wyl"/>
                         <constraint firstItem="5vO-2T-cyS" firstAttribute="leading" secondItem="MHx-NT-71Z" secondAttribute="trailing" id="Kf6-3h-ZH6"/>
                         <constraint firstAttribute="centerY" secondItem="5vO-2T-cyS" secondAttribute="centerY" id="Uj5-43-Aaf"/>
-                        <constraint firstAttribute="height" constant="40" id="X96-K5-gf7"/>
+                        <constraint firstAttribute="height" constant="44" id="X96-K5-gf7"/>
                         <constraint firstAttribute="trailing" secondItem="5vO-2T-cyS" secondAttribute="trailing" id="b13-L6-gg8"/>
                         <constraint firstItem="MHx-NT-71Z" firstAttribute="leading" secondItem="U8e-r8-p4g" secondAttribute="leading" constant="10" id="bpO-Bg-oeL"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xyK-xF-YS1" userLabel="LoginButton">
-                    <rect key="frame" x="20" y="70" width="280" height="44"/>
+                    <rect key="frame" x="20" y="74" width="280" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="DCi-5f-hyP"/>
                     </constraints>

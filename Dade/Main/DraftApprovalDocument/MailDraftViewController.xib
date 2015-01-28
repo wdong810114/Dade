@@ -108,6 +108,9 @@
                                 </label>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入题目" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ZU2-m3-PyE" userLabel="SubjectTextField">
                                     <rect key="frame" x="47" y="7" width="253" height="19"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="19" id="9nq-Ez-2fr"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                     <connections>

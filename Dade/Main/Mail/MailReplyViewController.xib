@@ -21,16 +21,19 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GTY-us-uPh" userLabel="SubjectView">
-                    <rect key="frame" x="10" y="15" width="300" height="27"/>
+                    <rect key="frame" x="10" y="15" width="300" height="33"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="主题：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzl-6V-AAs" userLabel="STitleLabel">
-                            <rect key="frame" x="5" y="5" width="42" height="17"/>
+                            <rect key="frame" x="5" y="8" width="42" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入题目" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A8F-pz-JeT" userLabel="SubjectTextField">
-                            <rect key="frame" x="47" y="5" width="253" height="17"/>
+                            <rect key="frame" x="47" y="7" width="253" height="19"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="19" id="cRf-2n-Vce"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                             <connections>
@@ -40,17 +43,16 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="centerY" secondItem="wzl-6V-AAs" secondAttribute="centerY" id="09A-kz-YAm"/>
-                        <constraint firstItem="wzl-6V-AAs" firstAttribute="leading" secondItem="GTY-us-uPh" secondAttribute="leading" constant="5" id="2mW-Wj-jvQ"/>
-                        <constraint firstAttribute="trailing" secondItem="A8F-pz-JeT" secondAttribute="trailing" id="L9R-j3-fiL"/>
-                        <constraint firstAttribute="bottom" secondItem="A8F-pz-JeT" secondAttribute="bottom" constant="5" id="PX7-NG-FWE"/>
-                        <constraint firstItem="A8F-pz-JeT" firstAttribute="leading" secondItem="wzl-6V-AAs" secondAttribute="trailing" id="W7g-4R-xwC"/>
-                        <constraint firstAttribute="centerY" secondItem="A8F-pz-JeT" secondAttribute="centerY" id="bCR-4D-euH"/>
-                        <constraint firstItem="wzl-6V-AAs" firstAttribute="top" secondItem="GTY-us-uPh" secondAttribute="top" constant="5" id="mPQ-yt-gIX"/>
+                        <constraint firstItem="wzl-6V-AAs" firstAttribute="centerY" secondItem="GTY-us-uPh" secondAttribute="centerY" id="32e-Rg-5eO"/>
+                        <constraint firstItem="wzl-6V-AAs" firstAttribute="leading" secondItem="GTY-us-uPh" secondAttribute="leading" constant="5" id="BsC-t1-W09"/>
+                        <constraint firstItem="A8F-pz-JeT" firstAttribute="top" secondItem="GTY-us-uPh" secondAttribute="top" constant="7" id="b8K-2e-ebo"/>
+                        <constraint firstAttribute="centerY" secondItem="A8F-pz-JeT" secondAttribute="centerY" id="baS-ck-DLG"/>
+                        <constraint firstItem="A8F-pz-JeT" firstAttribute="leading" secondItem="wzl-6V-AAs" secondAttribute="trailing" id="cPL-V3-4Jb"/>
+                        <constraint firstAttribute="trailing" secondItem="A8F-pz-JeT" secondAttribute="trailing" id="sa3-ED-pme"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="azY-cX-7U6" userLabel="ContentView">
-                    <rect key="frame" x="10" y="57" width="300" height="127"/>
+                    <rect key="frame" x="10" y="63" width="300" height="127"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="内容：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jrx-gQ-1TC" userLabel="CTitleLabel">
                             <rect key="frame" x="5" y="5" width="42" height="17"/>
@@ -102,7 +104,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GGk-W6-FV5" userLabel="ReplyButton">
-                    <rect key="frame" x="10" y="199" width="300" height="44"/>
+                    <rect key="frame" x="10" y="205" width="300" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="R4r-xE-fOA"/>
                     </constraints>
