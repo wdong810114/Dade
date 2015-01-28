@@ -8,6 +8,11 @@
 
 #import "DraftApprovalDocumentViewController.h"
 
+#import "MailDraftViewController.h"
+#import "LeaveApplyViewController.h"
+#import "NotPunchExplainViewController.h"
+#import "NoticeDraftViewController.h"
+
 @interface DraftApprovalDocumentViewController ()
 
 @end
@@ -96,6 +101,38 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    UIViewController *viewController;
+    
+    switch (indexPath.row) {
+        case 0:
+        {
+            viewController = [[MailDraftViewController alloc] initWithNibName:@"MailDraftViewController" bundle:nil];
+        }
+            break;
+        case 1:
+        {
+            viewController = [[LeaveApplyViewController alloc] initWithNibName:@"LeaveApplyViewController" bundle:nil];
+        }
+            break;
+        case 2:
+        {
+            viewController = [[NotPunchExplainViewController alloc] initWithNibName:@"NotPunchExplainViewController" bundle:nil];
+        }
+            break;
+        case 3:
+        {
+            viewController = [[NoticeDraftViewController alloc] initWithNibName:@"NoticeDraftViewController" bundle:nil];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+    if(viewController) {
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
 }
 
 @end

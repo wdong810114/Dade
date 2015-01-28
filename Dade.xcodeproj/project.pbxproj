@@ -25,6 +25,14 @@
 		8B2991BC1A787D3000C32F4F /* DraftApprovalDocumentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2991BA1A787D3000C32F4F /* DraftApprovalDocumentViewController.xib */; };
 		8B2991C01A787D6A00C32F4F /* WorkContactListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B2991BE1A787D6A00C32F4F /* WorkContactListViewController.m */; };
 		8B2991C11A787D6A00C32F4F /* WorkContactListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2991BF1A787D6A00C32F4F /* WorkContactListViewController.xib */; };
+		8B2991CA1A7885B100C32F4F /* MailDraftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B2991C81A7885B100C32F4F /* MailDraftViewController.m */; };
+		8B2991CB1A7885B100C32F4F /* MailDraftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2991C91A7885B100C32F4F /* MailDraftViewController.xib */; };
+		8B2991CF1A7885D800C32F4F /* LeaveApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B2991CD1A7885D800C32F4F /* LeaveApplyViewController.m */; };
+		8B2991D01A7885D800C32F4F /* LeaveApplyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2991CE1A7885D800C32F4F /* LeaveApplyViewController.xib */; };
+		8B2991D41A78869A00C32F4F /* NotPunchExplainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B2991D21A78869A00C32F4F /* NotPunchExplainViewController.m */; };
+		8B2991D51A78869A00C32F4F /* NotPunchExplainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2991D31A78869A00C32F4F /* NotPunchExplainViewController.xib */; };
+		8B2991D91A78870D00C32F4F /* NoticeDraftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B2991D71A78870D00C32F4F /* NoticeDraftViewController.m */; };
+		8B2991DA1A78870D00C32F4F /* NoticeDraftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2991D81A78870D00C32F4F /* NoticeDraftViewController.xib */; };
 		8BAAED021A6F90DE00464655 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAED011A6F90DE00464655 /* main.m */; };
 		8BAAED051A6F90DE00464655 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAED041A6F90DE00464655 /* AppDelegate.m */; };
 		8BAAED0D1A6F90DE00464655 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BAAED0C1A6F90DE00464655 /* Images.xcassets */; };
@@ -90,6 +98,18 @@
 		8B2991BD1A787D6A00C32F4F /* WorkContactListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkContactListViewController.h; sourceTree = "<group>"; };
 		8B2991BE1A787D6A00C32F4F /* WorkContactListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkContactListViewController.m; sourceTree = "<group>"; };
 		8B2991BF1A787D6A00C32F4F /* WorkContactListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkContactListViewController.xib; sourceTree = "<group>"; };
+		8B2991C71A7885B100C32F4F /* MailDraftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailDraftViewController.h; sourceTree = "<group>"; };
+		8B2991C81A7885B100C32F4F /* MailDraftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailDraftViewController.m; sourceTree = "<group>"; };
+		8B2991C91A7885B100C32F4F /* MailDraftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MailDraftViewController.xib; sourceTree = "<group>"; };
+		8B2991CC1A7885D800C32F4F /* LeaveApplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaveApplyViewController.h; sourceTree = "<group>"; };
+		8B2991CD1A7885D800C32F4F /* LeaveApplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaveApplyViewController.m; sourceTree = "<group>"; };
+		8B2991CE1A7885D800C32F4F /* LeaveApplyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeaveApplyViewController.xib; sourceTree = "<group>"; };
+		8B2991D11A78869A00C32F4F /* NotPunchExplainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotPunchExplainViewController.h; sourceTree = "<group>"; };
+		8B2991D21A78869A00C32F4F /* NotPunchExplainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotPunchExplainViewController.m; sourceTree = "<group>"; };
+		8B2991D31A78869A00C32F4F /* NotPunchExplainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotPunchExplainViewController.xib; sourceTree = "<group>"; };
+		8B2991D61A78870D00C32F4F /* NoticeDraftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeDraftViewController.h; sourceTree = "<group>"; };
+		8B2991D71A78870D00C32F4F /* NoticeDraftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeDraftViewController.m; sourceTree = "<group>"; };
+		8B2991D81A78870D00C32F4F /* NoticeDraftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoticeDraftViewController.xib; sourceTree = "<group>"; };
 		8BAAECFC1A6F90DE00464655 /* Dade.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dade.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BAAED001A6F90DE00464655 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BAAED011A6F90DE00464655 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -287,6 +307,18 @@
 				8B2991B81A787D3000C32F4F /* DraftApprovalDocumentViewController.h */,
 				8B2991B91A787D3000C32F4F /* DraftApprovalDocumentViewController.m */,
 				8B2991BA1A787D3000C32F4F /* DraftApprovalDocumentViewController.xib */,
+				8B2991C71A7885B100C32F4F /* MailDraftViewController.h */,
+				8B2991C81A7885B100C32F4F /* MailDraftViewController.m */,
+				8B2991C91A7885B100C32F4F /* MailDraftViewController.xib */,
+				8B2991CC1A7885D800C32F4F /* LeaveApplyViewController.h */,
+				8B2991CD1A7885D800C32F4F /* LeaveApplyViewController.m */,
+				8B2991CE1A7885D800C32F4F /* LeaveApplyViewController.xib */,
+				8B2991D11A78869A00C32F4F /* NotPunchExplainViewController.h */,
+				8B2991D21A78869A00C32F4F /* NotPunchExplainViewController.m */,
+				8B2991D31A78869A00C32F4F /* NotPunchExplainViewController.xib */,
+				8B2991D61A78870D00C32F4F /* NoticeDraftViewController.h */,
+				8B2991D71A78870D00C32F4F /* NoticeDraftViewController.m */,
+				8B2991D81A78870D00C32F4F /* NoticeDraftViewController.xib */,
 			);
 			path = DraftApprovalDocument;
 			sourceTree = "<group>";
@@ -431,7 +463,9 @@
 				8BBE125E1A70CDCE009D894F /* draft_approval_document_icon@3x.png in Resources */,
 				8B256E9C1A76309000C14EF3 /* MailReplyViewController.xib in Resources */,
 				8BBE125A1A70CDCE009D894F /* back_icon_p@3x.png in Resources */,
+				8B2991D01A7885D800C32F4F /* LeaveApplyViewController.xib in Resources */,
 				8BBE125C1A70CDCE009D894F /* agency_icon@3x.png in Resources */,
+				8B2991CB1A7885B100C32F4F /* MailDraftViewController.xib in Resources */,
 				8B2991BC1A787D3000C32F4F /* DraftApprovalDocumentViewController.xib in Resources */,
 				8B22257A1A723E9B00816809 /* LoginViewController.xib in Resources */,
 				8B2225871A724E6F00816809 /* username_icon@2x.png in Resources */,
@@ -444,9 +478,11 @@
 				8BBE12591A70CDCE009D894F /* back_icon_p@2x.png in Resources */,
 				8B2225861A724E6F00816809 /* password_icon@3x.png in Resources */,
 				8BBE12601A70CDCE009D894F /* mail_icon@3x.png in Resources */,
+				8B2991D51A78869A00C32F4F /* NotPunchExplainViewController.xib in Resources */,
 				8B256E971A76300B00C14EF3 /* MailDetailViewController.xib in Resources */,
 				8B2225851A724E6F00816809 /* password_icon@2x.png in Resources */,
 				8BAAED391A6FA03A00464655 /* MainViewController.xib in Resources */,
+				8B2991DA1A78870D00C32F4F /* NoticeDraftViewController.xib in Resources */,
 				8BBE12421A70CA5A009D894F /* NoticeListViewController.xib in Resources */,
 				8BBE12621A70CDCE009D894F /* notice_icon@3x.png in Resources */,
 				8B2225881A724E6F00816809 /* username_icon@3x.png in Resources */,
@@ -474,12 +510,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BBE12411A70CA5A009D894F /* NoticeListViewController.m in Sources */,
+				8B2991D41A78869A00C32F4F /* NotPunchExplainViewController.m in Sources */,
+				8B2991D91A78870D00C32F4F /* NoticeDraftViewController.m in Sources */,
 				8B256E9B1A76309000C14EF3 /* MailReplyViewController.m in Sources */,
 				8BAAED051A6F90DE00464655 /* AppDelegate.m in Sources */,
 				8B256E961A76300B00C14EF3 /* MailDetailViewController.m in Sources */,
 				8B2991C01A787D6A00C32F4F /* WorkContactListViewController.m in Sources */,
 				8B256E911A762FF500C14EF3 /* MailListViewController.m in Sources */,
 				8BAAED301A6F99E700464655 /* BaseViewController.m in Sources */,
+				8B2991CA1A7885B100C32F4F /* MailDraftViewController.m in Sources */,
 				8BBE12461A70CA72009D894F /* NoticeDetailViewController.m in Sources */,
 				8BAAED021A6F90DE00464655 /* main.m in Sources */,
 				8B22257E1A723EB900816809 /* CaptchaViewController.m in Sources */,
@@ -488,6 +527,7 @@
 				8BAAED3C1A6FAE1E00464655 /* DDLoadingView.m in Sources */,
 				8BAAED381A6FA03A00464655 /* MainViewController.m in Sources */,
 				8BAAED341A6F9E3A00464655 /* Util.m in Sources */,
+				8B2991CF1A7885D800C32F4F /* LeaveApplyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
