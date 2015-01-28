@@ -11,4 +11,18 @@
 
 @interface MailDraftViewController : BaseViewController
 
+@property (weak, nonatomic) IBOutlet UIScrollView *mailDraftScrollView;
+
+@property (weak, nonatomic) IBOutlet UILabel *senderLabel;
+@property (weak, nonatomic) IBOutlet UILabel *recipientsLabel;
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
+@property (weak, nonatomic) IBOutlet UITextField *subjectTextField;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (weak, nonatomic) IBOutlet UITextView *contentTextView;
+@property (weak, nonatomic) IBOutlet UILabel *placeholderLabel;
+@property (weak, nonatomic) IBOutlet UIButton *sendButton;
+
+- (IBAction)addButtonClicked:(UIButton *)button;
+- (IBAction)sendButtonClicked:(UIButton *)button;
+
 @end
