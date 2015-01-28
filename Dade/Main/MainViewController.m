@@ -10,6 +10,8 @@
 
 #import "NoticeListViewController.h"
 #import "MailListViewController.h"
+#import "WorkContactListViewController.h"
+#import "DraftApprovalDocumentViewController.h"
 
 @interface MainViewController ()
 
@@ -129,12 +131,12 @@
             break;
         case 3:
         {
-
+            viewController = [[WorkContactListViewController alloc] initWithNibName:@"WorkContactListViewController" bundle:nil];
         }
             break;
         case 4:
         {
-
+            viewController = [[DraftApprovalDocumentViewController alloc] initWithNibName:@"DraftApprovalDocumentViewController" bundle:nil];
         }
             break;
             
