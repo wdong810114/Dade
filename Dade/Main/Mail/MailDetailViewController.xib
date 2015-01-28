@@ -164,9 +164,9 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7i6-Q5-NrX" userLabel="ReplyButton">
-                            <rect key="frame" x="10" y="265" width="300" height="40"/>
+                            <rect key="frame" x="10" y="265" width="300" height="44"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="40" id="hId-06-naO"/>
+                                <constraint firstAttribute="height" constant="44" id="hId-06-naO"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <state key="normal" title="回复">

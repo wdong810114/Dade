@@ -130,7 +130,6 @@
     self.view.frame = frame;
     
     [UIView commitAnimations];
-    
 }
 
 #pragma mark - Private Methods

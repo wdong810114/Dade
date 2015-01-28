@@ -51,9 +51,9 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xyK-xF-YS1" userLabel="LoginButton">
-                    <rect key="frame" x="20" y="70" width="280" height="40"/>
+                    <rect key="frame" x="20" y="70" width="280" height="44"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="DCi-5f-hyP"/>
+                        <constraint firstAttribute="height" constant="44" id="DCi-5f-hyP"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <state key="normal" title="登录">

@@ -114,9 +114,9 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eih-UN-iyx" userLabel="LoginButton">
-                    <rect key="frame" x="20" y="180" width="280" height="40"/>
+                    <rect key="frame" x="20" y="180" width="280" height="44"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="lNd-v7-c05"/>
+                        <constraint firstAttribute="height" constant="44" id="lNd-v7-c05"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <state key="normal" title="登录">
