@@ -35,6 +35,10 @@
 		8B2991DA1A78870D00C32F4F /* NoticeDraftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2991D81A78870D00C32F4F /* NoticeDraftViewController.xib */; };
 		8B2991DD1A78E5CA00C32F4F /* down_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B2991DB1A78E5CA00C32F4F /* down_arrow@2x.png */; };
 		8B2991DE1A78E5CA00C32F4F /* down_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B2991DC1A78E5CA00C32F4F /* down_arrow@3x.png */; };
+		8BA9792A1A7A2F9200C2D197 /* row_selected_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA979261A7A2F9200C2D197 /* row_selected_icon@2x.png */; };
+		8BA9792B1A7A2F9200C2D197 /* row_selected_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA979271A7A2F9200C2D197 /* row_selected_icon@3x.png */; };
+		8BA9792C1A7A2F9200C2D197 /* row_unselected_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA979281A7A2F9200C2D197 /* row_unselected_icon@2x.png */; };
+		8BA9792D1A7A2F9200C2D197 /* row_unselected_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA979291A7A2F9200C2D197 /* row_unselected_icon@3x.png */; };
 		8BAAED021A6F90DE00464655 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAED011A6F90DE00464655 /* main.m */; };
 		8BAAED051A6F90DE00464655 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAED041A6F90DE00464655 /* AppDelegate.m */; };
 		8BAAED0D1A6F90DE00464655 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BAAED0C1A6F90DE00464655 /* Images.xcassets */; };
@@ -114,6 +118,10 @@
 		8B2991D81A78870D00C32F4F /* NoticeDraftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoticeDraftViewController.xib; sourceTree = "<group>"; };
 		8B2991DB1A78E5CA00C32F4F /* down_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_arrow@2x.png"; sourceTree = "<group>"; };
 		8B2991DC1A78E5CA00C32F4F /* down_arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_arrow@3x.png"; sourceTree = "<group>"; };
+		8BA979261A7A2F9200C2D197 /* row_selected_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "row_selected_icon@2x.png"; sourceTree = "<group>"; };
+		8BA979271A7A2F9200C2D197 /* row_selected_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "row_selected_icon@3x.png"; sourceTree = "<group>"; };
+		8BA979281A7A2F9200C2D197 /* row_unselected_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "row_unselected_icon@2x.png"; sourceTree = "<group>"; };
+		8BA979291A7A2F9200C2D197 /* row_unselected_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "row_unselected_icon@3x.png"; sourceTree = "<group>"; };
 		8BAAECFC1A6F90DE00464655 /* Dade.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dade.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BAAED001A6F90DE00464655 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BAAED011A6F90DE00464655 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -266,6 +274,10 @@
 				8BBE124B1A70CDCE009D894F /* back_icon_p@3x.png */,
 				8B2991DB1A78E5CA00C32F4F /* down_arrow@2x.png */,
 				8B2991DC1A78E5CA00C32F4F /* down_arrow@3x.png */,
+				8BA979261A7A2F9200C2D197 /* row_selected_icon@2x.png */,
+				8BA979271A7A2F9200C2D197 /* row_selected_icon@3x.png */,
+				8BA979281A7A2F9200C2D197 /* row_unselected_icon@2x.png */,
+				8BA979291A7A2F9200C2D197 /* row_unselected_icon@3x.png */,
 				8B2225801A724E6F00816809 /* Login */,
 				8BBE124C1A70CDCE009D894F /* Main */,
 			);
@@ -478,8 +490,10 @@
 				8BAAED0D1A6F90DE00464655 /* Images.xcassets in Resources */,
 				8B22257F1A723EB900816809 /* CaptchaViewController.xib in Resources */,
 				8BBE12641A70CDCE009D894F /* work_contact_list_icon@3x.png in Resources */,
+				8BA9792A1A7A2F9200C2D197 /* row_selected_icon@2x.png in Resources */,
 				8BBE125D1A70CDCE009D894F /* draft_approval_document_icon@2x.png in Resources */,
 				8BBE12571A70CDCE009D894F /* back_icon_n@2x.png in Resources */,
+				8BA9792D1A7A2F9200C2D197 /* row_unselected_icon@3x.png in Resources */,
 				8BBE12631A70CDCE009D894F /* work_contact_list_icon@2x.png in Resources */,
 				8BBE12591A70CDCE009D894F /* back_icon_p@2x.png in Resources */,
 				8B2225861A724E6F00816809 /* password_icon@3x.png in Resources */,
@@ -488,11 +502,13 @@
 				8B2991D51A78869A00C32F4F /* NotPunchExplainViewController.xib in Resources */,
 				8B256E971A76300B00C14EF3 /* MailDetailViewController.xib in Resources */,
 				8B2225851A724E6F00816809 /* password_icon@2x.png in Resources */,
+				8BA9792C1A7A2F9200C2D197 /* row_unselected_icon@2x.png in Resources */,
 				8BAAED391A6FA03A00464655 /* MainViewController.xib in Resources */,
 				8B2991DA1A78870D00C32F4F /* NoticeDraftViewController.xib in Resources */,
 				8BBE12421A70CA5A009D894F /* NoticeListViewController.xib in Resources */,
 				8BBE12621A70CDCE009D894F /* notice_icon@3x.png in Resources */,
 				8B2225881A724E6F00816809 /* username_icon@3x.png in Resources */,
+				8BA9792B1A7A2F9200C2D197 /* row_selected_icon@3x.png in Resources */,
 				8BBE125F1A70CDCE009D894F /* mail_icon@2x.png in Resources */,
 				8B2991DD1A78E5CA00C32F4F /* down_arrow@2x.png in Resources */,
 				8BBE125B1A70CDCE009D894F /* agency_icon@2x.png in Resources */,
