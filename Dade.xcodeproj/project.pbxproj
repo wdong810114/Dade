@@ -33,6 +33,8 @@
 		8B2991D51A78869A00C32F4F /* NotPunchExplainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2991D31A78869A00C32F4F /* NotPunchExplainViewController.xib */; };
 		8B2991D91A78870D00C32F4F /* NoticeDraftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B2991D71A78870D00C32F4F /* NoticeDraftViewController.m */; };
 		8B2991DA1A78870D00C32F4F /* NoticeDraftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2991D81A78870D00C32F4F /* NoticeDraftViewController.xib */; };
+		8B2991DD1A78E5CA00C32F4F /* down_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B2991DB1A78E5CA00C32F4F /* down_arrow@2x.png */; };
+		8B2991DE1A78E5CA00C32F4F /* down_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B2991DC1A78E5CA00C32F4F /* down_arrow@3x.png */; };
 		8BAAED021A6F90DE00464655 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAED011A6F90DE00464655 /* main.m */; };
 		8BAAED051A6F90DE00464655 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAED041A6F90DE00464655 /* AppDelegate.m */; };
 		8BAAED0D1A6F90DE00464655 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BAAED0C1A6F90DE00464655 /* Images.xcassets */; };
@@ -110,6 +112,8 @@
 		8B2991D61A78870D00C32F4F /* NoticeDraftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeDraftViewController.h; sourceTree = "<group>"; };
 		8B2991D71A78870D00C32F4F /* NoticeDraftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeDraftViewController.m; sourceTree = "<group>"; };
 		8B2991D81A78870D00C32F4F /* NoticeDraftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoticeDraftViewController.xib; sourceTree = "<group>"; };
+		8B2991DB1A78E5CA00C32F4F /* down_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_arrow@2x.png"; sourceTree = "<group>"; };
+		8B2991DC1A78E5CA00C32F4F /* down_arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_arrow@3x.png"; sourceTree = "<group>"; };
 		8BAAECFC1A6F90DE00464655 /* Dade.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dade.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BAAED001A6F90DE00464655 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BAAED011A6F90DE00464655 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -260,6 +264,8 @@
 				8BBE12491A70CDCE009D894F /* back_icon_n@3x.png */,
 				8BBE124A1A70CDCE009D894F /* back_icon_p@2x.png */,
 				8BBE124B1A70CDCE009D894F /* back_icon_p@3x.png */,
+				8B2991DB1A78E5CA00C32F4F /* down_arrow@2x.png */,
+				8B2991DC1A78E5CA00C32F4F /* down_arrow@3x.png */,
 				8B2225801A724E6F00816809 /* Login */,
 				8BBE124C1A70CDCE009D894F /* Main */,
 			);
@@ -478,6 +484,7 @@
 				8BBE12591A70CDCE009D894F /* back_icon_p@2x.png in Resources */,
 				8B2225861A724E6F00816809 /* password_icon@3x.png in Resources */,
 				8BBE12601A70CDCE009D894F /* mail_icon@3x.png in Resources */,
+				8B2991DE1A78E5CA00C32F4F /* down_arrow@3x.png in Resources */,
 				8B2991D51A78869A00C32F4F /* NotPunchExplainViewController.xib in Resources */,
 				8B256E971A76300B00C14EF3 /* MailDetailViewController.xib in Resources */,
 				8B2225851A724E6F00816809 /* password_icon@2x.png in Resources */,
@@ -487,6 +494,7 @@
 				8BBE12621A70CDCE009D894F /* notice_icon@3x.png in Resources */,
 				8B2225881A724E6F00816809 /* username_icon@3x.png in Resources */,
 				8BBE125F1A70CDCE009D894F /* mail_icon@2x.png in Resources */,
+				8B2991DD1A78E5CA00C32F4F /* down_arrow@2x.png in Resources */,
 				8BBE125B1A70CDCE009D894F /* agency_icon@2x.png in Resources */,
 				8B256E921A762FF500C14EF3 /* MailListViewController.xib in Resources */,
 				8BBE12581A70CDCE009D894F /* back_icon_n@3x.png in Resources */,
