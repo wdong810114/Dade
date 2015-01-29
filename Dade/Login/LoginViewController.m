@@ -22,33 +22,6 @@
 
 @implementation LoginViewController
 
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillShowNotification
-                                                  object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIKeyboardWillHideNotification
-                                                  object:nil];
-}
-
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if(self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWillShow:)
-                                                     name:UIKeyboardWillShowNotification
-                                                   object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWillHide:)
-                                                     name:UIKeyboardWillHideNotification
-                                                   object:nil];
-    }
-    
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -80,51 +53,6 @@
     // 登录
     
     [self login];
-}
-
-- (void)keyboardWillShow:(NSNotification *)notification
-{
-    CGRect keyboardFrame = [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    CGFloat duration = [[notification.userInfo valueForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
-    UIViewAnimationCurve curve = [[notification.userInfo valueForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
-    
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationBeginsFromCurrentState:YES];
-    [UIView setAnimationDuration:duration];
-    [UIView setAnimationCurve:curve];
-    
-    if([self.usernameTextField isFirstResponder] || [self.passwordTextField isFirstResponder]) {
-        CGRect frame = self.view.frame;
-        frame.origin.y = !IOS_VERSION_7_OR_ABOVE ? 0.0 : (STATUS_BAR_HEIGHT + NAVIGATION_BAR_HEIGHT);
-        self.view.frame = frame;
-    } else {
-        CGFloat offsetY = self.loginButton.frame.origin.y + self.loginButton.frame.size.height + keyboardFrame.size.height - self.view.frame.size.height;
-        if(offsetY > 0.0) {
-            CGRect frame = self.view.frame;
-            frame.origin.y -= offsetY;
-            self.view.frame = frame;
-        }
-    }
-    
-    [UIView commitAnimations];
-}
-
-- (void)keyboardWillHide:(NSNotification *)notification
-{
-    CGFloat duration = [[notification.userInfo valueForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
-    UIViewAnimationCurve curve = [[notification.userInfo valueForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
-    
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationBeginsFromCurrentState:YES];
-    [UIView setAnimationDuration:duration];
-    [UIView setAnimationCurve:curve];
-    
-    CGRect frame = self.view.frame;
-    frame.origin.y = !IOS_VERSION_7_OR_ABOVE ? 0.0 : (STATUS_BAR_HEIGHT + NAVIGATION_BAR_HEIGHT);
-    self.view.frame = frame;
-    
-    [UIView commitAnimations];
-
 }
 
 #pragma mark - Private Methods

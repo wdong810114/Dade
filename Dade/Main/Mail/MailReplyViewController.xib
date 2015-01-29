@@ -52,7 +52,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="azY-cX-7U6" userLabel="ContentView">
-                    <rect key="frame" x="10" y="63" width="300" height="127"/>
+                    <rect key="frame" x="10" y="63" width="300" height="107"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="内容：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jrx-gQ-1TC" userLabel="CTitleLabel">
                             <rect key="frame" x="5" y="5" width="42" height="17"/>
@@ -61,13 +61,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SXb-Cq-lue" userLabel="InputView">
-                            <rect key="frame" x="0.0" y="22" width="300" height="105"/>
+                            <rect key="frame" x="0.0" y="22" width="300" height="85"/>
                             <subviews>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oZO-bm-JSX" userLabel="ContentTextView">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="80"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="100" id="Jtf-hX-SQd"/>
+                                        <constraint firstAttribute="height" constant="80" id="Jtf-hX-SQd"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
@@ -104,7 +104,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GGk-W6-FV5" userLabel="ReplyButton">
-                    <rect key="frame" x="10" y="205" width="300" height="44"/>
+                    <rect key="frame" x="10" y="185" width="300" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="R4r-xE-fOA"/>
                     </constraints>

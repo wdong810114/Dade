@@ -102,7 +102,8 @@
     CGFloat offsetY = self.contentView.frame.origin.y + self.contentView.frame.size.height + keyboardFrame.size.height - self.view.frame.size.height;
     if(offsetY > 0.0) {
         CGRect frame = self.view.frame;
-        frame.origin.y -= offsetY + 15.0;
+        frame.origin.y = !IOS_VERSION_7_OR_ABOVE ? 0.0 : (STATUS_BAR_HEIGHT + NAVIGATION_BAR_HEIGHT);
+        frame.origin.y -= self.contentView.frame.origin.y;
         self.view.frame = frame;
     }
     
