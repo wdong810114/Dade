@@ -184,22 +184,22 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oja-9c-ZHx" userLabel="LeaveTypeView">
-                            <rect key="frame" x="10" y="255" width="300" height="37"/>
+                            <rect key="frame" x="10" y="255" width="300" height="33"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="请假类别：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rcL-Hf-sOT" userLabel="LTitleLabel">
-                                    <rect key="frame" x="5" y="8" width="70" height="21"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="请假类别：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pND-a8-gyI" userLabel="LTitleLabel">
+                                    <rect key="frame" x="5" y="8" width="70" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="225" placeholderIntrinsicHeight="37" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cIS-9g-250" userLabel="LeaveTypeLabel">
-                                    <rect key="frame" x="75" y="0.0" width="225" height="37"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="225" placeholderIntrinsicHeight="33" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cIS-9g-250" userLabel="LeaveTypeLabel">
+                                    <rect key="frame" x="75" y="0.0" width="225" height="33"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xX5-Ul-cbG" userLabel="ArrowImageView">
-                                    <rect key="frame" x="281" y="15" width="14" height="8"/>
+                                    <rect key="frame" x="281" y="13" width="14" height="8"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="8" id="KCK-dA-CJ6"/>
                                         <constraint firstAttribute="width" constant="14" id="k2f-hx-fKm"/>
@@ -209,14 +209,14 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="xX5-Ul-cbG" firstAttribute="centerY" secondItem="oja-9c-ZHx" secondAttribute="centerY" id="1V1-WI-dnc"/>
-                                <constraint firstAttribute="bottom" secondItem="rcL-Hf-sOT" secondAttribute="bottom" constant="8" id="4Lf-9M-uuC"/>
-                                <constraint firstItem="cIS-9g-250" firstAttribute="leading" secondItem="rcL-Hf-sOT" secondAttribute="trailing" id="LMi-If-nox"/>
+                                <constraint firstAttribute="bottom" secondItem="pND-a8-gyI" secondAttribute="bottom" constant="8" id="3oc-jY-dPp"/>
                                 <constraint firstAttribute="trailing" secondItem="cIS-9g-250" secondAttribute="trailing" id="LST-Op-VnY"/>
+                                <constraint firstItem="pND-a8-gyI" firstAttribute="top" secondItem="oja-9c-ZHx" secondAttribute="top" constant="8" id="Yjs-zq-vS7"/>
+                                <constraint firstItem="pND-a8-gyI" firstAttribute="leading" secondItem="oja-9c-ZHx" secondAttribute="leading" constant="5" id="c4p-Lk-8hJ"/>
                                 <constraint firstItem="cIS-9g-250" firstAttribute="top" secondItem="oja-9c-ZHx" secondAttribute="top" id="c61-TM-xk7"/>
-                                <constraint firstItem="rcL-Hf-sOT" firstAttribute="leading" secondItem="oja-9c-ZHx" secondAttribute="leading" constant="5" id="cbE-Ao-DZR"/>
                                 <constraint firstAttribute="bottom" secondItem="cIS-9g-250" secondAttribute="bottom" id="j5V-D8-vXI"/>
+                                <constraint firstItem="cIS-9g-250" firstAttribute="leading" secondItem="pND-a8-gyI" secondAttribute="trailing" id="jYi-sg-mX3"/>
                                 <constraint firstAttribute="trailing" secondItem="xX5-Ul-cbG" secondAttribute="trailing" constant="5" id="tea-ue-sPy"/>
-                                <constraint firstItem="rcL-Hf-sOT" firstAttribute="top" secondItem="oja-9c-ZHx" secondAttribute="top" constant="8" id="xJP-Ua-vxT"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rn0-Dj-t2V" userLabel="ContentView">
@@ -356,7 +356,7 @@
                         <constraint firstItem="EgJ-jY-LvK" firstAttribute="width" secondItem="yh8-or-0UM" secondAttribute="width" id="GEc-hq-wXC"/>
                         <constraint firstItem="oja-9c-ZHx" firstAttribute="leading" secondItem="yh8-or-0UM" secondAttribute="leading" id="IB3-qP-aDB"/>
                         <constraint firstItem="Rn0-Dj-t2V" firstAttribute="width" secondItem="yh8-or-0UM" secondAttribute="width" id="L4A-c9-CHs"/>
-                        <constraint firstAttribute="bottom" secondItem="ZdR-a1-a9U" secondAttribute="bottom" constant="15" id="PNJ-34-0ZE"/>
+                        <constraint firstAttribute="bottom" secondItem="ZdR-a1-a9U" secondAttribute="bottom" constant="-131" id="PNJ-34-0ZE"/>
                         <constraint firstItem="gEw-vo-Bxu" firstAttribute="leading" secondItem="yh8-or-0UM" secondAttribute="leading" id="Pa3-1q-Rpd"/>
                         <constraint firstItem="oja-9c-ZHx" firstAttribute="width" secondItem="yh8-or-0UM" secondAttribute="width" id="Q15-TM-6Oz"/>
                         <constraint firstItem="Rn0-Dj-t2V" firstAttribute="leading" secondItem="yh8-or-0UM" secondAttribute="leading" id="Ql0-nB-irX"/>
@@ -371,7 +371,7 @@
                         <constraint firstItem="Ujg-Gr-AiZ" firstAttribute="width" secondItem="yh8-or-0UM" secondAttribute="width" id="kKR-Ml-0kb"/>
                         <constraint firstItem="WcY-Pb-d2X" firstAttribute="width" secondItem="yh8-or-0UM" secondAttribute="width" id="nhK-cM-pUr"/>
                         <constraint firstItem="ZdR-a1-a9U" firstAttribute="width" secondItem="yh8-or-0UM" secondAttribute="width" id="ryp-md-6W5"/>
-                        <constraint firstItem="Rn0-Dj-t2V" firstAttribute="top" secondItem="oja-9c-ZHx" secondAttribute="bottom" constant="15" id="wR2-jD-y8O"/>
+                        <constraint firstItem="Rn0-Dj-t2V" firstAttribute="top" secondItem="oja-9c-ZHx" secondAttribute="bottom" constant="19" id="wR2-jD-y8O"/>
                         <constraint firstItem="659-Dh-w5E" firstAttribute="leading" secondItem="yh8-or-0UM" secondAttribute="leading" id="y1M-Yo-W55"/>
                     </constraints>
                     <connections>
