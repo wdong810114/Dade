@@ -8,6 +8,8 @@
 
 #import "DraftWorkContactListViewController.h"
 
+#import "PersonnelListViewController.h"
+
 @interface DraftWorkContactListViewController ()
 
 - (void)initView;
@@ -89,6 +91,8 @@
 {
     // 添加
     
+    PersonnelListViewController *viewController = [[PersonnelListViewController alloc] initWithNibName:@"PersonnelListViewController" bundle:nil];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (IBAction)sendButtonClicked:(UIButton *)button
