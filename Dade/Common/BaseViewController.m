@@ -129,11 +129,11 @@
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
                                                                                  message:nil
                                                                           preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定"
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:^(UIAlertAction *action) {
-                                                         }];
-        [alertController addAction:okAction];
+        UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:ALERT_BUTTON_TITLE_CONFIRM
+                                                                style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction *action) {
+                                                              }];
+        [alertController addAction:confirmAction];
         
         [self presentViewController:alertController animated:YES completion:NULL];
     } else {
@@ -141,7 +141,7 @@
                                                             message:nil
                                                            delegate:nil
                                                   cancelButtonTitle:nil
-                                                  otherButtonTitles:@"确定", nil];
+                                                  otherButtonTitles:ALERT_BUTTON_TITLE_CONFIRM, nil];
         [alertView show];
     }
 }

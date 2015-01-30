@@ -28,4 +28,6 @@
 
 #define FONT(S)                 [UIFont systemFontOfSize:S]
 
-#define BUTTON_TITLE_DONE       @"完成"
+#define ALERT_BUTTON_TITLE_CONFIRM      @"确定"
+#define ALERT_BUTTON_TITLE_CANCEL       @"取消"
+#define BAR_BUTTON_TITLE_DONE           @"完成"

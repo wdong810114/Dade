@@ -91,7 +91,7 @@
         UIToolbar *toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0.0, 0.0, _leaveTypePickerPanel.frame.size.width, 44.0)];
         toolbar.barStyle = UIBarStyleDefault;
         UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:BUTTON_TITLE_DONE style:UIBarButtonItemStyleDone target:self action:@selector(doneClicked)];
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:BAR_BUTTON_TITLE_DONE style:UIBarButtonItemStyleDone target:self action:@selector(doneClicked)];
         NSArray *buttonArray = [NSArray arrayWithObjects:flexibleSpace, doneButton, nil];
         toolbar.items = buttonArray;
         
@@ -202,7 +202,7 @@
     UIToolbar *inputAccessoryView = [[UIToolbar alloc]initWithFrame:CGRectMake(0.0, 0.0, DEVICE_WIDTH, INPUT_ACCESSORY_VIEW_HEIGHT)];
     inputAccessoryView.barStyle = UIBarStyleDefault;
     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:BUTTON_TITLE_DONE style:UIBarButtonItemStyleDone target:self action:@selector(dismissKeyboard)];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:BAR_BUTTON_TITLE_DONE style:UIBarButtonItemStyleDone target:self action:@selector(dismissKeyboard)];
     NSArray *buttonArray = [NSArray arrayWithObjects:flexibleSpace, doneButton, nil];
     inputAccessoryView.items = buttonArray;
     self.contentTextView.inputAccessoryView = inputAccessoryView;
