@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 
+#import "AgencyListViewController.h"
 #import "NoticeListViewController.h"
 #import "MailListViewController.h"
 #import "WorkContactListViewController.h"
@@ -116,7 +117,7 @@
     switch (indexPath.row) {
         case 0:
         {
-
+            viewController = [[AgencyListViewController alloc] initWithNibName:@"AgencyListViewController" bundle:nil];
         }
             break;
         case 1:
