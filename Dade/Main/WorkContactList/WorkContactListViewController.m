@@ -9,6 +9,7 @@
 #import "WorkContactListViewController.h"
 
 #import "DraftWorkContactListViewController.h"
+#import "WorkContactListDraftsViewController.h"
 
 @interface WorkContactListViewController ()
 
@@ -124,7 +125,7 @@
             break;
         case 3:
         {
-            
+            viewController = [[WorkContactListDraftsViewController alloc] initWithNibName:@"WorkContactListDraftsViewController" bundle:nil];
         }
             break;
             
