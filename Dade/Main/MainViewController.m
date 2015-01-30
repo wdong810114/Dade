@@ -20,7 +20,7 @@
 
 @implementation MainViewController
 {
-    NSInteger _agencyCount; // 代办数
+    NSInteger _agencyCount; // 待办数
     NSInteger _noticeCount; // 通知数
     NSInteger _mailCount;   // 邮件数
 }
@@ -67,7 +67,7 @@
         case 0:
         {
             cell.imageView.image = [UIImage imageNamed:@"agency_icon"];
-            cell.textLabel.text = [NSString stringWithFormat:@"代办（%i）", (int)_agencyCount];
+            cell.textLabel.text = [NSString stringWithFormat:@"待办（%i）", (int)_agencyCount];
         }
             break;
         case 1:

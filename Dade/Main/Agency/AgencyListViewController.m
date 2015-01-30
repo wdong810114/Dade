@@ -32,7 +32,7 @@
 {
     [super setNavigationBar];
     
-    [self setNavigationBarTitle:@"代办"];
+    [self setNavigationBarTitle:@"待办"];
     [self setLeftBarButtonItem:@selector(backClicked:) image:@"back_icon_n" highlightedImage:@"back_icon_p"];
 }
 
@@ -59,7 +59,7 @@
         cell.textLabel.font = FONT(14.0);
     }
     
-    cell.textLabel.text = @"当前没有代办文件";
+    cell.textLabel.text = @"当前没有待办文件";
     
     return cell;
 }
