@@ -98,6 +98,22 @@
     self.navigationItem.rightBarButtonItem = rightButtonItem;
 }
 
+- (void)setRightBarButtonItem:(SEL)action title:(NSString *)title
+{
+    UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightButton.frame = CGRectMake(0.0, 0.0, 37.0, 35.0);
+    if(IOS_VERSION_7_OR_ABOVE) {
+        rightButton.titleEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, 0.0, -20.0);
+    }
+    rightButton.titleLabel.font = FONT(14.0);
+    [rightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [rightButton setTitleColor:COLOR(0xff,0x75,0x22) forState:UIControlStateHighlighted];
+    [rightButton setTitle:title forState:UIControlStateNormal];
+    [rightButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+    self.navigationItem.rightBarButtonItem = rightButtonItem;
+}
+
 - (void)pop
 {
     [self.navigationController popViewControllerAnimated:YES];

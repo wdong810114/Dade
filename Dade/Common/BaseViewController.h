@@ -23,6 +23,7 @@
 - (void)setNavigationBarTitle:(NSString *)title;
 - (void)setLeftBarButtonItem:(SEL)action image:(NSString *)image highlightedImage:(NSString *)highlightedImage;
 - (void)setRightBarButtonItem:(SEL)action image:(NSString *)image highlightedImage:(NSString *)highlightedImage;
+- (void)setRightBarButtonItem:(SEL)action title:(NSString *)title;
 
 - (void)pop;
 
