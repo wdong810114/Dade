@@ -17,7 +17,7 @@
 
 @implementation WorkContactListViewController
 {
-    NSInteger _agencyCount;         // 待办数
+    NSInteger _todoCount;           // 待办数
     NSInteger _supervisionCount;    // 监督数
     NSInteger _draftCount;          // 草稿数
 }
@@ -74,7 +74,7 @@
             break;
         case 1:
         {
-            cell.textLabel.text = [NSString stringWithFormat:@"待办工作联系单（%i）", (int)_agencyCount];
+            cell.textLabel.text = [NSString stringWithFormat:@"待办工作联系单（%i）", (int)_todoCount];
         }
             break;
         case 2:

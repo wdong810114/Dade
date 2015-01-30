@@ -1,26 +1,26 @@
 //
-//  AgencyListViewController.m
+//  TodoListViewController.m
 //  Dade
 //
 //  Created by 王冬冬 on 15-1-30.
 //  Copyright (c) 2015年 Spark. All rights reserved.
 //
 
-#import "AgencyListViewController.h"
+#import "TodoListViewController.h"
 
-@interface AgencyListViewController ()
+@interface TodoListViewController ()
 
 @end
 
-@implementation AgencyListViewController
+@implementation TodoListViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.agencyListTableView.backgroundView = nil;
-    self.agencyListTableView.backgroundColor = TABLEVIEW_BG_COLOR;
-    self.agencyListTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.todoListTableView.backgroundView = nil;
+    self.todoListTableView.backgroundColor = TABLEVIEW_BG_COLOR;
+    self.todoListTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,11 +49,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *AgencyListCellIdentifier = @"AgencyListCellIdentifier";
+    static NSString *TodoListCellIdentifier = @"TodoListCellIdentifier";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:AgencyListCellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:TodoListCellIdentifier];
     if(cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:AgencyListCellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TodoListCellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         cell.textLabel.font = FONT(14.0);

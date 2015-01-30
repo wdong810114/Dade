@@ -8,7 +8,7 @@
 
 #import "MainViewController.h"
 
-#import "AgencyListViewController.h"
+#import "TodoListViewController.h"
 #import "NoticeListViewController.h"
 #import "MailListViewController.h"
 #import "WorkContactListViewController.h"
@@ -20,7 +20,7 @@
 
 @implementation MainViewController
 {
-    NSInteger _agencyCount; // 待办数
+    NSInteger _todoCount;   // 待办数
     NSInteger _noticeCount; // 通知数
     NSInteger _mailCount;   // 邮件数
 }
@@ -66,8 +66,8 @@
     switch (indexPath.row) {
         case 0:
         {
-            cell.imageView.image = [UIImage imageNamed:@"agency_icon"];
-            cell.textLabel.text = [NSString stringWithFormat:@"待办（%i）", (int)_agencyCount];
+            cell.imageView.image = [UIImage imageNamed:@"todo_icon"];
+            cell.textLabel.text = [NSString stringWithFormat:@"待办（%i）", (int)_todoCount];
         }
             break;
         case 1:
@@ -117,7 +117,7 @@
     switch (indexPath.row) {
         case 0:
         {
-            viewController = [[AgencyListViewController alloc] initWithNibName:@"AgencyListViewController" bundle:nil];
+            viewController = [[TodoListViewController alloc] initWithNibName:@"TodoListViewController" bundle:nil];
         }
             break;
         case 1:

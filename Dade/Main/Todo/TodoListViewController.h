@@ -1,5 +1,5 @@
 //
-//  AgencyListViewController.h
+//  TodoListViewController.h
 //  Dade
 //
 //  Created by 王冬冬 on 15-1-30.
@@ -9,8 +9,8 @@
 
 #import "BaseViewController.h"
 
-@interface AgencyListViewController : BaseViewController
+@interface TodoListViewController : BaseViewController
 
-@property (weak, nonatomic) IBOutlet UITableView *agencyListTableView;
+@property (weak, nonatomic) IBOutlet UITableView *todoListTableView;
 
 @end
