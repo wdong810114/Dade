@@ -71,7 +71,7 @@
     LoginViewController *viewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     self.loginNavigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [self.window.rootViewController presentViewController:self.loginNavigationController
-                                                 animated:NO
+                                                 animated:YES
                                                completion:NULL];
 }
 
