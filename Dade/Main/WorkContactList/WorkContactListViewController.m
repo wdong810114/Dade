@@ -8,6 +8,8 @@
 
 #import "WorkContactListViewController.h"
 
+#import "DraftWorkContactListViewController.h"
+
 @interface WorkContactListViewController ()
 
 @end
@@ -101,6 +103,38 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    UIViewController *viewController;
+    
+    switch (indexPath.row) {
+        case 0:
+        {
+            viewController = [[DraftWorkContactListViewController alloc] initWithNibName:@"DraftWorkContactListViewController" bundle:nil];
+        }
+            break;
+        case 1:
+        {
+            
+        }
+            break;
+        case 2:
+        {
+            
+        }
+            break;
+        case 3:
+        {
+            
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+    if(viewController) {
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
 }
 
 @end
