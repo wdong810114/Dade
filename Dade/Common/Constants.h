@@ -23,6 +23,8 @@
 
 #define RED_BUTTON_BG_NORMAL_COLOR          COLOR(0xcf,0x3b,0x1d)   // 红色按钮背景颜色（正常）
 #define RED_BUTTON_BG_HIGHLIGHTED_COLOR     COLOR(0xba,0x35,0x1a)   // 红色按钮背景颜色（高亮）
+#define GRAY_BUTTON_BG_NORMAL_COLOR         COLOR(0xa9,0xa9,0xa9)   // 灰色按钮背景颜色（正常）
+#define GRAY_BUTTON_BG_HIGHLIGHTED_COLOR    COLOR(0xc5,0xc5,0xc5)   // 灰色按钮背景颜色（高亮）
 #define BLUE_BUTTON_TITLE_NORMAL_COLOR      COLOR(0x21,0x96,0xf3)   // 按钮蓝色标题颜色（正常）
 #define BLUE_BUTTON_TITLE_HIGHLIGHTED_COLOR COLOR(0x1a,0x78,0xc2)   // 按钮蓝色标题颜色（高亮）
 

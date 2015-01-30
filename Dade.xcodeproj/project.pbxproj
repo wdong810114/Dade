@@ -56,6 +56,10 @@
 		8BAD9FD11A7B595B00F43D8B /* TodoListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BAD9FCF1A7B595B00F43D8B /* TodoListViewController.xib */; };
 		8BAD9FD41A7B5A2B00F43D8B /* todo_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAD9FD21A7B5A2B00F43D8B /* todo_icon@2x.png */; };
 		8BAD9FD51A7B5A2B00F43D8B /* todo_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAD9FD31A7B5A2B00F43D8B /* todo_icon@3x.png */; };
+		8BAD9FDA1A7B68CD00F43D8B /* PersonnelListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAD9FD81A7B68CD00F43D8B /* PersonnelListViewController.m */; };
+		8BAD9FDB1A7B68CD00F43D8B /* PersonnelListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BAD9FD91A7B68CD00F43D8B /* PersonnelListViewController.xib */; };
+		8BAD9FDE1A7B6C5900F43D8B /* magnifier@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAD9FDC1A7B6C5900F43D8B /* magnifier@2x.png */; };
+		8BAD9FDF1A7B6C5900F43D8B /* magnifier@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BAD9FDD1A7B6C5900F43D8B /* magnifier@3x.png */; };
 		8BBE12411A70CA5A009D894F /* NoticeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBE123F1A70CA5A009D894F /* NoticeListViewController.m */; };
 		8BBE12421A70CA5A009D894F /* NoticeListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BBE12401A70CA5A009D894F /* NoticeListViewController.xib */; };
 		8BBE12461A70CA72009D894F /* NoticeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBE12441A70CA72009D894F /* NoticeDetailViewController.m */; };
@@ -158,6 +162,11 @@
 		8BAD9FCF1A7B595B00F43D8B /* TodoListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodoListViewController.xib; sourceTree = "<group>"; };
 		8BAD9FD21A7B5A2B00F43D8B /* todo_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "todo_icon@2x.png"; sourceTree = "<group>"; };
 		8BAD9FD31A7B5A2B00F43D8B /* todo_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "todo_icon@3x.png"; sourceTree = "<group>"; };
+		8BAD9FD71A7B68CD00F43D8B /* PersonnelListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonnelListViewController.h; sourceTree = "<group>"; };
+		8BAD9FD81A7B68CD00F43D8B /* PersonnelListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonnelListViewController.m; sourceTree = "<group>"; };
+		8BAD9FD91A7B68CD00F43D8B /* PersonnelListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonnelListViewController.xib; sourceTree = "<group>"; };
+		8BAD9FDC1A7B6C5900F43D8B /* magnifier@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "magnifier@2x.png"; sourceTree = "<group>"; };
+		8BAD9FDD1A7B6C5900F43D8B /* magnifier@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "magnifier@3x.png"; sourceTree = "<group>"; };
 		8BBE123E1A70CA5A009D894F /* NoticeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeListViewController.h; sourceTree = "<group>"; };
 		8BBE123F1A70CA5A009D894F /* NoticeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeListViewController.m; sourceTree = "<group>"; };
 		8BBE12401A70CA5A009D894F /* NoticeListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoticeListViewController.xib; sourceTree = "<group>"; };
@@ -323,6 +332,7 @@
 				8BAAED2B1A6F997600464655 /* Mail */,
 				8BAAED2D1A6F997600464655 /* WorkContactList */,
 				8BAAED2A1A6F997600464655 /* DraftApprovalDocument */,
+				8BAD9FD61A7B68A600F43D8B /* Other */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -404,6 +414,16 @@
 			path = Todo;
 			sourceTree = "<group>";
 		};
+		8BAD9FD61A7B68A600F43D8B /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				8BAD9FD71A7B68CD00F43D8B /* PersonnelListViewController.h */,
+				8BAD9FD81A7B68CD00F43D8B /* PersonnelListViewController.m */,
+				8BAD9FD91A7B68CD00F43D8B /* PersonnelListViewController.xib */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		8BBE124C1A70CDCE009D894F /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -417,6 +437,8 @@
 				8BBE12561A70CDCE009D894F /* work_contact_list_icon@3x.png */,
 				8BBE124F1A70CDCE009D894F /* draft_approval_document_icon@2x.png */,
 				8BBE12501A70CDCE009D894F /* draft_approval_document_icon@3x.png */,
+				8BAD9FDC1A7B6C5900F43D8B /* magnifier@2x.png */,
+				8BAD9FDD1A7B6C5900F43D8B /* magnifier@3x.png */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -518,12 +540,14 @@
 				8BBE12571A70CDCE009D894F /* back_icon_n@2x.png in Resources */,
 				8BAD9FC61A7B48B700F43D8B /* WorkContactListDraftsViewController.xib in Resources */,
 				8BA9792D1A7A2F9200C2D197 /* row_unselected_icon@3x.png in Resources */,
+				8BAD9FDF1A7B6C5900F43D8B /* magnifier@3x.png in Resources */,
 				8BBE12631A70CDCE009D894F /* work_contact_list_icon@2x.png in Resources */,
 				8BBE12591A70CDCE009D894F /* back_icon_p@2x.png in Resources */,
 				8B2225861A724E6F00816809 /* password_icon@3x.png in Resources */,
 				8BBE12601A70CDCE009D894F /* mail_icon@3x.png in Resources */,
 				8B2991DE1A78E5CA00C32F4F /* down_arrow@3x.png in Resources */,
 				8B2991D51A78869A00C32F4F /* NotPunchExplainViewController.xib in Resources */,
+				8BAD9FDE1A7B6C5900F43D8B /* magnifier@2x.png in Resources */,
 				8BAD9FD11A7B595B00F43D8B /* TodoListViewController.xib in Resources */,
 				8B256E971A76300B00C14EF3 /* MailDetailViewController.xib in Resources */,
 				8B2225851A724E6F00816809 /* password_icon@2x.png in Resources */,
@@ -541,6 +565,7 @@
 				8BAD9FBC1A7B255700F43D8B /* DraftWorkContactListViewController.xib in Resources */,
 				8B256E921A762FF500C14EF3 /* MailListViewController.xib in Resources */,
 				8BBE12581A70CDCE009D894F /* back_icon_n@3x.png in Resources */,
+				8BAD9FDB1A7B68CD00F43D8B /* PersonnelListViewController.xib in Resources */,
 				8BBE12471A70CA72009D894F /* NoticeDetailViewController.xib in Resources */,
 				8BBE12611A70CDCE009D894F /* notice_icon@2x.png in Resources */,
 			);
@@ -578,6 +603,7 @@
 				8B22257E1A723EB900816809 /* CaptchaViewController.m in Sources */,
 				8B2225791A723E9B00816809 /* LoginViewController.m in Sources */,
 				8B2991BB1A787D3000C32F4F /* DraftApprovalDocumentViewController.m in Sources */,
+				8BAD9FDA1A7B68CD00F43D8B /* PersonnelListViewController.m in Sources */,
 				8BAAED3C1A6FAE1E00464655 /* DDLoadingView.m in Sources */,
 				8BAAED381A6FA03A00464655 /* MainViewController.m in Sources */,
 				8BAAED341A6F9E3A00464655 /* Util.m in Sources */,
