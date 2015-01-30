@@ -48,6 +48,8 @@
 		8BAAED381A6FA03A00464655 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAED361A6FA03A00464655 /* MainViewController.m */; };
 		8BAAED391A6FA03A00464655 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BAAED371A6FA03A00464655 /* MainViewController.xib */; };
 		8BAAED3C1A6FAE1E00464655 /* DDLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAED3B1A6FAE1E00464655 /* DDLoadingView.m */; };
+		8BAD9FBB1A7B255700F43D8B /* DraftWorkContactListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAD9FB91A7B255700F43D8B /* DraftWorkContactListViewController.m */; };
+		8BAD9FBC1A7B255700F43D8B /* DraftWorkContactListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BAD9FBA1A7B255700F43D8B /* DraftWorkContactListViewController.xib */; };
 		8BBE12411A70CA5A009D894F /* NoticeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBE123F1A70CA5A009D894F /* NoticeListViewController.m */; };
 		8BBE12421A70CA5A009D894F /* NoticeListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BBE12401A70CA5A009D894F /* NoticeListViewController.xib */; };
 		8BBE12461A70CA72009D894F /* NoticeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBE12441A70CA72009D894F /* NoticeDetailViewController.m */; };
@@ -141,6 +143,9 @@
 		8BAAED371A6FA03A00464655 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		8BAAED3A1A6FAE1E00464655 /* DDLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLoadingView.h; sourceTree = "<group>"; };
 		8BAAED3B1A6FAE1E00464655 /* DDLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLoadingView.m; sourceTree = "<group>"; };
+		8BAD9FB81A7B255700F43D8B /* DraftWorkContactListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraftWorkContactListViewController.h; sourceTree = "<group>"; };
+		8BAD9FB91A7B255700F43D8B /* DraftWorkContactListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraftWorkContactListViewController.m; sourceTree = "<group>"; };
+		8BAD9FBA1A7B255700F43D8B /* DraftWorkContactListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftWorkContactListViewController.xib; sourceTree = "<group>"; };
 		8BBE123E1A70CA5A009D894F /* NoticeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeListViewController.h; sourceTree = "<group>"; };
 		8BBE123F1A70CA5A009D894F /* NoticeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeListViewController.m; sourceTree = "<group>"; };
 		8BBE12401A70CA5A009D894F /* NoticeListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoticeListViewController.xib; sourceTree = "<group>"; };
@@ -376,6 +381,9 @@
 				8B2991BD1A787D6A00C32F4F /* WorkContactListViewController.h */,
 				8B2991BE1A787D6A00C32F4F /* WorkContactListViewController.m */,
 				8B2991BF1A787D6A00C32F4F /* WorkContactListViewController.xib */,
+				8BAD9FB81A7B255700F43D8B /* DraftWorkContactListViewController.h */,
+				8BAD9FB91A7B255700F43D8B /* DraftWorkContactListViewController.m */,
+				8BAD9FBA1A7B255700F43D8B /* DraftWorkContactListViewController.xib */,
 			);
 			path = WorkContactList;
 			sourceTree = "<group>";
@@ -511,6 +519,7 @@
 				8BA9792B1A7A2F9200C2D197 /* row_selected_icon@3x.png in Resources */,
 				8BBE125F1A70CDCE009D894F /* mail_icon@2x.png in Resources */,
 				8B2991DD1A78E5CA00C32F4F /* down_arrow@2x.png in Resources */,
+				8BAD9FBC1A7B255700F43D8B /* DraftWorkContactListViewController.xib in Resources */,
 				8BBE125B1A70CDCE009D894F /* agency_icon@2x.png in Resources */,
 				8B256E921A762FF500C14EF3 /* MailListViewController.xib in Resources */,
 				8BBE12581A70CDCE009D894F /* back_icon_n@3x.png in Resources */,
@@ -543,6 +552,7 @@
 				8B256E911A762FF500C14EF3 /* MailListViewController.m in Sources */,
 				8BAAED301A6F99E700464655 /* BaseViewController.m in Sources */,
 				8B2991CA1A7885B100C32F4F /* MailDraftViewController.m in Sources */,
+				8BAD9FBB1A7B255700F43D8B /* DraftWorkContactListViewController.m in Sources */,
 				8BBE12461A70CA72009D894F /* NoticeDetailViewController.m in Sources */,
 				8BAAED021A6F90DE00464655 /* main.m in Sources */,
 				8B22257E1A723EB900816809 /* CaptchaViewController.m in Sources */,
