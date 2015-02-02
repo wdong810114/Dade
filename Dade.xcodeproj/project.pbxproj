@@ -50,6 +50,7 @@
 		8BAAED381A6FA03A00464655 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAED361A6FA03A00464655 /* MainViewController.m */; };
 		8BAAED391A6FA03A00464655 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BAAED371A6FA03A00464655 /* MainViewController.xib */; };
 		8BAAED3C1A6FAE1E00464655 /* DDLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAED3B1A6FAE1E00464655 /* DDLoadingView.m */; };
+		8BAB494B1A7F9581007187E1 /* NSDictionary+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB494A1A7F9581007187E1 /* NSDictionary+Util.m */; };
 		8BAD9FBB1A7B255700F43D8B /* DraftWorkContactListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAD9FB91A7B255700F43D8B /* DraftWorkContactListViewController.m */; };
 		8BAD9FBC1A7B255700F43D8B /* DraftWorkContactListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BAD9FBA1A7B255700F43D8B /* DraftWorkContactListViewController.xib */; };
 		8BAD9FC51A7B48B700F43D8B /* WorkContactListDraftsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAD9FC31A7B48B700F43D8B /* WorkContactListDraftsViewController.m */; };
@@ -172,6 +173,8 @@
 		8BAAED371A6FA03A00464655 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		8BAAED3A1A6FAE1E00464655 /* DDLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLoadingView.h; sourceTree = "<group>"; };
 		8BAAED3B1A6FAE1E00464655 /* DDLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLoadingView.m; sourceTree = "<group>"; };
+		8BAB49491A7F9581007187E1 /* NSDictionary+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Util.h"; sourceTree = "<group>"; };
+		8BAB494A1A7F9581007187E1 /* NSDictionary+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Util.m"; sourceTree = "<group>"; };
 		8BAD9FB81A7B255700F43D8B /* DraftWorkContactListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DraftWorkContactListViewController.h; sourceTree = "<group>"; };
 		8BAD9FB91A7B255700F43D8B /* DraftWorkContactListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DraftWorkContactListViewController.m; sourceTree = "<group>"; };
 		8BAD9FBA1A7B255700F43D8B /* DraftWorkContactListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftWorkContactListViewController.xib; sourceTree = "<group>"; };
@@ -362,6 +365,8 @@
 				8BAAED3A1A6FAE1E00464655 /* DDLoadingView.h */,
 				8BAAED3B1A6FAE1E00464655 /* DDLoadingView.m */,
 				8B54E1151A7F34B40036E443 /* DDEngine */,
+				8BAB49491A7F9581007187E1 /* NSDictionary+Util.h */,
+				8BAB494A1A7F9581007187E1 /* NSDictionary+Util.m */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -743,6 +748,7 @@
 				8B2991C01A787D6A00C32F4F /* WorkContactListViewController.m in Sources */,
 				8B256E911A762FF500C14EF3 /* MailListViewController.m in Sources */,
 				8B54E1221A7F6CD30036E443 /* UserInfo.m in Sources */,
+				8BAB494B1A7F9581007187E1 /* NSDictionary+Util.m in Sources */,
 				8BAAED301A6F99E700464655 /* BaseViewController.m in Sources */,
 				8BAD9FD01A7B595B00F43D8B /* TodoListViewController.m in Sources */,
 				8B2991CA1A7885B100C32F4F /* MailDraftViewController.m in Sources */,
