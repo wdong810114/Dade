@@ -173,6 +173,11 @@
     [_requestArray removeObject:request];
 }
 
+- (BOOL)isRequesting
+{
+    return [_requestArray count] > 0;
+}
+
 @end
 
 @implementation BaseViewController (Alert)

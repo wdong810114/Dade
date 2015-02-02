@@ -38,6 +38,7 @@
 - (void)startRequest:(ASIFormDataRequest *)request didFinishSelector:(SEL)didFinishSelector didFailSelector:(SEL)didFailSelector;
 - (void)requestDidFinish:(ASIHTTPRequest *)request;
 - (void)requestDidFail:(ASIHTTPRequest *)request;
+- (BOOL)isRequesting;
 
 @end
 
