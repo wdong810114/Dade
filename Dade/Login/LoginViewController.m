@@ -16,7 +16,10 @@
 
 - (void)initView;
 - (BOOL)checkValidity;
+
 - (void)login;
+- (void)requestLoginFinished:(ASIHTTPRequest *)request;
+- (void)requestLoginFailed:(ASIHTTPRequest *)request;
 
 @end
 
@@ -52,6 +55,10 @@
 {
     // 登录
     
+    if([self isRequesting]) {
+        return;
+    }
+    
     [self login];
 }
 
@@ -77,19 +84,19 @@
 
 - (BOOL)checkValidity
 {
-//    if([[Util trimString:self.usernameTextField.text] isEqualToString:@""] ||
-//       [[Util trimString:self.passwordTextField.text] isEqualToString:@""] ||
-//       [[Util trimString:self.codeTextField.text] isEqualToString:@""]) {
-//        [self showAlert:@"信息填写不完整"];
-//        
-//        return NO;
-//    }
-//    
-//    if(![self.codeTextField.text isEqualToString:self.codeLabel.text]) {
-//        [self showAlert:@"验证码错误"];
-//        
-//        return NO;
-//    }
+    if([[Util trimString:self.usernameTextField.text] isEqualToString:@""] ||
+       [[Util trimString:self.passwordTextField.text] isEqualToString:@""] ||
+       [[Util trimString:self.codeTextField.text] isEqualToString:@""]) {
+        [self showAlert:@"信息填写不完整"];
+        
+        return NO;
+    }
+    
+    if(![self.codeTextField.text isEqualToString:self.codeLabel.text]) {
+        [self showAlert:@"验证码错误"];
+        
+        return NO;
+    }
     
     return YES;
 }
@@ -99,14 +106,57 @@
     if([self checkValidity]) {
         [self.view endEditing:YES];
         
-        CaptchaViewController *viewController = [[CaptchaViewController alloc] initWithNibName:@"CaptchaViewController" bundle:nil];
-        [self.navigationController pushViewController:viewController animated:YES];
+        [self addLoadingView];
+        
+        NSString *postString = [NSString stringWithFormat:@"{loginName:'%@',loginPassWord:'%@'}", self.usernameTextField.text, self.passwordTextField.text];
+        NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        ASIFormDataRequest *request = [self requestWithRelativeURL:LOGIN_USER_REQUEST_URL];
+        [request setPostBody:postData];
+        [self startRequest:request didFinishSelector:@selector(requestLoginFinished:) didFailSelector:@selector(requestLoginFailed:)];
     }
+}
+
+- (void)requestLoginFinished:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonDict) {
+        NSString *ajaxToken = [jsonDict objectForKey:@"ajax_token"];
+        if([ajaxToken integerValue] == 0) {
+            DadeAppDelegate.userInfo = [[UserInfo alloc] initWithDict:jsonDict];
+            
+            CaptchaViewController *viewController = [[CaptchaViewController alloc] initWithNibName:@"CaptchaViewController" bundle:nil];
+            [self.navigationController pushViewController:viewController animated:YES];
+        } else {
+            NSString *ajaxMessage = [jsonDict objectForKey:@"ajax_message"];
+            [self showAlert:ajaxMessage];
+            
+            self.codeLabel.text = [self randomCode];
+        }
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestLoginFailed:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    [self requestDidFail:request];
 }
 
 #pragma mark - UITextFieldDelegate Methods
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    if([self isRequesting]) {
+        return NO;
+    }
+    
     return YES;
 }
 
@@ -126,12 +176,10 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if(textField == self.usernameTextField) {
-        [self.usernameTextField resignFirstResponder];
         [self.passwordTextField becomeFirstResponder];
     } else if(textField == self.passwordTextField) {
-        [self.passwordTextField resignFirstResponder];
         [self.codeTextField becomeFirstResponder];
-    } else {
+    } else if(textField == self.codeTextField) {
         [self.codeTextField resignFirstResponder];
         [self login];
     }

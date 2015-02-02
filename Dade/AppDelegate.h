@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "DDEngine.h"
+#import "UserInfo.h"
 
 #define DadeAppDelegate ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 
@@ -19,6 +20,7 @@
 @property (strong, nonatomic) UINavigationController *loginNavigationController;
 
 @property (strong, nonatomic) DDEngine *engine;
+@property (strong, nonatomic) UserInfo *userInfo;
 
 - (void)loginSuccessed;
 
