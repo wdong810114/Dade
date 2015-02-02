@@ -6,6 +6,8 @@
 //  Copyright (c) 2015年 Spark. All rights reserved.
 //
 
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+
 #import "BaseViewController.h"
 
 @interface BaseViewController ()
@@ -16,6 +18,20 @@
 
 - (void)dealloc
 {
+    for(ASIHTTPRequest *request in _requestArray) {
+        [request clearDelegatesAndCancel];
+    }
+    [_requestArray removeAllObjects];
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if(self) {
+        _requestArray = [[NSMutableArray alloc] init];
+    }
+    
+    return self;
 }
 
 - (void)viewDidLoad
@@ -117,6 +133,44 @@
 - (void)pop
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+@end
+
+@implementation BaseViewController (Network)
+
+- (ASIFormDataRequest *)requestWithRelativeURL:(NSString *)relativeURL
+{
+    NSString *url = [NSString stringWithFormat:relativeURL, BASE_REQUEST_URL];
+    NSURL *requstURL = [NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    ASIFormDataRequest *request = [[ASIFormDataRequest alloc] initWithURL:requstURL];
+    request.requestMethod = @"POST";
+    
+    return request;
+}
+
+- (void)startRequest:(ASIFormDataRequest *)request didFinishSelector:(SEL)didFinishSelector didFailSelector:(SEL)didFailSelector
+{
+    [_requestArray addObject:request];
+    
+    [DadeAppDelegate.engine appendHttpRequest:request
+                                     delegate:self
+                            didFinishSelector:didFinishSelector
+                              didFailSelector:didFailSelector];
+}
+
+- (void)requestDidFinish:(ASIHTTPRequest *)request
+{
+    [request clearDelegatesAndCancel];
+    [_requestArray removeObject:request];
+}
+
+- (void)requestDidFail:(ASIHTTPRequest *)request
+{
+    [self showAlert:@"网络连接不可用，请检查你的网络连接"];
+    
+    [request clearDelegatesAndCancel];
+    [_requestArray removeObject:request];
 }
 
 @end

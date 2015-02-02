@@ -9,6 +9,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
 #import "Constants.h"
 #import "Util.h"
 #import "DDLoadingView.h"
@@ -16,6 +18,7 @@
 
 @interface BaseViewController : UIViewController
 {
+    NSMutableArray *_requestArray;
     DDLoadingView *_loadingView;
 }
 
@@ -26,6 +29,15 @@
 - (void)setRightBarButtonItem:(SEL)action title:(NSString *)title;
 
 - (void)pop;
+
+@end
+
+@interface BaseViewController (Network)
+
+- (ASIFormDataRequest *)requestWithRelativeURL:(NSString *)relativeURL;
+- (void)startRequest:(ASIFormDataRequest *)request didFinishSelector:(SEL)didFinishSelector didFailSelector:(SEL)didFailSelector;
+- (void)requestDidFinish:(ASIHTTPRequest *)request;
+- (void)requestDidFail:(ASIHTTPRequest *)request;
 
 @end
 
