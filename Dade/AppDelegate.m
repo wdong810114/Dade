@@ -24,6 +24,8 @@
 {
     // Override point for customization after application launch.
     
+    self.engine = [[DDEngine alloc] init];
+    
     MainViewController *viewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
     self.mainNavigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     

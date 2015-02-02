@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "DDEngine.h"
+
 #define DadeAppDelegate ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
@@ -15,6 +17,8 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UINavigationController *mainNavigationController;
 @property (strong, nonatomic) UINavigationController *loginNavigationController;
+
+@property (strong, nonatomic) DDEngine *engine;
 
 - (void)loginSuccessed;
 
