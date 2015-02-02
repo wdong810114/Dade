@@ -126,14 +126,14 @@
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonDict) {
-        NSString *ajaxToken = [jsonDict objectForKey:@"ajax_token"];
+        NSString *ajaxToken = [jsonDict stringForKey:@"ajax_token"];
         if([ajaxToken integerValue] == 0) {
             DadeAppDelegate.userInfo = [[UserInfo alloc] initWithDict:jsonDict];
             
             CaptchaViewController *viewController = [[CaptchaViewController alloc] initWithNibName:@"CaptchaViewController" bundle:nil];
             [self.navigationController pushViewController:viewController animated:YES];
         } else {
-            NSString *ajaxMessage = [jsonDict objectForKey:@"ajax_message"];
+            NSString *ajaxMessage = [jsonDict stringForKey:@"ajax_message"];
             [self showAlert:ajaxMessage];
             
             self.codeLabel.text = [self randomCode];

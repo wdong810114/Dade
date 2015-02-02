@@ -37,3 +37,4 @@
 #define BASE_REQUEST_URL                @"http://218.60.29.216:8080/kinghorse"
 #define LOGIN_USER_REQUEST_URL          @"%@/LoginUser"         // 用户登录身份验证接口
 #define SEND_TEXT_REQUEST_URL           @"%@/sendText"          // 发送短信验证码接口
+#define QUERY_NOTICE_LIST_REQUEST_URL   @"%@/QueryNoticeList"   // 通知文件查询列表接口

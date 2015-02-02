@@ -20,4 +20,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *recipientsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 
+@property (copy, nonatomic) NSString *noticeId;
+
 @end

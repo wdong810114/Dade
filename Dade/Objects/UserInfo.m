@@ -8,16 +8,18 @@
 
 #import "UserInfo.h"
 
+#import "NSDictionary+Util.h"
+
 @implementation UserInfo
 
 - (instancetype)initWithDict:(NSDictionary *)dict
 {
     self = [super init];
     if(self) {
-        self.staffId = [dict objectForKey:@"staffId"];
-        self.staffPhone = [dict objectForKey:@"staffPhone"];
-        self.staffSex = [dict objectForKey:@"staffSex"];
-        self.staffMail = [dict objectForKey:@"staffMail"];
+        self.staffId = [dict stringForKey:@"staffId"];
+        self.staffPhone = [dict stringForKey:@"staffPhone"];
+        self.staffSex = [dict stringForKey:@"staffSex"];
+        self.staffMail = [dict stringForKey:@"staffMail"];
     }
     
     return self;

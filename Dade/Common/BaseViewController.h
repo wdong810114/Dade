@@ -14,6 +14,7 @@
 #import "Constants.h"
 #import "Util.h"
 #import "DDLoadingView.h"
+#import "NSDictionary+Util.h"
 #import "AppDelegate.h"
 
 @interface BaseViewController : UIViewController

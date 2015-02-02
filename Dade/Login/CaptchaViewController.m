@@ -14,15 +14,25 @@
 - (BOOL)checkValidity;
 - (void)login;
 
+- (void)sendCaptcha;
+- (void)requestSendCaptchaFinished:(ASIHTTPRequest *)request;
+- (void)requestSendCaptchaFailed:(ASIHTTPRequest *)request;
+
 @end
 
 @implementation CaptchaViewController
+{
+    NSString *_captcha;
+    NSInteger _tryTimes;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self initView];
+    
+    [self sendCaptcha];
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,6 +64,10 @@
 {
     // 登录
     
+    if([self isRequesting]) {
+        return;
+    }
+    
     [self login];
 }
 
@@ -67,21 +81,78 @@
 
 - (BOOL)checkValidity
 {
+    if([[Util trimString:self.captchaTextField.text] isEqualToString:@""]) {
+        [self showAlert:@"请输入验证码"];
+        
+        return NO;
+    }
+    
+    if(![self.captchaTextField.text isEqualToString:_captcha]) {
+        [self showAlert:@"验证码输入错误"];
+        
+        _tryTimes += 1;
+        if(_tryTimes == 3) {
+            [self sendCaptcha];
+            
+            _tryTimes = 0;
+        }
+        
+        return NO;
+    }
+    
     return YES;
 }
 
 - (void)login
 {
-    if([self checkValidity]) {
-        [self.view endEditing:YES];
-        
+    [self.view endEditing:YES];
+    
+    if(1/*[self checkValidity]*/) {
         [DadeAppDelegate loginSuccessed];
     }
+}
+
+- (void)sendCaptcha
+{
+    [self addLoadingView];
+    
+    NSString *postString = [NSString stringWithFormat:@"{userId:'%@'}", DadeAppDelegate.userInfo.staffId];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:SEND_TEXT_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestSendCaptchaFinished:) didFailSelector:@selector(requestSendCaptchaFailed:)];
+}
+
+- (void)requestSendCaptchaFinished:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonDict) {
+        _captcha = [jsonDict stringForKey:@"random"];
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestSendCaptchaFailed:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    [self requestDidFail:request];
 }
 
 #pragma mark - UITextFieldDelegate Methods
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    if([self isRequesting]) {
+        return NO;
+    }
+    
     return YES;
 }
 

@@ -12,9 +12,16 @@
 
 @interface NoticeListViewController ()
 
+- (void)queryNoticeList;
+- (void)requestQueryNoticeListFinished:(ASIHTTPRequest *)request;
+- (void)requestQueryNoticeListFailed:(ASIHTTPRequest *)request;
+
 @end
 
 @implementation NoticeListViewController
+{
+    NSMutableArray *_noticeArray;
+}
 
 - (void)viewDidLoad
 {
@@ -23,6 +30,8 @@
     self.noticeListTableView.backgroundView = nil;
     self.noticeListTableView.backgroundColor = TABLEVIEW_BG_COLOR;
     self.noticeListTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    [self queryNoticeList];
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,10 +52,47 @@
     [self pop];
 }
 
+#pragma mark - Private Methods
+- (void)queryNoticeList
+{
+    [self addLoadingView];
+    
+    NSString *postString = [NSString stringWithFormat:@"{userId:'%@'}", DadeAppDelegate.userInfo.staffId];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_NOTICE_LIST_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestQueryNoticeListFinished:) didFailSelector:@selector(requestQueryNoticeListFailed:)];
+}
+
+- (void)requestQueryNoticeListFinished:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonArray) {
+        _noticeArray = [[NSMutableArray alloc] initWithArray:jsonArray];
+        
+        [self.noticeListTableView reloadData];
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestQueryNoticeListFailed:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    [self requestDidFail:request];
+}
+
 #pragma mark - UITableViewDataSource Methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 8;
+    return [_noticeArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -61,7 +107,8 @@
         cell.textLabel.font = FONT(14.0);
     }
     
-    cell.textLabel.text = @"通知：2014主题游活动启动仪式方案（2014年度）";
+    NSDictionary *notice = [_noticeArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = [notice stringForKey:@"displayvalue"];
     
     return cell;
 }
@@ -76,7 +123,10 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    NSDictionary *notice = [_noticeArray objectAtIndex:indexPath.row];
+    
     NoticeDetailViewController *viewController = [[NoticeDetailViewController alloc] initWithNibName:@"NoticeDetailViewController" bundle:nil];
+    viewController.noticeId = [notice stringForKey:@"id"];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
