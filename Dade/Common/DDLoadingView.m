@@ -32,11 +32,11 @@
         
         _bgView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, frame.size.width, frame.size.height)];
         _bgView.backgroundColor = [UIColor blackColor];
-        _bgView.alpha = 0.3;
+        _bgView.alpha = 0.7;
         [self addSubview:_bgView];
         
         _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-        _indicatorView.color = COLOR(0xcf,0x3b,0x1d);
+        _indicatorView.color = [UIColor whiteColor];
         _indicatorView.center = _bgView.center;
         [self addSubview:_indicatorView];
         
