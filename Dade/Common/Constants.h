@@ -41,3 +41,17 @@
 #define GET_INCOME_VIEW_BY_ID_REQUEST_URL       @"%@/GetIncomeViewById"         // 文件详细信息接口
 #define QUERY_NOTICE_LIST_REQUEST_URL           @"%@/QueryNoticeList"           // 通知文件查询列表接口
 #define SHOW_NOTICE_VIEW_BY_ID_REQUEST_URL      @"%@/ShowNoticeViewById"        // 通知详细信息接口
+
+#define SAVE_MAIL_REQUEST_URL                   @"%@/SaveMail"                  // 邮件起草接口
+#define SAVE_LEAVE_APPLICATION_REQUEST_URL      @"%@/SaveLeaveApplication"      // 请假申请起草接口
+#define SAVE_NOT_PUNCH_REQUEST_URL              @"%@/SaveNotPunch"              // 未打卡说明起草接口
+#define DRAFT_NOTICE_INFO_REQUEST_URL           @"%@/DraftNoticeInfo"           // 通知起草接口
+#define GET_PROCESS_BY_FILE_ID_REQUEST_URL      @"%@/GetProcessByFileId"        // 起草文件审批流程查询接口
+
+
+
+
+
+
+
+

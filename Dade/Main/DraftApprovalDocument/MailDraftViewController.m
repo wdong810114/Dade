@@ -14,7 +14,10 @@
 
 - (void)initView;
 - (BOOL)checkValidity;
-- (void)send;
+
+- (void)saveMail;
+- (void)requestSaveMailFinished:(ASIHTTPRequest *)request;
+- (void)requestSaveMailFailed:(ASIHTTPRequest *)request;
 
 @end
 
@@ -69,12 +72,20 @@
 
 - (void)backClicked:(UIButton *)button
 {
+    if([self isRequesting]) {
+        return;
+    }
+    
     [self pop];
 }
 
 - (IBAction)addButtonClicked:(UIButton *)button
 {
     // 添加
+    
+    if([self isRequesting]) {
+        return;
+    }
     
     PersonnelListViewController *viewController = [[PersonnelListViewController alloc] initWithNibName:@"PersonnelListViewController" bundle:nil];
     [self.navigationController pushViewController:viewController animated:YES];
@@ -84,7 +95,11 @@
 {
     // 发送
     
-    [self send];
+    if([self isRequesting]) {
+        return;
+    }
+    
+    [self saveMail];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification
@@ -112,7 +127,11 @@
 {
     CGFloat scrollMaxOffsetY = self.mailDraftScrollView.contentSize.height - self.mailDraftScrollView.frame.size.height;
     if(self.mailDraftScrollView.contentOffset.y > scrollMaxOffsetY) {
-        [self.mailDraftScrollView setContentOffset:CGPointMake(0.0, scrollMaxOffsetY) animated:YES];
+        if(scrollMaxOffsetY < 0) {
+            [self.mailDraftScrollView setContentOffset:CGPointZero animated:YES];
+        } else {
+            [self.mailDraftScrollView setContentOffset:CGPointMake(0.0, scrollMaxOffsetY) animated:YES];
+        }
     }
 }
 
@@ -143,12 +162,6 @@
     NSArray *buttonArray = [NSArray arrayWithObjects:flexibleSpace, doneButton, nil];
     inputAccessoryView.items = buttonArray;
     self.contentTextView.inputAccessoryView = inputAccessoryView;
-    
-// 测试---Start
-    self.senderLabel.text = @"王冬王冬冬王冬冬王冬冬王冬冬王冬冬王冬冬王冬冬王冬冬";
-    self.recipientsLabel.text = @"葛立群;崔明东;葛立群;崔明东;葛立群;崔明东;葛立群;崔明东;葛立群;崔明东;葛立群;崔明东;";
-    self.subjectTextField.text = @"日程表";
-// 测试---End
 }
 
 - (BOOL)checkValidity
@@ -169,12 +182,51 @@
     return YES;
 }
 
-- (void)send
+- (void)saveMail
 {
     if([self checkValidity]) {
         [self.view endEditing:YES];
         
+        [self addLoadingView];
+        
+//        staffIds：收件人ID（多人用“|”分割）
+//        displayvalue 邮件主题
+//        content 邮件内容
+//        userId ：用户Id
+        
+        NSString *postString = [NSString stringWithFormat:@"{staffIds:'%@',displayvalue:'%@',content:'%@',userId:'%@'}", self.recipientsLabel.text, self.subjectTextField.text, self.contentTextView.text, DadeAppDelegate.userInfo.staffId];
+        NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        ASIFormDataRequest *request = [self requestWithRelativeURL:SAVE_MAIL_REQUEST_URL];
+        [request setPostBody:postData];
+        [self startRequest:request didFinishSelector:@selector(requestSaveMailFinished:) didFailSelector:@selector(requestSaveMailFailed:)];
     }
+}
+
+- (void)requestSaveMailFinished:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonDict) {
+        NSString *ajaxToken = [jsonDict stringForKey:@"ajax_token"];
+        if([ajaxToken integerValue] != 0) {
+            NSString *ajaxMessage = [jsonDict stringForKey:@"ajax_message"];
+            [self showAlert:ajaxMessage];
+        }
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestSaveMailFailed:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    [self requestDidFail:request];
 }
 
 #pragma mark - UIScrollViewDelegate Methods
@@ -186,6 +238,10 @@
 #pragma mark - UITextFieldDelegate Methods
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    if([self isRequesting]) {
+        return NO;
+    }
+    
     return YES;
 }
 
@@ -201,6 +257,10 @@
 #pragma mark - UITextViewDelegate Methods
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
+    if([self isRequesting]) {
+        return NO;
+    }
+    
     return YES;
 }
 

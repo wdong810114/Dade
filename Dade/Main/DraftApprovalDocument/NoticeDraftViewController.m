@@ -14,7 +14,10 @@
 
 - (void)initView;
 - (BOOL)checkValidity;
-- (void)send;
+
+- (void)draftNoticeInfo;
+- (void)requestDraftNoticeInfoFinished:(ASIHTTPRequest *)request;
+- (void)requestDraftNoticeInfoFailed:(ASIHTTPRequest *)request;
 
 @end
 
@@ -72,12 +75,20 @@
 
 - (void)backClicked:(UIButton *)button
 {
+    if([self isRequesting]) {
+        return;
+    }
+    
     [self pop];
 }
 
 - (IBAction)addButtonClicked:(UIButton *)button
 {
     // 添加
+    
+    if([self isRequesting]) {
+        return;
+    }
     
     PersonnelListViewController *viewController = [[PersonnelListViewController alloc] initWithNibName:@"PersonnelListViewController" bundle:nil];
     [self.navigationController pushViewController:viewController animated:YES];
@@ -87,12 +98,20 @@
 {
     // 发送
     
-    [self send];
+    if([self isRequesting]) {
+        return;
+    }
+    
+    [self draftNoticeInfo];
 }
 
 - (void)feedbackClicked
 {
     // 完结回馈
+    
+    if([self isRequesting]) {
+        return;
+    }
     
     [self.view endEditing:YES];
     
@@ -168,11 +187,6 @@
     NSArray *buttonArray = [NSArray arrayWithObjects:flexibleSpace, doneButton, nil];
     inputAccessoryView.items = buttonArray;
     self.contentTextView.inputAccessoryView = inputAccessoryView;
-    
-    // 测试---Start
-    self.recipientsLabel.text = @"王冬王冬冬王冬冬王冬冬王冬冬王冬冬王冬冬王冬冬王冬冬";
-    self.departmentLabel.text = @"综合管理部综合管理部综合管理部综合管理部综合管理部综合管理部综合管理部综合管理部";
-    // 测试---End
 }
 
 - (BOOL)checkValidity
@@ -192,12 +206,55 @@
     return YES;
 }
 
-- (void)send
+- (void)draftNoticeInfo
 {
     if([self checkValidity]) {
         [self.view endEditing:YES];
         
+        [self addLoadingView];
+        
+//        userId ：用户Id
+//        fileTypeId: 文件类型Id
+//        displayvalue：主题
+//        filenum：编号
+//        content：内容
+//        staffIds：收件人(以“|”间隔)
+//        temp：部门(由org_id|qyid|depOrgid组成，以“|”间隔)
+//        isEnd：是否完结
+        
+//        NSString *postString = [NSString stringWithFormat:@"{userId:'%@',fileTypeId:'%@',displayvalue:'%@',filenum:'%@',content:'%@',staffIds:'%@',temp:'%@',isEnd:'%@'}", ];
+//        NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+//        
+//        ASIFormDataRequest *request = [self requestWithRelativeURL:DRAFT_NOTICE_INFO_REQUEST_URL];
+//        [request setPostBody:postData];
+//        [self startRequest:request didFinishSelector:@selector(requestDraftNoticeInfoFinished:) didFailSelector:@selector(requestDraftNoticeInfoFailed:)];
     }
+}
+
+- (void)requestDraftNoticeInfoFinished:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonDict) {
+        NSString *ajaxToken = [jsonDict stringForKey:@"ajax_token"];
+        if([ajaxToken integerValue] != 0) {
+            NSString *ajaxMessage = [jsonDict stringForKey:@"ajax_message"];
+            [self showAlert:ajaxMessage];
+        }
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestDraftNoticeInfoFailed:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    [self requestDidFail:request];
 }
 
 #pragma mark - UIScrollViewDelegate Methods
@@ -209,6 +266,10 @@
 #pragma mark - UITextFieldDelegate Methods
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    if([self isRequesting]) {
+        return NO;
+    }
+    
     return YES;
 }
 
@@ -224,6 +285,10 @@
 #pragma mark - UITextViewDelegate Methods
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
+    if([self isRequesting]) {
+        return NO;
+    }
+    
     return YES;
 }
 

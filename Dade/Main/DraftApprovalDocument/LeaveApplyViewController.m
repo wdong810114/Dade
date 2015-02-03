@@ -12,8 +12,11 @@
 
 - (void)initView;
 - (BOOL)checkValidity;
-- (void)report;
 - (void)removePickerPanel;
+
+- (void)saveLeaveApplication;
+- (void)requestSaveLeaveApplicationFinished:(ASIHTTPRequest *)request;
+- (void)requestSaveLeaveApplicationFailed:(ASIHTTPRequest *)request;
 
 @end
 
@@ -75,12 +78,20 @@
 
 - (void)backClicked:(UIButton *)button
 {
+    if([self isRequesting]) {
+        return;
+    }
+    
     [self pop];
 }
 
 - (void)leaveTypeClicked
 {
     // 请假类别
+    
+    if([self isRequesting]) {
+        return;
+    }
     
     [self.view endEditing:YES];
 
@@ -135,7 +146,11 @@
 {
     // 呈报
     
-    [self report];
+    if([self isRequesting]) {
+        return;
+    }
+    
+    [self saveLeaveApplication];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification
@@ -166,7 +181,11 @@
 {
     CGFloat scrollMaxOffsetY = self.leaveApplyScrollView.contentSize.height - self.leaveApplyScrollView.frame.size.height;
     if(self.leaveApplyScrollView.contentOffset.y > scrollMaxOffsetY) {
-        [self.leaveApplyScrollView setContentOffset:CGPointMake(0.0, scrollMaxOffsetY) animated:YES];
+        if(scrollMaxOffsetY < 0) {
+            [self.leaveApplyScrollView setContentOffset:CGPointZero animated:YES];
+        } else {
+            [self.leaveApplyScrollView setContentOffset:CGPointMake(0.0, scrollMaxOffsetY) animated:YES];
+        }
     }
 }
 
@@ -207,13 +226,6 @@
     inputAccessoryView.items = buttonArray;
     self.contentTextView.inputAccessoryView = inputAccessoryView;
     self.explainTextView.inputAccessoryView = inputAccessoryView;
-    
-    // 测试---Start
-    self.subjectLabel.text = @"我要请假我要请假我要请假我要请假我要请假我要请假我要请假我要请假";
-    self.senderLabel.text = @"王冬王冬冬王冬冬王冬冬王冬冬王冬冬王冬冬王冬冬王冬冬";
-    self.departmentLabel.text = @"综合管理部综合管理部综合管理部综合管理部综合管理部综合管理部综合管理部综合管理部";
-    self.positionLabel.text = @"员工员工员工员工员工员工员工员工员工员工员工员工员工员工";
-    // 测试---End
 }
 
 - (BOOL)checkValidity
@@ -234,14 +246,6 @@
     return YES;
 }
 
-- (void)report
-{
-    if([self checkValidity]) {
-        [self.view endEditing:YES];
-        
-    }
-}
-
 - (void)removePickerPanel
 {
     if(_leaveTypePickerPanel) {
@@ -255,6 +259,58 @@
     }
 }
 
+- (void)saveLeaveApplication
+{
+    if([self checkValidity]) {
+        [self.view endEditing:YES];
+        
+        [self addLoadingView];
+        
+//        leavesTypeId：请假类型
+//        leavesTypeName：请假类型名称
+//        leavesTypeContent：请假原因
+//        leavesDate：请假日期
+//        content：内容
+//        exaContent：流转说明
+//        orgId：组织架构Id
+//        depOrgId：部门组织架构ID
+//        userId：用户Id
+        
+//        NSString *postString = [NSString stringWithFormat:@"{leavesTypeId:'%@',leavesTypeName:'%@',leavesTypeContent:'%@',leavesDate:'%@',content:'%@',exaContent:'%@',orgId:'%@',depOrgId:'%@',userId:'%@'}", ];
+//        NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+//        
+//        ASIFormDataRequest *request = [self requestWithRelativeURL:SAVE_LEAVE_APPLICATION_REQUEST_URL];
+//        [request setPostBody:postData];
+//        [self startRequest:request didFinishSelector:@selector(requestSaveLeaveApplicationFinished:) didFailSelector:@selector(requestSaveLeaveApplicationFailed:)];
+    }
+}
+
+- (void)requestSaveLeaveApplicationFinished:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonDict) {
+        NSString *ajaxToken = [jsonDict stringForKey:@"ajax_token"];
+        if([ajaxToken integerValue] != 0) {
+            NSString *ajaxMessage = [jsonDict stringForKey:@"ajax_message"];
+            [self showAlert:ajaxMessage];
+        }
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestSaveLeaveApplicationFailed:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    [self requestDidFail:request];
+}
+
 #pragma mark - UIScrollViewDelegate Methods
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
@@ -266,6 +322,10 @@
 #pragma mark - UITextFieldDelegate Methods
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    if([self isRequesting]) {
+        return NO;
+    }
+    
     [self removePickerPanel];
     
     return YES;
@@ -283,6 +343,10 @@
 #pragma mark - UITextViewDelegate Methods
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
+    if([self isRequesting]) {
+        return NO;
+    }
+    
     [self removePickerPanel];
     
     return YES;

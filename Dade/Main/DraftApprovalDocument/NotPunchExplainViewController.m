@@ -12,7 +12,10 @@
 
 - (void)initView;
 - (BOOL)checkValidity;
-- (void)report;
+
+- (void)saveNotPunch;
+- (void)requestSaveNotPunchFinished:(ASIHTTPRequest *)request;
+- (void)requestSaveNotPunchFailed:(ASIHTTPRequest *)request;
 
 @end
 
@@ -67,6 +70,10 @@
 
 - (void)backClicked:(UIButton *)button
 {
+    if([self isRequesting]) {
+        return;
+    }
+    
     [self pop];
 }
 
@@ -74,7 +81,11 @@
 {
     // 呈报
     
-    [self report];
+    if([self isRequesting]) {
+        return;
+    }
+    
+    [self saveNotPunch];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification
@@ -145,11 +156,6 @@
     inputAccessoryView.items = buttonArray;
     self.notPunchTextView.inputAccessoryView = inputAccessoryView;
     self.explainTextView.inputAccessoryView = inputAccessoryView;
-    
-    // 测试---Start
-    self.nameLabel.text = @"王冬王冬冬王冬冬王冬冬王冬冬王冬冬王冬冬王冬冬王冬冬";
-    self.departmentLabel.text = @"综合管理部综合管理部综合管理部综合管理部综合管理部综合管理部综合管理部综合管理部";
-    // 测试---End
 }
 
 - (BOOL)checkValidity
@@ -176,12 +182,54 @@
     return YES;
 }
 
-- (void)report
+- (void)saveNotPunch
 {
     if([self checkValidity]) {
         [self.view endEditing:YES];
         
+        [self addLoadingView];
+        
+//        attendance：考勤号
+//        cardDate：未打卡日期
+//        content：未打卡说明
+//        exaContent：审批说明
+//        orgId：组织架构Id
+//        depOrgId：部门组织架构ID
+//        userId：用户Id
+        
+//        NSString *postString = [NSString stringWithFormat:@"{attendance:'%@',cardDate:'%@',content:'%@',exaContent:'%@',orgId:'%@',depOrgId:'%@',userId:'%@'}", ];
+//        NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+//        
+//        ASIFormDataRequest *request = [self requestWithRelativeURL:SAVE_NOT_PUNCH_REQUEST_URL];
+//        [request setPostBody:postData];
+//        [self startRequest:request didFinishSelector:@selector(requestSaveNotPunchFinished:) didFailSelector:@selector(requestSaveNotPunchFailed:)];
     }
+}
+
+- (void)requestSaveNotPunchFinished:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonDict) {
+        NSString *ajaxToken = [jsonDict stringForKey:@"ajax_token"];
+        if([ajaxToken integerValue] != 0) {
+            NSString *ajaxMessage = [jsonDict stringForKey:@"ajax_message"];
+            [self showAlert:ajaxMessage];
+        }
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestSaveNotPunchFailed:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    [self requestDidFail:request];
 }
 
 #pragma mark - UIScrollViewDelegate Methods
@@ -193,13 +241,16 @@
 #pragma mark - UITextFieldDelegate Methods
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    if([self isRequesting]) {
+        return NO;
+    }
+    
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if(textField == self.numberTextField) {
-        [self.numberTextField resignFirstResponder];
         [self.dateTextField becomeFirstResponder];
     } else if(textField == self.dateTextField) {
         [self.dateTextField resignFirstResponder];
@@ -211,6 +262,10 @@
 #pragma mark - UITextViewDelegate Methods
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
+    if([self isRequesting]) {
+        return NO;
+    }
+
     return YES;
 }
 
