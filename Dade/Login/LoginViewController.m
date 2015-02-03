@@ -82,7 +82,7 @@
     self.codeLabel.text = [self randomCode];
     
 // 测试---Start
-    self.usernameTextField.text = @"lus";
+    self.usernameTextField.text = @"gaoxs";
     self.passwordTextField.text = @"123456";
     self.codeTextField.text = @"9999";
     self.codeLabel.text = @"9999";

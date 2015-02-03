@@ -21,5 +21,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 
 @property (copy, nonatomic) NSString *noticeId;
+@property (copy, nonatomic) NSString *fileTypeId;
 
 @end

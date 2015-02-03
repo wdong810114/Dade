@@ -178,6 +178,11 @@
     return [_requestArray count] > 0;
 }
 
+- (BOOL)isSingleRequesting
+{
+    return [_requestArray count] == 1;
+}
+
 @end
 
 @implementation BaseViewController (Alert)

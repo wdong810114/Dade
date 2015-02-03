@@ -111,7 +111,7 @@
     }
     
     NSDictionary *notice = [_noticeArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = [notice stringForKey:@"displayvalue"];
+    cell.textLabel.text = [NSString stringWithFormat:@"通知:%@", [notice stringForKey:@"displayvalue"]];
     
     return cell;
 }
@@ -130,6 +130,7 @@
     
     NoticeDetailViewController *viewController = [[NoticeDetailViewController alloc] initWithNibName:@"NoticeDetailViewController" bundle:nil];
     viewController.noticeId = [notice stringForKey:@"id"];
+    viewController.fileTypeId = [notice stringForKey:@"filetypeid"];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

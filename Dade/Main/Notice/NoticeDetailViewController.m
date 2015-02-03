@@ -15,6 +15,9 @@
 - (void)showNoticeViewById;
 - (void)requestShowNoticeViewByIdFinished:(ASIHTTPRequest *)request;
 - (void)requestShowNoticeViewByIdFailed:(ASIHTTPRequest *)request;
+- (void)showNoticeFlowInfoList;
+- (void)requestShowNoticeFlowInfoListFinished:(ASIHTTPRequest *)request;
+- (void)requestShowNoticeFlowInfoListFailed:(ASIHTTPRequest *)request;
 
 @end
 
@@ -30,6 +33,7 @@
     [self initView];
     
     [self showNoticeViewById];
+    [self showNoticeFlowInfoList];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -102,7 +106,9 @@
 
 - (void)requestShowNoticeViewByIdFinished:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    if([self isSingleRequesting]) {
+        [self removeLoadingView];
+    }
     
     NSString *jsonString = request.responseString;
     
@@ -113,7 +119,6 @@
         self.departmentLabel.text = [jsonDict stringForKey:@"depname"];
         self.quartersLabel.text = [jsonDict stringForKey:@"orgName"];
         self.undertakerLabel.text = [jsonDict stringForKey:@"undertake"];
-        self.recipientsLabel.text = @"";
         self.contentLabel.text = [jsonDict stringForKey:@"content"];
     }
     
@@ -122,7 +127,57 @@
 
 - (void)requestShowNoticeViewByIdFailed:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    if([self isSingleRequesting]) {
+        [self removeLoadingView];
+    }
+    
+    [self requestDidFail:request];
+}
+
+- (void)showNoticeFlowInfoList
+{
+    [self addLoadingView];
+    
+//    fileinfoId：文件主表Id
+//    filetypeid：文件类型ID
+//    userId：当前登录人Id
+    
+    NSString *postString = [NSString stringWithFormat:@"{fileinfoId:'%@',filetypeid:'%@',userId:'%@'}", self.noticeId, self.fileTypeId, DadeAppDelegate.userInfo.staffId];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:SHOW_NOTICE_FLOW_INFO_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestShowNoticeFlowInfoListFinished:) didFailSelector:@selector(requestShowNoticeFlowInfoListFailed:)];
+}
+
+- (void)requestShowNoticeFlowInfoListFinished:(ASIHTTPRequest *)request
+{
+    if([self isSingleRequesting]) {
+        [self removeLoadingView];
+    }
+    
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonArray) {
+        NSMutableString *recipients = [[NSMutableString alloc] init];
+        for(NSDictionary *infoDict in jsonArray) {
+            NSString *recipient = [infoDict stringForKey:@"receipt"];
+            [recipients appendFormat:@"%@;", [Util trimString:recipient]];
+        }
+        
+        self.recipientsLabel.text = recipients;
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestShowNoticeFlowInfoListFailed:(ASIHTTPRequest *)request
+{
+    if([self isSingleRequesting]) {
+        [self removeLoadingView];
+    }
     
     [self requestDidFail:request];
 }

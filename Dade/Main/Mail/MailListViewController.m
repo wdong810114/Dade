@@ -111,7 +111,7 @@
     }
     
     NSDictionary *mail = [_mailArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = [mail stringForKey:@"displayvalue"];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@:%@", [Util trimString:[mail stringForKey:@"staffName"]], [mail stringForKey:@"displayvalue"]];
     
     return cell;
 }

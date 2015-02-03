@@ -40,6 +40,7 @@
 - (void)requestDidFinish:(ASIHTTPRequest *)request;
 - (void)requestDidFail:(ASIHTTPRequest *)request;
 - (BOOL)isRequesting;
+- (BOOL)isSingleRequesting;
 
 @end
 
