@@ -88,13 +88,13 @@
     }
     
     if(![self.captchaTextField.text isEqualToString:_captcha]) {
-        [self showAlert:@"验证码输入错误"];
-        
         _tryTimes += 1;
         if(_tryTimes == 3) {
             [self sendCaptcha];
             
             _tryTimes = 0;
+        } else {
+            [self showAlert:[NSString stringWithFormat:@"验证码错误，%i次后重新获取验证码", 3 - _tryTimes]];
         }
         
         return NO;
@@ -107,7 +107,7 @@
 {
     [self.view endEditing:YES];
     
-    if(1/*[self checkValidity]*/) {
+    if([self checkValidity]) {
         [DadeAppDelegate loginSuccessed];
     }
 }
@@ -133,7 +133,7 @@
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonDict) {
-        _captcha = [jsonDict stringForKey:@"random"];
+        _captcha = [jsonDict stringForKey:@"random "];
     }
     
     [self requestDidFinish:request];
