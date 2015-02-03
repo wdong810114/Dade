@@ -12,9 +12,16 @@
 
 @interface MailListViewController ()
 
+- (void)queryNewsList;
+- (void)requestQueryNewsListFinished:(ASIHTTPRequest *)request;
+- (void)requestQueryNewsListFailed:(ASIHTTPRequest *)request;
+
 @end
 
 @implementation MailListViewController
+{
+    NSMutableArray *_mailArray;
+}
 
 - (void)viewDidLoad
 {
@@ -23,6 +30,8 @@
     self.mailListTableView.backgroundView = nil;
     self.mailListTableView.backgroundColor = TABLEVIEW_BG_COLOR;
     self.mailListTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    [self queryNewsList];
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,10 +52,50 @@
     [self pop];
 }
 
+#pragma mark - Private Methods
+- (void)queryNewsList
+{
+    [self addLoadingView];
+    
+//    userId ：用户Id
+    
+    NSString *postString = [NSString stringWithFormat:@"{userId:'%@'}", DadeAppDelegate.userInfo.staffId];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_NEWS_LIST_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestQueryNewsListFinished:) didFailSelector:@selector(requestQueryNewsListFailed:)];
+}
+
+- (void)requestQueryNewsListFinished:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonArray) {
+        _mailArray = [[NSMutableArray alloc] initWithArray:jsonArray];
+        
+        [self setNavigationBarTitle:[NSString stringWithFormat:@"邮件(%i)", [_mailArray count]]];
+        [self.mailListTableView reloadData];
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestQueryNewsListFailed:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    [self requestDidFail:request];
+}
+
 #pragma mark - UITableViewDataSource Methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 8;
+    return [_mailArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -61,7 +110,8 @@
         cell.textLabel.font = FONT(14.0);
     }
     
-    cell.textLabel.text = @"平安俊：文件批准通知";
+    NSDictionary *mail = [_mailArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = [mail stringForKey:@"displayvalue"];
     
     return cell;
 }
@@ -76,7 +126,10 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    NSDictionary *mail = [_mailArray objectAtIndex:indexPath.row];
+    
     MailDetailViewController *viewController = [[MailDetailViewController alloc] initWithNibName:@"MailDetailViewController" bundle:nil];
+    viewController.mailId = [mail stringForKey:@"id"];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

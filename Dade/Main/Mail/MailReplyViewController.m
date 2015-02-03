@@ -12,7 +12,10 @@
 
 - (void)initView;
 - (BOOL)checkValidity;
-- (void)reply;
+
+- (void)replyMail;
+- (void)requestReplyMailFinished:(ASIHTTPRequest *)request;
+- (void)requestReplyMailFailed:(ASIHTTPRequest *)request;
 
 @end
 
@@ -74,6 +77,10 @@
 
 - (void)backClicked:(UIButton *)button
 {
+    if([self isRequesting]) {
+        return;
+    }
+    
     [self pop];
 }
 
@@ -81,7 +88,11 @@
 {
     // 回复
     
-    [self reply];
+    if([self isRequesting]) {
+        return;
+    }
+    
+    [self replyMail];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification
@@ -162,17 +173,62 @@
     return YES;
 }
 
-- (void)reply
+- (void)replyMail
 {
     if([self checkValidity]) {
         [self.view endEditing:YES];
         
+        [self addLoadingView];
+        
+//        mailId：邮件主表Id
+//        displayvalue：邮件主题
+//        content：邮件内容
+//        userId：用户Id
+        
+        NSString *postString = [NSString stringWithFormat:@"{mailId:'%@',displayvalue:'%@',content:'%@',userId:'%@'}", self.mailId, self.subjectTextField.text, self.contentTextView.text, DadeAppDelegate.userInfo.staffId];
+        NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        ASIFormDataRequest *request = [self requestWithRelativeURL:REPLY_MAIL_REQUEST_URL];
+        [request setPostBody:postData];
+        [self startRequest:request didFinishSelector:@selector(requestReplyMailFinished:) didFailSelector:@selector(requestReplyMailFailed:)];
     }
+}
+
+- (void)requestReplyMailFinished:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonDict) {
+        NSString *ajaxToken = [jsonDict stringForKey:@"ajax_token"];
+        if([ajaxToken integerValue] != 0) {
+            NSString *ajaxMessage = [jsonDict stringForKey:@"ajax_message"];
+            [self showAlert:ajaxMessage];
+        } else {
+            [self performSelector:@selector(pop)];
+        }
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestReplyMailFailed:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    [self requestDidFail:request];
 }
 
 #pragma mark - UITextFieldDelegate Methods
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    if([self isRequesting]) {
+        return NO;
+    }
+    
     return YES;
 }
 
@@ -188,6 +244,10 @@
 #pragma mark - UITextViewDelegate Methods
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
+    if([self isRequesting]) {
+        return NO;
+    }
+
     return YES;
 }
 

@@ -34,19 +34,28 @@
 #define ALERT_BUTTON_TITLE_CANCEL       @"取消"
 #define BAR_BUTTON_TITLE_DONE           @"完成"
 
+// 接口定义
 #define BASE_REQUEST_URL                        @"http://218.60.29.216:8080/kinghorse"
+
 #define LOGIN_USER_REQUEST_URL                  @"%@/LoginUser"                 // 用户登录身份验证接口
 #define SEND_TEXT_REQUEST_URL                   @"%@/SendText"                  // 发送短信验证码接口
+#define QUERY_ORGANIZATION_REQUEST_URL          @"%@/QueryOrganization"         // 查询用户企业组织机构信息接口
+
 #define QUERY_INCOME_LIST_REQUEST_URL           @"%@/QueryIncomeList"           // 待办文件查询列表接口
 #define GET_INCOME_VIEW_BY_ID_REQUEST_URL       @"%@/GetIncomeViewById"         // 文件详细信息接口
 #define QUERY_NOTICE_LIST_REQUEST_URL           @"%@/QueryNoticeList"           // 通知文件查询列表接口
 #define SHOW_NOTICE_VIEW_BY_ID_REQUEST_URL      @"%@/ShowNoticeViewById"        // 通知详细信息接口
+#define QUERY_NEWS_LIST_REQUEST_URL             @"%@/QueryNewsList"             // 邮件查询列表接口
+#define QUERY_MAIL_INFO_BY_ID_REQUEST_URL       @"%@/QueryMailInfoById"         // 邮件详细信息查询接口
+#define REPLY_MAIL_REQUEST_URL                  @"%@/ReplyMail"                 // 邮件回复接口
 
 #define SAVE_MAIL_REQUEST_URL                   @"%@/SaveMail"                  // 邮件起草接口
 #define SAVE_LEAVE_APPLICATION_REQUEST_URL      @"%@/SaveLeaveApplication"      // 请假申请起草接口
 #define SAVE_NOT_PUNCH_REQUEST_URL              @"%@/SaveNotPunch"              // 未打卡说明起草接口
 #define DRAFT_NOTICE_INFO_REQUEST_URL           @"%@/DraftNoticeInfo"           // 通知起草接口
 #define GET_PROCESS_BY_FILE_ID_REQUEST_URL      @"%@/GetProcessByFileId"        // 起草文件审批流程查询接口
+
+#define QUERY_VERSION_NUMBER_REQUEST_URL        @"%@/QueryVersionNumber"        // 查询版本号
 
 
 

@@ -13,41 +13,22 @@
 @interface MailDetailViewController ()
 
 - (void)initView;
-- (void)refreshView;
+
+- (void)queryMailInfoById;
+- (void)requestQueryMailInfoByIdFinished:(ASIHTTPRequest *)request;
+- (void)requestQueryMailInfoByIdFailed:(ASIHTTPRequest *)request;
 
 @end
 
 @implementation MailDetailViewController
-{
-    NSString *_subject;     // 主题
-    NSString *_sender;      // 发件人
-    NSString *_recipients;  // 收件人
-    NSString *_time;        // 操作时间
-    NSString *_content;     // 内容
-}
-
-// 测试---Start
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if(self) {
-        _subject = @"关于第三季度综合管理检查的邮件";
-        _sender = @"王冬冬";
-        _recipients = @"葛立群;崔明东;葛立群;崔明东;葛立群;崔明东;葛立群;崔明东;葛立群;崔明东;葛立群;崔明东;";
-        _time = @"2015-11-23";
-        _content = @"各位领导、同事：\n工作汇报可以按照日程表的格式来提交，在领度企业执行与沟通平台的日程表可以用来填报自己的工作，可以按天，按小时填写汇报工作，填写的内容包含工作摘要、内容、花费时间、对应的任务、上传附件等。";
-    }
-    
-    return self;
-    
-}
-// 测试---End
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self initView];
+    
+    [self queryMailInfoById];
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,8 +53,13 @@
 {
     // 回复
     
+    if([self isRequesting]) {
+        return;
+    }
+    
     MailReplyViewController *viewController = [[MailReplyViewController alloc] initWithNibName:@"MailReplyViewController" bundle:nil];
-    viewController.recipient = _sender;
+    viewController.recipient = self.senderLabel.text;
+    viewController.mailId = self.mailId;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -93,17 +79,47 @@
     [self.replyButton setBackgroundImage:[Util imageWithColor:RED_BUTTON_BG_NORMAL_COLOR] forState:UIControlStateNormal];
     [self.replyButton setBackgroundImage:[Util imageWithColor:RED_BUTTON_BG_HIGHLIGHTED_COLOR] forState:UIControlStateHighlighted];
     [self.replyButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    
-    [self refreshView];
 }
 
-- (void)refreshView
+- (void)queryMailInfoById
 {
-    self.subjectLabel.text = _subject;
-    self.senderLabel.text = _sender;
-    self.recipientsLabel.text = _recipients;
-    self.timeLabel.text = _time;
-    self.contentLabel.text = _content;
+    [self addLoadingView];
+    
+//    mailInfoId：邮件表主键Id
+//    userId：用户Id
+    
+    NSString *postString = [NSString stringWithFormat:@"{mailInfoId:'%@',userId:'%@'}", self.mailId, DadeAppDelegate.userInfo.staffId];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_MAIL_INFO_BY_ID_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestQueryMailInfoByIdFinished:) didFailSelector:@selector(requestQueryMailInfoByIdFailed:)];
+}
+
+- (void)requestQueryMailInfoByIdFinished:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonDict) {
+        self.subjectLabel.text = [jsonDict stringForKey:@"displayvalue"];
+        self.senderLabel.text = [jsonDict stringForKey:@"mailStaffname"];
+        self.recipientsLabel.text = [jsonDict stringForKey:@"staffNames"];
+        self.timeLabel.text = [jsonDict stringForKey:@"operationdate"];
+        self.contentLabel.text = [jsonDict stringForKey:@"content"];
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestQueryMailInfoByIdFailed:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    [self requestDidFail:request];
 }
 
 @end

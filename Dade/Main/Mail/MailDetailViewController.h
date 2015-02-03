@@ -22,4 +22,6 @@
 
 - (IBAction)replyButtonClicked:(UIButton *)button;
 
+@property (copy, nonatomic) NSString *mailId;
+
 @end
