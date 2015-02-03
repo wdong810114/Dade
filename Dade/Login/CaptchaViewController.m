@@ -17,6 +17,9 @@
 - (void)sendCaptcha;
 - (void)requestSendCaptchaFinished:(ASIHTTPRequest *)request;
 - (void)requestSendCaptchaFailed:(ASIHTTPRequest *)request;
+- (void)queryOrganization;
+- (void)requestQueryOrganizationFinished:(ASIHTTPRequest *)request;
+- (void)requestQueryOrganizationFailed:(ASIHTTPRequest *)request;
 
 @end
 
@@ -108,7 +111,7 @@
     [self.view endEditing:YES];
     
     if([self checkValidity]) {
-        [DadeAppDelegate loginSuccessed];
+        [self queryOrganization];
     }
 }
 
@@ -145,6 +148,44 @@
 }
 
 - (void)requestSendCaptchaFailed:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    [self requestDidFail:request];
+}
+
+- (void)queryOrganization
+{
+    [self addLoadingView];
+    
+//    userId ：用户Id
+    
+    NSString *postString = [NSString stringWithFormat:@"{userId:'%@'}", DadeAppDelegate.userInfo.staffId];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_ORGANIZATION_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestQueryOrganizationFinished:) didFailSelector:@selector(requestQueryOrganizationFailed:)];
+}
+
+- (void)requestQueryOrganizationFinished:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonArray) {
+        [DadeAppDelegate.userInfo parseOrganizationDict:[jsonArray objectAtIndex:0]];
+        
+        [DadeAppDelegate performSelector:@selector(loginSuccessed)];
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestQueryOrganizationFailed:(ASIHTTPRequest *)request
 {
     [self removeLoadingView];
     
