@@ -67,19 +67,19 @@
         case 0:
         {
             cell.imageView.image = [UIImage imageNamed:@"todo_icon"];
-            cell.textLabel.text = [NSString stringWithFormat:@"待办（%i）", (int)_todoCount];
+            cell.textLabel.text = [NSString stringWithFormat:@"待办(%i)", (int)_todoCount];
         }
             break;
         case 1:
         {
             cell.imageView.image = [UIImage imageNamed:@"notice_icon"];
-            cell.textLabel.text = [NSString stringWithFormat:@"通知（%i）", (int)_noticeCount];
+            cell.textLabel.text = [NSString stringWithFormat:@"通知(%i)", (int)_noticeCount];
         }
             break;
         case 2:
         {
             cell.imageView.image = [UIImage imageNamed:@"mail_icon"];
-            cell.textLabel.text = [NSString stringWithFormat:@"邮件（%i）", (int)_mailCount];
+            cell.textLabel.text = [NSString stringWithFormat:@"邮件(%i)", (int)_mailCount];
         }
             break;
         case 3:
