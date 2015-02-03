@@ -21,6 +21,9 @@
 @end
 
 @implementation MailDetailViewController
+{
+    CGPoint _scrollViewContentOffset;   // 解决iOS6下bug
+}
 
 - (void)viewDidLoad
 {
@@ -29,6 +32,27 @@
     [self initView];
     
     [self queryMailInfoById];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.mailDetailScrollView.contentOffset = CGPointZero;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    _scrollViewContentOffset = self.mailDetailScrollView.contentOffset;
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    self.mailDetailScrollView.contentOffset = _scrollViewContentOffset;
 }
 
 - (void)didReceiveMemoryWarning

@@ -146,7 +146,7 @@
 #pragma mark - Private Methods
 - (void)initView
 {
-    self.subjectTextField.text = [NSString stringWithFormat:@"回复：%@（邮件主题）", self.recipient];
+    self.subjectTextField.text = [NSString stringWithFormat:@"回复：%@（邮件主题）", [Util trimString:self.recipient]];
     
     [self.replyButton setBackgroundImage:[Util imageWithColor:RED_BUTTON_BG_NORMAL_COLOR] forState:UIControlStateNormal];
     [self.replyButton setBackgroundImage:[Util imageWithColor:RED_BUTTON_BG_HIGHLIGHTED_COLOR] forState:UIControlStateHighlighted];
