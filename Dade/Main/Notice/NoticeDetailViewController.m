@@ -66,6 +66,8 @@
 {
     [self addLoadingView];
     
+//    id ：文件主表Id
+    
     NSString *postString = [NSString stringWithFormat:@"{id:'%@'}", self.noticeId];
     NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     

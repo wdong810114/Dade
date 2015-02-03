@@ -115,6 +115,9 @@
         
         [self addLoadingView];
         
+//        loginName：用户登录名
+//        loginPassWord：用户登录密码
+        
         NSString *postString = [NSString stringWithFormat:@"{loginName:'%@',loginPassWord:'%@'}", self.usernameTextField.text, self.passwordTextField.text];
         NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
         

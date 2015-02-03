@@ -55,6 +55,8 @@
 {
     [self addLoadingView];
     
+//    userId ：用户Id
+    
     NSString *postString = [NSString stringWithFormat:@"{userId:'%@'}", DadeAppDelegate.userInfo.staffId];
     NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
