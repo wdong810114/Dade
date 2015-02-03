@@ -125,7 +125,11 @@
 {
     CGFloat scrollMaxOffsetY = self.noticeDraftScrollView.contentSize.height - self.noticeDraftScrollView.frame.size.height;
     if(self.noticeDraftScrollView.contentOffset.y > scrollMaxOffsetY) {
-        [self.noticeDraftScrollView setContentOffset:CGPointMake(0.0, scrollMaxOffsetY) animated:YES];
+        if(scrollMaxOffsetY < 0) {
+            [self.noticeDraftScrollView setContentOffset:CGPointZero animated:YES];
+        } else {
+            [self.noticeDraftScrollView setContentOffset:CGPointMake(0.0, scrollMaxOffsetY) animated:YES];
+        }
     }
 }
 

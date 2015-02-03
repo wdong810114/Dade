@@ -108,7 +108,11 @@
 {
     CGFloat scrollMaxOffsetY = self.notPunchExplainScrollView.contentSize.height - self.notPunchExplainScrollView.frame.size.height;
     if(self.notPunchExplainScrollView.contentOffset.y > scrollMaxOffsetY) {
-        [self.notPunchExplainScrollView setContentOffset:CGPointMake(0.0, scrollMaxOffsetY) animated:YES];
+        if(scrollMaxOffsetY < 0) {
+            [self.notPunchExplainScrollView setContentOffset:CGPointZero animated:YES];
+        } else {
+            [self.notPunchExplainScrollView setContentOffset:CGPointMake(0.0, scrollMaxOffsetY) animated:YES];
+        }
     }
 }
 
