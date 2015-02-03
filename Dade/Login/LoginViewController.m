@@ -80,6 +80,13 @@
     [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     self.codeLabel.text = [self randomCode];
+    
+// 测试---Start
+    self.usernameTextField.text = @"lus";
+    self.passwordTextField.text = @"123456";
+    self.codeTextField.text = @"9999";
+    self.codeLabel.text = @"9999";
+// 测试---End
 }
 
 - (BOOL)checkValidity

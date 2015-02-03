@@ -134,6 +134,9 @@
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonDict) {
         _captcha = [jsonDict stringForKey:@"random "];
+// 测试---Start
+        self.captchaTextField.text = _captcha;
+// 测试---End
     }
     
     [self requestDidFinish:request];
