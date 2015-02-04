@@ -55,6 +55,7 @@
 #define SAVE_NOT_PUNCH_REQUEST_URL              @"%@/SaveNotPunch"              // 未打卡说明起草接口
 #define DRAFT_NOTICE_INFO_REQUEST_URL           @"%@/DraftNoticeInfo"           // 通知起草接口
 #define GET_PROCESS_BY_FILE_ID_REQUEST_URL      @"%@/GetProcessByFileId"        // 起草文件审批流程查询接口
+#define QUERY_STAFF_LIST_BY_NAME_REQUEST_URL    @"%@/QueryStaffListByName"      // 用户查询接口
 
 #define QUERY_VERSION_NUMBER_REQUEST_URL        @"%@/QueryVersionNumber"        // 查询版本号
 
