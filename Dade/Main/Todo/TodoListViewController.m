@@ -76,6 +76,7 @@
     if(!error && jsonArray) {
         _todoArray = [[NSMutableArray alloc] initWithArray:jsonArray];
         
+        [self setNavigationBarTitle:[NSString stringWithFormat:@"待办(%i)", [_todoArray count]]];
         [self.todoListTableView reloadData];
     }
     
@@ -108,7 +109,7 @@
     }
     
     NSDictionary *income = [_todoArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = [income stringForKey:@"displayvalue"];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@:%@", [income stringForKey:@"filetype"], [income stringForKey:@"displayvalue"]];
     
     return cell;
 }
