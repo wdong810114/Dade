@@ -306,6 +306,8 @@
         if([ajaxToken integerValue] != 0) {
             NSString *ajaxMessage = [jsonDict stringForKey:@"ajax_message"];
             [self showAlert:ajaxMessage];
+        } else {
+            [self performSelector:@selector(pop)];
         }
     }
     
