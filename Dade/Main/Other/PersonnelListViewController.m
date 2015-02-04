@@ -12,7 +12,6 @@
 
 - (void)initView;
 - (BOOL)checkSelected:(NSDictionary *)personnel;
-- (void)removeSelectedId:(NSString *)personnelId;
 
 - (void)queryStaffListByName;
 - (void)requestQueryStaffListByNameFinished:(ASIHTTPRequest *)request;
@@ -126,7 +125,7 @@
     
     for(NSDictionary *personnel in _searchPersonnelArray) {
         if([self checkSelected:personnel]) {
-            [self removeSelectedId:[personnel stringForKey:@"id"]];
+            [self.selectedIdArray removeObject:[personnel stringForKey:@"id"]];
         } else {
             [self.selectedIdArray addObject:[personnel stringForKey:@"id"]];
         }
@@ -191,14 +190,6 @@
     }
     
     return isSelected;
-}
-
-- (void)removeSelectedId:(NSString *)personnelId
-{
-    NSUInteger index = [self.selectedIdArray indexOfObject:personnelId];
-    if(NSNotFound != index) {
-        [self.selectedIdArray removeObjectAtIndex:index];
-    }
 }
 
 - (void)queryStaffListByName
@@ -288,7 +279,7 @@
     NSDictionary *personnel = [_searchPersonnelArray objectAtIndex:indexPath.row];
     
     if([self checkSelected:personnel]) {
-        [self removeSelectedId:[personnel stringForKey:@"id"]];
+        [self.selectedIdArray removeObject:[personnel stringForKey:@"id"]];
     } else {
         [self.selectedIdArray addObject:[personnel stringForKey:@"id"]];
     }
