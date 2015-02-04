@@ -8,8 +8,6 @@
 
 #import "DraftWorkContactListViewController.h"
 
-#import "PersonnelListViewController.h"
-
 @interface DraftWorkContactListViewController ()
 
 - (void)initView;
@@ -20,6 +18,11 @@
 @end
 
 @implementation DraftWorkContactListViewController
+{
+    CGPoint _scrollViewContentOffset;   // 解决iOS6下bug
+    
+    NSArray *_recipientIdArray;
+}
 
 - (void)dealloc
 {
@@ -57,6 +60,27 @@
     [self initView];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.draftWorkContactListScrollView.contentOffset = CGPointZero;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    _scrollViewContentOffset = self.draftWorkContactListScrollView.contentOffset;
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    self.draftWorkContactListScrollView.contentOffset = _scrollViewContentOffset;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -92,6 +116,8 @@
     // 添加
     
     PersonnelListViewController *viewController = [[PersonnelListViewController alloc] initWithNibName:@"PersonnelListViewController" bundle:nil];
+    viewController.delegate = self;
+    viewController.selectedIdArray = [NSMutableArray arrayWithArray:_recipientIdArray];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -260,6 +286,13 @@
             self.placeholderLabel.alpha = 0.0;
         }
     }
+}
+
+#pragma mark - PersonnelListViewControllerDelegate Methods
+- (void)personnelListViewController:(PersonnelListViewController *)personnelListViewController didSelectIds:(NSArray *)idArray didSelectNames:(NSArray *)nameArray
+{
+    _recipientIdArray = [NSArray arrayWithArray:idArray];
+    self.recipientsLabel.text = [nameArray componentsJoinedByString:@"|"];
 }
 
 @end

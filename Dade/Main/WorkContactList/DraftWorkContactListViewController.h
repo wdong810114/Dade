@@ -9,12 +9,14 @@
 
 #import "BaseViewController.h"
 
+#import "PersonnelListViewController.h"
+
 typedef NS_ENUM(NSInteger, EntranceType) {
     ENTRANCE_TYPE_DRAFT,        // 起草
     ENTRANCE_TYPE_EDIT,         // 草稿
 };
 
-@interface DraftWorkContactListViewController : BaseViewController
+@interface DraftWorkContactListViewController : BaseViewController <PersonnelListViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *draftWorkContactListScrollView;
 

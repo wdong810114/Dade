@@ -9,7 +9,9 @@
 
 #import "BaseViewController.h"
 
-@interface NoticeDraftViewController : BaseViewController
+#import "PersonnelListViewController.h"
+
+@interface NoticeDraftViewController : BaseViewController <PersonnelListViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *noticeDraftScrollView;
 
