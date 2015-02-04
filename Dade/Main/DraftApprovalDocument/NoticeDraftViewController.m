@@ -167,6 +167,8 @@
         self.departmentLabel.preferredMaxLayoutWidth = self.departmentLabel.bounds.size.width;
     }
     
+    self.departmentLabel.text = DadeAppDelegate.userInfo.department;
+    
     self.feedbackLabel.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(feedbackClicked)];
     [self.feedbackLabel addGestureRecognizer:tapGestureRecognizer];

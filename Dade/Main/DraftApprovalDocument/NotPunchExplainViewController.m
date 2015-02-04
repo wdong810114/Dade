@@ -144,6 +144,9 @@
         self.departmentLabel.preferredMaxLayoutWidth = self.departmentLabel.bounds.size.width;
     }
     
+    self.nameLabel.text = DadeAppDelegate.userInfo.staffName;
+    self.departmentLabel.text = DadeAppDelegate.userInfo.department;
+    
     [self.reportButton setBackgroundImage:[Util imageWithColor:RED_BUTTON_BG_NORMAL_COLOR] forState:UIControlStateNormal];
     [self.reportButton setBackgroundImage:[Util imageWithColor:RED_BUTTON_BG_HIGHLIGHTED_COLOR] forState:UIControlStateHighlighted];
     [self.reportButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

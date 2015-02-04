@@ -208,6 +208,11 @@
         self.positionLabel.preferredMaxLayoutWidth = self.positionLabel.bounds.size.width;
     }
     
+    self.subjectLabel.text = DadeAppDelegate.userInfo.staffName;
+    self.senderLabel.text = DadeAppDelegate.userInfo.staffName;
+    self.departmentLabel.text = DadeAppDelegate.userInfo.department;
+    self.positionLabel.text = DadeAppDelegate.userInfo.gradeName;
+    
     self.leaveTypeLabel.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(leaveTypeClicked)];
     [self.leaveTypeLabel addGestureRecognizer:tapGestureRecognizer];
