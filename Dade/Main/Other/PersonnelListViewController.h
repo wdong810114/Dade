@@ -9,6 +9,15 @@
 
 #import "BaseViewController.h"
 
+@class PersonnelListViewController;
+
+@protocol PersonnelListViewControllerDelegate <NSObject>
+
+@required
+- (void)personnelListViewController:(PersonnelListViewController *)personnelListViewController didSelectIds:(NSArray *)idArray didSelectNames:(NSArray *)nameArray;
+
+@end
+
 @interface PersonnelListViewController : BaseViewController
 
 @property (weak, nonatomic) IBOutlet UIImageView *magnifierImageView;
@@ -23,5 +32,8 @@
 - (IBAction)confirmButtonClicked:(UIButton *)button;
 - (IBAction)cancelButtonClicked:(UIButton *)button;
 - (IBAction)reverseButtonClicked:(UIButton *)button;
+
+@property (weak, nonatomic) id <PersonnelListViewControllerDelegate> delegate;
+@property (strong, nonatomic) NSMutableArray *selectedIdArray;
 
 @end
