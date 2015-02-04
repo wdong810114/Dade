@@ -9,7 +9,9 @@
 
 #import "BaseViewController.h"
 
-@interface MailDraftViewController : BaseViewController
+#import "PersonnelListViewController.h"
+
+@interface MailDraftViewController : BaseViewController <PersonnelListViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *mailDraftScrollView;
 

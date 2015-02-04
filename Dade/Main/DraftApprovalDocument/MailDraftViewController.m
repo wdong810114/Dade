@@ -8,8 +8,6 @@
 
 #import "MailDraftViewController.h"
 
-#import "PersonnelListViewController.h"
-
 @interface MailDraftViewController ()
 
 - (void)initView;
@@ -22,6 +20,11 @@
 @end
 
 @implementation MailDraftViewController
+{
+    CGPoint _scrollViewContentOffset;   // 解决iOS6下bug
+    
+    NSArray *_recipientIdArray;
+}
 
 - (void)dealloc
 {
@@ -57,6 +60,27 @@
     [self initView];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.mailDraftScrollView.contentOffset = CGPointZero;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    _scrollViewContentOffset = self.mailDraftScrollView.contentOffset;
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    self.mailDraftScrollView.contentOffset = _scrollViewContentOffset;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -88,6 +112,8 @@
     }
     
     PersonnelListViewController *viewController = [[PersonnelListViewController alloc] initWithNibName:@"PersonnelListViewController" bundle:nil];
+    viewController.delegate = self;
+    viewController.selectedIdArray = [NSMutableArray arrayWithArray:_recipientIdArray];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -147,6 +173,8 @@
         self.senderLabel.preferredMaxLayoutWidth = self.senderLabel.bounds.size.width;
         self.recipientsLabel.preferredMaxLayoutWidth = self.recipientsLabel.bounds.size.width;
     }
+    
+    self.senderLabel.text = DadeAppDelegate.userInfo.staffName;
     
     [self.addButton setTitleColor:BLUE_BUTTON_TITLE_NORMAL_COLOR forState:UIControlStateNormal];
     [self.addButton setTitleColor:BLUE_BUTTON_TITLE_HIGHLIGHTED_COLOR forState:UIControlStateHighlighted];
@@ -273,6 +301,13 @@
             self.placeholderLabel.alpha = 0.0;
         }
     }
+}
+
+#pragma mark - PersonnelListViewControllerDelegate Methods
+- (void)personnelListViewController:(PersonnelListViewController *)personnelListViewController didSelectIds:(NSArray *)idArray didSelectNames:(NSArray *)nameArray
+{
+    _recipientIdArray = [NSArray arrayWithArray:idArray];
+    self.recipientsLabel.text = [nameArray componentsJoinedByString:@"|"];
 }
 
 @end
