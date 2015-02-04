@@ -16,6 +16,16 @@
 
 @interface MainViewController ()
 
+- (void)queryIncomeList;
+- (void)requestQueryIncomeListFinished:(ASIHTTPRequest *)request;
+- (void)requestQueryIncomeListFailed:(ASIHTTPRequest *)request;
+- (void)queryNoticeList;
+- (void)requestQueryNoticeListFinished:(ASIHTTPRequest *)request;
+- (void)requestQueryNoticeListFailed:(ASIHTTPRequest *)request;
+- (void)queryNewsList;
+- (void)requestQueryNewsListFinished:(ASIHTTPRequest *)request;
+- (void)requestQueryNewsListFailed:(ASIHTTPRequest *)request;
+
 @end
 
 @implementation MainViewController
@@ -23,6 +33,8 @@
     NSInteger _todoCount;   // 待办数
     NSInteger _noticeCount; // 通知数
     NSInteger _mailCount;   // 邮件数
+    
+    NSTimeInterval _lastTimeInterval;   // 最近一次刷新时间
 }
 
 - (void)viewDidLoad
@@ -32,6 +44,24 @@
     self.mainTableView.backgroundView = nil;
     self.mainTableView.backgroundColor = TABLEVIEW_BG_COLOR;
     self.mainTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if(DadeAppDelegate.userInfo) {
+        NSTimeInterval currentTimeInterval = [[NSDate date] timeIntervalSince1970];
+        if(currentTimeInterval - _lastTimeInterval > 30 * 60) {
+            // 间隔超过30分钟才刷新
+            
+            _lastTimeInterval = currentTimeInterval;
+            
+            [self queryIncomeList];
+            [self queryNoticeList];
+            [self queryNewsList];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,6 +74,103 @@
     [super setNavigationBar];
     
     [self setNavigationBarTitle:@"大德集团"];
+}
+
+#pragma mark - Private Methods
+- (void)queryIncomeList
+{
+//    userId ：用户Id
+    
+    NSString *postString = [NSString stringWithFormat:@"{userId:'%@'}", DadeAppDelegate.userInfo.staffId];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_INCOME_LIST_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestQueryIncomeListFinished:) didFailSelector:@selector(requestQueryIncomeListFailed:)];
+}
+
+- (void)requestQueryIncomeListFinished:(ASIHTTPRequest *)request
+{
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonArray) {
+        _todoCount = [jsonArray count];
+        
+        [self.mainTableView reloadData];
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestQueryIncomeListFailed:(ASIHTTPRequest *)request
+{
+    [self requestDidFail:request];
+}
+
+- (void)queryNoticeList
+{
+//    userId ：用户Id
+    
+    NSString *postString = [NSString stringWithFormat:@"{userId:'%@'}", DadeAppDelegate.userInfo.staffId];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_NOTICE_LIST_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestQueryNoticeListFinished:) didFailSelector:@selector(requestQueryNoticeListFailed:)];
+}
+
+- (void)requestQueryNoticeListFinished:(ASIHTTPRequest *)request
+{
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonArray) {
+        _noticeCount = [jsonArray count];
+
+        [self.mainTableView reloadData];
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestQueryNoticeListFailed:(ASIHTTPRequest *)request
+{
+    [self requestDidFail:request];
+}
+
+- (void)queryNewsList
+{
+//    userId ：用户Id
+    
+    NSString *postString = [NSString stringWithFormat:@"{userId:'%@'}", DadeAppDelegate.userInfo.staffId];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_NEWS_LIST_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestQueryNewsListFinished:) didFailSelector:@selector(requestQueryNewsListFailed:)];
+}
+
+- (void)requestQueryNewsListFinished:(ASIHTTPRequest *)request
+{
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonArray) {
+        _mailCount = [jsonArray count];
+
+        [self.mainTableView reloadData];
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestQueryNewsListFailed:(ASIHTTPRequest *)request
+{
+    [self requestDidFail:request];
 }
 
 #pragma mark - UITableViewDataSource Methods
