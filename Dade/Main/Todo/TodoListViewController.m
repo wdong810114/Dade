@@ -76,7 +76,7 @@
     if(!error && jsonArray) {
         _todoArray = [[NSMutableArray alloc] initWithArray:jsonArray];
         
-        [self setNavigationBarTitle:[NSString stringWithFormat:@"待办(%i)", [_todoArray count]]];
+        [self setNavigationBarTitle:[NSString stringWithFormat:@"待办(%i)", (int)[_todoArray count]]];
         [self.todoListTableView reloadData];
     }
     

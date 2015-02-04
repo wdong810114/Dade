@@ -78,7 +78,7 @@
     if(!error && jsonArray) {
         _mailArray = [[NSMutableArray alloc] initWithArray:jsonArray];
         
-        [self setNavigationBarTitle:[NSString stringWithFormat:@"邮件(%i)", [_mailArray count]]];
+        [self setNavigationBarTitle:[NSString stringWithFormat:@"邮件(%i)", (int)[_mailArray count]]];
         [self.mailListTableView reloadData];
     }
     

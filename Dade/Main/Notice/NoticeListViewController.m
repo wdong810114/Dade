@@ -78,7 +78,7 @@
     if(!error && jsonArray) {
         _noticeArray = [[NSMutableArray alloc] initWithArray:jsonArray];
         
-        [self setNavigationBarTitle:[NSString stringWithFormat:@"通知(%i)", [_noticeArray count]]];
+        [self setNavigationBarTitle:[NSString stringWithFormat:@"通知(%i)", (int)[_noticeArray count]]];
         [self.noticeListTableView reloadData];
     }
     

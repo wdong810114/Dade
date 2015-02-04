@@ -97,7 +97,7 @@
             
             _tryTimes = 0;
         } else {
-            [self showAlert:[NSString stringWithFormat:@"验证码错误，%i次后重新获取验证码", 3 - _tryTimes]];
+            [self showAlert:[NSString stringWithFormat:@"验证码错误，%i次后重新获取验证码", 3 - (int)_tryTimes]];
         }
         
         return NO;

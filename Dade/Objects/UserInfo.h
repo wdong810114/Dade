@@ -28,7 +28,7 @@
 @property (copy, nonatomic) NSString *gradeName;    // 级别名称
 @property (copy, nonatomic) NSString *gradeId;      // 级别ID
 @property (copy, nonatomic) NSString *gradeCode;    // 级别代码
-@property (copy, nonatomic) NSString *staffName;    // 级别名称
+@property (copy, nonatomic) NSString *staffName;    // 人员名称
 
 - (instancetype)initWithDict:(NSDictionary *)dict;
 - (void)parseOrganizationDict:(NSDictionary *)dict;

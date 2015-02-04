@@ -74,17 +74,17 @@
             break;
         case 1:
         {
-            cell.textLabel.text = [NSString stringWithFormat:@"待办工作联系单（%i）", (int)_todoCount];
+            cell.textLabel.text = [NSString stringWithFormat:@"待办工作联系单(%i)", (int)_todoCount];
         }
             break;
         case 2:
         {
-            cell.textLabel.text = [NSString stringWithFormat:@"监督工作联系单（%i）", (int)_supervisionCount];
+            cell.textLabel.text = [NSString stringWithFormat:@"监督工作联系单(%i)", (int)_supervisionCount];
         }
             break;
         case 3:
         {
-            cell.textLabel.text = [NSString stringWithFormat:@"工作联系单草稿（%i）", (int)_draftCount];
+            cell.textLabel.text = [NSString stringWithFormat:@"工作联系单草稿(%i)", (int)_draftCount];
         }
             break;
             
