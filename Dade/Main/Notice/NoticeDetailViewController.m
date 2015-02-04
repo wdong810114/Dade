@@ -22,9 +22,6 @@
 @end
 
 @implementation NoticeDetailViewController
-{
-    CGPoint _scrollViewContentOffset;   // 解决iOS6下bug
-}
 
 - (void)viewDidLoad
 {
@@ -34,27 +31,6 @@
     
     [self showNoticeViewById];
     [self showNoticeFlowInfoList];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    self.noticeDetailScrollView.contentOffset = CGPointZero;
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    _scrollViewContentOffset = self.noticeDetailScrollView.contentOffset;
-}
-
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    
-    self.noticeDetailScrollView.contentOffset = _scrollViewContentOffset;
 }
 
 - (void)didReceiveMemoryWarning
