@@ -276,7 +276,7 @@
 //        depOrgId：部门组织架构ID
 //        userId：用户Id
         
-//        NSString *postString = [NSString stringWithFormat:@"{leavesTypeId:'%@',leavesTypeName:'%@',leavesTypeContent:'%@',leavesDate:'%@',content:'%@',exaContent:'%@',orgId:'%@',depOrgId:'%@',userId:'%@'}", ];
+//        NSString *postString = [NSString stringWithFormat:@"{leavesTypeId:'%@',leavesTypeName:'%@',leavesTypeContent:'%@',leavesDate:'%@',content:'%@',exaContent:'%@',orgId:'%@',depOrgId:'%@',userId:'%@'}", self.leaveDateTextField.text, self.contentTextView.text, self.explainTextView.text, DadeAppDelegate.userInfo.orgId, DadeAppDelegate.userInfo.depOrgId, DadeAppDelegate.userInfo.staffId];
 //        NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
 //        
 //        ASIFormDataRequest *request = [self requestWithRelativeURL:SAVE_LEAVE_APPLICATION_REQUEST_URL];

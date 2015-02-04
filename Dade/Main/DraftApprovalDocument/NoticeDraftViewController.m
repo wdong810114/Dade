@@ -222,7 +222,7 @@
 //        temp：部门(由org_id|qyid|depOrgid组成，以“|”间隔)
 //        isEnd：是否完结
         
-//        NSString *postString = [NSString stringWithFormat:@"{userId:'%@',fileTypeId:'%@',displayvalue:'%@',filenum:'%@',content:'%@',staffIds:'%@',temp:'%@',isEnd:'%@'}", ];
+//        NSString *postString = [NSString stringWithFormat:@"{userId:'%@',fileTypeId:'%@',displayvalue:'%@',filenum:'%@',content:'%@',staffIds:'%@',temp:'%@',isEnd:'%@'}", DadeAppDelegate.userInfo.staffId, self.contentTextView.text, self.recipientsLabel.text];
 //        NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
 //        
 //        ASIFormDataRequest *request = [self requestWithRelativeURL:DRAFT_NOTICE_INFO_REQUEST_URL];
