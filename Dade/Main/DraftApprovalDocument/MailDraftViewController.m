@@ -222,7 +222,9 @@
 //        content 邮件内容
 //        userId ：用户Id
         
-        NSString *postString = [NSString stringWithFormat:@"{staffIds:'%@',displayvalue:'%@',content:'%@',userId:'%@'}", self.recipientsLabel.text, self.subjectTextField.text, self.contentTextView.text, DadeAppDelegate.userInfo.staffId];
+        NSString *staffIds = [_recipientIdArray componentsJoinedByString:@"|"];
+        
+        NSString *postString = [NSString stringWithFormat:@"{staffIds:'%@',displayvalue:'%@',content:'%@',userId:'%@'}", staffIds, self.subjectTextField.text, self.contentTextView.text, DadeAppDelegate.userInfo.staffId];
         NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:SAVE_MAIL_REQUEST_URL];

@@ -163,11 +163,11 @@
 
 - (BOOL)checkValidity
 {
-    if([[Util trimString:self.numberTextField.text] isEqualToString:@""]) {
-        [self showAlert:@"考勤号不能为空"];
-        
-        return NO;
-    }
+//    if([[Util trimString:self.numberTextField.text] isEqualToString:@""]) {
+//        [self showAlert:@"考勤号不能为空"];
+//        
+//        return NO;
+//    }
     
     if([[Util trimString:self.dateTextField.text] isEqualToString:@""]) {
         [self showAlert:@"未打卡日期不能为空"];
@@ -200,12 +200,12 @@
 //        depOrgId：部门组织架构ID
 //        userId：用户Id
         
-//        NSString *postString = [NSString stringWithFormat:@"{attendance:'%@',cardDate:'%@',content:'%@',exaContent:'%@',orgId:'%@',depOrgId:'%@',userId:'%@'}", self.dateTextField.text, self.notPunchTextView.text, self.explainTextView.text, DadeAppDelegate.userInfo.orgId, DadeAppDelegate.userInfo.depOrgId, DadeAppDelegate.userInfo.staffId];
-//        NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
-//        
-//        ASIFormDataRequest *request = [self requestWithRelativeURL:SAVE_NOT_PUNCH_REQUEST_URL];
-//        [request setPostBody:postData];
-//        [self startRequest:request didFinishSelector:@selector(requestSaveNotPunchFinished:) didFailSelector:@selector(requestSaveNotPunchFailed:)];
+        NSString *postString = [NSString stringWithFormat:@"{attendance:'%@',cardDate:'%@',content:'%@',exaContent:'%@',orgId:'%@',depOrgId:'%@',userId:'%@'}", @""/*self.numberTextField.text*/, self.dateTextField.text, self.notPunchTextView.text, self.explainTextView.text, DadeAppDelegate.userInfo.orgId, DadeAppDelegate.userInfo.depOrgId, DadeAppDelegate.userInfo.staffId];
+        NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        ASIFormDataRequest *request = [self requestWithRelativeURL:SAVE_NOT_PUNCH_REQUEST_URL];
+        [request setPostBody:postData];
+        [self startRequest:request didFinishSelector:@selector(requestSaveNotPunchFinished:) didFailSelector:@selector(requestSaveNotPunchFailed:)];
     }
 }
 
