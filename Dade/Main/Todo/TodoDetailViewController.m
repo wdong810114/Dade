@@ -11,6 +11,7 @@
 @interface TodoDetailViewController ()
 
 - (void)initView;
+- (BOOL)checkValidity;
 
 - (void)getIncomeViewById;
 - (void)requestGetIncomeViewByIdFinished:(ASIHTTPRequest *)request;
@@ -71,10 +72,6 @@
 
 - (void)backClicked:(UIButton *)button
 {
-    if([self isRequesting]) {
-        return;
-    }
-    
     [self pop];
 }
 
@@ -174,7 +171,6 @@
     
     return YES;
 }
-
 
 - (void)getIncomeViewById
 {
