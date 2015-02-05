@@ -17,6 +17,9 @@
 - (void)getIncomeViewById;
 - (void)requestGetIncomeViewByIdFinished:(ASIHTTPRequest *)request;
 - (void)requestGetIncomeViewByIdFailed:(ASIHTTPRequest *)request;
+- (void)getDateFileTextById;
+- (void)requestGetDateFileTextByIdFinished:(ASIHTTPRequest *)request;
+- (void)requestGetDateFileTextByIdFailed:(ASIHTTPRequest *)request;
 
 @end
 
@@ -59,6 +62,7 @@
     [self initView];
     
     [self getIncomeViewById];
+    [self getDateFileTextById];
 }
 
 - (void)didReceiveMemoryWarning
@@ -210,7 +214,9 @@
 
 - (void)requestGetIncomeViewByIdFinished:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    if([self isSingleRequesting]) {
+        [self removeLoadingView];
+    }
     
     NSString *jsonString = request.responseString;
     
@@ -228,7 +234,51 @@
 
 - (void)requestGetIncomeViewByIdFailed:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    if([self isSingleRequesting]) {
+        [self removeLoadingView];
+    }
+    
+    [self requestDidFail:request];
+}
+
+- (void)getDateFileTextById
+{
+    [self addLoadingView];
+    
+//    fileId：文件主表Id
+//    fileTypeId：文件类型ID
+    
+    NSString *postString = [NSString stringWithFormat:@"{fileId:'%@',fileTypeId:'113'}", self.todoId];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:GET_DATE_FILE_TEXT_BY_ID_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestGetDateFileTextByIdFinished:) didFailSelector:@selector(requestGetDateFileTextByIdFailed:)];
+}
+
+- (void)requestGetDateFileTextByIdFinished:(ASIHTTPRequest *)request
+{
+    if([self isSingleRequesting]) {
+        [self removeLoadingView];
+    }
+    
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonDict) {
+        self.leaveDateLabel.text = [jsonDict stringForKey:@"char2"];
+        self.leaveTypeLabel.text = [jsonDict stringForKey:@"char1"];
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestGetDateFileTextByIdFailed:(ASIHTTPRequest *)request
+{
+    if([self isSingleRequesting]) {
+        [self removeLoadingView];
+    }
     
     [self requestDidFail:request];
 }

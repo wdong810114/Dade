@@ -43,6 +43,7 @@
 
 #define QUERY_INCOME_LIST_REQUEST_URL           @"%@/QueryIncomeList"           // 待办文件查询列表接口
 #define GET_INCOME_VIEW_BY_ID_REQUEST_URL       @"%@/GetIncomeViewById"         // 文件详细信息接口
+#define GET_DATE_FILE_TEXT_BY_ID_REQUEST_URL    @"%@/GetDatefiletextById"       // 未打卡说明/请假申请详细信息接口
 #define QUERY_NOTICE_LIST_REQUEST_URL           @"%@/QueryNoticeList"           // 通知文件查询列表接口
 #define SHOW_NOTICE_VIEW_BY_ID_REQUEST_URL      @"%@/ShowNoticeViewById"        // 通知详细信息接口
 #define SHOW_NOTICE_FLOW_INFO_REQUEST_URL       @"%@/ShowNoticeFlowInfoList"    // 通知人员列表接口
