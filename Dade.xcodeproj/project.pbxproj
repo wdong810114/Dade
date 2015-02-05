@@ -35,6 +35,8 @@
 		8B2991DA1A78870D00C32F4F /* NoticeDraftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2991D81A78870D00C32F4F /* NoticeDraftViewController.xib */; };
 		8B2991DD1A78E5CA00C32F4F /* down_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B2991DB1A78E5CA00C32F4F /* down_arrow@2x.png */; };
 		8B2991DE1A78E5CA00C32F4F /* down_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B2991DC1A78E5CA00C32F4F /* down_arrow@3x.png */; };
+		8B42A5C61A832F1D00EDCED4 /* TodoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B42A5C41A832F1D00EDCED4 /* TodoDetailViewController.m */; };
+		8B42A5C71A832F1D00EDCED4 /* TodoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B42A5C51A832F1D00EDCED4 /* TodoDetailViewController.xib */; };
 		8B54E1181A7F34FB0036E443 /* DDEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54E1171A7F34FB0036E443 /* DDEngine.m */; };
 		8B54E1221A7F6CD30036E443 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B54E1211A7F6CD30036E443 /* UserInfo.m */; };
 		8BA9792A1A7A2F9200C2D197 /* row_selected_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA979261A7A2F9200C2D197 /* row_selected_icon@2x.png */; };
@@ -146,6 +148,9 @@
 		8B2991D81A78870D00C32F4F /* NoticeDraftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoticeDraftViewController.xib; sourceTree = "<group>"; };
 		8B2991DB1A78E5CA00C32F4F /* down_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_arrow@2x.png"; sourceTree = "<group>"; };
 		8B2991DC1A78E5CA00C32F4F /* down_arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_arrow@3x.png"; sourceTree = "<group>"; };
+		8B42A5C31A832F1D00EDCED4 /* TodoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodoDetailViewController.h; sourceTree = "<group>"; };
+		8B42A5C41A832F1D00EDCED4 /* TodoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodoDetailViewController.m; sourceTree = "<group>"; };
+		8B42A5C51A832F1D00EDCED4 /* TodoDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodoDetailViewController.xib; sourceTree = "<group>"; };
 		8B54E1161A7F34FB0036E443 /* DDEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDEngine.h; sourceTree = "<group>"; };
 		8B54E1171A7F34FB0036E443 /* DDEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDEngine.m; sourceTree = "<group>"; };
 		8B54E1201A7F6CD30036E443 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
@@ -492,6 +497,9 @@
 				8BAD9FCD1A7B595B00F43D8B /* TodoListViewController.h */,
 				8BAD9FCE1A7B595B00F43D8B /* TodoListViewController.m */,
 				8BAD9FCF1A7B595B00F43D8B /* TodoListViewController.xib */,
+				8B42A5C31A832F1D00EDCED4 /* TodoDetailViewController.h */,
+				8B42A5C41A832F1D00EDCED4 /* TodoDetailViewController.m */,
+				8B42A5C51A832F1D00EDCED4 /* TodoDetailViewController.xib */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
@@ -711,6 +719,7 @@
 				8BAD9FD41A7B5A2B00F43D8B /* todo_icon@2x.png in Resources */,
 				8B2991DD1A78E5CA00C32F4F /* down_arrow@2x.png in Resources */,
 				8BAD9FD51A7B5A2B00F43D8B /* todo_icon@3x.png in Resources */,
+				8B42A5C71A832F1D00EDCED4 /* TodoDetailViewController.xib in Resources */,
 				8BAD9FBC1A7B255700F43D8B /* DraftWorkContactListViewController.xib in Resources */,
 				8B256E921A762FF500C14EF3 /* MailListViewController.xib in Resources */,
 				8BBE12581A70CDCE009D894F /* back_icon_n@3x.png in Resources */,
@@ -762,6 +771,7 @@
 				8B2225791A723E9B00816809 /* LoginViewController.m in Sources */,
 				8BADA0051A7B8A2F00F43D8B /* Reachability.m in Sources */,
 				8B2991BB1A787D3000C32F4F /* DraftApprovalDocumentViewController.m in Sources */,
+				8B42A5C61A832F1D00EDCED4 /* TodoDetailViewController.m in Sources */,
 				8BAD9FDA1A7B68CD00F43D8B /* PersonnelListViewController.m in Sources */,
 				8BAAED3C1A6FAE1E00464655 /* DDLoadingView.m in Sources */,
 				8BADA0021A7B8A2F00F43D8B /* ASIInputStream.m in Sources */,

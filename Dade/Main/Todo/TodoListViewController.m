@@ -8,6 +8,8 @@
 
 #import "TodoListViewController.h"
 
+#import "TodoDetailViewController.h"
+
 @interface TodoListViewController ()
 
 - (void)queryIncomeList;
@@ -124,7 +126,11 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-//    NSDictionary *income = [_todoArray objectAtIndex:indexPath.row];
+    NSDictionary *income = [_todoArray objectAtIndex:indexPath.row];
+    
+    TodoDetailViewController *viewController = [[TodoDetailViewController alloc] initWithNibName:@"TodoDetailViewController" bundle:nil];
+    viewController.todoId = [income stringForKey:@"id"];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 @end
