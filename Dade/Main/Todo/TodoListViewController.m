@@ -9,6 +9,8 @@
 #import "TodoListViewController.h"
 
 #import "TodoDetailViewController.h"
+#import "TodoLeaveApplyDetailViewController.h"
+#import "TodoNotPunchExplainDetailViewController.h"
 
 @interface TodoListViewController ()
 
@@ -127,10 +129,29 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSDictionary *income = [_todoArray objectAtIndex:indexPath.row];
+    NSString *fileTypeId = [income stringForKey:@"filetypeid"];
+    NSString *todoId = [income stringForKey:@"id"];
     
-    TodoDetailViewController *viewController = [[TodoDetailViewController alloc] initWithNibName:@"TodoDetailViewController" bundle:nil];
-    viewController.todoId = [income stringForKey:@"id"];
-    [self.navigationController pushViewController:viewController animated:YES];
+    if([fileTypeId isEqualToString:@"113"]) {
+        // 请假申请
+        
+        TodoLeaveApplyDetailViewController *viewController = [[TodoLeaveApplyDetailViewController alloc] initWithNibName:@"TodoLeaveApplyDetailViewController" bundle:nil];
+        viewController.todoId = todoId;
+        [self.navigationController pushViewController:viewController animated:YES];
+    } else if([fileTypeId isEqualToString:@"114"]) {
+        // 未打卡说明
+        
+        TodoNotPunchExplainDetailViewController *viewController = [[TodoNotPunchExplainDetailViewController alloc] initWithNibName:@"TodoNotPunchExplainDetailViewController" bundle:nil];
+        viewController.todoId = todoId;
+        [self.navigationController pushViewController:viewController animated:YES];
+    } else {
+        // 正常
+        
+        TodoDetailViewController *viewController = [[TodoDetailViewController alloc] initWithNibName:@"TodoDetailViewController" bundle:nil];
+        viewController.todoId = todoId;
+        [self.navigationController pushViewController:viewController animated:YES];
+    }
+
 }
 
 @end
