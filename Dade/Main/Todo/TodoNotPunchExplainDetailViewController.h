@@ -21,12 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIView *explainView;
 @property (weak, nonatomic) IBOutlet UITextView *explainTextView;
 @property (weak, nonatomic) IBOutlet UILabel *explainPlaceholderLabel;
-@property (weak, nonatomic) IBOutlet UIButton *verifyButton;
-@property (weak, nonatomic) IBOutlet UIButton *retreatButton;
+@property (weak, nonatomic) IBOutlet UIView *buttonsView;
 @property (weak, nonatomic) IBOutlet UIView *approvalView;
-
-- (IBAction)verifyButtonClicked:(UIButton *)button;
-- (IBAction)retreatButtonClicked:(UIButton *)button;
 
 @property (copy, nonatomic) NSString *todoId;
 @property (copy, nonatomic) NSString *flowId;

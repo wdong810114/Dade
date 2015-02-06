@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TodoNotPunchExplainDetailViewController">
             <connections>
                 <outlet property="approvalView" destination="fjf-9G-f8B" id="ycU-uA-doy"/>
+                <outlet property="buttonsView" destination="KlP-6E-b8t" id="KF1-IB-I5r"/>
                 <outlet property="contentLabel" destination="X2x-br-xB5" id="3f5-wB-gLT"/>
                 <outlet property="dateLabel" destination="SID-Uh-dWB" id="qkD-rG-xqe"/>
                 <outlet property="departmentLabel" destination="IGA-at-rNS" id="LzT-Ur-eX6"/>
@@ -15,10 +16,8 @@
                 <outlet property="explainTextView" destination="pHR-79-7e3" id="cT0-2B-Aln"/>
                 <outlet property="explainView" destination="HWT-7I-CLe" id="d6d-Lo-Jih"/>
                 <outlet property="numberLabel" destination="gpB-MJ-NX8" id="HcY-Zt-IUc"/>
-                <outlet property="retreatButton" destination="Zxa-Mx-DBa" id="yBc-HF-Gfq"/>
                 <outlet property="subjectLabel" destination="bf8-1y-spW" id="tr4-Uu-uoM"/>
                 <outlet property="todoDetailScrollView" destination="EHG-2f-kBU" id="ZzF-8q-Ii7"/>
-                <outlet property="verifyButton" destination="4Ie-6N-zGa" id="amg-Vl-1wo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -224,44 +223,8 @@
                                 <constraint firstItem="8Hp-dK-7Yh" firstAttribute="leading" secondItem="HWT-7I-CLe" secondAttribute="leading" constant="5" id="sHV-bx-4Nk"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KlP-6E-b8t" userLabel="ButtonsView">
-                            <rect key="frame" x="10" y="431" width="300" height="50"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ie-6N-zGa" userLabel="VerifyButton">
-                                    <rect key="frame" x="5" y="5" width="80" height="40"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="40" id="KJj-1H-gN1"/>
-                                        <constraint firstAttribute="width" constant="80" id="xvj-1v-K9o"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <state key="normal" title="审核">
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="verifyButtonClicked:" destination="-1" eventType="touchUpInside" id="gPd-qC-7EH"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zxa-Mx-DBa" userLabel="RetreatButton">
-                                    <rect key="frame" x="95" y="5" width="80" height="40"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <state key="normal" title="退回">
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="retreatButtonClicked:" destination="-1" eventType="touchUpInside" id="v53-BK-P5Y"/>
-                                    </connections>
-                                </button>
-                            </subviews>
+                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="KlP-6E-b8t" userLabel="ButtonsView">
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="50" id="38a-Ba-DId"/>
-                                <constraint firstItem="Zxa-Mx-DBa" firstAttribute="leading" secondItem="4Ie-6N-zGa" secondAttribute="trailing" constant="10" id="3S8-EX-bza"/>
-                                <constraint firstAttribute="centerY" secondItem="4Ie-6N-zGa" secondAttribute="centerY" id="aOy-Kg-dzv"/>
-                                <constraint firstItem="Zxa-Mx-DBa" firstAttribute="centerY" secondItem="4Ie-6N-zGa" secondAttribute="centerY" id="jRR-1l-fQx"/>
-                                <constraint firstItem="Zxa-Mx-DBa" firstAttribute="height" secondItem="4Ie-6N-zGa" secondAttribute="height" id="srw-3f-HF3"/>
-                                <constraint firstItem="Zxa-Mx-DBa" firstAttribute="width" secondItem="4Ie-6N-zGa" secondAttribute="width" id="tTk-UU-6qZ"/>
-                                <constraint firstItem="4Ie-6N-zGa" firstAttribute="leading" secondItem="KlP-6E-b8t" secondAttribute="leading" constant="5" id="yt1-wC-Z85"/>
-                            </constraints>
                         </view>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="fjf-9G-f8B" userLabel="ApprovalView">
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
