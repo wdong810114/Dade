@@ -138,6 +138,7 @@
         
         TodoLeaveApplyDetailViewController *viewController = [[TodoLeaveApplyDetailViewController alloc] initWithNibName:@"TodoLeaveApplyDetailViewController" bundle:nil];
         viewController.todoId = todoId;
+        viewController.flowId = flowId;
         [self.navigationController pushViewController:viewController animated:YES];
     } else if([fileTypeId isEqualToString:@"114"]) {
         // 未打卡说明
