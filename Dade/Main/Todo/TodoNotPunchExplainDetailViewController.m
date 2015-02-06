@@ -10,13 +10,55 @@
 
 @interface TodoNotPunchExplainDetailViewController ()
 
+- (void)initView;
+- (BOOL)checkValidity;
+
+- (void)getIncomeViewById;
+- (void)requestGetIncomeViewByIdFinished:(ASIHTTPRequest *)request;
+- (void)requestGetIncomeViewByIdFailed:(ASIHTTPRequest *)request;
+- (void)getDateFileTextById;
+- (void)requestGetDateFileTextByIdFinished:(ASIHTTPRequest *)request;
+- (void)requestGetDateFileTextByIdFailed:(ASIHTTPRequest *)request;
+
 @end
 
 @implementation TodoNotPunchExplainDetailViewController
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillShowNotification
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if(self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillShow:)
+                                                     name:UIKeyboardWillShowNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillHide:)
+                                                     name:UIKeyboardWillHideNotification
+                                                   object:nil];
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self initView];
+    
+    [self getIncomeViewById];
+    [self getDateFileTextById];
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,6 +77,212 @@
 - (void)backClicked:(UIButton *)button
 {
     [self pop];
+}
+
+- (IBAction)verifyButtonClicked:(UIButton *)button
+{
+    // 审核
+    
+    if([self isRequesting]) {
+        return;
+    }
+    
+}
+
+- (IBAction)retreatButtonClicked:(UIButton *)button
+{
+    // 退回
+    
+    if([self isRequesting]) {
+        return;
+    }
+    
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    CGRect keyboardFrame = [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat maxOffsetY, minOffsetY;
+    
+    if([self.explainTextView isFirstResponder]) {
+        maxOffsetY = self.explainView.frame.origin.y;
+        minOffsetY = self.explainView.frame.origin.y + self.explainView.frame.size.height + keyboardFrame.size.height - self.todoDetailScrollView.frame.size.height;
+    }
+    
+    if(maxOffsetY < self.todoDetailScrollView.contentOffset.y) {
+        [self.todoDetailScrollView setContentOffset:CGPointMake(0.0, maxOffsetY) animated:YES];
+    }
+    if(self.todoDetailScrollView.contentOffset.y < minOffsetY) {
+        [self.todoDetailScrollView setContentOffset:CGPointMake(0.0, minOffsetY) animated:YES];
+    }
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    CGFloat scrollMaxOffsetY = self.todoDetailScrollView.contentSize.height - self.todoDetailScrollView.frame.size.height;
+    if(self.todoDetailScrollView.contentOffset.y > scrollMaxOffsetY) {
+        if(scrollMaxOffsetY < 0) {
+            [self.todoDetailScrollView setContentOffset:CGPointZero animated:YES];
+        } else {
+            [self.todoDetailScrollView setContentOffset:CGPointMake(0.0, scrollMaxOffsetY) animated:YES];
+        }
+    }
+}
+
+- (void)dismissKeyboard
+{
+    [self.explainTextView resignFirstResponder];
+}
+
+#pragma mark - Private Methods
+- (void)initView
+{
+    self.todoDetailScrollView.backgroundColor = COLOR(0xf5,0xf5,0xf5);
+    
+    if(!IOS_VERSION_7_OR_ABOVE) {
+        self.subjectLabel.preferredMaxLayoutWidth = self.subjectLabel.bounds.size.width;
+        self.departmentLabel.preferredMaxLayoutWidth = self.departmentLabel.bounds.size.width;
+        self.numberLabel.preferredMaxLayoutWidth = self.numberLabel.bounds.size.width;
+        self.dateLabel.preferredMaxLayoutWidth = self.dateLabel.bounds.size.width;
+        self.contentLabel.preferredMaxLayoutWidth = self.contentLabel.bounds.size.width;
+    }
+    
+    [self.verifyButton setBackgroundImage:[Util imageWithColor:GRAY_BUTTON_BG_NORMAL_COLOR] forState:UIControlStateNormal];
+    [self.verifyButton setBackgroundImage:[Util imageWithColor:GRAY_BUTTON_BG_HIGHLIGHTED_COLOR] forState:UIControlStateHighlighted];
+    [self.verifyButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.retreatButton setBackgroundImage:[Util imageWithColor:GRAY_BUTTON_BG_NORMAL_COLOR] forState:UIControlStateNormal];
+    [self.retreatButton setBackgroundImage:[Util imageWithColor:GRAY_BUTTON_BG_HIGHLIGHTED_COLOR] forState:UIControlStateHighlighted];
+    [self.retreatButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    UIToolbar *inputAccessoryView = [[UIToolbar alloc]initWithFrame:CGRectMake(0.0, 0.0, DEVICE_WIDTH, INPUT_ACCESSORY_VIEW_HEIGHT)];
+    inputAccessoryView.barStyle = UIBarStyleDefault;
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:BAR_BUTTON_TITLE_DONE style:UIBarButtonItemStyleDone target:self action:@selector(dismissKeyboard)];
+    NSArray *buttonArray = [NSArray arrayWithObjects:flexibleSpace, doneButton, nil];
+    inputAccessoryView.items = buttonArray;
+    self.explainTextView.inputAccessoryView = inputAccessoryView;
+}
+
+- (BOOL)checkValidity
+{
+    if([[Util trimString:self.explainTextView.text] isEqualToString:@""]) {
+        [self showAlert:@"流转说明不能为空"];
+        
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (void)getIncomeViewById
+{
+    [self addLoadingView];
+    
+//    id：文件主表Id
+    
+    NSString *postString = [NSString stringWithFormat:@"{id:'%@'}", self.todoId];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:GET_INCOME_VIEW_BY_ID_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestGetIncomeViewByIdFinished:) didFailSelector:@selector(requestGetIncomeViewByIdFailed:)];
+}
+
+- (void)requestGetIncomeViewByIdFinished:(ASIHTTPRequest *)request
+{
+    if([self isSingleRequesting]) {
+        [self removeLoadingView];
+    }
+    
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonDict) {
+        self.subjectLabel.text = [jsonDict stringForKey:@"displayvalue"];
+        self.departmentLabel.text = [jsonDict stringForKey:@"depname"];
+        self.contentLabel.text = [jsonDict stringForKey:@"content"];
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestGetIncomeViewByIdFailed:(ASIHTTPRequest *)request
+{
+    if([self isSingleRequesting]) {
+        [self removeLoadingView];
+    }
+    
+    [self requestDidFail:request];
+}
+
+- (void)getDateFileTextById
+{
+    [self addLoadingView];
+    
+//    fileId：文件主表Id
+//    fileTypeId：文件类型ID
+    
+    NSString *postString = [NSString stringWithFormat:@"{fileId:'%@',fileTypeId:'114'}", self.todoId];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:GET_DATE_FILE_TEXT_BY_ID_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestGetDateFileTextByIdFinished:) didFailSelector:@selector(requestGetDateFileTextByIdFailed:)];
+}
+
+- (void)requestGetDateFileTextByIdFinished:(ASIHTTPRequest *)request
+{
+    if([self isSingleRequesting]) {
+        [self removeLoadingView];
+    }
+    
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonDict) {
+        self.numberLabel.text = [jsonDict stringForKey:@"char1"];
+        self.dateLabel.text = [jsonDict stringForKey:@"char2"];
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestGetDateFileTextByIdFailed:(ASIHTTPRequest *)request
+{
+    if([self isSingleRequesting]) {
+        [self removeLoadingView];
+    }
+    
+    [self requestDidFail:request];
+}
+
+#pragma mark - UIScrollViewDelegate Methods
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.view endEditing:YES];
+}
+
+#pragma mark - UITextViewDelegate Methods
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    if([self isRequesting]) {
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    if(textView == self.explainTextView) {
+        if([Util isEmptyString:self.explainTextView.text]) {
+            self.explainPlaceholderLabel.alpha = 1.0;
+        } else {
+            self.explainPlaceholderLabel.alpha = 0.0;
+        }
+    }
 }
 
 @end

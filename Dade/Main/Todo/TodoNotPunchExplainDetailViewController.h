@@ -13,6 +13,21 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *todoDetailScrollView;
 
+@property (weak, nonatomic) IBOutlet UILabel *subjectLabel;
+@property (weak, nonatomic) IBOutlet UILabel *departmentLabel;
+@property (weak, nonatomic) IBOutlet UILabel *numberLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+@property (weak, nonatomic) IBOutlet UIView *explainView;
+@property (weak, nonatomic) IBOutlet UITextView *explainTextView;
+@property (weak, nonatomic) IBOutlet UILabel *explainPlaceholderLabel;
+@property (weak, nonatomic) IBOutlet UIButton *verifyButton;
+@property (weak, nonatomic) IBOutlet UIButton *retreatButton;
+@property (weak, nonatomic) IBOutlet UIView *approvalView;
+
+- (IBAction)verifyButtonClicked:(UIButton *)button;
+- (IBAction)retreatButtonClicked:(UIButton *)button;
+
 @property (copy, nonatomic) NSString *todoId;
 
 @end
