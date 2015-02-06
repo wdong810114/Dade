@@ -130,6 +130,7 @@
     
     NSDictionary *income = [_todoArray objectAtIndex:indexPath.row];
     NSString *fileTypeId = [income stringForKey:@"filetypeid"];
+    NSString *flowId = [income stringForKey:@"flowid"];
     NSString *todoId = [income stringForKey:@"id"];
     
     if([fileTypeId isEqualToString:@"113"]) {
@@ -143,12 +144,15 @@
         
         TodoNotPunchExplainDetailViewController *viewController = [[TodoNotPunchExplainDetailViewController alloc] initWithNibName:@"TodoNotPunchExplainDetailViewController" bundle:nil];
         viewController.todoId = todoId;
+        viewController.flowId = flowId;
         [self.navigationController pushViewController:viewController animated:YES];
     } else {
         // 正常
         
         TodoDetailViewController *viewController = [[TodoDetailViewController alloc] initWithNibName:@"TodoDetailViewController" bundle:nil];
         viewController.todoId = todoId;
+        viewController.fileTypeId = fileTypeId;
+        viewController.flowId = flowId;
         [self.navigationController pushViewController:viewController animated:YES];
     }
 

@@ -31,5 +31,7 @@
 - (IBAction)retreatButtonClicked:(UIButton *)button;
 
 @property (copy, nonatomic) NSString *todoId;
+@property (copy, nonatomic) NSString *fileTypeId;
+@property (copy, nonatomic) NSString *flowId;
 
 @end

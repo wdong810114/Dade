@@ -12,14 +12,29 @@
 
 - (void)initView;
 - (BOOL)checkValidity;
+- (void)updateApprovalView;
+- (NSString *)getFlowCode;
 
 - (void)getIncomeViewById;
 - (void)requestGetIncomeViewByIdFinished:(ASIHTTPRequest *)request;
 - (void)requestGetIncomeViewByIdFailed:(ASIHTTPRequest *)request;
+- (void)getFlowPathByFileIdInTable;
+- (void)requestGetFlowPathByFileIdInTableFinished:(ASIHTTPRequest *)request;
+- (void)requestGetFlowPathByFileIdInTableFailed:(ASIHTTPRequest *)request;
+- (void)getNowFlowInfoByFlowId;
+- (void)requestGetNowFlowInfoByFlowIdFinished:(ASIHTTPRequest *)request;
+- (void)requestGetNowFlowInfoByFlowIdFailed:(ASIHTTPRequest *)request;
+- (void)approvalFileInfo:(NSInteger)type;
+- (void)requestApprovalFileInfoFinished:(ASIHTTPRequest *)request;
+- (void)requestApprovalFileInfoFailed:(ASIHTTPRequest *)request;
 
 @end
 
 @implementation TodoDetailViewController
+{
+    NSString *_flowEndId;
+    NSArray *_flowArray;
+}
 
 - (void)dealloc
 {
@@ -55,6 +70,8 @@
     [self initView];
     
     [self getIncomeViewById];
+    [self getFlowPathByFileIdInTable];
+    [self getNowFlowInfoByFlowId];
 }
 
 - (void)didReceiveMemoryWarning
@@ -83,6 +100,7 @@
         return;
     }
     
+    [self approvalFileInfo:0];
 }
 
 - (IBAction)retreatButtonClicked:(UIButton *)button
@@ -93,6 +111,7 @@
         return;
     }
     
+    [self approvalFileInfo:1];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification
@@ -172,6 +191,67 @@
     return YES;
 }
 
+- (void)updateApprovalView
+{
+    static const CGFloat kFlowHeight = 90.0;
+    
+    NSLayoutConstraint *leftLineConstraint = [NSLayoutConstraint constraintWithItem:self.approvalView
+                                                                          attribute:NSLayoutAttributeHeight
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:nil
+                                                                          attribute:NSLayoutAttributeNotAnAttribute
+                                                                         multiplier:1
+                                                                           constant:[_flowArray count] * kFlowHeight];
+    [self.approvalView addConstraint:leftLineConstraint];
+    
+    CGFloat originY = 0.0;
+    for(NSDictionary *flow in _flowArray) {
+        UIView *flowView = [[UIView alloc] initWithFrame:CGRectMake(0.0, originY, self.approvalView.frame.size.width, kFlowHeight)];
+        flowView.backgroundColor = [UIColor clearColor];
+        
+        UILabel *staffLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, flowView.frame.size.width, 30.0)];
+        staffLabel.backgroundColor = [UIColor clearColor];
+        staffLabel.font = FONT(14.0);
+        staffLabel.textColor = [UIColor blackColor];
+        staffLabel.text = [NSString stringWithFormat:@"审批人员：%@", [flow stringForKey:@"org_staff_Name"]];
+        
+        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, staffLabel.frame.origin.y + staffLabel.frame.size.height, staffLabel.frame.size.width, staffLabel.frame.size.height)];
+        nameLabel.backgroundColor = [UIColor clearColor];
+        nameLabel.font = FONT(14.0);
+        nameLabel.textColor = [UIColor blackColor];
+        nameLabel.text = [NSString stringWithFormat:@"审核：%@", [flow stringForKey:@"flowname"]];
+        
+        UILabel *explainLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, nameLabel.frame.origin.y + nameLabel.frame.size.height, staffLabel.frame.size.width, staffLabel.frame.size.height)];
+        explainLabel.backgroundColor = [UIColor clearColor];
+        explainLabel.font = FONT(14.0);
+        explainLabel.textColor = [UIColor blackColor];
+        explainLabel.text = [NSString stringWithFormat:@"流转说明：%@", [flow stringForKey:@"flowexplain"]];
+        
+        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0.0, flowView.frame.size.height - 0.5, flowView.frame.size.width, 0.5)];
+        lineView.backgroundColor = [UIColor blackColor];
+        
+        [flowView addSubview:staffLabel];
+        [flowView addSubview:nameLabel];
+        [flowView addSubview:explainLabel];
+        [flowView addSubview:lineView];
+        
+        [self.approvalView addSubview:flowView];
+        
+        originY += kFlowHeight;
+    }
+}
+
+- (NSString *)getFlowCode
+{
+    for(NSDictionary *flow in _flowArray) {
+        if([_flowEndId isEqualToString:[flow stringForKey:@"id"]]) {
+            return [flow stringForKey:@"flowcode"];
+        }
+    }
+    
+    return @"";
+}
+
 - (void)getIncomeViewById
 {
     [self addLoadingView];
@@ -188,7 +268,9 @@
 
 - (void)requestGetIncomeViewByIdFinished:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    if([self isSingleRequesting]) {
+        [self removeLoadingView];
+    }
     
     NSString *jsonString = request.responseString;
     
@@ -208,6 +290,152 @@
 }
 
 - (void)requestGetIncomeViewByIdFailed:(ASIHTTPRequest *)request
+{
+    if([self isSingleRequesting]) {
+        [self removeLoadingView];
+    }
+    
+    [self requestDidFail:request];
+}
+
+- (void)getFlowPathByFileIdInTable
+{
+    [self addLoadingView];
+    
+//    fileId：文件主表Id
+//    fileTypeId: 文件类型Id
+    
+    NSString *postString = [NSString stringWithFormat:@"{fileId:'%@',fileTypeId:'%@'}", self.todoId, self.fileTypeId];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:GET_FLOW_PATH_BY_FILE_ID_IN_TABLE_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestGetFlowPathByFileIdInTableFinished:) didFailSelector:@selector(requestGetFlowPathByFileIdInTableFailed:)];
+}
+
+- (void)requestGetFlowPathByFileIdInTableFinished:(ASIHTTPRequest *)request
+{
+    if([self isSingleRequesting]) {
+        [self removeLoadingView];
+    }
+    
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonArray) {
+        _flowArray = [NSArray arrayWithArray:jsonArray];
+        
+        [self updateApprovalView];
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestGetFlowPathByFileIdInTableFailed:(ASIHTTPRequest *)request
+{
+    if([self isSingleRequesting]) {
+        [self removeLoadingView];
+    }
+    
+    [self requestDidFail:request];
+}
+
+- (void)getNowFlowInfoByFlowId
+{
+    [self addLoadingView];
+    
+//    flowId：文件流转表Id
+    
+    NSString *postString = [NSString stringWithFormat:@"{flowId:'%@'}", self.flowId];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:GET_NOW_FLOW_INFO_BY_FLOW_ID_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestGetNowFlowInfoByFlowIdFinished:) didFailSelector:@selector(requestGetNowFlowInfoByFlowIdFailed:)];
+}
+
+- (void)requestGetNowFlowInfoByFlowIdFinished:(ASIHTTPRequest *)request
+{
+    if([self isSingleRequesting]) {
+        [self removeLoadingView];
+    }
+    
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonDict) {
+        _flowEndId = [jsonDict stringForKey:@"flowendid"];
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestGetNowFlowInfoByFlowIdFailed:(ASIHTTPRequest *)request
+{
+    if([self isSingleRequesting]) {
+        [self removeLoadingView];
+    }
+    
+    [self requestDidFail:request];
+}
+
+- (void)approvalFileInfo:(NSInteger)type    // 0：审核 1：退回
+{
+    if([self checkValidity]) {
+        [self.view endEditing:YES];
+        
+        [self addLoadingView];
+        
+//    fileinfoId：文件主表Id
+//    code：审批索引码
+//    apptype：操作类型
+//    approveType_value：批准操作类型
+//    cirContext：审批内容
+        
+        NSString *flowCode = [self getFlowCode];
+        NSString *approveType;
+        NSString *approveTypeValue;
+        if([flowCode isEqualToString:@"40"]) {
+            approveType = @"1";
+            approveTypeValue = (type == 0) ? @"1" : @"4";
+        } else {
+            approveType = (type == 0) ? @"1" : @"2";
+            approveTypeValue = @"0";
+        }
+        
+        NSString *postString = [NSString stringWithFormat:@"{fileinfoId:'%@',code:'%@',apptype:'%@',approveType_value:'%@',cirContext:'%@'}", self.todoId, flowCode, approveType, approveTypeValue, self.explainTextView.text];
+        NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        ASIFormDataRequest *request = [self requestWithRelativeURL:APPROVAL_FILE_INFO_REQUEST_URL];
+        [request setPostBody:postData];
+        [self startRequest:request didFinishSelector:@selector(requestApprovalFileInfoFinished:) didFailSelector:@selector(requestApprovalFileInfoFailed:)];
+    }
+}
+
+- (void)requestApprovalFileInfoFinished:(ASIHTTPRequest *)request
+{
+    [self removeLoadingView];
+    
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonDict) {
+        NSString *ajaxToken = [jsonDict stringForKey:@"ajax_token"];
+        if([ajaxToken integerValue] != 0) {
+            NSString *ajaxMessage = [jsonDict stringForKey:@"ajax_message"];
+            [self showAlert:ajaxMessage];
+        } else {
+            [self performSelector:@selector(pop)];
+        }
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestApprovalFileInfoFailed:(ASIHTTPRequest *)request
 {
     [self removeLoadingView];
     
