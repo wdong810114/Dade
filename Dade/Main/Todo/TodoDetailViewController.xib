@@ -8,19 +8,18 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TodoDetailViewController">
             <connections>
                 <outlet property="approvalView" destination="MIC-E2-nbW" id="3Qd-Lz-xBc"/>
+                <outlet property="buttonsView" destination="NKz-xT-O2K" id="Hj1-XG-HpH"/>
                 <outlet property="contentLabel" destination="lzf-EG-peo" id="rYX-8j-X98"/>
                 <outlet property="departmentLabel" destination="iBc-FA-8EP" id="uJ6-MM-NUM"/>
                 <outlet property="explainPlaceholderLabel" destination="rIP-Rp-gC9" id="YPa-GX-9cu"/>
                 <outlet property="explainTextView" destination="6Pp-kL-46s" id="VAf-zv-PpA"/>
                 <outlet property="explainView" destination="GhV-H8-gWs" id="KZz-L8-F00"/>
                 <outlet property="quartersLabel" destination="2SG-Dm-VJs" id="WWf-kL-8Oz"/>
-                <outlet property="retreatButton" destination="GTm-8n-NBY" id="mCU-kc-6DR"/>
                 <outlet property="statusLabel" destination="o70-tg-2ST" id="voa-S4-v29"/>
                 <outlet property="subjectLabel" destination="vEs-5p-of2" id="HFP-4P-g9B"/>
                 <outlet property="todoDetailScrollView" destination="hKK-M0-SLz" id="v1i-k2-chS"/>
                 <outlet property="typeLabel" destination="HmJ-Dp-Jab" id="H8V-t0-vEn"/>
                 <outlet property="undertakerLabel" destination="CxH-Tz-6NR" id="DWf-O6-zAl"/>
-                <outlet property="verifyButton" destination="hXl-na-pMw" id="0pk-UR-sN9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -282,44 +281,8 @@
                                 <constraint firstAttribute="trailing" secondItem="vZz-ia-fFj" secondAttribute="trailing" id="z1F-88-reH"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NKz-xT-O2K" userLabel="ButtonsView">
-                            <rect key="frame" x="10" y="527" width="300" height="50"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXl-na-pMw" userLabel="VerifyButton">
-                                    <rect key="frame" x="5" y="5" width="80" height="40"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="40" id="K3i-AK-CSF"/>
-                                        <constraint firstAttribute="width" constant="80" id="p6W-Cw-3kS"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <state key="normal" title="审核">
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="verifyButtonClicked:" destination="-1" eventType="touchUpInside" id="r10-1v-pWi"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GTm-8n-NBY" userLabel="RetreatButton">
-                                    <rect key="frame" x="95" y="5" width="80" height="40"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                    <state key="normal" title="退回">
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="retreatButtonClicked:" destination="-1" eventType="touchUpInside" id="umZ-cm-NB9"/>
-                                    </connections>
-                                </button>
-                            </subviews>
+                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="NKz-xT-O2K" userLabel="ButtonsView">
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstItem="GTm-8n-NBY" firstAttribute="width" secondItem="hXl-na-pMw" secondAttribute="width" id="56P-4N-a0J"/>
-                                <constraint firstAttribute="height" constant="50" id="6Ni-yz-oMp"/>
-                                <constraint firstItem="GTm-8n-NBY" firstAttribute="height" secondItem="hXl-na-pMw" secondAttribute="height" id="MsG-lA-3M2"/>
-                                <constraint firstAttribute="centerY" secondItem="hXl-na-pMw" secondAttribute="centerY" id="YSv-oc-bSR"/>
-                                <constraint firstItem="GTm-8n-NBY" firstAttribute="leading" secondItem="hXl-na-pMw" secondAttribute="trailing" constant="10" id="cq4-Di-LhF"/>
-                                <constraint firstItem="hXl-na-pMw" firstAttribute="leading" secondItem="NKz-xT-O2K" secondAttribute="leading" constant="5" id="lc6-gI-7SO"/>
-                                <constraint firstItem="GTm-8n-NBY" firstAttribute="centerY" secondItem="hXl-na-pMw" secondAttribute="centerY" id="zOz-Qg-eQX"/>
-                            </constraints>
                         </view>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="MIC-E2-nbW" userLabel="ApprovalView">
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
