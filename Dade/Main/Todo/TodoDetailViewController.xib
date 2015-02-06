@@ -300,7 +300,7 @@
                         <constraint firstItem="JEo-qp-b2r" firstAttribute="leading" secondItem="PiM-T1-kVG" secondAttribute="leading" id="GbO-rZ-fQ8"/>
                         <constraint firstItem="M8f-Z0-T3k" firstAttribute="width" secondItem="PiM-T1-kVG" secondAttribute="width" id="Gh0-Ad-Oty"/>
                         <constraint firstItem="NME-Gv-4PP" firstAttribute="top" secondItem="jpy-6d-Snw" secondAttribute="bottom" constant="15" id="IIB-iG-V76"/>
-                        <constraint firstAttribute="bottom" secondItem="MIC-E2-nbW" secondAttribute="bottom" constant="15" id="Kgm-sX-Zjp"/>
+                        <constraint firstAttribute="bottom" secondItem="MIC-E2-nbW" secondAttribute="bottom" id="Kgm-sX-Zjp"/>
                         <constraint firstItem="PiM-T1-kVG" firstAttribute="width" secondItem="JF0-UY-ZGN" secondAttribute="width" id="O2q-F1-d6k"/>
                         <constraint firstItem="s6o-ih-K3P" firstAttribute="top" secondItem="JF0-UY-ZGN" secondAttribute="bottom" constant="15" id="ODO-TE-U50"/>
                         <constraint firstItem="PiM-T1-kVG" firstAttribute="leading" secondItem="hKK-M0-SLz" secondAttribute="leading" constant="10" id="U33-KT-6Ob"/>
@@ -309,7 +309,7 @@
                         <constraint firstAttribute="trailing" secondItem="PiM-T1-kVG" secondAttribute="trailing" constant="10" id="aqM-YC-Glg"/>
                         <constraint firstItem="PiM-T1-kVG" firstAttribute="leading" secondItem="JF0-UY-ZGN" secondAttribute="leading" id="bXQ-dz-ixK"/>
                         <constraint firstAttribute="centerX" secondItem="PiM-T1-kVG" secondAttribute="centerX" id="eNi-fv-GaH"/>
-                        <constraint firstItem="MIC-E2-nbW" firstAttribute="top" secondItem="NKz-xT-O2K" secondAttribute="bottom" id="g8t-bP-cDo"/>
+                        <constraint firstItem="MIC-E2-nbW" firstAttribute="top" secondItem="NKz-xT-O2K" secondAttribute="bottom" constant="5" id="g8t-bP-cDo"/>
                         <constraint firstItem="NME-Gv-4PP" firstAttribute="width" secondItem="PiM-T1-kVG" secondAttribute="width" id="h7k-FY-DUD"/>
                         <constraint firstItem="JEo-qp-b2r" firstAttribute="width" secondItem="PiM-T1-kVG" secondAttribute="width" id="hbv-Ce-ejM"/>
                         <constraint firstItem="GhV-H8-gWs" firstAttribute="top" secondItem="M8f-Z0-T3k" secondAttribute="bottom" constant="15" id="iua-V7-xP6"/>

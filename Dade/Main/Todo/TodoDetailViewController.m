@@ -269,9 +269,10 @@
         verifyButton.frame = CGRectMake(5.0, radiosView.frame.origin.y + radiosView.frame.size.height + 10.0, 80.0, 40.0);
         [verifyButton setBackgroundImage:[Util imageWithColor:GRAY_BUTTON_BG_NORMAL_COLOR] forState:UIControlStateNormal];
         [verifyButton setBackgroundImage:[Util imageWithColor:GRAY_BUTTON_BG_HIGHLIGHTED_COLOR] forState:UIControlStateHighlighted];
+        verifyButton.titleLabel.font = FONT(16.0);
         [verifyButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [verifyButton addTarget:self action:@selector(verifyButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [verifyButton setTitle:@"批准" forState:UIControlStateNormal];
+        [verifyButton addTarget:self action:@selector(verifyButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         
         [self.buttonsView addSubview:radiosView];
         [self.buttonsView addSubview:verifyButton];
@@ -293,8 +294,8 @@
         verifyButton.frame = CGRectMake(5.0, 5.0, 80.0, 40.0);
         [verifyButton setBackgroundImage:[Util imageWithColor:GRAY_BUTTON_BG_NORMAL_COLOR] forState:UIControlStateNormal];
         [verifyButton setBackgroundImage:[Util imageWithColor:GRAY_BUTTON_BG_HIGHLIGHTED_COLOR] forState:UIControlStateHighlighted];
+        verifyButton.titleLabel.font = FONT(16.0);
         [verifyButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [verifyButton addTarget:self action:@selector(verifyButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         if([_flowCode isEqualToString:@"45"]) {
             [verifyButton setTitle:@"盖章" forState:UIControlStateNormal];
         } else if([_flowCode isEqualToString:@"50"]) {
@@ -302,6 +303,7 @@
         } else {
             [verifyButton setTitle:@"审核" forState:UIControlStateNormal];
         }
+        [verifyButton addTarget:self action:@selector(verifyButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.buttonsView addSubview:verifyButton];
         
         if(![_flowCode isEqualToString:@"45"] && ![_flowCode isEqualToString:@"50"]) {
@@ -309,9 +311,10 @@
             retreatButton.frame = CGRectMake(verifyButton.frame.origin.x + verifyButton.frame.size.width + 10.0, verifyButton.frame.origin.y, verifyButton.frame.size.width, verifyButton.frame.size.height);
             [retreatButton setBackgroundImage:[Util imageWithColor:GRAY_BUTTON_BG_NORMAL_COLOR] forState:UIControlStateNormal];
             [retreatButton setBackgroundImage:[Util imageWithColor:GRAY_BUTTON_BG_HIGHLIGHTED_COLOR] forState:UIControlStateHighlighted];
+            retreatButton.titleLabel.font = FONT(16.0);
             [retreatButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [retreatButton addTarget:self action:@selector(retreatButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             [retreatButton setTitle:@"退回" forState:UIControlStateNormal];
+            [retreatButton addTarget:self action:@selector(retreatButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             [self.buttonsView addSubview:retreatButton];
         }
     }
