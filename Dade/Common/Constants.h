@@ -54,6 +54,13 @@
 #define QUERY_MAIL_INFO_BY_ID_REQUEST_URL               @"%@/QueryMailInfoById"             // 邮件详细信息查询接口
 #define REPLY_MAIL_REQUEST_URL                          @"%@/ReplyMail"                     // 邮件回复接口
 
+#define QUERY_TODO_WORK_LIST_REQUEST_URL                @"%@/QueryToDoWorkList"             // 工作联系单待办接口
+#define QUERY_SUPERVISION_WORD_LIST_REQUEST_URL         @"%@/QuerySupervisionWordList"      // 工作联系单监督接口
+#define QUERY_SUPERVISION_WORD_DRAFT_LIST_REQUEST_URL   @"%@/QuerySupervisionWordDraftList" // 工作联系单草稿接口
+#define SAVE_OR_UPDATE_TODO_WORD_REQUEST_URL            @"%@/SaveOrUpdateToDoWord"          // 工作联系单起草、修改接口
+#define QUERY_TODO_WORK_INFO_REQUEST_URL                @"%@/QueryToDoWorkInfo"             // 工作联系单详细信息接口
+#define QUERY_TODO_NOTICE_LIST_REQUEST_URL              @"%@/QueryToDoNoticeList"           // 工作联系单人员列表接口
+
 #define SAVE_MAIL_REQUEST_URL                           @"%@/SaveMail"                      // 邮件起草接口
 #define SAVE_LEAVE_APPLICATION_REQUEST_URL              @"%@/SaveLeaveApplication"          // 请假申请起草接口
 #define SAVE_NOT_PUNCH_REQUEST_URL                      @"%@/SaveNotPunch"                  // 未打卡说明起草接口

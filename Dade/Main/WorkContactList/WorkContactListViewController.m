@@ -13,6 +13,16 @@
 
 @interface WorkContactListViewController ()
 
+- (void)queryTodoWorkList;
+- (void)requestQueryTodoWorkListFinished:(ASIHTTPRequest *)request;
+- (void)requestQueryTodoWorkListFailed:(ASIHTTPRequest *)request;
+- (void)querySupervisionWordList;
+- (void)requestQuerySupervisionWordListFinished:(ASIHTTPRequest *)request;
+- (void)requestQuerySupervisionWordListFailed:(ASIHTTPRequest *)request;
+- (void)querySupervisionWordDraftList;
+- (void)requestQuerySupervisionWordDraftListFinished:(ASIHTTPRequest *)request;
+- (void)requestQuerySupervisionWordDraftListFailed:(ASIHTTPRequest *)request;
+
 @end
 
 @implementation WorkContactListViewController
@@ -29,6 +39,10 @@
     self.workContactListTableView.backgroundView = nil;
     self.workContactListTableView.backgroundColor = TABLEVIEW_BG_COLOR;
     self.workContactListTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    [self queryTodoWorkList];
+    [self querySupervisionWordList];
+    [self querySupervisionWordDraftList];
 }
 
 - (void)didReceiveMemoryWarning
@@ -47,6 +61,103 @@
 - (void)backClicked:(UIButton *)button
 {
     [self pop];
+}
+
+#pragma mark - Private Methods
+- (void)queryTodoWorkList
+{
+//    userId ：用户Id
+    
+    NSString *postString = [NSString stringWithFormat:@"{userId:'%@'}", DadeAppDelegate.userInfo.staffId];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_TODO_WORK_LIST_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestQueryTodoWorkListFinished:) didFailSelector:@selector(requestQueryTodoWorkListFailed:)];
+}
+
+- (void)requestQueryTodoWorkListFinished:(ASIHTTPRequest *)request
+{
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonArray) {
+        _todoCount = [jsonArray count];
+        
+        [self.workContactListTableView reloadData];
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestQueryTodoWorkListFailed:(ASIHTTPRequest *)request
+{
+    [self requestDidFail:request];
+}
+
+- (void)querySupervisionWordList
+{
+//    userId ：用户Id
+    
+    NSString *postString = [NSString stringWithFormat:@"{userId:'%@'}", DadeAppDelegate.userInfo.staffId];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_SUPERVISION_WORD_LIST_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestQuerySupervisionWordListFinished:) didFailSelector:@selector(requestQuerySupervisionWordListFailed:)];
+}
+
+- (void)requestQuerySupervisionWordListFinished:(ASIHTTPRequest *)request
+{
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonArray) {
+        _supervisionCount = [jsonArray count];
+        
+        [self.workContactListTableView reloadData];
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestQuerySupervisionWordListFailed:(ASIHTTPRequest *)request
+{
+    [self requestDidFail:request];
+}
+
+- (void)querySupervisionWordDraftList
+{
+//    userId ：用户Id
+    
+    NSString *postString = [NSString stringWithFormat:@"{userId:'%@'}", DadeAppDelegate.userInfo.staffId];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_SUPERVISION_WORD_DRAFT_LIST_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestQuerySupervisionWordListFinished:) didFailSelector:@selector(requestQuerySupervisionWordListFailed:)];
+}
+
+- (void)requestQuerySupervisionWordDraftListFinished:(ASIHTTPRequest *)request
+{
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonArray) {
+        _draftCount = [jsonArray count];
+        
+        [self.workContactListTableView reloadData];
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestQuerySupervisionWordDraftListFailed:(ASIHTTPRequest *)request
+{
+    [self requestDidFail:request];
 }
 
 #pragma mark - UITableViewDataSource Methods
