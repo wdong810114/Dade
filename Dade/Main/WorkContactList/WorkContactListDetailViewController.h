@@ -9,7 +9,7 @@
 
 #import "BaseViewController.h"
 
-@interface WorkContactListDetailViewController : BaseViewController /*<UITableViewDataSource, UITableViewDelegate>*/
+@interface WorkContactListDetailViewController : BaseViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *workContactListDetailScrollView;
 
@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UIView *recipientsListView;
 
-@property (copy, nonatomic) NSString *workListId;
+@property (copy, nonatomic) NSString *workId;
+@property (copy, nonatomic) NSString *workType;     // 1待办，2监督
 
 @end

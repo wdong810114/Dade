@@ -142,7 +142,7 @@
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="0" placeholder="请输入天数" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pkh-Yi-nwz" userLabel="SMSAlertTextField">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入天数" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pkh-Yi-nwz" userLabel="SMSAlertTextField">
                                     <rect key="frame" x="75" y="7" width="86" height="19"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="19" id="aYz-PF-j0X"/>

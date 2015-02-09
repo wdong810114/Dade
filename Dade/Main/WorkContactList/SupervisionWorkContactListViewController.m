@@ -129,7 +129,8 @@
     NSDictionary *workList = [_workListArray objectAtIndex:indexPath.row];
     
     WorkContactListDetailViewController *viewController = [[WorkContactListDetailViewController alloc] initWithNibName:@"WorkContactListDetailViewController" bundle:nil];
-    viewController.workListId = [workList stringForKey:@"mailId"];
+    viewController.workId = [workList stringForKey:@"mailId"];
+    viewController.workType = @"2";
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

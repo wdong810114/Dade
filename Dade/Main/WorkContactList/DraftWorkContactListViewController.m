@@ -256,15 +256,16 @@
 //        wordId：工作联系单ID（更新，保存时使用）
 //        staffId：发件人ID
         
-//        NSString *doType = [NSString stringWithFormat:@"%i", (int)type];
-//        NSString *staffIds = [_recipientIdArray componentsJoinedByString:@","];
-//        
-//        NSString *postString = [NSString stringWithFormat:@"{doType:'%@',staffIds:'%@',phone:'%@',date_ph:'%@',appoint_time:'%@',displayvalue:'%@',content:'%@',wordId:'',staffId:'%@'}", ];
-//        NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
-//        
-//        ASIFormDataRequest *request = [self requestWithRelativeURL:SAVE_OR_UPDATE_TODO_WORD_REQUEST_URL];
-//        [request setPostBody:postData];
-//        [self startRequest:request didFinishSelector:@selector(requestSaveOrUpdateTodoWordFinished:) didFailSelector:@selector(requestSaveOrUpdateTodoWordFailed:)];
+        NSString *doType = [NSString stringWithFormat:@"%i", (int)type];
+        NSString *staffIds = [_recipientIdArray componentsJoinedByString:@","];
+        NSString *isSMSAlert = [Util isEmptyString:self.smsAlertTextField.text] ? @"0" : @"1";
+        
+        NSString *postString = [NSString stringWithFormat:@"{doType:'%@',staffIds:'%@',phone:'%@',date_ph:'%@',appoint_time:'%@',displayvalue:'%@',content:'%@',wordId:'',staffId:'%@'}", doType, staffIds, isSMSAlert, self.smsAlertTextField.text, self.dateTextField.text, self.subjectTextField.text, self.contentTextView.text, DadeAppDelegate.userInfo.staffId];
+        NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        ASIFormDataRequest *request = [self requestWithRelativeURL:SAVE_OR_UPDATE_TODO_WORD_REQUEST_URL];
+        [request setPostBody:postData];
+        [self startRequest:request didFinishSelector:@selector(requestSaveOrUpdateTodoWordFinished:) didFailSelector:@selector(requestSaveOrUpdateTodoWordFailed:)];
     }
 }
 
