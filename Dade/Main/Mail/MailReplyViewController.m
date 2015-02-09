@@ -174,7 +174,7 @@
     if([self checkValidity]) {
         [self.view endEditing:YES];
         
-        [self addLoadingView];
+        [self startLoading];
         
 //        mailId：邮件主表Id
 //        displayvalue：邮件主题
@@ -192,7 +192,7 @@
 
 - (void)requestReplyMailFinished:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     NSString *jsonString = request.responseString;
     
@@ -213,7 +213,7 @@
 
 - (void)requestReplyMailFailed:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     [self requestDidFail:request];
 }

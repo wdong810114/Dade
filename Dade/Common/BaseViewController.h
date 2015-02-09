@@ -47,9 +47,9 @@
 @interface BaseViewController (Loading)
 
 - (BOOL)isLoading;
-- (void)addLoadingView;
-- (void)addLoadingView:(CGRect)frame;
-- (void)removeLoadingView;
+- (void)startLoading;
+- (void)startLoading:(CGRect)frame;
+- (void)stopLoading;
 
 @end
 

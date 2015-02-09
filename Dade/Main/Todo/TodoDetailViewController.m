@@ -372,7 +372,7 @@
 
 - (void)getIncomeViewById
 {
-    [self addLoadingView];
+    [self startLoading];
     
 //    id：文件主表Id
     
@@ -387,7 +387,7 @@
 - (void)requestGetIncomeViewByIdFinished:(ASIHTTPRequest *)request
 {
     if([self isSingleRequesting]) {
-        [self removeLoadingView];
+        [self stopLoading];
     }
     
     NSString *jsonString = request.responseString;
@@ -410,7 +410,7 @@
 - (void)requestGetIncomeViewByIdFailed:(ASIHTTPRequest *)request
 {
     if([self isSingleRequesting]) {
-        [self removeLoadingView];
+        [self stopLoading];
     }
     
     [self requestDidFail:request];
@@ -418,7 +418,7 @@
 
 - (void)getFlowPathByFileIdInTable
 {
-    [self addLoadingView];
+    [self startLoading];
     
 //    fileId：文件主表Id
 //    fileTypeId: 文件类型Id
@@ -434,7 +434,7 @@
 - (void)requestGetFlowPathByFileIdInTableFinished:(ASIHTTPRequest *)request
 {
     if([self isSingleRequesting]) {
-        [self removeLoadingView];
+        [self stopLoading];
     }
     
     NSString *jsonString = request.responseString;
@@ -453,7 +453,7 @@
 - (void)requestGetFlowPathByFileIdInTableFailed:(ASIHTTPRequest *)request
 {
     if([self isSingleRequesting]) {
-        [self removeLoadingView];
+        [self stopLoading];
     }
     
     [self requestDidFail:request];
@@ -461,7 +461,7 @@
 
 - (void)getNowFlowInfoByFlowId
 {
-    [self addLoadingView];
+    [self startLoading];
     
 //    flowId：文件流转表Id
     
@@ -476,7 +476,7 @@
 - (void)requestGetNowFlowInfoByFlowIdFinished:(ASIHTTPRequest *)request
 {
     if([self isSingleRequesting]) {
-        [self removeLoadingView];
+        [self stopLoading];
     }
     
     NSString *jsonString = request.responseString;
@@ -501,7 +501,7 @@
 - (void)requestGetNowFlowInfoByFlowIdFailed:(ASIHTTPRequest *)request
 {
     if([self isSingleRequesting]) {
-        [self removeLoadingView];
+        [self stopLoading];
     }
     
     [self requestDidFail:request];
@@ -512,7 +512,7 @@
     if([self checkValidity]) {
         [self.view endEditing:YES];
         
-        [self addLoadingView];
+        [self startLoading];
         
 //    fileinfoId：文件主表Id
 //    code：审批索引码
@@ -544,7 +544,7 @@
 
 - (void)requestApprovalFileInfoFinished:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     NSString *jsonString = request.responseString;
     
@@ -565,7 +565,7 @@
 
 - (void)requestApprovalFileInfoFailed:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     [self requestDidFail:request];
 }

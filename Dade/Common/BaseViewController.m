@@ -219,25 +219,25 @@
     return (_loadingView == nil) ? NO : YES;
 }
 
-- (void)addLoadingView
+- (void)startLoading
 {
     CGFloat sizeWidth = 100.0;
     CGFloat sizeHeight = 100.0;
     CGFloat originX = (DEVICE_WIDTH - sizeWidth) / 2;
     CGFloat originY = (DEVICE_HEIGHT - STATUS_BAR_HEIGHT - NAVIGATION_BAR_HEIGHT - sizeHeight) / 2;
     
-    [self addLoadingView:CGRectMake(originX, originY, sizeWidth, sizeHeight)];
+    [self startLoading:CGRectMake(originX, originY, sizeWidth, sizeHeight)];
 }
 
-- (void)addLoadingView:(CGRect)frame
+- (void)startLoading:(CGRect)frame
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     _loadingView = [[DDLoadingView alloc] initWithFrame:frame];
     [self.view addSubview:_loadingView];
 }
 
-- (void)removeLoadingView
+- (void)stopLoading
 {
     if([self isLoading]) {
         [_loadingView removeFromSuperview];

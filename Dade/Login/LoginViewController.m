@@ -113,7 +113,7 @@
     if([self checkValidity]) {
         [self.view endEditing:YES];
         
-        [self addLoadingView];
+        [self startLoading];
         
 //        loginName：用户登录名
 //        loginPassWord：用户登录密码
@@ -129,7 +129,7 @@
 
 - (void)requestLoginFinished:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     NSString *jsonString = request.responseString;
     
@@ -155,7 +155,7 @@
 
 - (void)requestLoginFailed:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     [self requestDidFail:request];
 }

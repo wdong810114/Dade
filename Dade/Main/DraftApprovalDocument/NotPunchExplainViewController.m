@@ -190,7 +190,7 @@
     if([self checkValidity]) {
         [self.view endEditing:YES];
         
-        [self addLoadingView];
+        [self startLoading];
         
 //        attendance：考勤号
 //        cardDate：未打卡日期
@@ -211,7 +211,7 @@
 
 - (void)requestSaveNotPunchFinished:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     NSString *jsonString = request.responseString;
     
@@ -232,7 +232,7 @@
 
 - (void)requestSaveNotPunchFailed:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     [self requestDidFail:request];
 }

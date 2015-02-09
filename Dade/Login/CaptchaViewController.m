@@ -117,7 +117,7 @@
 
 - (void)sendCaptcha
 {
-    [self addLoadingView];
+    [self startLoading];
     
 //    userId ：用户Id
     
@@ -131,7 +131,7 @@
 
 - (void)requestSendCaptchaFinished:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     NSString *jsonString = request.responseString;
     
@@ -149,14 +149,14 @@
 
 - (void)requestSendCaptchaFailed:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     [self requestDidFail:request];
 }
 
 - (void)queryOrganization
 {
-    [self addLoadingView];
+    [self startLoading];
     
 //    userId ：用户Id
     
@@ -170,7 +170,7 @@
 
 - (void)requestQueryOrganizationFinished:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     NSString *jsonString = request.responseString;
     
@@ -187,7 +187,7 @@
 
 - (void)requestQueryOrganizationFailed:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     [self requestDidFail:request];
 }

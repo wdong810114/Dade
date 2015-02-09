@@ -57,7 +57,7 @@
 #pragma mark - Private Methods
 - (void)queryIncomeList
 {
-    [self addLoadingView];
+    [self startLoading];
     
 //    userId ：用户Id
     
@@ -71,7 +71,7 @@
 
 - (void)requestQueryIncomeListFinished:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     NSString *jsonString = request.responseString;
     
@@ -89,7 +89,7 @@
 
 - (void)requestQueryIncomeListFailed:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     [self requestDidFail:request];
 }

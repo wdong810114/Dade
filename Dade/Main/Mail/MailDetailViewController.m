@@ -107,7 +107,7 @@
 
 - (void)queryMailInfoById
 {
-    [self addLoadingView];
+    [self startLoading];
     
 //    mailInfoId：邮件表主键Id
 //    userId：用户Id
@@ -122,7 +122,7 @@
 
 - (void)requestQueryMailInfoByIdFinished:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     NSString *jsonString = request.responseString;
     
@@ -141,7 +141,7 @@
 
 - (void)requestQueryMailInfoByIdFailed:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     [self requestDidFail:request];
 }

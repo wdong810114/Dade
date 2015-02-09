@@ -237,7 +237,7 @@
     if([self checkValidity]) {
         [self.view endEditing:YES];
         
-        [self addLoadingView];
+        [self startLoading];
         
 //        userId ：用户Id
 //        fileTypeId: 文件类型Id
@@ -263,7 +263,7 @@
 
 - (void)requestDraftNoticeInfoFinished:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     NSString *jsonString = request.responseString;
     
@@ -284,7 +284,7 @@
 
 - (void)requestDraftNoticeInfoFailed:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     [self requestDidFail:request];
 }

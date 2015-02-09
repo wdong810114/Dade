@@ -68,7 +68,7 @@
 
 - (void)showNoticeViewById
 {
-    [self addLoadingView];
+    [self startLoading];
     
 //    id ：文件主表Id
     
@@ -83,7 +83,7 @@
 - (void)requestShowNoticeViewByIdFinished:(ASIHTTPRequest *)request
 {
     if([self isSingleRequesting]) {
-        [self removeLoadingView];
+        [self stopLoading];
     }
     
     NSString *jsonString = request.responseString;
@@ -104,7 +104,7 @@
 - (void)requestShowNoticeViewByIdFailed:(ASIHTTPRequest *)request
 {
     if([self isSingleRequesting]) {
-        [self removeLoadingView];
+        [self stopLoading];
     }
     
     [self requestDidFail:request];
@@ -112,7 +112,7 @@
 
 - (void)showNoticeFlowInfoList
 {
-    [self addLoadingView];
+    [self startLoading];
     
 //    fileinfoId：文件主表Id
 //    filetypeid：文件类型ID
@@ -129,7 +129,7 @@
 - (void)requestShowNoticeFlowInfoListFinished:(ASIHTTPRequest *)request
 {
     if([self isSingleRequesting]) {
-        [self removeLoadingView];
+        [self stopLoading];
     }
     
     NSString *jsonString = request.responseString;
@@ -152,7 +152,7 @@
 - (void)requestShowNoticeFlowInfoListFailed:(ASIHTTPRequest *)request
 {
     if([self isSingleRequesting]) {
-        [self removeLoadingView];
+        [self stopLoading];
     }
     
     [self requestDidFail:request];

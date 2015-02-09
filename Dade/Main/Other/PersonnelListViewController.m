@@ -194,7 +194,7 @@
 
 - (void)queryStaffListByName
 {
-    [self addLoadingView];
+    [self startLoading];
     
 //    userName：查询名称
     
@@ -208,7 +208,7 @@
 
 - (void)requestQueryStaffListByNameFinished:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     NSString *jsonString = request.responseString;
     
@@ -226,7 +226,7 @@
 
 - (void)requestQueryStaffListByNameFailed:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     [self requestDidFail:request];
 }

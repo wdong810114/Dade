@@ -215,7 +215,7 @@
     if([self checkValidity]) {
         [self.view endEditing:YES];
         
-        [self addLoadingView];
+        [self startLoading];
         
 //        staffIds：收件人ID（多人用“|”分割）
 //        displayvalue 邮件主题
@@ -235,7 +235,7 @@
 
 - (void)requestSaveMailFinished:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     NSString *jsonString = request.responseString;
     
@@ -256,7 +256,7 @@
 
 - (void)requestSaveMailFailed:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     [self requestDidFail:request];
 }

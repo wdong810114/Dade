@@ -55,7 +55,7 @@
 #pragma mark - Private Methods
 - (void)queryNoticeList
 {
-    [self addLoadingView];
+    [self startLoading];
     
 //    userId ：用户Id
     
@@ -69,7 +69,7 @@
 
 - (void)requestQueryNoticeListFinished:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     NSString *jsonString = request.responseString;
     
@@ -87,7 +87,7 @@
 
 - (void)requestQueryNoticeListFailed:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     [self requestDidFail:request];
 }

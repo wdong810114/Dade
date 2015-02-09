@@ -270,7 +270,7 @@
     if([self checkValidity]) {
         [self.view endEditing:YES];
         
-        [self addLoadingView];
+        [self startLoading];
         
 //        leavesTypeId：请假类型
 //        leavesTypeName：请假类型名称
@@ -295,7 +295,7 @@
 
 - (void)requestSaveLeaveApplicationFinished:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     NSString *jsonString = request.responseString;
     
@@ -316,7 +316,7 @@
 
 - (void)requestSaveLeaveApplicationFailed:(ASIHTTPRequest *)request
 {
-    [self removeLoadingView];
+    [self stopLoading];
     
     [self requestDidFail:request];
 }
