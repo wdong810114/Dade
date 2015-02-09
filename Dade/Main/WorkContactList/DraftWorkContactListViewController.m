@@ -13,6 +13,9 @@
 - (void)initView;
 - (BOOL)checkValidity;
 
+- (void)queryTodoWorkInfo;
+- (void)requestQueryTodoWorkInfoFinished:(ASIHTTPRequest *)request;
+- (void)requestQueryTodoWorkInfoFailed:(ASIHTTPRequest *)request;
 - (void)saveOrUpdateTodoWord:(NSInteger)type;
 - (void)requestSaveOrUpdateTodoWordFinished:(ASIHTTPRequest *)request;
 - (void)requestSaveOrUpdateTodoWordFailed:(ASIHTTPRequest *)request;
@@ -60,6 +63,10 @@
     [super viewDidLoad];
     
     [self initView];
+    
+    if(self.workId) {
+        [self queryTodoWorkInfo];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -231,6 +238,65 @@
     }
     
     return YES;
+}
+
+- (void)queryTodoWorkInfo
+{
+    [self startLoading];
+    
+//    workId：工作联系单Id
+    
+    NSString *postString = [NSString stringWithFormat:@"{workId:'%@'}", self.workId];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_TODO_WORK_INFO_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestQueryTodoWorkInfoFinished:) didFailSelector:@selector(requestQueryTodoWorkInfoFailed:)];
+}
+
+- (void)requestQueryTodoWorkInfoFinished:(ASIHTTPRequest *)request
+{
+    [self stopLoading];
+    
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonDict) {
+        self.senderLabel.text = [jsonDict stringForKey:@"staffName"];
+        self.dateTextField.text = [jsonDict stringForKey:@"appointTime"];
+        self.smsAlertTextField.text = [jsonDict stringForKey:@"datePh"];
+        self.subjectTextField.text = [jsonDict stringForKey:@"displayvalue"];
+        
+        NSString *content = [jsonDict stringForKey:@"content"];
+        if(content.length > 0) {
+            self.contentTextView.text = content;
+            self.placeholderLabel.alpha = 0.0;
+        }
+        
+        NSMutableString *recipients = [NSMutableString stringWithString:[jsonDict stringForKey:@"addressees"]];
+        if(recipients.length > 0) {
+            [recipients deleteCharactersInRange:NSMakeRange(recipients.length - 1, 1)];
+            [recipients replaceOccurrencesOfString:@" " withString:@"" options:NSLiteralSearch range:NSMakeRange(0, recipients.length)];
+            [recipients replaceOccurrencesOfString:@";" withString:@"|" options:NSLiteralSearch range:NSMakeRange(0, recipients.length)];
+            self.recipientsLabel.text = recipients;
+        }
+        
+        NSMutableString *recipientsIds = [NSMutableString stringWithString:[jsonDict stringForKey:@"addresseesIds"]];
+        if(recipientsIds.length > 0) {
+            [recipientsIds deleteCharactersInRange:NSMakeRange(recipientsIds.length - 1, 1)];
+            _recipientIdArray = [[NSMutableArray alloc] initWithArray:[recipientsIds componentsSeparatedByString:@","]];
+        }
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestQueryTodoWorkInfoFailed:(ASIHTTPRequest *)request
+{
+    [self stopLoading];
+    
+    [self requestDidFail:request];
 }
 
 - (void)saveOrUpdateTodoWord:(NSInteger)type    // 0：草稿 1：发送

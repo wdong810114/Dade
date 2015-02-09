@@ -38,5 +38,6 @@ typedef NS_ENUM(NSInteger, EntranceType) {
 - (IBAction)addButtonClicked:(UIButton *)button;
 
 @property (assign, nonatomic) EntranceType entranceType;    // 入口类型
+@property (copy, nonatomic) NSString *workId;
 
 @end
