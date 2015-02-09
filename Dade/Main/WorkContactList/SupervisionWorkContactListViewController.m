@@ -8,6 +8,8 @@
 
 #import "SupervisionWorkContactListViewController.h"
 
+#import "WorkContactListDetailViewController.h"
+
 @interface SupervisionWorkContactListViewController ()
 
 - (void)querySupervisionWordList;
@@ -124,7 +126,11 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-//    NSDictionary *workList = [_workListArray objectAtIndex:indexPath.row];
+    NSDictionary *workList = [_workListArray objectAtIndex:indexPath.row];
+    
+    WorkContactListDetailViewController *viewController = [[WorkContactListDetailViewController alloc] initWithNibName:@"WorkContactListDetailViewController" bundle:nil];
+    viewController.workListId = [workList stringForKey:@"mailId"];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 @end
