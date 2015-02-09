@@ -12,8 +12,10 @@
 
 - (void)initView;
 - (BOOL)checkValidity;
-- (void)send;
-- (void)save;
+
+- (void)saveOrUpdateTodoWord:(NSInteger)type;
+- (void)requestSaveOrUpdateTodoWordFinished:(ASIHTTPRequest *)request;
+- (void)requestSaveOrUpdateTodoWordFailed:(ASIHTTPRequest *)request;
 
 @end
 
@@ -108,24 +110,36 @@
 {
     // 保存
     
-    [self save];
-}
-
-- (IBAction)addButtonClicked:(UIButton *)button
-{
-    // 添加
+    if([self isRequesting]) {
+        return;
+    }
     
-    PersonnelListViewController *viewController = [[PersonnelListViewController alloc] initWithNibName:@"PersonnelListViewController" bundle:nil];
-    viewController.delegate = self;
-    viewController.selectedIdArray = [NSMutableArray arrayWithArray:_recipientIdArray];
-    [self.navigationController pushViewController:viewController animated:YES];
+    [self saveOrUpdateTodoWord:0];
 }
 
 - (IBAction)sendButtonClicked:(UIButton *)button
 {
     // 发送
     
-    [self send];
+    if([self isRequesting]) {
+        return;
+    }
+    
+    [self saveOrUpdateTodoWord:1];
+}
+
+- (IBAction)addButtonClicked:(UIButton *)button
+{
+    // 添加
+    
+    if([self isRequesting]) {
+        return;
+    }
+    
+    PersonnelListViewController *viewController = [[PersonnelListViewController alloc] initWithNibName:@"PersonnelListViewController" bundle:nil];
+    viewController.delegate = self;
+    viewController.selectedIdArray = [NSMutableArray arrayWithArray:_recipientIdArray];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification
@@ -178,6 +192,8 @@
         self.recipientsLabel.preferredMaxLayoutWidth = self.recipientsLabel.bounds.size.width;
     }
     
+    self.senderLabel.text = DadeAppDelegate.userInfo.staffName;
+    
     [self.addButton setTitleColor:BLUE_BUTTON_TITLE_NORMAL_COLOR forState:UIControlStateNormal];
     [self.addButton setTitleColor:BLUE_BUTTON_TITLE_HIGHLIGHTED_COLOR forState:UIControlStateHighlighted];
     
@@ -192,11 +208,6 @@
     NSArray *buttonArray = [NSArray arrayWithObjects:flexibleSpace, doneButton, nil];
     inputAccessoryView.items = buttonArray;
     self.contentTextView.inputAccessoryView = inputAccessoryView;
-    
-    // 测试---Start
-    self.senderLabel.text = @"王冬王冬冬王冬冬王冬冬王冬冬王冬冬";
-    self.recipientsLabel.text = @"大家大家大家大家大家大家大家大家大家大家大家大家大家大家大家大家大家大家大家大家大家";
-    // 测试---End
 }
 
 - (BOOL)checkValidity
@@ -228,20 +239,61 @@
     return YES;
 }
 
-- (void)send
+- (void)saveOrUpdateTodoWord:(NSInteger)type    // 0：草稿 1：发送
 {
     if([self checkValidity]) {
         [self.view endEditing:YES];
         
+        [self startLoading];
+        
+//        doType：状态 草稿0，已发1
+//        staffIds：收件人ID，（多个ID用','号分割）
+//        phone：是否短信提醒，0不提醒，1提醒
+//        date_ph：短信提醒天数
+//        appoint_time：指定完成时间yyyy-MM-dd
+//        displayvalue：主题
+//        content：内容
+//        wordId：工作联系单ID（更新，保存时使用）
+//        staffId：发件人ID
+        
+//        NSString *doType = [NSString stringWithFormat:@"%i", (int)type];
+//        NSString *staffIds = [_recipientIdArray componentsJoinedByString:@","];
+//        
+//        NSString *postString = [NSString stringWithFormat:@"{doType:'%@',staffIds:'%@',phone:'%@',date_ph:'%@',appoint_time:'%@',displayvalue:'%@',content:'%@',wordId:'',staffId:'%@'}", ];
+//        NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+//        
+//        ASIFormDataRequest *request = [self requestWithRelativeURL:SAVE_OR_UPDATE_TODO_WORD_REQUEST_URL];
+//        [request setPostBody:postData];
+//        [self startRequest:request didFinishSelector:@selector(requestSaveOrUpdateTodoWordFinished:) didFailSelector:@selector(requestSaveOrUpdateTodoWordFailed:)];
     }
 }
 
-- (void)save
+- (void)requestSaveOrUpdateTodoWordFinished:(ASIHTTPRequest *)request
 {
-    if([self checkValidity]) {
-        [self.view endEditing:YES];
-        
+    [self stopLoading];
+    
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonDict) {
+        NSString *ajaxToken = [jsonDict stringForKey:@"ajax_token"];
+        if([ajaxToken integerValue] != 0) {
+            NSString *ajaxMessage = [jsonDict stringForKey:@"ajax_message"];
+            [self showAlert:ajaxMessage];
+        } else {
+            [self performSelector:@selector(pop)];
+        }
     }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestSaveOrUpdateTodoWordFailed:(ASIHTTPRequest *)request
+{
+    [self stopLoading];
+    
+    [self requestDidFail:request];
 }
 
 #pragma mark - UIScrollViewDelegate Methods
@@ -253,16 +305,18 @@
 #pragma mark - UITextFieldDelegate Methods
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    if([self isRequesting]) {
+        return NO;
+    }
+    
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if(textField == self.dateTextField) {
-        [self.dateTextField resignFirstResponder];
         [self.smsAlertTextField becomeFirstResponder];
     } else if(textField == self.smsAlertTextField) {
-        [self.smsAlertTextField resignFirstResponder];
         [self.subjectTextField becomeFirstResponder];
     } else if(textField == self.subjectTextField) {
         [self.subjectTextField resignFirstResponder];
@@ -274,6 +328,10 @@
 #pragma mark - UITextViewDelegate Methods
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
+    if([self isRequesting]) {
+        return NO;
+    }
+    
     return YES;
 }
 

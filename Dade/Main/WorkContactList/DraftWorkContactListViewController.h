@@ -34,8 +34,8 @@ typedef NS_ENUM(NSInteger, EntranceType) {
 @property (weak, nonatomic) IBOutlet UILabel *placeholderLabel;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 
-- (IBAction)addButtonClicked:(UIButton *)button;
 - (IBAction)sendButtonClicked:(UIButton *)button;
+- (IBAction)addButtonClicked:(UIButton *)button;
 
 @property (assign, nonatomic) EntranceType entranceType;    // 入口类型
 
