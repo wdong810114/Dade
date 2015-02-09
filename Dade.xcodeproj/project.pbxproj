@@ -35,6 +35,10 @@
 		8B2991DA1A78870D00C32F4F /* NoticeDraftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2991D81A78870D00C32F4F /* NoticeDraftViewController.xib */; };
 		8B2991DD1A78E5CA00C32F4F /* down_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B2991DB1A78E5CA00C32F4F /* down_arrow@2x.png */; };
 		8B2991DE1A78E5CA00C32F4F /* down_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B2991DC1A78E5CA00C32F4F /* down_arrow@3x.png */; };
+		8B3EC7411A885C5300D1E2A5 /* TodoWorkContactListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3EC73F1A885C5300D1E2A5 /* TodoWorkContactListViewController.m */; };
+		8B3EC7421A885C5300D1E2A5 /* TodoWorkContactListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B3EC7401A885C5300D1E2A5 /* TodoWorkContactListViewController.xib */; };
+		8B3EC7461A885C9200D1E2A5 /* SupervisionWorkContactListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3EC7441A885C9200D1E2A5 /* SupervisionWorkContactListViewController.m */; };
+		8B3EC7471A885C9200D1E2A5 /* SupervisionWorkContactListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B3EC7451A885C9200D1E2A5 /* SupervisionWorkContactListViewController.xib */; };
 		8B42A5C61A832F1D00EDCED4 /* TodoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B42A5C41A832F1D00EDCED4 /* TodoDetailViewController.m */; };
 		8B42A5C71A832F1D00EDCED4 /* TodoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B42A5C51A832F1D00EDCED4 /* TodoDetailViewController.xib */; };
 		8B42A5CB1A83594D00EDCED4 /* TodoLeaveApplyDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B42A5C91A83594D00EDCED4 /* TodoLeaveApplyDetailViewController.m */; };
@@ -152,6 +156,12 @@
 		8B2991D81A78870D00C32F4F /* NoticeDraftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NoticeDraftViewController.xib; sourceTree = "<group>"; };
 		8B2991DB1A78E5CA00C32F4F /* down_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_arrow@2x.png"; sourceTree = "<group>"; };
 		8B2991DC1A78E5CA00C32F4F /* down_arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_arrow@3x.png"; sourceTree = "<group>"; };
+		8B3EC73E1A885C5300D1E2A5 /* TodoWorkContactListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodoWorkContactListViewController.h; sourceTree = "<group>"; };
+		8B3EC73F1A885C5300D1E2A5 /* TodoWorkContactListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodoWorkContactListViewController.m; sourceTree = "<group>"; };
+		8B3EC7401A885C5300D1E2A5 /* TodoWorkContactListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodoWorkContactListViewController.xib; sourceTree = "<group>"; };
+		8B3EC7431A885C9200D1E2A5 /* SupervisionWorkContactListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupervisionWorkContactListViewController.h; sourceTree = "<group>"; };
+		8B3EC7441A885C9200D1E2A5 /* SupervisionWorkContactListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupervisionWorkContactListViewController.m; sourceTree = "<group>"; };
+		8B3EC7451A885C9200D1E2A5 /* SupervisionWorkContactListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SupervisionWorkContactListViewController.xib; sourceTree = "<group>"; };
 		8B42A5C31A832F1D00EDCED4 /* TodoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodoDetailViewController.h; sourceTree = "<group>"; };
 		8B42A5C41A832F1D00EDCED4 /* TodoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodoDetailViewController.m; sourceTree = "<group>"; };
 		8B42A5C51A832F1D00EDCED4 /* TodoDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodoDetailViewController.xib; sourceTree = "<group>"; };
@@ -494,6 +504,12 @@
 				8BAD9FB81A7B255700F43D8B /* DraftWorkContactListViewController.h */,
 				8BAD9FB91A7B255700F43D8B /* DraftWorkContactListViewController.m */,
 				8BAD9FBA1A7B255700F43D8B /* DraftWorkContactListViewController.xib */,
+				8B3EC73E1A885C5300D1E2A5 /* TodoWorkContactListViewController.h */,
+				8B3EC73F1A885C5300D1E2A5 /* TodoWorkContactListViewController.m */,
+				8B3EC7401A885C5300D1E2A5 /* TodoWorkContactListViewController.xib */,
+				8B3EC7431A885C9200D1E2A5 /* SupervisionWorkContactListViewController.h */,
+				8B3EC7441A885C9200D1E2A5 /* SupervisionWorkContactListViewController.m */,
+				8B3EC7451A885C9200D1E2A5 /* SupervisionWorkContactListViewController.xib */,
 				8BAD9FC21A7B48B700F43D8B /* WorkContactListDraftsViewController.h */,
 				8BAD9FC31A7B48B700F43D8B /* WorkContactListDraftsViewController.m */,
 				8BAD9FC41A7B48B700F43D8B /* WorkContactListDraftsViewController.xib */,
@@ -734,11 +750,13 @@
 				8BA9792B1A7A2F9200C2D197 /* row_selected_icon@3x.png in Resources */,
 				8B42A5CC1A83594D00EDCED4 /* TodoLeaveApplyDetailViewController.xib in Resources */,
 				8BBE125F1A70CDCE009D894F /* mail_icon@2x.png in Resources */,
+				8B3EC7421A885C5300D1E2A5 /* TodoWorkContactListViewController.xib in Resources */,
 				8BAD9FD41A7B5A2B00F43D8B /* todo_icon@2x.png in Resources */,
 				8B2991DD1A78E5CA00C32F4F /* down_arrow@2x.png in Resources */,
 				8BAD9FD51A7B5A2B00F43D8B /* todo_icon@3x.png in Resources */,
 				8B42A5C71A832F1D00EDCED4 /* TodoDetailViewController.xib in Resources */,
 				8BAD9FBC1A7B255700F43D8B /* DraftWorkContactListViewController.xib in Resources */,
+				8B3EC7471A885C9200D1E2A5 /* SupervisionWorkContactListViewController.xib in Resources */,
 				8B256E921A762FF500C14EF3 /* MailListViewController.xib in Resources */,
 				8BBE12581A70CDCE009D894F /* back_icon_n@3x.png in Resources */,
 				8BAD9FDB1A7B68CD00F43D8B /* PersonnelListViewController.xib in Resources */,
@@ -775,6 +793,7 @@
 				8BAD9FC51A7B48B700F43D8B /* WorkContactListDraftsViewController.m in Sources */,
 				8B2991C01A787D6A00C32F4F /* WorkContactListViewController.m in Sources */,
 				8B256E911A762FF500C14EF3 /* MailListViewController.m in Sources */,
+				8B3EC7411A885C5300D1E2A5 /* TodoWorkContactListViewController.m in Sources */,
 				8B54E1221A7F6CD30036E443 /* UserInfo.m in Sources */,
 				8BAB494B1A7F9581007187E1 /* NSDictionary+Util.m in Sources */,
 				8BAAED301A6F99E700464655 /* BaseViewController.m in Sources */,
@@ -794,6 +813,7 @@
 				8BAD9FDA1A7B68CD00F43D8B /* PersonnelListViewController.m in Sources */,
 				8BAAED3C1A6FAE1E00464655 /* DDLoadingView.m in Sources */,
 				8BADA0021A7B8A2F00F43D8B /* ASIInputStream.m in Sources */,
+				8B3EC7461A885C9200D1E2A5 /* SupervisionWorkContactListViewController.m in Sources */,
 				8BAAED381A6FA03A00464655 /* MainViewController.m in Sources */,
 				8BAAED341A6F9E3A00464655 /* Util.m in Sources */,
 				8B42A5CB1A83594D00EDCED4 /* TodoLeaveApplyDetailViewController.m in Sources */,

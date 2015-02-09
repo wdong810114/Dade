@@ -9,6 +9,8 @@
 #import "WorkContactListViewController.h"
 
 #import "DraftWorkContactListViewController.h"
+#import "TodoWorkContactListViewController.h"
+#import "SupervisionWorkContactListViewController.h"
 #import "WorkContactListDraftsViewController.h"
 
 @interface WorkContactListViewController ()
@@ -137,7 +139,7 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_SUPERVISION_WORD_DRAFT_LIST_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestQuerySupervisionWordListFinished:) didFailSelector:@selector(requestQuerySupervisionWordListFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestQuerySupervisionWordDraftListFinished:) didFailSelector:@selector(requestQuerySupervisionWordDraftListFailed:)];
 }
 
 - (void)requestQuerySupervisionWordDraftListFinished:(ASIHTTPRequest *)request
@@ -226,12 +228,12 @@
             break;
         case 1:
         {
-            
+            viewController = [[TodoWorkContactListViewController alloc] initWithNibName:@"TodoWorkContactListViewController" bundle:nil];
         }
             break;
         case 2:
         {
-            
+            viewController = [[SupervisionWorkContactListViewController alloc] initWithNibName:@"SupervisionWorkContactListViewController" bundle:nil];
         }
             break;
         case 3:
