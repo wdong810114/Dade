@@ -15,6 +15,10 @@
 - (void)showDeleteAlert:(NSString *)title;
 - (void)deleteDraft;
 
+- (void)querySupervisionWordDraftList;
+- (void)requestQuerySupervisionWordDraftListFinished:(ASIHTTPRequest *)request;
+- (void)requestQuerySupervisionWordDraftListFailed:(ASIHTTPRequest *)request;
+
 @end
 
 @implementation WorkContactListDraftsViewController
@@ -24,16 +28,6 @@
     NSIndexPath *_willDeleteIndexPath;
 }
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if(self) {
-        _draftArray = [[NSMutableArray alloc] initWithObjects:@"草稿1", @"草稿2", @"草稿3", @"草稿4", @"草稿5", @"草稿6", @"草稿7", @"草稿8", nil];
-    }
-    
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -41,6 +35,8 @@
     self.workContactListDraftsTableView.backgroundView = nil;
     self.workContactListDraftsTableView.backgroundColor = TABLEVIEW_BG_COLOR;
     self.workContactListDraftsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    [self querySupervisionWordDraftList];
 }
 
 - (void)didReceiveMemoryWarning
@@ -104,6 +100,45 @@
     }
 }
 
+- (void)querySupervisionWordDraftList
+{
+    [self startLoading];
+    
+//    userId ：用户Id
+    
+    NSString *postString = [NSString stringWithFormat:@"{userId:'%@'}", DadeAppDelegate.userInfo.staffId];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_SUPERVISION_WORD_DRAFT_LIST_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestQuerySupervisionWordDraftListFinished:) didFailSelector:@selector(requestQuerySupervisionWordDraftListFailed:)];
+}
+
+- (void)requestQuerySupervisionWordDraftListFinished:(ASIHTTPRequest *)request
+{
+    [self stopLoading];
+    
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonArray) {
+        _draftArray = [[NSMutableArray alloc] initWithArray:jsonArray];
+        
+        [self setNavigationBarTitle:[NSString stringWithFormat:@"工作联系单草稿(%i)", (int)[_draftArray count]]];
+        [self.workContactListDraftsTableView reloadData];
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestQuerySupervisionWordDraftListFailed:(ASIHTTPRequest *)request
+{
+    [self stopLoading];
+    
+    [self requestDidFail:request];
+}
+
 #pragma mark - UIAlertViewDelegate Methods
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
@@ -129,8 +164,9 @@
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         cell.textLabel.font = FONT(14.0);
     }
-    
-    cell.textLabel.text = [_draftArray objectAtIndex:indexPath.row];
+
+    NSDictionary *draft = [_draftArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", [draft stringForKey:@"displayvalue"]];
     
     return cell;
 }
@@ -159,8 +195,11 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
+    NSDictionary *draft = [_draftArray objectAtIndex:indexPath.row];
+    
     DraftWorkContactListViewController *viewController = [[DraftWorkContactListViewController alloc] initWithNibName:@"DraftWorkContactListViewController" bundle:nil];
     viewController.entranceType = ENTRANCE_TYPE_EDIT;
+    viewController.workId = [draft stringForKey:@"mailId"];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
