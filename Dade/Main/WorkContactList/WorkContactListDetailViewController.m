@@ -208,7 +208,7 @@
     }
     
     NSDictionary *recipient = [_recipientArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"(%@)%@--%@", [recipient stringForKey:@"zt"], [recipient stringForKey:@"staffName"], [recipient stringForKey:@"sjdate"]];
+    cell.textLabel.text = [NSString stringWithFormat:@"(%@)%@—%@", [recipient stringForKey:@"zt"], [recipient stringForKey:@"staffName"], [recipient stringForKey:@"sjdate"]];
     
     return cell;
 }

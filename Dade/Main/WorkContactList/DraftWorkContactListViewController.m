@@ -218,12 +218,6 @@
         return NO;
     }
     
-    if([[Util trimString:self.smsAlertTextField.text] isEqualToString:@""]) {
-        [self showAlert:@"短信提醒不能为空"];
-        
-        return NO;
-    }
-    
     if([[Util trimString:self.subjectTextField.text] isEqualToString:@""]) {
         [self showAlert:@"题目不能为空"];
 
