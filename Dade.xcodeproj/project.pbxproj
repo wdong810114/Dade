@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8B1AEFE91A89B94F00AD2CAF /* WorkContactListReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1AEFE71A89B94F00AD2CAF /* WorkContactListReplyViewController.m */; };
 		8B1AEFEA1A89B94F00AD2CAF /* WorkContactListReplyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B1AEFE81A89B94F00AD2CAF /* WorkContactListReplyViewController.xib */; };
+		8B1AEFEE1A89F2B500AD2CAF /* WorkContactListEvaluateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1AEFEC1A89F2B500AD2CAF /* WorkContactListEvaluateViewController.m */; };
+		8B1AEFEF1A89F2B500AD2CAF /* WorkContactListEvaluateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B1AEFED1A89F2B500AD2CAF /* WorkContactListEvaluateViewController.xib */; };
 		8B2225791A723E9B00816809 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B2225771A723E9B00816809 /* LoginViewController.m */; };
 		8B22257A1A723E9B00816809 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2225781A723E9B00816809 /* LoginViewController.xib */; };
 		8B22257E1A723EB900816809 /* CaptchaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B22257C1A723EB900816809 /* CaptchaViewController.m */; };
@@ -124,6 +126,9 @@
 		8B1AEFE61A89B94F00AD2CAF /* WorkContactListReplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkContactListReplyViewController.h; sourceTree = "<group>"; };
 		8B1AEFE71A89B94F00AD2CAF /* WorkContactListReplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkContactListReplyViewController.m; sourceTree = "<group>"; };
 		8B1AEFE81A89B94F00AD2CAF /* WorkContactListReplyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkContactListReplyViewController.xib; sourceTree = "<group>"; };
+		8B1AEFEB1A89F2B500AD2CAF /* WorkContactListEvaluateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkContactListEvaluateViewController.h; sourceTree = "<group>"; };
+		8B1AEFEC1A89F2B500AD2CAF /* WorkContactListEvaluateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkContactListEvaluateViewController.m; sourceTree = "<group>"; };
+		8B1AEFED1A89F2B500AD2CAF /* WorkContactListEvaluateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkContactListEvaluateViewController.xib; sourceTree = "<group>"; };
 		8B2225761A723E9B00816809 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		8B2225771A723E9B00816809 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		8B2225781A723E9B00816809 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -529,6 +534,9 @@
 				8B1AEFE61A89B94F00AD2CAF /* WorkContactListReplyViewController.h */,
 				8B1AEFE71A89B94F00AD2CAF /* WorkContactListReplyViewController.m */,
 				8B1AEFE81A89B94F00AD2CAF /* WorkContactListReplyViewController.xib */,
+				8B1AEFEB1A89F2B500AD2CAF /* WorkContactListEvaluateViewController.h */,
+				8B1AEFEC1A89F2B500AD2CAF /* WorkContactListEvaluateViewController.m */,
+				8B1AEFED1A89F2B500AD2CAF /* WorkContactListEvaluateViewController.xib */,
 			);
 			path = WorkContactList;
 			sourceTree = "<group>";
@@ -747,6 +755,7 @@
 				8BAD9FC61A7B48B700F43D8B /* WorkContactListDraftsViewController.xib in Resources */,
 				8BA9792D1A7A2F9200C2D197 /* row_unselected_icon@3x.png in Resources */,
 				8BAD9FDF1A7B6C5900F43D8B /* magnifier@3x.png in Resources */,
+				8B1AEFEF1A89F2B500AD2CAF /* WorkContactListEvaluateViewController.xib in Resources */,
 				8BBE12631A70CDCE009D894F /* work_contact_list_icon@2x.png in Resources */,
 				8BBE12591A70CDCE009D894F /* back_icon_p@2x.png in Resources */,
 				8B2225861A724E6F00816809 /* password_icon@3x.png in Resources */,
@@ -808,6 +817,7 @@
 				8BAAED051A6F90DE00464655 /* AppDelegate.m in Sources */,
 				8BADA0001A7B8A2F00F43D8B /* ASIFormDataRequest.m in Sources */,
 				8B256E961A76300B00C14EF3 /* MailDetailViewController.m in Sources */,
+				8B1AEFEE1A89F2B500AD2CAF /* WorkContactListEvaluateViewController.m in Sources */,
 				8BAD9FC51A7B48B700F43D8B /* WorkContactListDraftsViewController.m in Sources */,
 				8B2991C01A787D6A00C32F4F /* WorkContactListViewController.m in Sources */,
 				8B256E911A762FF500C14EF3 /* MailListViewController.m in Sources */,

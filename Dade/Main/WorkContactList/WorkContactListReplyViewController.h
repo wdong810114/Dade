@@ -25,5 +25,7 @@
 @property (copy, nonatomic) NSString *workType;     // 1待办，2监督
 @property (copy, nonatomic) NSString *recipientId;
 @property (copy, nonatomic) NSString *relationId;
+@property (assign, nonatomic) BOOL isEnd;           // 是否已完结
+@property (assign, nonatomic) BOOL isLastEvaluate;  // 是否评价最后一个联系人
 
 @end

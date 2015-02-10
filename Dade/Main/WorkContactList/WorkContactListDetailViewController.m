@@ -27,8 +27,29 @@
 @implementation WorkContactListDetailViewController
 {
     CGPoint _scrollViewContentOffset;   // 解决iOS6下bug
+    NSLayoutConstraint *_heightConstraint;
     
     NSMutableArray *_recipientArray;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:DDWorkContactListNeedRefreshNotification
+                                                  object:nil];
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if(self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(refreshView:)
+                                                     name:DDWorkContactListNeedRefreshNotification
+                                                   object:nil];
+    }
+    
+    return self;
 }
 
 - (void)viewDidLoad
@@ -80,6 +101,12 @@
     [self pop];
 }
 
+- (void)refreshView:(NSNotification *)notification
+{
+    [self queryTodoWorkInfo];
+    [self queryTodoNoticeList];
+}
+
 #pragma mark - Private Methods
 - (void)initView
 {
@@ -98,6 +125,10 @@
 
 - (void)updateRecipientsListView
 {
+    if(_heightConstraint) {
+        [self.recipientsListView removeConstraint:_heightConstraint];
+    }
+    
     CGFloat totalHeight = [_recipientArray count] * TABLEVIEW_CELL_HEIGHT;
     
     NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.recipientsListView
@@ -108,6 +139,8 @@
                                                                  multiplier:1
                                                                    constant:totalHeight];
     [self.recipientsListView addConstraint:constraint];
+    
+    [self.recipientsListView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     UITableView *recipientsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, self.recipientsListView.frame.size.width, totalHeight) style:UITableViewStylePlain];
     recipientsTableView.backgroundView = nil;
@@ -265,6 +298,24 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if([self isRequesting]) {
+        return;
+    }
+    
+    // 判断是否评价最后一个联系人
+    BOOL isLastEvaluate = YES;
+    for(NSInteger index = 0; index < [_recipientArray count]; index++) {
+        if(index == indexPath.row) {
+            continue;
+        }
+        
+        NSDictionary *recipient = [_recipientArray objectAtIndex:index];
+        if([recipient stringForKey:@"score"].length == 0 || [recipient stringForKey:@"access"].length == 0) {
+            isLastEvaluate = NO;
+            break;
+        }
+    }
+    
     NSDictionary *recipient = [_recipientArray objectAtIndex:indexPath.row];
     
     WorkContactListReplyViewController *viewController = [[WorkContactListReplyViewController alloc] initWithNibName:@"WorkContactListReplyViewController" bundle:nil];
@@ -272,6 +323,10 @@
     viewController.workType = self.workType;
     viewController.recipientId = [recipient stringForKey:@"staffid"];
     viewController.relationId = [recipient stringForKey:@"id"];
+    if([self.workType isEqualToString:@"2"]) {
+        viewController.isEnd = [[recipient stringForKey:@"isend"] isEqualToString:@"2"];
+        viewController.isLastEvaluate = isLastEvaluate;
+    }
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

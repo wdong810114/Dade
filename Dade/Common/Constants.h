@@ -64,19 +64,18 @@
 #define QUERY_GZLXD_FLOW_LIST_REQUEST_URL               @"%@/QueryGzlxdFlowList"            // 查看工作联系单回复内容接口
 #define REPLY_TODO_WORK_REQUEST_URL                     @"%@/ReplyToDoWork"                 // 回复工作联系单接口
 #define END_TODO_WORD_REQUEST_URL                       @"%@/EndToDoWord"                   // 完结工作联系单接口
+#define EVALUATION_TODO_WORK_REQUEST_URL                @"%@/EvaluationToDoWork"            // 评价工作联系接口
 
 #define SAVE_MAIL_REQUEST_URL                           @"%@/SaveMail"                      // 邮件起草接口
 #define SAVE_LEAVE_APPLICATION_REQUEST_URL              @"%@/SaveLeaveApplication"          // 请假申请起草接口
 #define SAVE_NOT_PUNCH_REQUEST_URL                      @"%@/SaveNotPunch"                  // 未打卡说明起草接口
 #define DRAFT_NOTICE_INFO_REQUEST_URL                   @"%@/DraftNoticeInfo"               // 通知起草接口
-//#define GET_PROCESS_BY_FILE_ID_REQUEST_URL              @"%@/GetProcessByFileId"            // 起草文件审批流程查询接口
 #define QUERY_STAFF_LIST_BY_NAME_REQUEST_URL            @"%@/QueryStaffListByName"          // 用户查询接口
 
+//#define GET_PROCESS_BY_FILE_ID_REQUEST_URL              @"%@/GetProcessByFileId"            // 起草文件审批流程查询接口
 //#define QUERY_VERSION_NUMBER_REQUEST_URL                @"%@/QueryVersionNumber"            // 查询版本号
 
-
-
-
+static NSString *const DDWorkContactListNeedRefreshNotification = @"DDWorkContactListNeedRefreshNotification";
 
 
 

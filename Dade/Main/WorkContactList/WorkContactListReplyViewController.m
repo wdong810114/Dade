@@ -8,6 +8,8 @@
 
 #import "WorkContactListReplyViewController.h"
 
+#import "WorkContactListEvaluateViewController.h"
+
 @interface WorkContactListReplyViewController ()
 
 - (void)initView;
@@ -72,13 +74,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [super touchesBegan:touches withEvent:event];
-    
-    [self.view endEditing:YES];
-}
-
 - (void)setNavigationBar
 {
     [super setNavigationBar];
@@ -87,6 +82,10 @@
     [self setLeftBarButtonItem:@selector(backClicked:) image:@"back_icon_n" highlightedImage:@"back_icon_p"];
     if([self.workType isEqualToString:@"1"]) {
         [self setRightBarButtonItem:@selector(endClicked:) title:@"完结"];
+    } else if([self.workType isEqualToString:@"2"]) {
+        if(self.isEnd) {
+            [self setRightBarButtonItem:@selector(evaluateClicked:) title:@"评价"];
+        }
     }
 }
 
@@ -104,6 +103,21 @@
     }
     
     [self endTodoWord];
+}
+
+- (void)evaluateClicked:(UIButton *)button
+{
+    // 评价
+    
+    if([self isRequesting]) {
+        return;
+    }
+    
+    WorkContactListEvaluateViewController *viewController = [[WorkContactListEvaluateViewController alloc] initWithNibName:@"WorkContactListEvaluateViewController" bundle:nil];
+    viewController.workId = self.workId;
+    viewController.relationId = self.relationId;
+    viewController.isLastEvaluate = self.isLastEvaluate;
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (IBAction)replyButtonClicked:(UIButton *)button
@@ -328,6 +342,7 @@
             NSString *ajaxMessage = [jsonDict stringForKey:@"ajax_message"];
             [self showAlert:ajaxMessage];
         } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:DDWorkContactListNeedRefreshNotification object:nil];
             [self performSelector:@selector(pop)];
         }
     }
@@ -370,6 +385,7 @@
             NSString *ajaxMessage = [jsonDict stringForKey:@"ajax_message"];
             [self showAlert:ajaxMessage];
         } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:DDWorkContactListNeedRefreshNotification object:nil];
             [self performSelector:@selector(pop)];
         }
     }
