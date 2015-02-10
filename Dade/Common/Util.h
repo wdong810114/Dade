@@ -15,6 +15,9 @@
 + (NSString *)trimString:(NSString *)string;
 + (BOOL)isEmptyString:(NSString *)string;
 
++ (CGSize)sizeOfString:(NSString *)string font:(UIFont *)font constrainedToSize:(CGSize)size;
++ (CGSize)sizeOfString:(NSString *)string font:(UIFont *)font constrainedToSize:(CGSize)size lineBreakMode:(NSLineBreakMode)lineBreakMode;
+
 @end
 
 @interface Util (Image)
