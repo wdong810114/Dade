@@ -13,11 +13,13 @@
 @interface WorkContactListDraftsViewController ()
 
 - (void)showDeleteAlert:(NSString *)title;
-- (void)deleteDraft;
 
 - (void)querySupervisionWordDraftList;
 - (void)requestQuerySupervisionWordDraftListFinished:(ASIHTTPRequest *)request;
 - (void)requestQuerySupervisionWordDraftListFailed:(ASIHTTPRequest *)request;
+- (void)deleteTodoWord;
+- (void)requestDeleteTodoWordFinished:(ASIHTTPRequest *)request;
+- (void)requestDeleteTodoWordFailed:(ASIHTTPRequest *)request;
 
 @end
 
@@ -71,7 +73,7 @@
         UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:ALERT_BUTTON_TITLE_CONFIRM
                                                                 style:UIAlertActionStyleDefault
                                                               handler:^(UIAlertAction *action) {
-                                                                  [self deleteDraft];
+                                                                  [self deleteTodoWord];
                                                               }];
         [alertController addAction:cancelAction];
         [alertController addAction:confirmAction];
@@ -87,24 +89,11 @@
     }
 }
 
-- (void)deleteDraft
-{
-    if(_willDeleteIndexPath) {
-        [_draftArray removeObjectAtIndex:_willDeleteIndexPath.row];
-        
-        [self.workContactListDraftsTableView beginUpdates];
-        [self.workContactListDraftsTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:_willDeleteIndexPath] withRowAnimation:UITableViewRowAnimationTop];
-        [self.workContactListDraftsTableView endUpdates];
-        
-        _willDeleteIndexPath = nil;
-    }
-}
-
 - (void)querySupervisionWordDraftList
 {
     [self startLoading];
     
-//    userId ：用户Id
+//    userId：用户Id
     
     NSString *postString = [NSString stringWithFormat:@"{userId:'%@'}", DadeAppDelegate.userInfo.staffId];
     NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
@@ -139,11 +128,62 @@
     [self requestDidFail:request];
 }
 
+- (void)deleteTodoWord
+{
+    if(_willDeleteIndexPath) {
+        [self startLoading];
+        
+//    wordId：联系单主键
+        
+        NSString *workId = [(NSDictionary *)[_draftArray objectAtIndex:_willDeleteIndexPath.row] stringForKey:@"mailId"];
+        
+        NSString *postString = [NSString stringWithFormat:@"{wordId:'%@'}", workId];
+        NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        ASIFormDataRequest *request = [self requestWithRelativeURL:DELETE_TODO_WORD_REQUEST_URL];
+        [request setPostBody:postData];
+        [self startRequest:request didFinishSelector:@selector(requestDeleteTodoWordFinished:) didFailSelector:@selector(requestDeleteTodoWordFailed:)];
+    }
+}
+
+- (void)requestDeleteTodoWordFinished:(ASIHTTPRequest *)request
+{
+    [self stopLoading];
+    
+    NSString *jsonString = request.responseString;
+    
+    NSError *error = nil;
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonDict) {
+        NSString *ajaxToken = [jsonDict stringForKey:@"ajax_token"];
+        if([ajaxToken integerValue] == 0) {
+            [_draftArray removeObjectAtIndex:_willDeleteIndexPath.row];
+            
+            [self.workContactListDraftsTableView beginUpdates];
+            [self.workContactListDraftsTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:_willDeleteIndexPath] withRowAnimation:UITableViewRowAnimationTop];
+            [self.workContactListDraftsTableView endUpdates];
+            
+            _willDeleteIndexPath = nil;
+            
+            [self setNavigationBarTitle:[NSString stringWithFormat:@"工作联系单草稿(%i)", (int)[_draftArray count]]];
+        }
+    }
+    
+    [self requestDidFinish:request];
+}
+
+- (void)requestDeleteTodoWordFailed:(ASIHTTPRequest *)request
+{
+    [self stopLoading];
+    
+    [self requestDidFail:request];
+}
+
 #pragma mark - UIAlertViewDelegate Methods
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     if(alertView.cancelButtonIndex != buttonIndex) {
-        [self deleteDraft];
+        [self deleteTodoWord];
     }
 }
 

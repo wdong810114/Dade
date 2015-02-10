@@ -209,7 +209,23 @@
     }
     
     NSDictionary *recipient = [_recipientArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"(%@)%@—%@", [recipient stringForKey:@"zt"], [recipient stringForKey:@"staffName"], [recipient stringForKey:@"sjdate"]];
+    NSString *isend = [recipient stringForKey:@"isend"];
+    NSString *status = @"";
+    if([isend isEqualToString:@"0"]) {
+        status = @"未读";
+    } else if([isend isEqualToString:@"1"]) {
+        status = @"已读";
+    } else if([isend isEqualToString:@"2"]) {
+        status = @"完结";
+    } else if([isend isEqualToString:@"3"]) {
+        status = @"拒绝";
+    } else if([isend isEqualToString:@"4"]) {
+        status = @"关闭";
+    } else {
+        status = @"未知";
+    }
+    NSString *name = [Util trimString:[recipient stringForKey:@"staffName"]];
+    cell.textLabel.text = [NSString stringWithFormat:@"(%@)%@—%@", status, name, [recipient stringForKey:@"sjdate"]];
     
     return cell;
 }
