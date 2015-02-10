@@ -8,6 +8,8 @@
 
 #import "WorkContactListDetailViewController.h"
 
+#import "WorkContactListReplyViewController.h"
+
 @interface WorkContactListDetailViewController ()
 
 - (void)initView;
@@ -24,6 +26,8 @@
 
 @implementation WorkContactListDetailViewController
 {
+    CGPoint _scrollViewContentOffset;   // 解决iOS6下bug
+    
     NSMutableArray *_recipientArray;
 }
 
@@ -35,6 +39,27 @@
     
     [self queryTodoWorkInfo];
     [self queryTodoNoticeList];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.workContactListDetailScrollView.contentOffset = CGPointZero;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    _scrollViewContentOffset = self.workContactListDetailScrollView.contentOffset;
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    self.workContactListDetailScrollView.contentOffset = _scrollViewContentOffset;
 }
 
 - (void)didReceiveMemoryWarning
@@ -239,6 +264,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSDictionary *recipient = [_recipientArray objectAtIndex:indexPath.row];
+    
+    WorkContactListReplyViewController *viewController = [[WorkContactListReplyViewController alloc] initWithNibName:@"WorkContactListReplyViewController" bundle:nil];
+    viewController.workId = self.workId;
+    viewController.workType = self.workType;
+    viewController.recipientId = [recipient stringForKey:@"staffid"];
+    viewController.relationId = [recipient stringForKey:@"id"];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 @end
