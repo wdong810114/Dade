@@ -11,11 +11,6 @@
 
 #import "PersonnelListViewController.h"
 
-typedef NS_ENUM(NSInteger, EntranceType) {
-    ENTRANCE_TYPE_DRAFT,        // 起草
-    ENTRANCE_TYPE_EDIT,         // 草稿
-};
-
 @interface DraftWorkContactListViewController : BaseViewController <PersonnelListViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *draftWorkContactListScrollView;
@@ -37,7 +32,6 @@ typedef NS_ENUM(NSInteger, EntranceType) {
 - (IBAction)sendButtonClicked:(UIButton *)button;
 - (IBAction)addButtonClicked:(UIButton *)button;
 
-@property (assign, nonatomic) EntranceType entranceType;    // 入口类型
 @property (copy, nonatomic) NSString *workId;
 
 @end

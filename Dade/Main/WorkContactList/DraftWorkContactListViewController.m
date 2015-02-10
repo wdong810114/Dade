@@ -51,8 +51,6 @@
                                                  selector:@selector(keyboardWillHide:)
                                                      name:UIKeyboardWillHideNotification
                                                    object:nil];
-        
-        _entranceType = ENTRANCE_TYPE_DRAFT;
     }
     
     return self;
@@ -99,10 +97,10 @@
 {
     [super setNavigationBar];
     
-    if(ENTRANCE_TYPE_DRAFT == self.entranceType) {
-        [self setNavigationBarTitle:@"工作联系单"];
-    } else {
+    if(self.workId) {
         [self setNavigationBarTitle:@"草稿详情"];
+    } else {
+        [self setNavigationBarTitle:@"工作联系单"];
     }
     [self setLeftBarButtonItem:@selector(backClicked:) image:@"back_icon_n" highlightedImage:@"back_icon_p"];
     [self setRightBarButtonItem:@selector(saveClicked:) title:@"保存"];

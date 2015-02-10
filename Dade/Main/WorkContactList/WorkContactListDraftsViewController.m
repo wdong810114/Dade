@@ -198,7 +198,6 @@
     NSDictionary *draft = [_draftArray objectAtIndex:indexPath.row];
     
     DraftWorkContactListViewController *viewController = [[DraftWorkContactListViewController alloc] initWithNibName:@"DraftWorkContactListViewController" bundle:nil];
-    viewController.entranceType = ENTRANCE_TYPE_EDIT;
     viewController.workId = [draft stringForKey:@"mailId"];
     [self.navigationController pushViewController:viewController animated:YES];
 }
