@@ -137,14 +137,14 @@
 - (void)textFieldTextDidChange:(NSNotification *)notification
 {
     if([self.searchTextField isFirstResponder]) {
-        NSString *keyword = self.searchTextField.text;
+        NSString *keyword = [NSString stringWithString:self.searchTextField.text];
         
-        if([Util isEmptyString:keyword]) {
+        if(keyword.length == 0) {
             _searchPersonnelArray = [[NSMutableArray alloc] initWithArray:_personnelArray];
         } else {
             _searchPersonnelArray = [[NSMutableArray alloc] init];
             for(NSDictionary *personnel in _personnelArray) {
-                if([[personnel stringForKey:@"staffName"] rangeOfString:keyword].length > 0) {
+                if([[personnel stringForKey:@"staffName"] rangeOfString:keyword options:NSCaseInsensitiveSearch|NSLiteralSearch].length > 0) {
                     [_searchPersonnelArray addObject:personnel];
                 }
             }
@@ -229,6 +229,12 @@
     [self stopLoading];
     
     [self requestDidFail:request];
+}
+
+#pragma mark - UIScrollViewDelegate Methods
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.view endEditing:YES];
 }
 
 #pragma mark - UITableViewDataSource Methods
