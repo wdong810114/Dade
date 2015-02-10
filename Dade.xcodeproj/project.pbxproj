@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B1AEFE91A89B94F00AD2CAF /* WorkContactListReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1AEFE71A89B94F00AD2CAF /* WorkContactListReplyViewController.m */; };
+		8B1AEFEA1A89B94F00AD2CAF /* WorkContactListReplyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B1AEFE81A89B94F00AD2CAF /* WorkContactListReplyViewController.xib */; };
 		8B2225791A723E9B00816809 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B2225771A723E9B00816809 /* LoginViewController.m */; };
 		8B22257A1A723E9B00816809 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2225781A723E9B00816809 /* LoginViewController.xib */; };
 		8B22257E1A723EB900816809 /* CaptchaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B22257C1A723EB900816809 /* CaptchaViewController.m */; };
@@ -119,6 +121,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8B1AEFE61A89B94F00AD2CAF /* WorkContactListReplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkContactListReplyViewController.h; sourceTree = "<group>"; };
+		8B1AEFE71A89B94F00AD2CAF /* WorkContactListReplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkContactListReplyViewController.m; sourceTree = "<group>"; };
+		8B1AEFE81A89B94F00AD2CAF /* WorkContactListReplyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkContactListReplyViewController.xib; sourceTree = "<group>"; };
 		8B2225761A723E9B00816809 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		8B2225771A723E9B00816809 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		8B2225781A723E9B00816809 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -521,6 +526,9 @@
 				8B3EC7481A8864E100D1E2A5 /* WorkContactListDetailViewController.h */,
 				8B3EC7491A8864E100D1E2A5 /* WorkContactListDetailViewController.m */,
 				8B3EC74A1A8864E100D1E2A5 /* WorkContactListDetailViewController.xib */,
+				8B1AEFE61A89B94F00AD2CAF /* WorkContactListReplyViewController.h */,
+				8B1AEFE71A89B94F00AD2CAF /* WorkContactListReplyViewController.m */,
+				8B1AEFE81A89B94F00AD2CAF /* WorkContactListReplyViewController.xib */,
 			);
 			path = WorkContactList;
 			sourceTree = "<group>";
@@ -757,6 +765,7 @@
 				8BBE12621A70CDCE009D894F /* notice_icon@3x.png in Resources */,
 				8B2225881A724E6F00816809 /* username_icon@3x.png in Resources */,
 				8BA9792B1A7A2F9200C2D197 /* row_selected_icon@3x.png in Resources */,
+				8B1AEFEA1A89B94F00AD2CAF /* WorkContactListReplyViewController.xib in Resources */,
 				8B42A5CC1A83594D00EDCED4 /* TodoLeaveApplyDetailViewController.xib in Resources */,
 				8BBE125F1A70CDCE009D894F /* mail_icon@2x.png in Resources */,
 				8B3EC7421A885C5300D1E2A5 /* TodoWorkContactListViewController.xib in Resources */,
@@ -806,6 +815,7 @@
 				8B54E1221A7F6CD30036E443 /* UserInfo.m in Sources */,
 				8BAB494B1A7F9581007187E1 /* NSDictionary+Util.m in Sources */,
 				8BAAED301A6F99E700464655 /* BaseViewController.m in Sources */,
+				8B1AEFE91A89B94F00AD2CAF /* WorkContactListReplyViewController.m in Sources */,
 				8BAD9FD01A7B595B00F43D8B /* TodoListViewController.m in Sources */,
 				8B2991CA1A7885B100C32F4F /* MailDraftViewController.m in Sources */,
 				8BAD9FBB1A7B255700F43D8B /* DraftWorkContactListViewController.m in Sources */,
