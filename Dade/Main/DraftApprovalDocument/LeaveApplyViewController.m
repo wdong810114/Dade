@@ -78,10 +78,6 @@
 
 - (void)backClicked:(UIButton *)button
 {
-    if([self isRequesting]) {
-        return;
-    }
-    
     [self pop];
 }
 
