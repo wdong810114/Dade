@@ -13,8 +13,8 @@
 @interface MailListViewController ()
 
 - (void)queryNewsList;
-- (void)requestQueryNewsListFinished:(ASIHTTPRequest *)request;
-- (void)requestQueryNewsListFailed:(ASIHTTPRequest *)request;
+- (void)requestQueryNewsListFinished:(NSString *)jsonString;
+- (void)requestQueryNewsListFailed;
 
 @end
 
@@ -64,14 +64,12 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_NEWS_LIST_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestQueryNewsListFinished:) didFailSelector:@selector(requestQueryNewsListFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestQueryNewsListFinished:) didFailSelector:@selector(requestQueryNewsListFailed)];
 }
 
-- (void)requestQueryNewsListFinished:(ASIHTTPRequest *)request
+- (void)requestQueryNewsListFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -81,15 +79,11 @@
         [self setNavigationBarTitle:[NSString stringWithFormat:@"邮件(%i)", (int)[_mailArray count]]];
         [self.mailListTableView reloadData];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestQueryNewsListFailed:(ASIHTTPRequest *)request
+- (void)requestQueryNewsListFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 #pragma mark - UITableViewDataSource Methods

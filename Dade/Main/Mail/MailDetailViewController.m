@@ -15,8 +15,8 @@
 - (void)initView;
 
 - (void)queryMailInfoById;
-- (void)requestQueryMailInfoByIdFinished:(ASIHTTPRequest *)request;
-- (void)requestQueryMailInfoByIdFailed:(ASIHTTPRequest *)request;
+- (void)requestQueryMailInfoByIdFinished:(NSString *)jsonString;
+- (void)requestQueryMailInfoByIdFailed;
 
 @end
 
@@ -117,14 +117,12 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_MAIL_INFO_BY_ID_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestQueryMailInfoByIdFinished:) didFailSelector:@selector(requestQueryMailInfoByIdFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestQueryMailInfoByIdFinished:) didFailSelector:@selector(requestQueryMailInfoByIdFailed)];
 }
 
-- (void)requestQueryMailInfoByIdFinished:(ASIHTTPRequest *)request
+- (void)requestQueryMailInfoByIdFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -135,15 +133,11 @@
         self.timeLabel.text = [jsonDict stringForKey:@"operationdate"];
         self.contentLabel.text = [jsonDict stringForKey:@"content"];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestQueryMailInfoByIdFailed:(ASIHTTPRequest *)request
+- (void)requestQueryMailInfoByIdFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 @end

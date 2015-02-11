@@ -14,8 +14,8 @@
 - (BOOL)checkValidity;
 
 - (void)replyMail;
-- (void)requestReplyMailFinished:(ASIHTTPRequest *)request;
-- (void)requestReplyMailFailed:(ASIHTTPRequest *)request;
+- (void)requestReplyMailFinished:(NSString *)jsonString;
+- (void)requestReplyMailFailed;
 
 @end
 
@@ -186,15 +186,13 @@
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:REPLY_MAIL_REQUEST_URL];
         [request setPostBody:postData];
-        [self startRequest:request didFinishSelector:@selector(requestReplyMailFinished:) didFailSelector:@selector(requestReplyMailFailed:)];
+        [self startRequest:request didFinishSelector:@selector(requestReplyMailFinished:) didFailSelector:@selector(requestReplyMailFailed)];
     }
 }
 
-- (void)requestReplyMailFinished:(ASIHTTPRequest *)request
+- (void)requestReplyMailFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -207,15 +205,11 @@
             [self performSelector:@selector(pop)];
         }
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestReplyMailFailed:(ASIHTTPRequest *)request
+- (void)requestReplyMailFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 #pragma mark - UITextFieldDelegate Methods

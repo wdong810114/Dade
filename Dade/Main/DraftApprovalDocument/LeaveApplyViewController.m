@@ -15,8 +15,8 @@
 - (void)removePickerPanel;
 
 - (void)saveLeaveApplication;
-- (void)requestSaveLeaveApplicationFinished:(ASIHTTPRequest *)request;
-- (void)requestSaveLeaveApplicationFailed:(ASIHTTPRequest *)request;
+- (void)requestSaveLeaveApplicationFinished:(NSString *)jsonString;
+- (void)requestSaveLeaveApplicationFailed;
 
 @end
 
@@ -285,15 +285,13 @@
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:SAVE_LEAVE_APPLICATION_REQUEST_URL];
         [request setPostBody:postData];
-        [self startRequest:request didFinishSelector:@selector(requestSaveLeaveApplicationFinished:) didFailSelector:@selector(requestSaveLeaveApplicationFailed:)];
+        [self startRequest:request didFinishSelector:@selector(requestSaveLeaveApplicationFinished:) didFailSelector:@selector(requestSaveLeaveApplicationFailed)];
     }
 }
 
-- (void)requestSaveLeaveApplicationFinished:(ASIHTTPRequest *)request
+- (void)requestSaveLeaveApplicationFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -306,15 +304,11 @@
             [self performSelector:@selector(pop)];
         }
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestSaveLeaveApplicationFailed:(ASIHTTPRequest *)request
+- (void)requestSaveLeaveApplicationFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 #pragma mark - UIScrollViewDelegate Methods

@@ -17,20 +17,20 @@
 - (void)updateApprovalView;
 
 - (void)getIncomeViewById;
-- (void)requestGetIncomeViewByIdFinished:(ASIHTTPRequest *)request;
-- (void)requestGetIncomeViewByIdFailed:(ASIHTTPRequest *)request;
+- (void)requestGetIncomeViewByIdFinished:(NSString *)jsonString;
+- (void)requestGetIncomeViewByIdFailed;
 - (void)getDateFileTextById;
-- (void)requestGetDateFileTextByIdFinished:(ASIHTTPRequest *)request;
-- (void)requestGetDateFileTextByIdFailed:(ASIHTTPRequest *)request;
+- (void)requestGetDateFileTextByIdFinished:(NSString *)jsonString;
+- (void)requestGetDateFileTextByIdFailed;
 - (void)getFlowPathByFileIdInTable;
-- (void)requestGetFlowPathByFileIdInTableFinished:(ASIHTTPRequest *)request;
-- (void)requestGetFlowPathByFileIdInTableFailed:(ASIHTTPRequest *)request;
+- (void)requestGetFlowPathByFileIdInTableFinished:(NSString *)jsonString;
+- (void)requestGetFlowPathByFileIdInTableFailed;
 - (void)getNowFlowInfoByFlowId;
-- (void)requestGetNowFlowInfoByFlowIdFinished:(ASIHTTPRequest *)request;
-- (void)requestGetNowFlowInfoByFlowIdFailed:(ASIHTTPRequest *)request;
+- (void)requestGetNowFlowInfoByFlowIdFinished:(NSString *)jsonString;
+- (void)requestGetNowFlowInfoByFlowIdFailed;
 - (void)approvalFileInfo:(NSInteger)type;
-- (void)requestApprovalFileInfoFinished:(ASIHTTPRequest *)request;
-- (void)requestApprovalFileInfoFailed:(ASIHTTPRequest *)request;
+- (void)requestApprovalFileInfoFinished:(NSString *)jsonString;
+- (void)requestApprovalFileInfoFailed;
 
 @end
 
@@ -384,16 +384,14 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:GET_INCOME_VIEW_BY_ID_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestGetIncomeViewByIdFinished:) didFailSelector:@selector(requestGetIncomeViewByIdFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestGetIncomeViewByIdFinished:) didFailSelector:@selector(requestGetIncomeViewByIdFailed)];
 }
 
-- (void)requestGetIncomeViewByIdFinished:(ASIHTTPRequest *)request
+- (void)requestGetIncomeViewByIdFinished:(NSString *)jsonString
 {
     if([self isSingleRequesting]) {
         [self stopLoading];
     }
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -403,17 +401,13 @@
         self.quartersLabel.text = [jsonDict stringForKey:@"orgName"];
         self.contentLabel.text = [jsonDict stringForKey:@"content"];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestGetIncomeViewByIdFailed:(ASIHTTPRequest *)request
+- (void)requestGetIncomeViewByIdFailed
 {
     if([self isSingleRequesting]) {
         [self stopLoading];
     }
-    
-    [self requestDidFail:request];
 }
 
 - (void)getDateFileTextById
@@ -428,16 +422,14 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:GET_DATE_FILE_TEXT_BY_ID_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestGetDateFileTextByIdFinished:) didFailSelector:@selector(requestGetDateFileTextByIdFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestGetDateFileTextByIdFinished:) didFailSelector:@selector(requestGetDateFileTextByIdFailed)];
 }
 
-- (void)requestGetDateFileTextByIdFinished:(ASIHTTPRequest *)request
+- (void)requestGetDateFileTextByIdFinished:(NSString *)jsonString
 {
     if([self isSingleRequesting]) {
         [self stopLoading];
     }
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -445,17 +437,13 @@
         self.leaveDateLabel.text = [jsonDict stringForKey:@"char2"];
         self.leaveTypeLabel.text = [jsonDict stringForKey:@"char1"];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestGetDateFileTextByIdFailed:(ASIHTTPRequest *)request
+- (void)requestGetDateFileTextByIdFailed
 {
     if([self isSingleRequesting]) {
         [self stopLoading];
     }
-    
-    [self requestDidFail:request];
 }
 
 - (void)getFlowPathByFileIdInTable
@@ -470,16 +458,14 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:GET_FLOW_PATH_BY_FILE_ID_IN_TABLE_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestGetFlowPathByFileIdInTableFinished:) didFailSelector:@selector(requestGetFlowPathByFileIdInTableFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestGetFlowPathByFileIdInTableFinished:) didFailSelector:@selector(requestGetFlowPathByFileIdInTableFailed)];
 }
 
-- (void)requestGetFlowPathByFileIdInTableFinished:(ASIHTTPRequest *)request
+- (void)requestGetFlowPathByFileIdInTableFinished:(NSString *)jsonString
 {
     if([self isSingleRequesting]) {
         [self stopLoading];
     }
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -488,17 +474,13 @@
         
         [self getNowFlowInfoByFlowId];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestGetFlowPathByFileIdInTableFailed:(ASIHTTPRequest *)request
+- (void)requestGetFlowPathByFileIdInTableFailed
 {
     if([self isSingleRequesting]) {
         [self stopLoading];
     }
-    
-    [self requestDidFail:request];
 }
 
 - (void)getNowFlowInfoByFlowId
@@ -512,16 +494,14 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:GET_NOW_FLOW_INFO_BY_FLOW_ID_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestGetNowFlowInfoByFlowIdFinished:) didFailSelector:@selector(requestGetNowFlowInfoByFlowIdFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestGetNowFlowInfoByFlowIdFinished:) didFailSelector:@selector(requestGetNowFlowInfoByFlowIdFailed)];
 }
 
-- (void)requestGetNowFlowInfoByFlowIdFinished:(ASIHTTPRequest *)request
+- (void)requestGetNowFlowInfoByFlowIdFinished:(NSString *)jsonString
 {
     if([self isSingleRequesting]) {
         [self stopLoading];
     }
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -536,17 +516,13 @@
         [self updateButtonsView];
         [self updateApprovalView];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestGetNowFlowInfoByFlowIdFailed:(ASIHTTPRequest *)request
+- (void)requestGetNowFlowInfoByFlowIdFailed
 {
     if([self isSingleRequesting]) {
         [self stopLoading];
     }
-    
-    [self requestDidFail:request];
 }
 
 - (void)approvalFileInfo:(NSInteger)type    // 0：审核 1：退回
@@ -580,15 +556,13 @@
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:APPROVAL_FILE_INFO_REQUEST_URL];
         [request setPostBody:postData];
-        [self startRequest:request didFinishSelector:@selector(requestApprovalFileInfoFinished:) didFailSelector:@selector(requestApprovalFileInfoFailed:)];
+        [self startRequest:request didFinishSelector:@selector(requestApprovalFileInfoFinished:) didFailSelector:@selector(requestApprovalFileInfoFailed)];
     }
 }
 
-- (void)requestApprovalFileInfoFinished:(ASIHTTPRequest *)request
+- (void)requestApprovalFileInfoFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -601,15 +575,11 @@
             [self performSelector:@selector(pop)];
         }
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestApprovalFileInfoFailed:(ASIHTTPRequest *)request
+- (void)requestApprovalFileInfoFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 #pragma mark - UIScrollViewDelegate Methods

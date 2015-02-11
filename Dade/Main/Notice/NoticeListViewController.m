@@ -13,8 +13,8 @@
 @interface NoticeListViewController ()
 
 - (void)queryNoticeList;
-- (void)requestQueryNoticeListFinished:(ASIHTTPRequest *)request;
-- (void)requestQueryNoticeListFailed:(ASIHTTPRequest *)request;
+- (void)requestQueryNoticeListFinished:(NSString *)jsonString;
+- (void)requestQueryNoticeListFailed;
 
 @end
 
@@ -64,14 +64,12 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_NOTICE_LIST_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestQueryNoticeListFinished:) didFailSelector:@selector(requestQueryNoticeListFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestQueryNoticeListFinished:) didFailSelector:@selector(requestQueryNoticeListFailed)];
 }
 
-- (void)requestQueryNoticeListFinished:(ASIHTTPRequest *)request
+- (void)requestQueryNoticeListFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -81,15 +79,11 @@
         [self setNavigationBarTitle:[NSString stringWithFormat:@"通知(%i)", (int)[_noticeArray count]]];
         [self.noticeListTableView reloadData];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestQueryNoticeListFailed:(ASIHTTPRequest *)request
+- (void)requestQueryNoticeListFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 #pragma mark - UITableViewDataSource Methods

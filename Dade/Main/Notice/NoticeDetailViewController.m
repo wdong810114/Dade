@@ -13,11 +13,11 @@
 - (void)initView;
 
 - (void)showNoticeViewById;
-- (void)requestShowNoticeViewByIdFinished:(ASIHTTPRequest *)request;
-- (void)requestShowNoticeViewByIdFailed:(ASIHTTPRequest *)request;
+- (void)requestShowNoticeViewByIdFinished:(NSString *)jsonString;
+- (void)requestShowNoticeViewByIdFailed;
 - (void)showNoticeFlowInfoList;
-- (void)requestShowNoticeFlowInfoListFinished:(ASIHTTPRequest *)request;
-- (void)requestShowNoticeFlowInfoListFailed:(ASIHTTPRequest *)request;
+- (void)requestShowNoticeFlowInfoListFinished:(NSString *)jsonString;
+- (void)requestShowNoticeFlowInfoListFailed;
 
 @end
 
@@ -77,16 +77,14 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:SHOW_NOTICE_VIEW_BY_ID_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestShowNoticeViewByIdFinished:) didFailSelector:@selector(requestShowNoticeViewByIdFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestShowNoticeViewByIdFinished:) didFailSelector:@selector(requestShowNoticeViewByIdFailed)];
 }
 
-- (void)requestShowNoticeViewByIdFinished:(ASIHTTPRequest *)request
+- (void)requestShowNoticeViewByIdFinished:(NSString *)jsonString
 {
     if([self isSingleRequesting]) {
         [self stopLoading];
     }
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -97,17 +95,13 @@
         self.undertakerLabel.text = [jsonDict stringForKey:@"undertake"];
         self.contentLabel.text = [jsonDict stringForKey:@"content"];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestShowNoticeViewByIdFailed:(ASIHTTPRequest *)request
+- (void)requestShowNoticeViewByIdFailed
 {
     if([self isSingleRequesting]) {
         [self stopLoading];
     }
-    
-    [self requestDidFail:request];
 }
 
 - (void)showNoticeFlowInfoList
@@ -123,16 +117,14 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:SHOW_NOTICE_FLOW_INFO_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestShowNoticeFlowInfoListFinished:) didFailSelector:@selector(requestShowNoticeFlowInfoListFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestShowNoticeFlowInfoListFinished:) didFailSelector:@selector(requestShowNoticeFlowInfoListFailed)];
 }
 
-- (void)requestShowNoticeFlowInfoListFinished:(ASIHTTPRequest *)request
+- (void)requestShowNoticeFlowInfoListFinished:(NSString *)jsonString
 {
     if([self isSingleRequesting]) {
         [self stopLoading];
     }
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -145,17 +137,13 @@
         
         self.recipientsLabel.text = recipients;
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestShowNoticeFlowInfoListFailed:(ASIHTTPRequest *)request
+- (void)requestShowNoticeFlowInfoListFailed
 {
     if([self isSingleRequesting]) {
         [self stopLoading];
     }
-    
-    [self requestDidFail:request];
 }
 
 @end

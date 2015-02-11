@@ -13,8 +13,8 @@
 @interface SupervisionWorkContactListViewController ()
 
 - (void)querySupervisionWordList;
-- (void)requestQuerySupervisionWordListFinished:(ASIHTTPRequest *)request;
-- (void)requestQuerySupervisionWordListFailed:(ASIHTTPRequest *)request;
+- (void)requestQuerySupervisionWordListFinished:(NSString *)jsonString;
+- (void)requestQuerySupervisionWordListFailed;
 
 @end
 
@@ -64,14 +64,12 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_SUPERVISION_WORD_LIST_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestQuerySupervisionWordListFinished:) didFailSelector:@selector(requestQuerySupervisionWordListFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestQuerySupervisionWordListFinished:) didFailSelector:@selector(requestQuerySupervisionWordListFailed)];
 }
 
-- (void)requestQuerySupervisionWordListFinished:(ASIHTTPRequest *)request
+- (void)requestQuerySupervisionWordListFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -81,15 +79,11 @@
         [self setNavigationBarTitle:[NSString stringWithFormat:@"监督工作联系单(%i)", (int)[_workListArray count]]];
         [self.supervisionWorkContactListTableView reloadData];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestQuerySupervisionWordListFailed:(ASIHTTPRequest *)request
+- (void)requestQuerySupervisionWordListFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 #pragma mark - UITableViewDataSource Methods

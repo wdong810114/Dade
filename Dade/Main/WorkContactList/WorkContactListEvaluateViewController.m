@@ -11,8 +11,8 @@
 @interface WorkContactListEvaluateViewController ()
 
 - (void)evaluateTodoWork;
-- (void)requestEvaluateTodoWorkFinished:(ASIHTTPRequest *)request;
-- (void)requestEvaluateTodoWorkFailed:(ASIHTTPRequest *)request;
+- (void)requestEvaluateTodoWorkFinished:(NSString *)jsonString;
+- (void)requestEvaluateTodoWorkFailed;
 
 @end
 
@@ -170,14 +170,12 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:EVALUATION_TODO_WORK_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestEvaluateTodoWorkFinished:) didFailSelector:@selector(requestEvaluateTodoWorkFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestEvaluateTodoWorkFinished:) didFailSelector:@selector(requestEvaluateTodoWorkFailed)];
 }
 
-- (void)requestEvaluateTodoWorkFinished:(ASIHTTPRequest *)request
+- (void)requestEvaluateTodoWorkFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -191,15 +189,11 @@
             [self performSelector:@selector(pop)];
         }
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestEvaluateTodoWorkFailed:(ASIHTTPRequest *)request
+- (void)requestEvaluateTodoWorkFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 #pragma mark - UIScrollViewDelegate Methods

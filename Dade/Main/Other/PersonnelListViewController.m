@@ -14,8 +14,8 @@
 - (BOOL)checkSelected:(NSDictionary *)personnel;
 
 - (void)queryStaffListByName;
-- (void)requestQueryStaffListByNameFinished:(ASIHTTPRequest *)request;
-- (void)requestQueryStaffListByNameFailed:(ASIHTTPRequest *)request;
+- (void)requestQueryStaffListByNameFinished:(NSString *)jsonString;
+- (void)requestQueryStaffListByNameFailed;
 
 @end
 
@@ -203,14 +203,12 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_STAFF_LIST_BY_NAME_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestQueryStaffListByNameFinished:) didFailSelector:@selector(requestQueryStaffListByNameFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestQueryStaffListByNameFinished:) didFailSelector:@selector(requestQueryStaffListByNameFailed)];
 }
 
-- (void)requestQueryStaffListByNameFinished:(ASIHTTPRequest *)request
+- (void)requestQueryStaffListByNameFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -220,15 +218,11 @@
 
         [self.personnelListTableView reloadData];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestQueryStaffListByNameFailed:(ASIHTTPRequest *)request
+- (void)requestQueryStaffListByNameFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 #pragma mark - UIScrollViewDelegate Methods

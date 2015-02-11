@@ -14,8 +14,8 @@
 - (BOOL)checkValidity;
 
 - (void)draftNoticeInfo;
-- (void)requestDraftNoticeInfoFinished:(ASIHTTPRequest *)request;
-- (void)requestDraftNoticeInfoFailed:(ASIHTTPRequest *)request;
+- (void)requestDraftNoticeInfoFinished:(NSString *)jsonString;
+- (void)requestDraftNoticeInfoFailed;
 
 @end
 
@@ -253,15 +253,13 @@
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:DRAFT_NOTICE_INFO_REQUEST_URL];
         [request setPostBody:postData];
-        [self startRequest:request didFinishSelector:@selector(requestDraftNoticeInfoFinished:) didFailSelector:@selector(requestDraftNoticeInfoFailed:)];
+        [self startRequest:request didFinishSelector:@selector(requestDraftNoticeInfoFinished:) didFailSelector:@selector(requestDraftNoticeInfoFailed)];
     }
 }
 
-- (void)requestDraftNoticeInfoFinished:(ASIHTTPRequest *)request
+- (void)requestDraftNoticeInfoFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -274,15 +272,11 @@
             [self performSelector:@selector(pop)];
         }
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestDraftNoticeInfoFailed:(ASIHTTPRequest *)request
+- (void)requestDraftNoticeInfoFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 #pragma mark - UIScrollViewDelegate Methods

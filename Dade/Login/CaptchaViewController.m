@@ -15,11 +15,11 @@
 - (void)login;
 
 - (void)sendCaptcha;
-- (void)requestSendCaptchaFinished:(ASIHTTPRequest *)request;
-- (void)requestSendCaptchaFailed:(ASIHTTPRequest *)request;
+- (void)requestSendCaptchaFinished:(NSString *)jsonString;
+- (void)requestSendCaptchaFailed;
 - (void)queryOrganization;
-- (void)requestQueryOrganizationFinished:(ASIHTTPRequest *)request;
-- (void)requestQueryOrganizationFailed:(ASIHTTPRequest *)request;
+- (void)requestQueryOrganizationFinished:(NSString *)jsonString;
+- (void)requestQueryOrganizationFailed;
 
 @end
 
@@ -126,14 +126,12 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:SEND_TEXT_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestSendCaptchaFinished:) didFailSelector:@selector(requestSendCaptchaFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestSendCaptchaFinished:) didFailSelector:@selector(requestSendCaptchaFailed)];
 }
 
-- (void)requestSendCaptchaFinished:(ASIHTTPRequest *)request
+- (void)requestSendCaptchaFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -143,15 +141,11 @@
         self.captchaTextField.text = _captcha;
 // 测试---End
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestSendCaptchaFailed:(ASIHTTPRequest *)request
+- (void)requestSendCaptchaFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 - (void)queryOrganization
@@ -165,14 +159,12 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_ORGANIZATION_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestQueryOrganizationFinished:) didFailSelector:@selector(requestQueryOrganizationFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestQueryOrganizationFinished:) didFailSelector:@selector(requestQueryOrganizationFailed)];
 }
 
-- (void)requestQueryOrganizationFinished:(ASIHTTPRequest *)request
+- (void)requestQueryOrganizationFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -181,15 +173,11 @@
         
         [DadeAppDelegate performSelector:@selector(loginSuccessed)];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestQueryOrganizationFailed:(ASIHTTPRequest *)request
+- (void)requestQueryOrganizationFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 #pragma mark - UITextFieldDelegate Methods

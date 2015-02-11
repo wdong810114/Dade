@@ -16,14 +16,14 @@
 @interface WorkContactListViewController ()
 
 - (void)queryTodoWorkList;
-- (void)requestQueryTodoWorkListFinished:(ASIHTTPRequest *)request;
-- (void)requestQueryTodoWorkListFailed:(ASIHTTPRequest *)request;
+- (void)requestQueryTodoWorkListFinished:(NSString *)jsonString;
+- (void)requestQueryTodoWorkListFailed;
 - (void)querySupervisionWordList;
-- (void)requestQuerySupervisionWordListFinished:(ASIHTTPRequest *)request;
-- (void)requestQuerySupervisionWordListFailed:(ASIHTTPRequest *)request;
+- (void)requestQuerySupervisionWordListFinished:(NSString *)jsonString;
+- (void)requestQuerySupervisionWordListFailed;
 - (void)querySupervisionWordDraftList;
-- (void)requestQuerySupervisionWordDraftListFinished:(ASIHTTPRequest *)request;
-- (void)requestQuerySupervisionWordDraftListFailed:(ASIHTTPRequest *)request;
+- (void)requestQuerySupervisionWordDraftListFinished:(NSString *)jsonString;
+- (void)requestQuerySupervisionWordDraftListFailed;
 
 @end
 
@@ -80,13 +80,11 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_TODO_WORK_LIST_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestQueryTodoWorkListFinished:) didFailSelector:@selector(requestQueryTodoWorkListFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestQueryTodoWorkListFinished:) didFailSelector:@selector(requestQueryTodoWorkListFailed)];
 }
 
-- (void)requestQueryTodoWorkListFinished:(ASIHTTPRequest *)request
+- (void)requestQueryTodoWorkListFinished:(NSString *)jsonString
 {
-    NSString *jsonString = request.responseString;
-    
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonArray) {
@@ -94,13 +92,10 @@
         
         [self.workContactListTableView reloadData];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestQueryTodoWorkListFailed:(ASIHTTPRequest *)request
+- (void)requestQueryTodoWorkListFailed
 {
-    [self requestDidFail:request];
 }
 
 - (void)querySupervisionWordList
@@ -112,13 +107,11 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_SUPERVISION_WORD_LIST_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestQuerySupervisionWordListFinished:) didFailSelector:@selector(requestQuerySupervisionWordListFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestQuerySupervisionWordListFinished:) didFailSelector:@selector(requestQuerySupervisionWordListFailed)];
 }
 
-- (void)requestQuerySupervisionWordListFinished:(ASIHTTPRequest *)request
+- (void)requestQuerySupervisionWordListFinished:(NSString *)jsonString
 {
-    NSString *jsonString = request.responseString;
-    
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonArray) {
@@ -126,13 +119,10 @@
         
         [self.workContactListTableView reloadData];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestQuerySupervisionWordListFailed:(ASIHTTPRequest *)request
+- (void)requestQuerySupervisionWordListFailed
 {
-    [self requestDidFail:request];
 }
 
 - (void)querySupervisionWordDraftList
@@ -144,13 +134,11 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_SUPERVISION_WORD_DRAFT_LIST_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestQuerySupervisionWordDraftListFinished:) didFailSelector:@selector(requestQuerySupervisionWordDraftListFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestQuerySupervisionWordDraftListFinished:) didFailSelector:@selector(requestQuerySupervisionWordDraftListFailed)];
 }
 
-- (void)requestQuerySupervisionWordDraftListFinished:(ASIHTTPRequest *)request
+- (void)requestQuerySupervisionWordDraftListFinished:(NSString *)jsonString
 {
-    NSString *jsonString = request.responseString;
-    
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonArray) {
@@ -158,13 +146,10 @@
         
         [self.workContactListTableView reloadData];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestQuerySupervisionWordDraftListFailed:(ASIHTTPRequest *)request
+- (void)requestQuerySupervisionWordDraftListFailed
 {
-    [self requestDidFail:request];
 }
 
 #pragma mark - UITableViewDataSource Methods

@@ -15,8 +15,8 @@
 @interface TodoListViewController ()
 
 - (void)queryIncomeList;
-- (void)requestQueryIncomeListFinished:(ASIHTTPRequest *)request;
-- (void)requestQueryIncomeListFailed:(ASIHTTPRequest *)request;
+- (void)requestQueryIncomeListFinished:(NSString *)jsonString;
+- (void)requestQueryIncomeListFailed;
 
 @end
 
@@ -66,14 +66,12 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_INCOME_LIST_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestQueryIncomeListFinished:) didFailSelector:@selector(requestQueryIncomeListFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestQueryIncomeListFinished:) didFailSelector:@selector(requestQueryIncomeListFailed)];
 }
 
-- (void)requestQueryIncomeListFinished:(ASIHTTPRequest *)request
+- (void)requestQueryIncomeListFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -83,15 +81,11 @@
         [self setNavigationBarTitle:[NSString stringWithFormat:@"待办(%i)", (int)[_todoArray count]]];
         [self.todoListTableView reloadData];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestQueryIncomeListFailed:(ASIHTTPRequest *)request
+- (void)requestQueryIncomeListFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 #pragma mark - UITableViewDataSource Methods

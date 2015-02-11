@@ -15,11 +15,11 @@
 - (void)showDeleteAlert:(NSString *)title;
 
 - (void)querySupervisionWordDraftList;
-- (void)requestQuerySupervisionWordDraftListFinished:(ASIHTTPRequest *)request;
-- (void)requestQuerySupervisionWordDraftListFailed:(ASIHTTPRequest *)request;
+- (void)requestQuerySupervisionWordDraftListFinished:(NSString *)jsonString;
+- (void)requestQuerySupervisionWordDraftListFailed;
 - (void)deleteTodoWord;
-- (void)requestDeleteTodoWordFinished:(ASIHTTPRequest *)request;
-- (void)requestDeleteTodoWordFailed:(ASIHTTPRequest *)request;
+- (void)requestDeleteTodoWordFinished:(NSString *)jsonString;
+- (void)requestDeleteTodoWordFailed;
 
 @end
 
@@ -100,14 +100,12 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_SUPERVISION_WORD_DRAFT_LIST_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestQuerySupervisionWordDraftListFinished:) didFailSelector:@selector(requestQuerySupervisionWordDraftListFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestQuerySupervisionWordDraftListFinished:) didFailSelector:@selector(requestQuerySupervisionWordDraftListFailed)];
 }
 
-- (void)requestQuerySupervisionWordDraftListFinished:(ASIHTTPRequest *)request
+- (void)requestQuerySupervisionWordDraftListFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -117,15 +115,11 @@
         [self setNavigationBarTitle:[NSString stringWithFormat:@"工作联系单草稿(%i)", (int)[_draftArray count]]];
         [self.workContactListDraftsTableView reloadData];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestQuerySupervisionWordDraftListFailed:(ASIHTTPRequest *)request
+- (void)requestQuerySupervisionWordDraftListFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 - (void)deleteTodoWord
@@ -142,15 +136,13 @@
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:DELETE_TODO_WORD_REQUEST_URL];
         [request setPostBody:postData];
-        [self startRequest:request didFinishSelector:@selector(requestDeleteTodoWordFinished:) didFailSelector:@selector(requestDeleteTodoWordFailed:)];
+        [self startRequest:request didFinishSelector:@selector(requestDeleteTodoWordFinished:) didFailSelector:@selector(requestDeleteTodoWordFailed)];
     }
 }
 
-- (void)requestDeleteTodoWordFinished:(ASIHTTPRequest *)request
+- (void)requestDeleteTodoWordFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -168,15 +160,11 @@
             [self setNavigationBarTitle:[NSString stringWithFormat:@"工作联系单草稿(%i)", (int)[_draftArray count]]];
         }
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestDeleteTodoWordFailed:(ASIHTTPRequest *)request
+- (void)requestDeleteTodoWordFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 #pragma mark - UIAlertViewDelegate Methods

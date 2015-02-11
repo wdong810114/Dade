@@ -13,8 +13,8 @@
 @interface TodoWorkContactListViewController ()
 
 - (void)queryTodoWorkList;
-- (void)requestQueryTodoWorkListFinished:(ASIHTTPRequest *)request;
-- (void)requestQueryTodoWorkListFailed:(ASIHTTPRequest *)request;
+- (void)requestQueryTodoWorkListFinished:(NSString *)jsonString;
+- (void)requestQueryTodoWorkListFailed;
 
 @end
 
@@ -64,14 +64,12 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_TODO_WORK_LIST_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestQueryTodoWorkListFinished:) didFailSelector:@selector(requestQueryTodoWorkListFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestQueryTodoWorkListFinished:) didFailSelector:@selector(requestQueryTodoWorkListFailed)];
 }
 
-- (void)requestQueryTodoWorkListFinished:(ASIHTTPRequest *)request
+- (void)requestQueryTodoWorkListFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -81,15 +79,11 @@
         [self setNavigationBarTitle:[NSString stringWithFormat:@"待办工作联系单(%i)", (int)[_workListArray count]]];
         [self.todoWorkContactListTableView reloadData];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestQueryTodoWorkListFailed:(ASIHTTPRequest *)request
+- (void)requestQueryTodoWorkListFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 #pragma mark - UITableViewDataSource Methods

@@ -16,11 +16,11 @@
 - (void)updateRecipientsListView;
 
 - (void)queryTodoWorkInfo;
-- (void)requestQueryTodoWorkInfoFinished:(ASIHTTPRequest *)request;
-- (void)requestQueryTodoWorkInfoFailed:(ASIHTTPRequest *)request;
+- (void)requestQueryTodoWorkInfoFinished:(NSString *)jsonString;
+- (void)requestQueryTodoWorkInfoFailed;
 - (void)queryTodoNoticeList;
-- (void)requestQueryTodoNoticeListFinished:(ASIHTTPRequest *)request;
-- (void)requestQueryTodoNoticeListFailed:(ASIHTTPRequest *)request;
+- (void)requestQueryTodoNoticeListFinished:(NSString *)jsonString;
+- (void)requestQueryTodoNoticeListFailed;
 
 @end
 
@@ -166,16 +166,14 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_TODO_WORK_INFO_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestQueryTodoWorkInfoFinished:) didFailSelector:@selector(requestQueryTodoWorkInfoFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestQueryTodoWorkInfoFinished:) didFailSelector:@selector(requestQueryTodoWorkInfoFailed)];
 }
 
-- (void)requestQueryTodoWorkInfoFinished:(ASIHTTPRequest *)request
+- (void)requestQueryTodoWorkInfoFinished:(NSString *)jsonString
 {
     if([self isSingleRequesting]) {
         [self stopLoading];
     }
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -191,17 +189,13 @@
         self.subjectLabel.text = [jsonDict stringForKey:@"displayvalue"];
         self.contentLabel.text = [jsonDict stringForKey:@"content"];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestQueryTodoWorkInfoFailed:(ASIHTTPRequest *)request
+- (void)requestQueryTodoWorkInfoFailed
 {
     if([self isSingleRequesting]) {
         [self stopLoading];
     }
-    
-    [self requestDidFail:request];
 }
 
 - (void)queryTodoNoticeList
@@ -217,16 +211,14 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_TODO_NOTICE_LIST_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestQueryTodoNoticeListFinished:) didFailSelector:@selector(requestQueryTodoNoticeListFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestQueryTodoNoticeListFinished:) didFailSelector:@selector(requestQueryTodoNoticeListFailed)];
 }
 
-- (void)requestQueryTodoNoticeListFinished:(ASIHTTPRequest *)request
+- (void)requestQueryTodoNoticeListFinished:(NSString *)jsonString
 {
     if([self isSingleRequesting]) {
         [self stopLoading];
     }
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -235,17 +227,13 @@
         
         [self updateRecipientsListView];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestQueryTodoNoticeListFailed:(ASIHTTPRequest *)request
+- (void)requestQueryTodoNoticeListFailed
 {
     if([self isSingleRequesting]) {
         [self stopLoading];
     }
-    
-    [self requestDidFail:request];
 }
 
 #pragma mark - UITableViewDataSource Methods

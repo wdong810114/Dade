@@ -14,8 +14,8 @@
 - (BOOL)checkValidity;
 
 - (void)saveMail;
-- (void)requestSaveMailFinished:(ASIHTTPRequest *)request;
-- (void)requestSaveMailFailed:(ASIHTTPRequest *)request;
+- (void)requestSaveMailFinished:(NSString *)jsonString;
+- (void)requestSaveMailFailed;
 
 @end
 
@@ -225,15 +225,13 @@
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:SAVE_MAIL_REQUEST_URL];
         [request setPostBody:postData];
-        [self startRequest:request didFinishSelector:@selector(requestSaveMailFinished:) didFailSelector:@selector(requestSaveMailFailed:)];
+        [self startRequest:request didFinishSelector:@selector(requestSaveMailFinished:) didFailSelector:@selector(requestSaveMailFailed)];
     }
 }
 
-- (void)requestSaveMailFinished:(ASIHTTPRequest *)request
+- (void)requestSaveMailFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -246,15 +244,11 @@
             [self performSelector:@selector(pop)];
         }
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestSaveMailFailed:(ASIHTTPRequest *)request
+- (void)requestSaveMailFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 #pragma mark - UIScrollViewDelegate Methods

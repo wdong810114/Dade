@@ -17,14 +17,14 @@
 @interface MainViewController ()
 
 - (void)queryIncomeList;
-- (void)requestQueryIncomeListFinished:(ASIHTTPRequest *)request;
-- (void)requestQueryIncomeListFailed:(ASIHTTPRequest *)request;
+- (void)requestQueryIncomeListFinished:(NSString *)jsonString;
+- (void)requestQueryIncomeListFailed;
 - (void)queryNoticeList;
-- (void)requestQueryNoticeListFinished:(ASIHTTPRequest *)request;
-- (void)requestQueryNoticeListFailed:(ASIHTTPRequest *)request;
+- (void)requestQueryNoticeListFinished:(NSString *)jsonString;
+- (void)requestQueryNoticeListFailed;
 - (void)queryNewsList;
-- (void)requestQueryNewsListFinished:(ASIHTTPRequest *)request;
-- (void)requestQueryNewsListFailed:(ASIHTTPRequest *)request;
+- (void)requestQueryNewsListFinished:(NSString *)jsonString;
+- (void)requestQueryNewsListFailed;
 
 @end
 
@@ -86,13 +86,11 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_INCOME_LIST_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestQueryIncomeListFinished:) didFailSelector:@selector(requestQueryIncomeListFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestQueryIncomeListFinished:) didFailSelector:@selector(requestQueryIncomeListFailed)];
 }
 
-- (void)requestQueryIncomeListFinished:(ASIHTTPRequest *)request
+- (void)requestQueryIncomeListFinished:(NSString *)jsonString
 {
-    NSString *jsonString = request.responseString;
-    
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonArray) {
@@ -100,13 +98,10 @@
         
         [self.mainTableView reloadData];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestQueryIncomeListFailed:(ASIHTTPRequest *)request
+- (void)requestQueryIncomeListFailed
 {
-    [self requestDidFail:request];
 }
 
 - (void)queryNoticeList
@@ -118,13 +113,11 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_NOTICE_LIST_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestQueryNoticeListFinished:) didFailSelector:@selector(requestQueryNoticeListFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestQueryNoticeListFinished:) didFailSelector:@selector(requestQueryNoticeListFailed)];
 }
 
-- (void)requestQueryNoticeListFinished:(ASIHTTPRequest *)request
+- (void)requestQueryNoticeListFinished:(NSString *)jsonString
 {
-    NSString *jsonString = request.responseString;
-    
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonArray) {
@@ -132,13 +125,10 @@
 
         [self.mainTableView reloadData];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestQueryNoticeListFailed:(ASIHTTPRequest *)request
+- (void)requestQueryNoticeListFailed
 {
-    [self requestDidFail:request];
 }
 
 - (void)queryNewsList
@@ -150,13 +140,11 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_NEWS_LIST_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestQueryNewsListFinished:) didFailSelector:@selector(requestQueryNewsListFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestQueryNewsListFinished:) didFailSelector:@selector(requestQueryNewsListFailed)];
 }
 
-- (void)requestQueryNewsListFinished:(ASIHTTPRequest *)request
+- (void)requestQueryNewsListFinished:(NSString *)jsonString
 {
-    NSString *jsonString = request.responseString;
-    
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonArray) {
@@ -164,13 +152,10 @@
 
         [self.mainTableView reloadData];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestQueryNewsListFailed:(ASIHTTPRequest *)request
+- (void)requestQueryNewsListFailed
 {
-    [self requestDidFail:request];
 }
 
 #pragma mark - UITableViewDataSource Methods

@@ -18,8 +18,8 @@
 - (BOOL)checkValidity;
 
 - (void)login;
-- (void)requestLoginFinished:(ASIHTTPRequest *)request;
-- (void)requestLoginFailed:(ASIHTTPRequest *)request;
+- (void)requestLoginFinished:(NSString *)jsonString;
+- (void)requestLoginFailed;
 
 @end
 
@@ -123,16 +123,14 @@
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:LOGIN_USER_REQUEST_URL];
         [request setPostBody:postData];
-        [self startRequest:request didFinishSelector:@selector(requestLoginFinished:) didFailSelector:@selector(requestLoginFailed:)];
+        [self startRequest:request didFinishSelector:@selector(requestLoginFinished:) didFailSelector:@selector(requestLoginFailed)];
     }
 }
 
-- (void)requestLoginFinished:(ASIHTTPRequest *)request
+- (void)requestLoginFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
-    
+
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonDict) {
@@ -149,15 +147,11 @@
             self.codeLabel.text = [self randomCode];
         }
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestLoginFailed:(ASIHTTPRequest *)request
+- (void)requestLoginFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 #pragma mark - UITextFieldDelegate Methods

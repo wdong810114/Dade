@@ -14,8 +14,8 @@
 - (BOOL)checkValidity;
 
 - (void)saveNotPunch;
-- (void)requestSaveNotPunchFinished:(ASIHTTPRequest *)request;
-- (void)requestSaveNotPunchFailed:(ASIHTTPRequest *)request;
+- (void)requestSaveNotPunchFinished:(NSString *)jsonString;
+- (void)requestSaveNotPunchFailed;
 
 @end
 
@@ -201,15 +201,13 @@
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:SAVE_NOT_PUNCH_REQUEST_URL];
         [request setPostBody:postData];
-        [self startRequest:request didFinishSelector:@selector(requestSaveNotPunchFinished:) didFailSelector:@selector(requestSaveNotPunchFailed:)];
+        [self startRequest:request didFinishSelector:@selector(requestSaveNotPunchFinished:) didFailSelector:@selector(requestSaveNotPunchFailed)];
     }
 }
 
-- (void)requestSaveNotPunchFinished:(ASIHTTPRequest *)request
+- (void)requestSaveNotPunchFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -222,15 +220,11 @@
             [self performSelector:@selector(pop)];
         }
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestSaveNotPunchFailed:(ASIHTTPRequest *)request
+- (void)requestSaveNotPunchFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 #pragma mark - UIScrollViewDelegate Methods

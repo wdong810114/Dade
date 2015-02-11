@@ -14,11 +14,11 @@
 - (BOOL)checkValidity;
 
 - (void)queryTodoWorkInfo;
-- (void)requestQueryTodoWorkInfoFinished:(ASIHTTPRequest *)request;
-- (void)requestQueryTodoWorkInfoFailed:(ASIHTTPRequest *)request;
+- (void)requestQueryTodoWorkInfoFinished:(NSString *)jsonString;
+- (void)requestQueryTodoWorkInfoFailed;
 - (void)saveOrUpdateTodoWord:(NSInteger)type;
-- (void)requestSaveOrUpdateTodoWordFinished:(ASIHTTPRequest *)request;
-- (void)requestSaveOrUpdateTodoWordFailed:(ASIHTTPRequest *)request;
+- (void)requestSaveOrUpdateTodoWordFinished:(NSString *)jsonString;
+- (void)requestSaveOrUpdateTodoWordFailed;
 
 @end
 
@@ -249,14 +249,12 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_TODO_WORK_INFO_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestQueryTodoWorkInfoFinished:) didFailSelector:@selector(requestQueryTodoWorkInfoFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestQueryTodoWorkInfoFinished:) didFailSelector:@selector(requestQueryTodoWorkInfoFailed)];
 }
 
-- (void)requestQueryTodoWorkInfoFinished:(ASIHTTPRequest *)request
+- (void)requestQueryTodoWorkInfoFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -286,15 +284,11 @@
             _recipientIdArray = [[NSMutableArray alloc] initWithArray:[recipientsIds componentsSeparatedByString:@","]];
         }
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestQueryTodoWorkInfoFailed:(ASIHTTPRequest *)request
+- (void)requestQueryTodoWorkInfoFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 - (void)saveOrUpdateTodoWord:(NSInteger)type    // 0：草稿 1：发送
@@ -323,15 +317,13 @@
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:SAVE_OR_UPDATE_TODO_WORD_REQUEST_URL];
         [request setPostBody:postData];
-        [self startRequest:request didFinishSelector:@selector(requestSaveOrUpdateTodoWordFinished:) didFailSelector:@selector(requestSaveOrUpdateTodoWordFailed:)];
+        [self startRequest:request didFinishSelector:@selector(requestSaveOrUpdateTodoWordFinished:) didFailSelector:@selector(requestSaveOrUpdateTodoWordFailed)];
     }
 }
 
-- (void)requestSaveOrUpdateTodoWordFinished:(ASIHTTPRequest *)request
+- (void)requestSaveOrUpdateTodoWordFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -344,15 +336,11 @@
             [self performSelector:@selector(pop)];
         }
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestSaveOrUpdateTodoWordFailed:(ASIHTTPRequest *)request
+- (void)requestSaveOrUpdateTodoWordFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 #pragma mark - UIScrollViewDelegate Methods

@@ -17,14 +17,14 @@
 - (void)updateFlowListView;
 
 - (void)queryGzlxdFlowList;
-- (void)requestQueryGzlxdFlowListFinished:(ASIHTTPRequest *)request;
-- (void)requestQueryGzlxdFlowListFailed:(ASIHTTPRequest *)request;
+- (void)requestQueryGzlxdFlowListFinished:(NSString *)jsonString;
+- (void)requestQueryGzlxdFlowListFailed;
 - (void)replyTodoWork;
-- (void)requestReplyTodoWorkFinished:(ASIHTTPRequest *)request;
-- (void)requestReplyTodoWorkFailed:(ASIHTTPRequest *)request;
+- (void)requestReplyTodoWorkFinished:(NSString *)jsonString;
+- (void)requestReplyTodoWorkFailed;
 - (void)endTodoWord;
-- (void)requestEndTodoWordFinished:(ASIHTTPRequest *)request;
-- (void)requestEndTodoWordFailed:(ASIHTTPRequest *)request;
+- (void)requestEndTodoWordFinished:(NSString *)jsonString;
+- (void)requestEndTodoWordFailed;
 
 @end
 
@@ -279,14 +279,12 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_GZLXD_FLOW_LIST_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestQueryGzlxdFlowListFinished:) didFailSelector:@selector(requestQueryGzlxdFlowListFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestQueryGzlxdFlowListFinished:) didFailSelector:@selector(requestQueryGzlxdFlowListFailed)];
 }
 
-- (void)requestQueryGzlxdFlowListFinished:(ASIHTTPRequest *)request
+- (void)requestQueryGzlxdFlowListFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -295,15 +293,11 @@
         
         [self updateFlowListView];
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestQueryGzlxdFlowListFailed:(ASIHTTPRequest *)request
+- (void)requestQueryGzlxdFlowListFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 - (void)replyTodoWork
@@ -324,15 +318,13 @@
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:REPLY_TODO_WORK_REQUEST_URL];
         [request setPostBody:postData];
-        [self startRequest:request didFinishSelector:@selector(requestReplyTodoWorkFinished:) didFailSelector:@selector(requestReplyTodoWorkFailed:)];
+        [self startRequest:request didFinishSelector:@selector(requestReplyTodoWorkFinished:) didFailSelector:@selector(requestReplyTodoWorkFailed)];
     }
 }
 
-- (void)requestReplyTodoWorkFinished:(ASIHTTPRequest *)request
+- (void)requestReplyTodoWorkFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -346,15 +338,11 @@
             [self performSelector:@selector(pop)];
         }
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestReplyTodoWorkFailed:(ASIHTTPRequest *)request
+- (void)requestReplyTodoWorkFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 - (void)endTodoWord
@@ -368,14 +356,12 @@
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:END_TODO_WORD_REQUEST_URL];
     [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestEndTodoWordFinished:) didFailSelector:@selector(requestEndTodoWordFailed:)];
+    [self startRequest:request didFinishSelector:@selector(requestEndTodoWordFinished:) didFailSelector:@selector(requestEndTodoWordFailed)];
 }
 
-- (void)requestEndTodoWordFinished:(ASIHTTPRequest *)request
+- (void)requestEndTodoWordFinished:(NSString *)jsonString
 {
     [self stopLoading];
-    
-    NSString *jsonString = request.responseString;
     
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
@@ -389,15 +375,11 @@
             [self performSelector:@selector(pop)];
         }
     }
-    
-    [self requestDidFinish:request];
 }
 
-- (void)requestEndTodoWordFailed:(ASIHTTPRequest *)request
+- (void)requestEndTodoWordFailed
 {
     [self stopLoading];
-    
-    [self requestDidFail:request];
 }
 
 #pragma mark - UIScrollViewDelegate Methods

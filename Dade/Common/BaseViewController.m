@@ -10,6 +10,8 @@
 
 #import "BaseViewController.h"
 
+#import "DDRequest.h"
+
 @interface BaseViewController ()
 
 @end
@@ -144,33 +146,59 @@
     NSString *url = [NSString stringWithFormat:relativeURL, BASE_REQUEST_URL];
     NSURL *requstURL = [NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     ASIFormDataRequest *request = [[ASIFormDataRequest alloc] initWithURL:requstURL];
-    request.requestMethod = @"POST";
     
     return request;
 }
 
 - (void)startRequest:(ASIFormDataRequest *)request didFinishSelector:(SEL)didFinishSelector didFailSelector:(SEL)didFailSelector
 {
-    [_requestArray addObject:request];
+    DDRequest *requestObj = [[DDRequest alloc] init];
+    requestObj.request = request;
+    requestObj.didFinishSelector = didFinishSelector;
+    requestObj.didFailSelector = didFailSelector;
+    [_requestArray addObject:requestObj];
     
     [DadeAppDelegate.engine appendHttpRequest:request
                                      delegate:self
-                            didFinishSelector:didFinishSelector
-                              didFailSelector:didFailSelector];
+                            didFinishSelector:@selector(requestDidFinish:)
+                              didFailSelector:@selector(requestDidFail:)];
 }
 
 - (void)requestDidFinish:(ASIHTTPRequest *)request
 {
-    [request clearDelegatesAndCancel];
-    [_requestArray removeObject:request];
+    DDRequest *ownRequestObj;
+    for(DDRequest *requestObj in _requestArray) {
+        if(requestObj.request == request) {
+            NSString *jsonString = request.responseString;
+            [self performSelector:requestObj.didFinishSelector withObject:jsonString];
+            
+            ownRequestObj = requestObj;
+            break;
+        }
+    }
+
+    if(ownRequestObj) {
+        [_requestArray removeObject:ownRequestObj];
+    }
 }
 
 - (void)requestDidFail:(ASIHTTPRequest *)request
 {
-    [self showAlert:@"网络连接不可用，请检查你的网络连接"];
+    DDRequest *ownRequestObj;
+    for(DDRequest *requestObj in _requestArray) {
+        if(requestObj.request == request) {
+            [self performSelector:requestObj.didFailSelector];
+            
+            ownRequestObj = requestObj;
+            break;
+        }
+    }
+
+    if(ownRequestObj) {
+        [_requestArray removeObject:ownRequestObj];
+    }
     
-    [request clearDelegatesAndCancel];
-    [_requestArray removeObject:request];
+    [self showAlert:@"网络连接不可用，请检查你的网络连接"];
 }
 
 - (BOOL)isRequesting
