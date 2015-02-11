@@ -183,6 +183,8 @@
             _willDeleteIndexPath = nil;
             
             [self setNavigationBarTitle:[NSString stringWithFormat:@"工作联系单草稿(%i)", (int)[_draftArray count]]];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:DDWorkContactListNumberRefreshNotification object:nil];
         }
     }
 }
@@ -226,6 +228,10 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if([self isRequesting]) {
+        return NO;
+    }
+    
     return YES;
 }
 
@@ -247,6 +253,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if([self isRequesting]) {
+        return;
+    }
 
     NSDictionary *draft = [_draftArray objectAtIndex:indexPath.row];
     

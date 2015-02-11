@@ -61,11 +61,6 @@
     self.workContactListTableView.backgroundView = nil;
     self.workContactListTableView.backgroundColor = TABLEVIEW_BG_COLOR;
     self.workContactListTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     
     [self queryTodoWorkList];
     [self querySupervisionWordList];
