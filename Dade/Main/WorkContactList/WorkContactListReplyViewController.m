@@ -334,7 +334,6 @@
             NSString *ajaxMessage = [jsonDict stringForKey:@"ajax_message"];
             [self showAlert:ajaxMessage];
         } else {
-            [[NSNotificationCenter defaultCenter] postNotificationName:DDWorkContactListNeedRefreshNotification object:nil];
             [self performSelector:@selector(pop)];
         }
     }
@@ -347,6 +346,8 @@
 
 - (void)endTodoWord
 {
+    [self.view endEditing:YES];
+    
     [self startLoading];
     
 //    noticeStaffId：工作联系单用户关系ID
@@ -371,7 +372,7 @@
             NSString *ajaxMessage = [jsonDict stringForKey:@"ajax_message"];
             [self showAlert:ajaxMessage];
         } else {
-            [[NSNotificationCenter defaultCenter] postNotificationName:DDWorkContactListNeedRefreshNotification object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:DDWorkContactListDetailRefreshNotification object:nil];
             [self performSelector:@selector(pop)];
         }
     }

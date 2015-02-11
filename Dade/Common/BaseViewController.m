@@ -20,9 +20,6 @@
 
 - (void)dealloc
 {
-    for(ASIHTTPRequest *request in _requestArray) {
-        [request clearDelegatesAndCancel];
-    }
     [_requestArray removeAllObjects];
 }
 

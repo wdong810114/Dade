@@ -35,7 +35,7 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:DDWorkContactListNeedRefreshNotification
+                                                    name:DDWorkContactListDetailRefreshNotification
                                                   object:nil];
 }
 
@@ -45,7 +45,7 @@
     if(self) {
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(refreshView:)
-                                                     name:DDWorkContactListNeedRefreshNotification
+                                                     name:DDWorkContactListDetailRefreshNotification
                                                    object:nil];
     }
     
@@ -103,7 +103,6 @@
 
 - (void)refreshView:(NSNotification *)notification
 {
-    [self queryTodoWorkInfo];
     [self queryTodoNoticeList];
 }
 
@@ -127,18 +126,19 @@
 {
     if(_heightConstraint) {
         [self.recipientsListView removeConstraint:_heightConstraint];
+        _heightConstraint = nil;
     }
     
     CGFloat totalHeight = [_recipientArray count] * TABLEVIEW_CELL_HEIGHT;
     
-    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.recipientsListView
-                                                                  attribute:NSLayoutAttributeHeight
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:nil
-                                                                  attribute:NSLayoutAttributeNotAnAttribute
-                                                                 multiplier:1
-                                                                   constant:totalHeight];
-    [self.recipientsListView addConstraint:constraint];
+    _heightConstraint = [NSLayoutConstraint constraintWithItem:self.recipientsListView
+                                                     attribute:NSLayoutAttributeHeight
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:nil
+                                                     attribute:NSLayoutAttributeNotAnAttribute
+                                                    multiplier:1
+                                                      constant:totalHeight];
+    [self.recipientsListView addConstraint:_heightConstraint];
     
     [self.recipientsListView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     

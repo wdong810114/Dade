@@ -154,23 +154,27 @@
 
 - (void)evaluateTodoWork
 {
-    [self startLoading];
-    
+    if([self checkValidity]) {
+        [self.view endEditing:YES];
+        
+        [self startLoading];
+        
 //    workId：工作联系单Id
 //    nsId：工作联系单人员关系表ID
 //    score：评价分数
 //    assess：评价内容
 //    endMark：完结工作联系单标示（0：不完结 1：完结）
 //    staffId：用户ID
-    
-    NSString *endMark = self.isLastEvaluate ? @"1" : @"0";
-    
-    NSString *postString = [NSString stringWithFormat:@"{workId:'%@',nsId:'%@',score:'%@',assess:'%@',endMark:'%@',staffId:'%@'}", self.workId, self.relationId, self.scoreTextField.text, self.contentTextView.text, endMark, DadeAppDelegate.userInfo.staffId];
-    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    ASIFormDataRequest *request = [self requestWithRelativeURL:EVALUATION_TODO_WORK_REQUEST_URL];
-    [request setPostBody:postData];
-    [self startRequest:request didFinishSelector:@selector(requestEvaluateTodoWorkFinished:) didFailSelector:@selector(requestEvaluateTodoWorkFailed)];
+        
+        NSString *endMark = self.isLastEvaluate ? @"1" : @"0";
+        
+        NSString *postString = [NSString stringWithFormat:@"{workId:'%@',nsId:'%@',score:'%@',assess:'%@',endMark:'%@',staffId:'%@'}", self.workId, self.relationId, self.scoreTextField.text, self.contentTextView.text, endMark, DadeAppDelegate.userInfo.staffId];
+        NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        ASIFormDataRequest *request = [self requestWithRelativeURL:EVALUATION_TODO_WORK_REQUEST_URL];
+        [request setPostBody:postData];
+        [self startRequest:request didFinishSelector:@selector(requestEvaluateTodoWorkFinished:) didFailSelector:@selector(requestEvaluateTodoWorkFailed)];
+    }
 }
 
 - (void)requestEvaluateTodoWorkFinished:(NSString *)jsonString
@@ -185,7 +189,6 @@
             NSString *ajaxMessage = [jsonDict stringForKey:@"ajax_message"];
             [self showAlert:ajaxMessage];
         } else {
-            [[NSNotificationCenter defaultCenter] postNotificationName:DDWorkContactListNeedRefreshNotification object:nil];
             [self performSelector:@selector(pop)];
         }
     }

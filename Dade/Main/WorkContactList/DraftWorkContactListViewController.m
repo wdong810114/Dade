@@ -333,6 +333,7 @@
             NSString *ajaxMessage = [jsonDict stringForKey:@"ajax_message"];
             [self showAlert:ajaxMessage];
         } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:DDWorkContactListNumberRefreshNotification object:nil];
             [self performSelector:@selector(pop)];
         }
     }
@@ -362,8 +363,10 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if(textField == self.dateTextField) {
+        [self.dateTextField resignFirstResponder];
         [self.smsAlertTextField becomeFirstResponder];
     } else if(textField == self.smsAlertTextField) {
+        [self.smsAlertTextField resignFirstResponder];
         [self.subjectTextField becomeFirstResponder];
     } else if(textField == self.subjectTextField) {
         [self.subjectTextField resignFirstResponder];
