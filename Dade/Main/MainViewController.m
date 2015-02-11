@@ -52,8 +52,8 @@
     
     if(DadeAppDelegate.userInfo) {
         NSTimeInterval currentTimeInterval = [[NSDate date] timeIntervalSince1970];
-        if(currentTimeInterval - _lastTimeInterval > 30 * 60) {
-            // 间隔超过30分钟才刷新
+        if(currentTimeInterval - _lastTimeInterval > 10 * 60) {
+            // 间隔超过10分钟才刷新
             
             _lastTimeInterval = currentTimeInterval;
             
@@ -173,6 +173,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MainCellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.textLabel.font = FONT(16.0);
     }
     
     switch (indexPath.row) {
