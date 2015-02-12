@@ -916,7 +916,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "481951a8-d022-48b0-807c-30c6e8f78dca";
+				PROVISIONING_PROFILE = "7fa0fb5b-5e99-4f31-8de8-389c9084dfc7";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -952,7 +952,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "481951a8-d022-48b0-807c-30c6e8f78dca";
+				PROVISIONING_PROFILE = "7fa0fb5b-5e99-4f31-8de8-389c9084dfc7";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -974,7 +974,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "481951a8-d022-48b0-807c-30c6e8f78dca";
+				PROVISIONING_PROFILE = "7fa0fb5b-5e99-4f31-8de8-389c9084dfc7";
 			};
 			name = Debug;
 		};
@@ -994,7 +994,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "481951a8-d022-48b0-807c-30c6e8f78dca";
+				PROVISIONING_PROFILE = "7fa0fb5b-5e99-4f31-8de8-389c9084dfc7";
 			};
 			name = Release;
 		};
@@ -1013,6 +1013,7 @@
 				INFOPLIST_FILE = DadeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7fa0fb5b-5e99-4f31-8de8-389c9084dfc7";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dade.app/Dade";
 			};
 			name = Debug;
@@ -1028,6 +1029,7 @@
 				INFOPLIST_FILE = DadeTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7fa0fb5b-5e99-4f31-8de8-389c9084dfc7";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dade.app/Dade";
 			};
 			name = Release;
