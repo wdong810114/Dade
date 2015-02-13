@@ -29,7 +29,7 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入题目" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A8F-pz-JeT" userLabel="SubjectTextField">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入主题" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A8F-pz-JeT" userLabel="SubjectTextField">
                             <rect key="frame" x="47" y="7" width="253" height="19"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="19" id="cRf-2n-Vce"/>

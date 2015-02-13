@@ -224,7 +224,7 @@
     }
     
     if([[Util trimString:self.subjectTextField.text] isEqualToString:@""]) {
-        [self showAlert:@"题目不能为空"];
+        [self showAlert:@"主题不能为空"];
 
         return NO;
     }
