@@ -196,8 +196,13 @@
         return NO;
     }
     
-    if([[Util trimString:self.subjectTextField.text] isEqualToString:@""] ||
-       [[Util trimString:self.contentTextView.text] isEqualToString:@""]) {
+    if([[Util trimString:self.subjectTextField.text] isEqualToString:@""]) {
+        [self showAlert:@"主题不能为空"];
+        
+        return NO;
+    }
+    
+    if([[Util trimString:self.contentTextView.text] isEqualToString:@""]) {
         [self showAlert:@"内容不能为空"];
         
         return NO;
