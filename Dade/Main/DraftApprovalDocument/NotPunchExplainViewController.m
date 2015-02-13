@@ -171,9 +171,14 @@
         return NO;
     }
     
-    if([[Util trimString:self.notPunchTextView.text] isEqualToString:@""] ||
-       [[Util trimString:self.explainTextView.text] isEqualToString:@""]) {
-        [self showAlert:@"内容不能为空"];
+    if([[Util trimString:self.notPunchTextView.text] isEqualToString:@""]) {
+        [self showAlert:@"未打卡说明不能为空"];
+        
+        return NO;
+    }
+    
+    if([[Util trimString:self.explainTextView.text] isEqualToString:@""]) {
+        [self showAlert:@"审批流转说明不能为空"];
         
         return NO;
     }

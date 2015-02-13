@@ -238,9 +238,14 @@
         return NO;
     }
     
-    if([[Util trimString:self.contentTextView.text] isEqualToString:@""] ||
-       [[Util trimString:self.explainTextView.text] isEqualToString:@""]) {
+    if([[Util trimString:self.contentTextView.text] isEqualToString:@""]) {
         [self showAlert:@"内容不能为空"];
+        
+        return NO;
+    }
+    
+    if([[Util trimString:self.explainTextView.text] isEqualToString:@""]) {
+        [self showAlert:@"审批流转说明不能为空"];
         
         return NO;
     }
