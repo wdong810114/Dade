@@ -157,6 +157,9 @@
     if([self.leaveDateTextField isFirstResponder]) {
         maxOffsetY = self.leaveDateView.frame.origin.y;
         minOffsetY = self.leaveDateView.frame.origin.y + self.leaveDateView.frame.size.height + keyboardFrame.size.height - self.leaveApplyScrollView.frame.size.height;
+    } else if([self.leaveDaysTextField isFirstResponder]) {
+        maxOffsetY = self.leaveDaysView.frame.origin.y;
+        minOffsetY = self.leaveDaysView.frame.origin.y + self.leaveDaysView.frame.size.height + keyboardFrame.size.height - self.leaveApplyScrollView.frame.size.height;
     } else if([self.contentTextView isFirstResponder]) {
         maxOffsetY = self.contentView.frame.origin.y;
         minOffsetY = self.contentView.frame.origin.y + self.contentView.frame.size.height + keyboardFrame.size.height - self.leaveApplyScrollView.frame.size.height;
@@ -238,6 +241,12 @@
         return NO;
     }
     
+    if([[Util trimString:self.leaveDaysTextField.text] isEqualToString:@""]) {
+        [self showAlert:@"请假天数不能为空"];
+        
+        return NO;
+    }
+    
     if([[Util trimString:self.contentTextView.text] isEqualToString:@""]) {
         [self showAlert:@"内容不能为空"];
         
@@ -288,10 +297,11 @@
 //        orgId：组织架构Id
 //        depOrgId：部门组织架构ID
 //        userId：用户Id
+//        ruzhiDate：请假天数
         
         NSString *leavesTypeId = [NSString stringWithFormat:@"%i", (int)[_leaveTypes indexOfObject:self.leaveTypeLabel.text] + 1];
         
-        NSString *postString = [NSString stringWithFormat:@"{leavesTypeId:'%@',leavesTypeName:'%@',leavesTypeContent:'',leavesDate:'%@',content:'%@',exaContent:'%@',orgId:'%@',depOrgId:'%@',userId:'%@'}", leavesTypeId, self.leaveTypeLabel.text, self.leaveDateTextField.text, self.contentTextView.text, self.explainTextView.text, DadeAppDelegate.userInfo.orgId, DadeAppDelegate.userInfo.depOrgId, DadeAppDelegate.userInfo.staffId];
+        NSString *postString = [NSString stringWithFormat:@"{leavesTypeId:'%@',leavesTypeName:'%@',leavesTypeContent:'',leavesDate:'%@',content:'%@',exaContent:'%@',orgId:'%@',depOrgId:'%@',userId:'%@',ruzhiDate:'%@'}", leavesTypeId, self.leaveTypeLabel.text, self.leaveDateTextField.text, self.contentTextView.text, self.explainTextView.text, DadeAppDelegate.userInfo.orgId, DadeAppDelegate.userInfo.depOrgId, DadeAppDelegate.userInfo.staffId, self.leaveDaysTextField.text];
         NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:SAVE_LEAVE_APPLICATION_REQUEST_URL];
@@ -346,6 +356,8 @@
 {
     if(textField == self.leaveDateTextField) {
         [self.leaveDateTextField resignFirstResponder];
+    } else if(textField == self.leaveDaysTextField) {
+        [self.leaveDaysTextField resignFirstResponder];
     }
     
     return YES;

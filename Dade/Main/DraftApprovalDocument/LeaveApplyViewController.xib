@@ -19,6 +19,8 @@
                 <outlet property="leaveApplyScrollView" destination="Iag-wc-W4l" id="gf9-91-xqP"/>
                 <outlet property="leaveDateTextField" destination="1J2-rb-zW9" id="iyz-op-5ja"/>
                 <outlet property="leaveDateView" destination="Ujg-Gr-AiZ" id="0Vq-Ss-5Mu"/>
+                <outlet property="leaveDaysTextField" destination="KvU-iv-hGR" id="Xg0-oc-s98"/>
+                <outlet property="leaveDaysView" destination="8In-Wu-l2u" id="MrB-mR-Yyf"/>
                 <outlet property="leaveTypeLabel" destination="cIS-9g-250" id="hxP-MK-VsN"/>
                 <outlet property="leaveTypeView" destination="oja-9c-ZHx" id="iNd-mp-lVl"/>
                 <outlet property="positionLabel" destination="pZU-Bq-9gq" id="gH4-2C-Ioy"/>
@@ -219,8 +221,39 @@
                                 <constraint firstAttribute="trailing" secondItem="xX5-Ul-cbG" secondAttribute="trailing" constant="5" id="tea-ue-sPy"/>
                             </constraints>
                         </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8In-Wu-l2u" userLabel="LeaveDaysView">
+                            <rect key="frame" x="10" y="303" width="300" height="33"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请假天数：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nl8-BO-hRU" userLabel="LTitleLabel">
+                                    <rect key="frame" x="5" y="8" width="70" height="17"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入请假天数" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="KvU-iv-hGR" userLabel="LeaveDaysTextField">
+                                    <rect key="frame" x="75" y="7" width="225" height="19"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="19" id="Rx0-ck-efW"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="Gm1-uU-1Iw"/>
+                                    </connections>
+                                </textField>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="nl8-BO-hRU" firstAttribute="leading" secondItem="8In-Wu-l2u" secondAttribute="leading" constant="5" id="9qw-nY-p4a"/>
+                                <constraint firstItem="KvU-iv-hGR" firstAttribute="top" secondItem="8In-Wu-l2u" secondAttribute="top" constant="7" id="Gxe-1e-TPz"/>
+                                <constraint firstAttribute="trailing" secondItem="KvU-iv-hGR" secondAttribute="trailing" id="NW9-TV-8IC"/>
+                                <constraint firstAttribute="centerY" secondItem="KvU-iv-hGR" secondAttribute="centerY" id="fug-nO-QXw"/>
+                                <constraint firstItem="KvU-iv-hGR" firstAttribute="leading" secondItem="nl8-BO-hRU" secondAttribute="trailing" id="hKi-h3-wEy"/>
+                                <constraint firstItem="nl8-BO-hRU" firstAttribute="centerY" secondItem="8In-Wu-l2u" secondAttribute="centerY" id="weY-og-w3a"/>
+                            </constraints>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rn0-Dj-t2V" userLabel="ContentView">
-                            <rect key="frame" x="10" y="307" width="300" height="127"/>
+                            <rect key="frame" x="10" y="351" width="300" height="127"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="内容：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w7a-y9-VAi" userLabel="CTitleLabel">
                                     <rect key="frame" x="5" y="5" width="42" height="17"/>
@@ -272,7 +305,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EgJ-jY-LvK" userLabel="ExplainView">
-                            <rect key="frame" x="10" y="449" width="300" height="127"/>
+                            <rect key="frame" x="10" y="493" width="300" height="127"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="审批流转说明：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCB-En-xuA" userLabel="ETitleLabel">
                                     <rect key="frame" x="5" y="5" width="98" height="17"/>
@@ -324,7 +357,7 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="659-Dh-w5E" userLabel="ReportButton">
-                            <rect key="frame" x="10" y="591" width="300" height="44"/>
+                            <rect key="frame" x="10" y="635" width="300" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="1z6-uo-xUF"/>
                             </constraints>
@@ -356,6 +389,7 @@
                         <constraint firstItem="EgJ-jY-LvK" firstAttribute="width" secondItem="yh8-or-0UM" secondAttribute="width" id="GEc-hq-wXC"/>
                         <constraint firstItem="oja-9c-ZHx" firstAttribute="leading" secondItem="yh8-or-0UM" secondAttribute="leading" id="IB3-qP-aDB"/>
                         <constraint firstItem="Rn0-Dj-t2V" firstAttribute="width" secondItem="yh8-or-0UM" secondAttribute="width" id="L4A-c9-CHs"/>
+                        <constraint firstItem="yh8-or-0UM" firstAttribute="leading" secondItem="8In-Wu-l2u" secondAttribute="leading" id="OEw-cG-hpa"/>
                         <constraint firstAttribute="bottom" secondItem="ZdR-a1-a9U" secondAttribute="bottom" constant="15" id="PNJ-34-0ZE"/>
                         <constraint firstItem="gEw-vo-Bxu" firstAttribute="leading" secondItem="yh8-or-0UM" secondAttribute="leading" id="Pa3-1q-Rpd"/>
                         <constraint firstItem="oja-9c-ZHx" firstAttribute="width" secondItem="yh8-or-0UM" secondAttribute="width" id="Q15-TM-6Oz"/>
@@ -364,14 +398,16 @@
                         <constraint firstItem="oja-9c-ZHx" firstAttribute="top" secondItem="Ujg-Gr-AiZ" secondAttribute="bottom" constant="15" id="TWc-MU-NL1"/>
                         <constraint firstItem="EgJ-jY-LvK" firstAttribute="top" secondItem="Rn0-Dj-t2V" secondAttribute="bottom" constant="15" id="TWf-fG-Pha"/>
                         <constraint firstItem="p75-dP-QYD" firstAttribute="leading" secondItem="yh8-or-0UM" secondAttribute="leading" id="V9D-eE-JlS"/>
+                        <constraint firstItem="8In-Wu-l2u" firstAttribute="top" secondItem="oja-9c-ZHx" secondAttribute="bottom" constant="15" id="Vtr-cN-DlB"/>
                         <constraint firstItem="p75-dP-QYD" firstAttribute="top" secondItem="WcY-Pb-d2X" secondAttribute="bottom" constant="15" id="dy3-dm-Kr0"/>
                         <constraint firstItem="EgJ-jY-LvK" firstAttribute="leading" secondItem="yh8-or-0UM" secondAttribute="leading" id="f9Y-YT-ndA"/>
                         <constraint firstItem="ZdR-a1-a9U" firstAttribute="top" secondItem="659-Dh-w5E" secondAttribute="bottom" id="gtf-eR-TaE"/>
                         <constraint firstItem="Ujg-Gr-AiZ" firstAttribute="top" secondItem="p75-dP-QYD" secondAttribute="bottom" constant="15" id="hts-UM-1B6"/>
                         <constraint firstItem="Ujg-Gr-AiZ" firstAttribute="width" secondItem="yh8-or-0UM" secondAttribute="width" id="kKR-Ml-0kb"/>
                         <constraint firstItem="WcY-Pb-d2X" firstAttribute="width" secondItem="yh8-or-0UM" secondAttribute="width" id="nhK-cM-pUr"/>
+                        <constraint firstItem="yh8-or-0UM" firstAttribute="width" secondItem="8In-Wu-l2u" secondAttribute="width" id="okq-rH-ELg"/>
+                        <constraint firstItem="Rn0-Dj-t2V" firstAttribute="top" secondItem="8In-Wu-l2u" secondAttribute="bottom" constant="15" id="re6-nV-cTp"/>
                         <constraint firstItem="ZdR-a1-a9U" firstAttribute="width" secondItem="yh8-or-0UM" secondAttribute="width" id="ryp-md-6W5"/>
-                        <constraint firstItem="Rn0-Dj-t2V" firstAttribute="top" secondItem="oja-9c-ZHx" secondAttribute="bottom" constant="19" id="wR2-jD-y8O"/>
                         <constraint firstItem="659-Dh-w5E" firstAttribute="leading" secondItem="yh8-or-0UM" secondAttribute="leading" id="y1M-Yo-W55"/>
                     </constraints>
                     <connections>

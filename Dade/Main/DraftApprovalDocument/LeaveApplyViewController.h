@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *leaveDateTextField;
 @property (weak, nonatomic) IBOutlet UIView *leaveTypeView;
 @property (weak, nonatomic) IBOutlet UILabel *leaveTypeLabel;
+@property (weak, nonatomic) IBOutlet UIView *leaveDaysView;
+@property (weak, nonatomic) IBOutlet UITextField *leaveDaysTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *arrowImageView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UITextView *contentTextView;
