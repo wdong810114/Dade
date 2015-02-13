@@ -217,6 +217,12 @@
 
 - (BOOL)checkValidity
 {
+    if([[Util trimString:self.senderLabel.text] isEqualToString:@""]) {
+        [self showAlert:@"收件人不能为空"];
+        
+        return NO;
+    }
+    
     if([[Util trimString:self.dateTextField.text] isEqualToString:@""]) {
         [self showAlert:@"指定完成时间不能为空"];
         
