@@ -133,6 +133,13 @@
     NSArray *buttonArray = [NSArray arrayWithObjects:flexibleSpace, doneButton, nil];
     inputAccessoryView.items = buttonArray;
     self.contentTextView.inputAccessoryView = inputAccessoryView;
+    
+    if(![[Util trimString:self.evaluateScore] isEqualToString:@""] && ![[Util trimString:self.evaluateContent] isEqualToString:@""]) {
+        self.scoreTextField.text = self.evaluateScore;
+        self.contentTextView.text = self.evaluateContent;
+        self.placeholderLabel.alpha = 0.0;
+        self.evaluateButton.alpha = 0.0;
+    }
 }
 
 - (BOOL)checkValidity
@@ -145,6 +152,12 @@
     
     if([[Util trimString:self.contentTextView.text] isEqualToString:@""]) {
         [self showAlert:@"内容不能为空"];
+        
+        return NO;
+    }
+    
+    if(![Util isValidScore:self.scoreTextField.text]) {
+        [self showAlert:@"分数不合法"];
         
         return NO;
     }
@@ -189,7 +202,7 @@
             NSString *ajaxMessage = [jsonDict stringForKey:@"ajax_message"];
             [self showAlert:ajaxMessage];
         } else {
-            [self performSelector:@selector(pop)];
+            [[NSNotificationCenter defaultCenter] postNotificationName:DDWorkContactListDetailRefreshNotification object:nil];
         }
     }
 }

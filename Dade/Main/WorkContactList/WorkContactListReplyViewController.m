@@ -117,6 +117,8 @@
     viewController.workId = self.workId;
     viewController.relationId = self.relationId;
     viewController.isLastEvaluate = self.isLastEvaluate;
+    viewController.evaluateScore = self.evaluateScore;
+    viewController.evaluateContent = self.evaluateContent;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -334,7 +336,7 @@
             NSString *ajaxMessage = [jsonDict stringForKey:@"ajax_message"];
             [self showAlert:ajaxMessage];
         } else {
-            [self performSelector:@selector(pop)];
+            [[NSNotificationCenter defaultCenter] postNotificationName:DDWorkContactListDetailRefreshNotification object:nil];
         }
     }
 }
@@ -373,7 +375,6 @@
             [self showAlert:ajaxMessage];
         } else {
             [[NSNotificationCenter defaultCenter] postNotificationName:DDWorkContactListDetailRefreshNotification object:nil];
-            [self performSelector:@selector(pop)];
         }
     }
 }

@@ -103,6 +103,8 @@
 
 - (void)refreshView:(NSNotification *)notification
 {
+    [self.navigationController popToViewController:self animated:YES];
+    
     [self queryTodoNoticeList];
 }
 
@@ -314,6 +316,8 @@
     if([self.workType isEqualToString:@"2"]) {
         viewController.isEnd = [[recipient stringForKey:@"isend"] isEqualToString:@"2"];
         viewController.isLastEvaluate = isLastEvaluate;
+        viewController.evaluateScore = [recipient stringForKey:@"score"];
+        viewController.evaluateContent = [recipient stringForKey:@"assess"];
     }
     [self.navigationController pushViewController:viewController animated:YES];
 }

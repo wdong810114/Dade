@@ -30,6 +30,11 @@
     self.todoWorkContactListTableView.backgroundView = nil;
     self.todoWorkContactListTableView.backgroundColor = TABLEVIEW_BG_COLOR;
     self.todoWorkContactListTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
     [self queryTodoWorkList];
 }

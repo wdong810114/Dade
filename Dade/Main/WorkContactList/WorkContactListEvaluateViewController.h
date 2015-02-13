@@ -25,5 +25,7 @@
 @property (copy, nonatomic) NSString *workId;
 @property (copy, nonatomic) NSString *relationId;
 @property (assign, nonatomic) BOOL isLastEvaluate;  // 是否评价最后一个联系人
+@property (copy, nonatomic) NSString *evaluateScore;    // 评价分数
+@property (copy, nonatomic) NSString *evaluateContent;  // 评价内容
 
 @end

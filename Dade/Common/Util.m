@@ -38,6 +38,14 @@
     return [predicate evaluateWithObject:dateString];
 }
 
++ (BOOL)isValidScore:(NSString *)scoreString
+{
+    NSString *regex = @"^(?:0|[1-9][0-9]?|100)$";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    
+    return [predicate evaluateWithObject:scoreString];
+}
+
 + (CGSize)sizeOfString:(NSString *)string font:(UIFont *)font constrainedToSize:(CGSize)size
 {
     return [Util sizeOfString:string
