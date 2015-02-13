@@ -241,6 +241,12 @@
         return NO;
     }
     
+    if(![Util isValidDate:self.dateTextField.text]) {
+        [self showAlert:@"指定完成时间不合法"];
+        
+        return NO;
+    }
+    
     return YES;
 }
 

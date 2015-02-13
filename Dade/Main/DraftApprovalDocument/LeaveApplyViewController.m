@@ -250,6 +250,12 @@
         return NO;
     }
     
+    if(![Util isValidDate:self.leaveDateTextField.text]) {
+        [self showAlert:@"请假日期不合法"];
+        
+        return NO;
+    }
+    
     return YES;
 }
 

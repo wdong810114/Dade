@@ -161,7 +161,7 @@
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入日期/时间" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1J2-rb-zW9" userLabel="LeaveDateTextField">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="yyyy-MM-dd" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1J2-rb-zW9" userLabel="LeaveDateTextField">
                                     <rect key="frame" x="75" y="7" width="225" height="19"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="19" id="z0P-bg-hAc"/>

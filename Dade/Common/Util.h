@@ -14,6 +14,7 @@
 
 + (NSString *)trimString:(NSString *)string;
 + (BOOL)isEmptyString:(NSString *)string;
++ (BOOL)isValidDate:(NSString *)dateString;
 
 + (CGSize)sizeOfString:(NSString *)string font:(UIFont *)font constrainedToSize:(CGSize)size;
 + (CGSize)sizeOfString:(NSString *)string font:(UIFont *)font constrainedToSize:(CGSize)size lineBreakMode:(NSLineBreakMode)lineBreakMode;

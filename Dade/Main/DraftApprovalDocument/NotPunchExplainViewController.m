@@ -183,6 +183,12 @@
         return NO;
     }
     
+    if(![Util isValidDate:self.dateTextField.text]) {
+        [self showAlert:@"未打卡日期不合法"];
+        
+        return NO;
+    }
+    
     return YES;
 }
 
