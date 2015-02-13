@@ -174,6 +174,7 @@
         self.quartersLabel.preferredMaxLayoutWidth = self.quartersLabel.bounds.size.width;
         self.leaveDateLabel.preferredMaxLayoutWidth = self.leaveDateLabel.bounds.size.width;
         self.leaveTypeLabel.preferredMaxLayoutWidth = self.leaveTypeLabel.bounds.size.width;
+        self.leaveDaysLabel.preferredMaxLayoutWidth = self.leaveDaysLabel.bounds.size.width;
         self.contentLabel.preferredMaxLayoutWidth = self.contentLabel.bounds.size.width;
     }
     
@@ -436,6 +437,7 @@
     if(!error && jsonDict) {
         self.leaveDateLabel.text = [jsonDict stringForKey:@"char2"];
         self.leaveTypeLabel.text = [jsonDict stringForKey:@"char1"];
+        self.leaveDaysLabel.text = [jsonDict stringForKey:@"char3"];
     }
 }
 

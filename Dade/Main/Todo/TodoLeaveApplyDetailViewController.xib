@@ -15,6 +15,7 @@
                 <outlet property="explainTextView" destination="r7q-v8-po8" id="ZsS-SV-tsz"/>
                 <outlet property="explainView" destination="6ms-0N-SR9" id="isJ-m9-Com"/>
                 <outlet property="leaveDateLabel" destination="Zrp-DB-BiW" id="h1i-vW-hwf"/>
+                <outlet property="leaveDaysLabel" destination="L8H-lj-bUl" id="WJt-m9-3wH"/>
                 <outlet property="leaveTypeLabel" destination="9l7-DH-1Xf" id="cbx-AI-SnG"/>
                 <outlet property="quartersLabel" destination="fWB-bP-D2t" id="M64-Yf-kjg"/>
                 <outlet property="subjectLabel" destination="f9E-hN-8rh" id="ZBn-15-j4j"/>
@@ -170,8 +171,36 @@
                                 <constraint firstItem="gov-Oa-DPO" firstAttribute="top" secondItem="9l7-DH-1Xf" secondAttribute="top" id="sgI-5r-ngV"/>
                             </constraints>
                         </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UJ7-VX-my0" userLabel="LeaveDaysView">
+                            <rect key="frame" x="10" y="255" width="300" height="33"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="请假天数：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smG-Nk-6BB" userLabel="LTitleLabel">
+                                    <rect key="frame" x="5" y="8" width="70" height="17"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="248" placeholderIntrinsicHeight="17" text="" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8H-lj-bUl" userLabel="LeaveDaysLabel">
+                                    <rect key="frame" x="75" y="8" width="220" height="17"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="smG-Nk-6BB" firstAttribute="top" secondItem="L8H-lj-bUl" secondAttribute="top" id="2T6-Gy-dV0"/>
+                                <constraint firstAttribute="trailing" secondItem="L8H-lj-bUl" secondAttribute="trailing" constant="5" id="PvG-Ge-Qgb"/>
+                                <constraint firstItem="smG-Nk-6BB" firstAttribute="top" secondItem="UJ7-VX-my0" secondAttribute="top" constant="8" id="Rrk-na-ogI"/>
+                                <constraint firstAttribute="bottom" secondItem="L8H-lj-bUl" secondAttribute="bottom" constant="8" id="Uy8-Jb-Znf"/>
+                                <constraint firstItem="L8H-lj-bUl" firstAttribute="leading" secondItem="smG-Nk-6BB" secondAttribute="trailing" id="ccT-mE-rkA"/>
+                                <constraint firstItem="smG-Nk-6BB" firstAttribute="leading" secondItem="UJ7-VX-my0" secondAttribute="leading" constant="5" id="eT7-kL-oz2"/>
+                                <constraint firstItem="smG-Nk-6BB" firstAttribute="height" relation="lessThanOrEqual" secondItem="L8H-lj-bUl" secondAttribute="height" id="vEC-GS-gAN"/>
+                            </constraints>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6d7-0R-LQk" userLabel="ContentView">
-                            <rect key="frame" x="10" y="255" width="300" height="67"/>
+                            <rect key="frame" x="10" y="303" width="300" height="67"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="内容：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iVn-ij-J97" userLabel="CTitleLabel">
                                     <rect key="frame" x="5" y="5" width="42" height="17"/>
@@ -201,7 +230,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ms-0N-SR9" userLabel="ExplainView">
-                            <rect key="frame" x="10" y="337" width="300" height="127"/>
+                            <rect key="frame" x="10" y="385" width="300" height="127"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="内容：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zp1-u7-8sF" userLabel="ETitleLabel">
                                     <rect key="frame" x="5" y="5" width="42" height="17"/>
@@ -261,7 +290,6 @@
                     </subviews>
                     <constraints>
                         <constraint firstItem="45o-5n-SFo" firstAttribute="width" secondItem="9J0-Ic-NCt" secondAttribute="width" id="9lv-57-jMp"/>
-                        <constraint firstItem="6d7-0R-LQk" firstAttribute="top" secondItem="vzM-ma-8dJ" secondAttribute="bottom" constant="15" id="B3P-kb-1aZ"/>
                         <constraint firstItem="9J0-Ic-NCt" firstAttribute="leading" secondItem="yHx-Fh-wmJ" secondAttribute="leading" constant="10" id="Bdj-9g-CgH"/>
                         <constraint firstItem="6d7-0R-LQk" firstAttribute="leading" secondItem="9J0-Ic-NCt" secondAttribute="leading" id="D9H-Bv-jnR"/>
                         <constraint firstItem="6ms-0N-SR9" firstAttribute="leading" secondItem="9J0-Ic-NCt" secondAttribute="leading" id="DZx-q8-rSW"/>
@@ -273,6 +301,7 @@
                         <constraint firstItem="6d7-0R-LQk" firstAttribute="width" secondItem="9J0-Ic-NCt" secondAttribute="width" id="K2D-bn-Jne"/>
                         <constraint firstItem="9J0-Ic-NCt" firstAttribute="top" secondItem="yHx-Fh-wmJ" secondAttribute="top" constant="15" id="Kve-E0-JBU"/>
                         <constraint firstItem="5a7-eg-JQf" firstAttribute="leading" secondItem="9J0-Ic-NCt" secondAttribute="leading" id="M5p-M7-cYC"/>
+                        <constraint firstItem="UJ7-VX-my0" firstAttribute="leading" secondItem="9J0-Ic-NCt" secondAttribute="leading" id="PXQ-hc-zUA"/>
                         <constraint firstItem="vzM-ma-8dJ" firstAttribute="width" secondItem="9J0-Ic-NCt" secondAttribute="width" id="Pmu-xM-QbD"/>
                         <constraint firstItem="uab-aS-cCM" firstAttribute="width" secondItem="9J0-Ic-NCt" secondAttribute="width" id="QGF-Ma-2qh"/>
                         <constraint firstAttribute="centerX" secondItem="9J0-Ic-NCt" secondAttribute="centerX" id="SYB-6w-k4a"/>
@@ -287,8 +316,11 @@
                         <constraint firstItem="18p-AT-vEr" firstAttribute="top" secondItem="5a7-eg-JQf" secondAttribute="bottom" constant="15" id="iD2-2Y-hhX"/>
                         <constraint firstItem="5a7-eg-JQf" firstAttribute="width" secondItem="9J0-Ic-NCt" secondAttribute="width" id="kC4-ou-W6m"/>
                         <constraint firstItem="vzM-ma-8dJ" firstAttribute="leading" secondItem="9J0-Ic-NCt" secondAttribute="leading" id="lJc-gX-pEC"/>
+                        <constraint firstItem="6d7-0R-LQk" firstAttribute="top" secondItem="UJ7-VX-my0" secondAttribute="bottom" constant="15" id="lPt-p5-K2W"/>
                         <constraint firstItem="6ms-0N-SR9" firstAttribute="width" secondItem="9J0-Ic-NCt" secondAttribute="width" id="myb-7a-5bF"/>
                         <constraint firstItem="uab-aS-cCM" firstAttribute="top" secondItem="9J0-Ic-NCt" secondAttribute="bottom" constant="15" id="oL4-v0-NeN"/>
+                        <constraint firstItem="UJ7-VX-my0" firstAttribute="top" secondItem="vzM-ma-8dJ" secondAttribute="bottom" constant="15" id="oaS-pY-VO0"/>
+                        <constraint firstItem="UJ7-VX-my0" firstAttribute="width" secondItem="9J0-Ic-NCt" secondAttribute="width" id="zfB-zR-hJb"/>
                     </constraints>
                     <connections>
                         <outlet property="delegate" destination="-1" id="bOm-WD-srX"/>

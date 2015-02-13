@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *quartersLabel;
 @property (weak, nonatomic) IBOutlet UILabel *leaveDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *leaveTypeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *leaveDaysLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UIView *explainView;
 @property (weak, nonatomic) IBOutlet UITextView *explainTextView;
