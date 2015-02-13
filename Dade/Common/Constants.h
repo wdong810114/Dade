@@ -75,6 +75,7 @@
 //#define GET_PROCESS_BY_FILE_ID_REQUEST_URL              @"%@/GetProcessByFileId"            // 起草文件审批流程查询接口
 //#define QUERY_VERSION_NUMBER_REQUEST_URL                @"%@/QueryVersionNumber"            // 查询版本号
 
+static NSString *const DDTodoListRefreshNotification = @"DDTodoListRefreshNotification";
 static NSString *const DDWorkContactListNumberRefreshNotification = @"DDWorkContactListNumberRefreshNotification";
 static NSString *const DDWorkContactListDetailRefreshNotification = @"DDWorkContactListDetailRefreshNotification";
 

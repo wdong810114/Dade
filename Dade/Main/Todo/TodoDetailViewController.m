@@ -536,6 +536,7 @@
             NSString *ajaxMessage = [jsonDict stringForKey:@"ajax_message"];
             [self showAlert:ajaxMessage];
         } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:DDTodoListRefreshNotification object:nil];
             [self performSelector:@selector(pop)];
         }
     }

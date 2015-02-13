@@ -25,6 +25,26 @@
     NSMutableArray *_todoArray;
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:DDTodoListRefreshNotification
+                                                  object:nil];
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if(self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(refreshView:)
+                                                     name:DDTodoListRefreshNotification
+                                                   object:nil];
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -52,6 +72,11 @@
 - (void)backClicked:(UIButton *)button
 {
     [self pop];
+}
+
+- (void)refreshView:(NSNotification *)notification
+{
+    [self queryIncomeList];
 }
 
 #pragma mark - Private Methods
