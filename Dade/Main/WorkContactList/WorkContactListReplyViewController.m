@@ -81,7 +81,9 @@
     [self setNavigationBarTitle:@"回复内容"];
     [self setLeftBarButtonItem:@selector(backClicked:) image:@"back_icon_n" highlightedImage:@"back_icon_p"];
     if([self.workType isEqualToString:@"1"]) {
-        [self setRightBarButtonItem:@selector(endClicked:) title:@"完结"];
+        if(!self.isEnd) {
+            [self setRightBarButtonItem:@selector(endClicked:) title:@"完结"];
+        }
     } else if([self.workType isEqualToString:@"2"]) {
         if(self.isEnd) {
             [self setRightBarButtonItem:@selector(evaluateClicked:) title:@"评价"];

@@ -313,8 +313,8 @@
     viewController.workType = self.workType;
     viewController.recipientId = [recipient stringForKey:@"staffid"];
     viewController.relationId = [recipient stringForKey:@"id"];
+    viewController.isEnd = [[recipient stringForKey:@"isend"] isEqualToString:@"2"];
     if([self.workType isEqualToString:@"2"]) {
-        viewController.isEnd = [[recipient stringForKey:@"isend"] isEqualToString:@"2"];
         viewController.isLastEvaluate = isLastEvaluate;
         viewController.evaluateScore = [recipient stringForKey:@"score"];
         viewController.evaluateContent = [recipient stringForKey:@"assess"];
