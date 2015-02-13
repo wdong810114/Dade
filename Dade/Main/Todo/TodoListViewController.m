@@ -105,6 +105,8 @@
         
         [self setNavigationBarTitle:[NSString stringWithFormat:@"待办(%i)", (int)[_todoArray count]]];
         [self.todoListTableView reloadData];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:DDMainRefreshNotification object:@{@"type":@1, @"count":[NSNumber numberWithInteger:[_todoArray count]]}];
     }
 }
 

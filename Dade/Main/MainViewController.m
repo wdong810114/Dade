@@ -37,6 +37,26 @@
     NSTimeInterval _lastTimeInterval;   // 最近一次刷新时间
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:DDMainRefreshNotification
+                                                  object:nil];
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if(self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(refreshView:)
+                                                     name:DDMainRefreshNotification
+                                                   object:nil];
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -74,6 +94,23 @@
     [super setNavigationBar];
     
     [self setNavigationBarTitle:@"大德集团"];
+}
+
+- (void)refreshView:(NSNotification *)notification
+{
+    NSDictionary *dict = notification.object;
+    NSInteger type = [[dict objectForKey:@"type"] integerValue];
+    NSInteger count = [[dict objectForKey:@"count"] integerValue];
+    
+    if(type == 1) {
+        _todoCount = count;
+    } else if(type == 2) {
+        _noticeCount = count;
+    } else if(type == 3) {
+        _mailCount = count;
+    }
+    
+    [self.mainTableView reloadData];
 }
 
 #pragma mark - Private Methods

@@ -78,6 +78,8 @@
         
         [self setNavigationBarTitle:[NSString stringWithFormat:@"通知(%i)", (int)[_noticeArray count]]];
         [self.noticeListTableView reloadData];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:DDMainRefreshNotification object:@{@"type":@2, @"count":[NSNumber numberWithInteger:[_noticeArray count]]}];
     }
 }
 

@@ -78,6 +78,8 @@
         
         [self setNavigationBarTitle:[NSString stringWithFormat:@"邮件(%i)", (int)[_mailArray count]]];
         [self.mailListTableView reloadData];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:DDMainRefreshNotification object:@{@"type":@3, @"count":[NSNumber numberWithInteger:[_mailArray count]]}];
     }
 }
 
