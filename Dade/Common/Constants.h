@@ -7,6 +7,8 @@
 //
 //  常量定义
 
+#define DEPLOYMENT_ENVIRONMENT          1   // 配置，0：线上  1：测试
+
 #define IOS_VERSION_7_OR_ABOVE          (([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) ? (YES) : (NO))
 #define IOS_VERSION_8_OR_ABOVE          (([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) ? (YES) : (NO))
 

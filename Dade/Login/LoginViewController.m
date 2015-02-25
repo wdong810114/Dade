@@ -94,12 +94,12 @@
     
     self.codeLabel.text = [self randomCode];
     
-// 测试---Start
-    self.usernameTextField.text = @"gaoxs";
-    self.passwordTextField.text = @"123456";
-    self.codeTextField.text = @"9999";
-    self.codeLabel.text = @"9999";
-// 测试---End
+    if(DEPLOYMENT_ENVIRONMENT == 1) {
+        self.usernameTextField.text = @"gaoxs";
+        self.passwordTextField.text = @"123456";
+        self.codeTextField.text = @"9999";
+        self.codeLabel.text = @"9999";
+    }
 }
 
 - (BOOL)checkValidity
@@ -184,8 +184,13 @@
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonDict) {
-        _latestVersionNumber = @"2.0";//[jsonDict stringForKey:@"versionCode"];
-        _appDownloadUrl = @"http://www.baidu.com";//[jsonDict stringForKey:@"versionUrl"];
+        if(DEPLOYMENT_ENVIRONMENT == 1) {
+            _latestVersionNumber = @"2.0";
+            _appDownloadUrl = @"http://www.baidu.com";
+        } else {
+            _latestVersionNumber = [jsonDict stringForKey:@"versionCode"];
+            _appDownloadUrl = [jsonDict stringForKey:@"versionUrl"];
+        }
         
         if(![_latestVersionNumber isEqualToString:@""] && ![_latestVersionNumber isEqualToString:DadeAppVersion]) {
             if(![_appDownloadUrl isEqualToString:@""]) {
