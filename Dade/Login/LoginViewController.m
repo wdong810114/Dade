@@ -21,15 +21,28 @@
 - (void)requestLoginFinished:(NSString *)jsonString;
 - (void)requestLoginFailed;
 
+- (void)queryVersionNumber;
+- (void)requestQueryVersionNumberFinished:(NSString *)jsonString;
+- (void)requestQueryVersionNumberFailed;
+
+- (void)showVersionAlert;
+- (void)downloadApp;
+
 @end
 
 @implementation LoginViewController
+{
+    NSString *_latestVersionNumber;     // 最新的版本号
+    NSString *_appDownloadUrl;          // 应用下载地址
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self initView];
+    
+    [self queryVersionNumber];
 }
 
 - (void)didReceiveMemoryWarning
@@ -152,6 +165,85 @@
 - (void)requestLoginFailed
 {
     [self stopLoading];
+}
+
+- (void)queryVersionNumber
+{
+//    type：版本类型（app发送：“app”，ios发送：“ios”）
+    
+    NSString *postString = [NSString stringWithFormat:@"{type:'%@'}", @"ios"];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_VERSION_NUMBER_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestQueryVersionNumberFinished:) didFailSelector:@selector(requestQueryVersionNumberFailed)];
+}
+
+- (void)requestQueryVersionNumberFinished:(NSString *)jsonString
+{
+    NSError *error = nil;
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonDict) {
+        _latestVersionNumber = @"2.0";//[jsonDict stringForKey:@"versionCode"];
+        _appDownloadUrl = @"http://www.baidu.com";//[jsonDict stringForKey:@"versionUrl"];
+        
+        if(![_latestVersionNumber isEqualToString:@""] && ![_latestVersionNumber isEqualToString:DadeAppVersion]) {
+            if(![_appDownloadUrl isEqualToString:@""]) {
+                [self showVersionAlert];
+            }
+        }
+    }
+}
+
+- (void)requestQueryVersionNumberFailed
+{
+}
+
+- (void)showVersionAlert
+{
+    NSString *title = [NSString stringWithFormat:@"发现新版本%@，是否立即更新？", _latestVersionNumber];
+    
+    if(IOS_VERSION_8_OR_ABOVE) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
+                                                                                 message:nil
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"否"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:^(UIAlertAction *action) {
+                                                         }];
+        UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"是"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction *action) {
+                                                              [self downloadApp];
+                                                          }];
+        [alertController addAction:noAction];
+        [alertController addAction:yesAction];
+        
+        [self presentViewController:alertController animated:YES completion:NULL];
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                            message:nil
+                                                           delegate:self
+                                                  cancelButtonTitle:@"否"
+                                                  otherButtonTitles:@"是", nil];
+        [alertView show];
+    }
+}
+
+- (void)downloadApp
+{
+    NSURL *url = [NSURL URLWithString:_appDownloadUrl];
+    if([[UIApplication sharedApplication] canOpenURL:url]) {
+        [[UIApplication sharedApplication] openURL:url];
+    }
+}
+
+#pragma mark - UIAlertViewDelegate Methods
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if(alertView.cancelButtonIndex != buttonIndex) {
+        [self downloadApp];
+    }
 }
 
 #pragma mark - UITextFieldDelegate Methods

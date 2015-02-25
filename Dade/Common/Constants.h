@@ -40,6 +40,7 @@
 #define LOGIN_USER_REQUEST_URL                          @"%@/LoginUser"                     // 用户登录身份验证接口
 #define SEND_TEXT_REQUEST_URL                           @"%@/SendText"                      // 发送短信验证码接口
 #define QUERY_ORGANIZATION_REQUEST_URL                  @"%@/QueryOrganization"             // 查询用户企业组织机构信息接口
+#define QUERY_VERSION_NUMBER_REQUEST_URL                @"%@/QueryVersionNumber"            // 查询版本号
 
 #define QUERY_INCOME_LIST_REQUEST_URL                   @"%@/QueryIncomeList"               // 待办文件查询列表接口
 #define GET_INCOME_VIEW_BY_ID_REQUEST_URL               @"%@/GetIncomeViewById"             // 文件详细信息接口
@@ -73,7 +74,6 @@
 #define QUERY_STAFF_LIST_BY_NAME_REQUEST_URL            @"%@/QueryStaffListByName"          // 用户查询接口
 
 //#define GET_PROCESS_BY_FILE_ID_REQUEST_URL              @"%@/GetProcessByFileId"            // 起草文件审批流程查询接口
-//#define QUERY_VERSION_NUMBER_REQUEST_URL                @"%@/QueryVersionNumber"            // 查询版本号
 
 static NSString *const DDMainRefreshNotification = @"DDMainRefreshNotification";
 static NSString *const DDTodoListRefreshNotification = @"DDTodoListRefreshNotification";

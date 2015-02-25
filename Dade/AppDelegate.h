@@ -11,7 +11,8 @@
 #import "DDEngine.h"
 #import "UserInfo.h"
 
-#define DadeAppDelegate ((AppDelegate *)[[UIApplication sharedApplication] delegate])
+#define DadeAppDelegate     ((AppDelegate *)[[UIApplication sharedApplication] delegate])
+#define DadeAppVersion      ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"])
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

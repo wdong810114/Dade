@@ -13,8 +13,6 @@
 
 @interface AppDelegate ()
 
-- (void)showLogin;
-
 @end
 
 @implementation AppDelegate
@@ -35,7 +33,11 @@
     [self.window makeKeyAndVisible];
     
     if(1) {
-        [self performSelector:@selector(showLogin) withObject:nil afterDelay:0.3];
+        LoginViewController *viewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+        self.loginNavigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+        [self.window.rootViewController presentViewController:self.loginNavigationController
+                                                     animated:NO
+                                                   completion:NULL];
     }
     
     return YES;
@@ -66,15 +68,6 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
-- (void)showLogin
-{
-    LoginViewController *viewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-    self.loginNavigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    [self.window.rootViewController presentViewController:self.loginNavigationController
-                                                 animated:YES
-                                               completion:NULL];
 }
 
 - (void)loginSuccessed
