@@ -265,6 +265,12 @@
         return NO;
     }
     
+    if(![Util isValidDays:self.leaveDaysTextField.text]) {
+        [self showAlert:@"请假天数不合法"];
+        
+        return NO;
+    }
+    
     return YES;
 }
 

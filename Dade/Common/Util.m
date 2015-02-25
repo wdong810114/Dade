@@ -38,6 +38,13 @@
     return [predicate evaluateWithObject:dateString];
 }
 
++ (BOOL)isValidDays:(NSString *)daysString
+{
+    NSScanner *scanner = [NSScanner scannerWithString:daysString];
+    NSInteger val;
+    return [scanner scanInteger:&val] && [scanner isAtEnd];
+}
+
 + (BOOL)isValidScore:(NSString *)scoreString
 {
     NSString *regex = @"^(?:0|[1-9][0-9]?|100)$";
