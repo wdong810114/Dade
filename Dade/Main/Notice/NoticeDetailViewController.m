@@ -72,7 +72,7 @@
     
 //    id ：文件主表Id
     
-    NSString *postString = [NSString stringWithFormat:@"{id:'%@'}", self.noticeId];
+    NSString *postString = [NSString stringWithFormat:@"{\"id\":\"%@\"}", self.noticeId];
     NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:SHOW_NOTICE_VIEW_BY_ID_REQUEST_URL];
@@ -112,7 +112,7 @@
 //    filetypeid：文件类型ID
 //    userId：当前登录人Id
     
-    NSString *postString = [NSString stringWithFormat:@"{fileinfoId:'%@',filetypeid:'%@',userId:'%@'}", self.noticeId, self.fileTypeId, DadeAppDelegate.userInfo.staffId];
+    NSString *postString = [NSString stringWithFormat:@"{\"fileinfoId\":\"%@\",\"filetypeid\":\"%@\",\"userId\":\"%@\"}", self.noticeId, self.fileTypeId, DadeAppDelegate.userInfo.staffId];
     NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:SHOW_NOTICE_FLOW_INFO_REQUEST_URL];

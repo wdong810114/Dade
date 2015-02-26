@@ -131,7 +131,7 @@
 //        loginName：用户登录名
 //        loginPassWord：用户登录密码
         
-        NSString *postString = [NSString stringWithFormat:@"{loginName:'%@',loginPassWord:'%@'}", self.usernameTextField.text, self.passwordTextField.text];
+        NSString *postString = [NSString stringWithFormat:@"{\"loginName\":\"%@\",\"loginPassWord\":\"%@\"}", self.usernameTextField.text, self.passwordTextField.text];
         NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:LOGIN_USER_REQUEST_URL];
@@ -171,7 +171,7 @@
 {
 //    type：版本类型（app发送：“app”，ios发送：“ios”）
     
-    NSString *postString = [NSString stringWithFormat:@"{type:'%@'}", @"ios"];
+    NSString *postString = [NSString stringWithFormat:@"{\"type\":\"%@\"}", @"ios"];
     NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_VERSION_NUMBER_REQUEST_URL];
@@ -185,14 +185,14 @@
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonDict) {
         if(DEPLOYMENT_ENVIRONMENT == 1) {
-            _latestVersionNumber = @"2.0";
+            _latestVersionNumber = @"1.1";
             _appDownloadUrl = @"http://www.baidu.com";
         } else {
-            _latestVersionNumber = [jsonDict stringForKey:@"versionCode"];
+            _latestVersionNumber = [jsonDict stringForKey:@"versionName"];
             _appDownloadUrl = [jsonDict stringForKey:@"versionUrl"];
         }
         
-        if(![_latestVersionNumber isEqualToString:@""] && ![_latestVersionNumber isEqualToString:DadeAppVersion]) {
+        if(_latestVersionNumber.length > 0 && ![_latestVersionNumber isEqualToString:DadeAppVersion]) {
             if(![_appDownloadUrl isEqualToString:@""]) {
                 [self showVersionAlert];
             }

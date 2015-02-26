@@ -112,7 +112,7 @@
 //    mailInfoId：邮件表主键Id
 //    userId：用户Id
     
-    NSString *postString = [NSString stringWithFormat:@"{mailInfoId:'%@',userId:'%@'}", self.mailId, DadeAppDelegate.userInfo.staffId];
+    NSString *postString = [NSString stringWithFormat:@"{\"mailInfoId\":\"%@\",\"userId\":\"%@\"}", self.mailId, DadeAppDelegate.userInfo.staffId];
     NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_MAIL_INFO_BY_ID_REQUEST_URL];

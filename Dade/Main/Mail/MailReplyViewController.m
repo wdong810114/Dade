@@ -181,7 +181,7 @@
 //        content：邮件内容
 //        userId：用户Id
         
-        NSString *postString = [NSString stringWithFormat:@"{mailId:'%@',displayvalue:'%@',content:'%@',userId:'%@'}", self.mailId, self.subjectTextField.text, self.contentTextView.text, DadeAppDelegate.userInfo.staffId];
+        NSString *postString = [NSString stringWithFormat:@"{\"mailId\":\"%@\",\"displayvalue\":\"%@\",\"content\":\"%@\",\"userId\":\"%@\"}", self.mailId, self.subjectTextField.text, self.contentTextView.text, DadeAppDelegate.userInfo.staffId];
         NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:REPLY_MAIL_REQUEST_URL];

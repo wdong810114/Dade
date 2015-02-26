@@ -380,7 +380,7 @@
     
 //    id：文件主表Id
     
-    NSString *postString = [NSString stringWithFormat:@"{id:'%@'}", self.todoId];
+    NSString *postString = [NSString stringWithFormat:@"{\"id\":\"%@\"}", self.todoId];
     NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:GET_INCOME_VIEW_BY_ID_REQUEST_URL];
@@ -418,7 +418,7 @@
 //    fileId：文件主表Id
 //    fileTypeId：文件类型ID
     
-    NSString *postString = [NSString stringWithFormat:@"{fileId:'%@',fileTypeId:'113'}", self.todoId];
+    NSString *postString = [NSString stringWithFormat:@"{\"fileId\":\"%@\",\"fileTypeId\":\"113\"}", self.todoId];
     NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:GET_DATE_FILE_TEXT_BY_ID_REQUEST_URL];
@@ -455,7 +455,7 @@
 //    fileId：文件主表Id
 //    fileTypeId: 文件类型Id
     
-    NSString *postString = [NSString stringWithFormat:@"{fileId:'%@',fileTypeId:'113'}", self.todoId];
+    NSString *postString = [NSString stringWithFormat:@"{\"fileId\":\"%@\",\"fileTypeId\":\"113\"}", self.todoId];
     NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:GET_FLOW_PATH_BY_FILE_ID_IN_TABLE_REQUEST_URL];
@@ -491,7 +491,7 @@
     
 //    flowId：文件流转表Id
     
-    NSString *postString = [NSString stringWithFormat:@"{flowId:'%@'}", self.flowId];
+    NSString *postString = [NSString stringWithFormat:@"{\"flowId\":\"%@\"}", self.flowId];
     NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:GET_NOW_FLOW_INFO_BY_FLOW_ID_REQUEST_URL];
@@ -553,7 +553,7 @@
             approveTypeValue = @"0";
         }
         
-        NSString *postString = [NSString stringWithFormat:@"{fileinfoId:'%@',code:'%@',apptype:'%@',approveType_value:'%@',cirContext:'%@'}", self.todoId, _flowCode, approveType, approveTypeValue, self.explainTextView.text];
+        NSString *postString = [NSString stringWithFormat:@"{\"fileinfoId\":\"%@\",\"code\":\"%@\",\"apptype\":\"%@\",\"approveType_value\":\"%@\",\"cirContext\":\"%@\"}", self.todoId, _flowCode, approveType, approveTypeValue, self.explainTextView.text];
         NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:APPROVAL_FILE_INFO_REQUEST_URL];
