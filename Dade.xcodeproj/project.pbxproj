@@ -518,8 +518,8 @@
 		8BAAED2D1A6F997600464655 /* WorkContactList */ = {
 			isa = PBXGroup;
 			children = (
-				8B2991BE1A787D6A00C32F4F /* WorkContactListViewController.m */,
 				8B2991BD1A787D6A00C32F4F /* WorkContactListViewController.h */,
+				8B2991BE1A787D6A00C32F4F /* WorkContactListViewController.m */,
 				8B2991BF1A787D6A00C32F4F /* WorkContactListViewController.xib */,
 				8BAD9FB81A7B255700F43D8B /* DraftWorkContactListViewController.h */,
 				8BAD9FB91A7B255700F43D8B /* DraftWorkContactListViewController.m */,
