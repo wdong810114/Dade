@@ -163,7 +163,7 @@
     
 //    workId：工作联系单Id
     
-    NSString *postString = [NSString stringWithFormat:@"{workId:'%@'}", self.workId];
+    NSString *postString = [NSString stringWithFormat:@"{\"workId\":\"%@\"}", self.workId];
     NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_TODO_WORK_INFO_REQUEST_URL];
@@ -208,7 +208,7 @@
 //    workId：工作联系单Id
 //    userStaffId：登录用户名
     
-    NSString *postString = [NSString stringWithFormat:@"{gzlxdtype:'%@',workId:'%@',userStaffId:'%@'}", self.workType, self.workId, DadeAppDelegate.userInfo.staffId];
+    NSString *postString = [NSString stringWithFormat:@"{\"gzlxdtype\":\"%@\",\"workId\":\"%@\",\"userStaffId\":\"%@\"}", self.workType, self.workId, DadeAppDelegate.userInfo.staffId];
     NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_TODO_NOTICE_LIST_REQUEST_URL];

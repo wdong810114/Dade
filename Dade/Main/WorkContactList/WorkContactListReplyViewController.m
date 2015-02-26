@@ -278,7 +278,7 @@
 //    staffId：登录人员ID
 //    receiptId：收件人ID
     
-    NSString *postString = [NSString stringWithFormat:@"{workId:'%@',staffId:'%@',receiptId:'%@'}", self.workId, DadeAppDelegate.userInfo.staffId, self.recipientId];
+    NSString *postString = [NSString stringWithFormat:@"{\"workId\":\"%@\",\"staffId\":\"%@\",\"receiptId\":\"%@\"}", self.workId, DadeAppDelegate.userInfo.staffId, self.recipientId];
     NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_GZLXD_FLOW_LIST_REQUEST_URL];
@@ -317,7 +317,7 @@
 //    receiptId：收件人ID
 //    content：回复内容
         
-        NSString *postString = [NSString stringWithFormat:@"{gzlxdtype:'%@',workId:'%@',staffId:'%@',receiptId:'%@',content:'%@'}", self.workType, self.workId, DadeAppDelegate.userInfo.staffId, self.recipientId, self.contentTextView.text];
+        NSString *postString = [NSString stringWithFormat:@"{\"gzlxdtype\":\"%@\",\"workId\":\"%@\",\"staffId\":\"%@\",\"receiptId\":\"%@\",\"content\":\"%@\"}", self.workType, self.workId, DadeAppDelegate.userInfo.staffId, self.recipientId, self.contentTextView.text];
         NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:REPLY_TODO_WORK_REQUEST_URL];
@@ -356,7 +356,7 @@
     
 //    noticeStaffId：工作联系单用户关系ID
     
-    NSString *postString = [NSString stringWithFormat:@"{noticeStaffId:'%@'}", self.relationId];
+    NSString *postString = [NSString stringWithFormat:@"{\"noticeStaffId\":\"%@\"}", self.relationId];
     NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:END_TODO_WORD_REQUEST_URL];

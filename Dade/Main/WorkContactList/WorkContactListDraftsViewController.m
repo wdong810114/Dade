@@ -120,7 +120,7 @@
     
 //    userId：用户Id
     
-    NSString *postString = [NSString stringWithFormat:@"{userId:'%@'}", DadeAppDelegate.userInfo.staffId];
+    NSString *postString = [NSString stringWithFormat:@"{\"userId\":\"%@\"}", DadeAppDelegate.userInfo.staffId];
     NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_SUPERVISION_WORD_DRAFT_LIST_REQUEST_URL];
@@ -156,7 +156,7 @@
         
         NSString *workId = [(NSDictionary *)[_draftArray objectAtIndex:_willDeleteIndexPath.row] stringForKey:@"mailId"];
         
-        NSString *postString = [NSString stringWithFormat:@"{wordId:'%@'}", workId];
+        NSString *postString = [NSString stringWithFormat:@"{\"wordId\":\"%@\"}", workId];
         NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:DELETE_TODO_WORD_REQUEST_URL];

@@ -181,7 +181,7 @@
         
         NSString *endMark = self.isLastEvaluate ? @"1" : @"0";
         
-        NSString *postString = [NSString stringWithFormat:@"{workId:'%@',nsId:'%@',score:'%@',assess:'%@',endMark:'%@',staffId:'%@'}", self.workId, self.relationId, self.scoreTextField.text, self.contentTextView.text, endMark, DadeAppDelegate.userInfo.staffId];
+        NSString *postString = [NSString stringWithFormat:@"{\"workId\":\"%@\",\"nsId\":\"%@\",\"score\":\"%@\",\"assess\":\"%@\",\"endMark\":\"%@\",\"staffId\":\"%@\"}", self.workId, self.relationId, self.scoreTextField.text, self.contentTextView.text, endMark, DadeAppDelegate.userInfo.staffId];
         NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:EVALUATION_TODO_WORK_REQUEST_URL];
