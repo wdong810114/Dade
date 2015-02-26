@@ -254,7 +254,7 @@
         NSString *temp = [NSString stringWithFormat:@"%@|%@|%@", DadeAppDelegate.userInfo.orgId, DadeAppDelegate.userInfo.qyId, DadeAppDelegate.userInfo.depOrgId];
         NSString *isEnd = _isFeedback ? @"1" : @"0";
         
-        NSString *postString = [NSString stringWithFormat:@"{userId:'%@',fileTypeId:'5',displayvalue:'%@',filenum:'',content:'%@',staffIds:'%@',temp:'%@',isEnd:'%@'}", DadeAppDelegate.userInfo.staffId, self.subjectTextField.text, self.contentTextView.text, staffIds, temp, isEnd];
+        NSString *postString = [NSString stringWithFormat:@"{\"userId\":\"%@\",\"fileTypeId\":\"5\",\"displayvalue\":\"%@\",\"filenum\":\"\",\"content\":\"%@\",\"staffIds\":\"%@\",\"temp\":\"%@\",\"isEnd\":\"%@\"}", DadeAppDelegate.userInfo.staffId, self.subjectTextField.text, self.contentTextView.text, staffIds, temp, isEnd];
         NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:DRAFT_NOTICE_INFO_REQUEST_URL];

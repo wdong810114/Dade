@@ -198,7 +198,7 @@
     
 //    userName：查询名称
     
-    NSString *postString = [NSString stringWithFormat:@"{userName:'%@'}", @""];
+    NSString *postString = [NSString stringWithFormat:@"{\"userName\":\"%@\"}", @""];
     NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_STAFF_LIST_BY_NAME_REQUEST_URL];
