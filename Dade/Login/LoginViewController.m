@@ -184,13 +184,8 @@
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonDict) {
-        if(DEPLOYMENT_ENVIRONMENT == 1) {
-            _latestVersionNumber = @"1.1";
-            _appDownloadUrl = @"http://www.baidu.com";
-        } else {
-            _latestVersionNumber = [jsonDict stringForKey:@"versionName"];
-            _appDownloadUrl = [jsonDict stringForKey:@"versionUrl"];
-        }
+        _latestVersionNumber = [jsonDict stringForKey:@"versionName"];
+        _appDownloadUrl = [jsonDict stringForKey:@"versionUrl"];
         
         if(_latestVersionNumber.length > 0 && ![_latestVersionNumber isEqualToString:DadeAppVersion]) {
             if(![_appDownloadUrl isEqualToString:@""]) {
