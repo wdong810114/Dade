@@ -195,6 +195,14 @@
         return NO;
     }
     
+    if([_flowCode isEqualToString:@"40"]) {
+        if(_selectedRadio == 0) {
+            [self showAlert:@"请选择操作类型"];
+            
+            return NO;
+        }
+    }
+    
     return YES;
 }
 
