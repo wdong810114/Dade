@@ -7,7 +7,7 @@
 //
 //  常量定义
 
-#define DEPLOYMENT_ENVIRONMENT          1   // 部署环境，0：线上 1：测试
+#define DEPLOYMENT_ENVIRONMENT          2   // 部署环境，0：InHouse 1：AdHoc 2：Development
 
 #define IOS_VERSION_7_OR_ABOVE          (([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) ? (YES) : (NO))
 #define IOS_VERSION_8_OR_ABOVE          (([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) ? (YES) : (NO))
@@ -74,8 +74,7 @@
 #define SAVE_NOT_PUNCH_REQUEST_URL                      @"%@/SaveNotPunch"                  // 未打卡说明起草接口
 #define DRAFT_NOTICE_INFO_REQUEST_URL                   @"%@/DraftNoticeInfo"               // 通知起草接口
 #define QUERY_STAFF_LIST_BY_NAME_REQUEST_URL            @"%@/QueryStaffListByName"          // 用户查询接口
-
-//#define GET_PROCESS_BY_FILE_ID_REQUEST_URL              @"%@/GetProcessByFileId"            // 起草文件审批流程查询接口
+#define GET_PROCESS_BY_FILE_ID_REQUEST_URL              @"%@/GetProcessByFileId"            // 起草文件审批流程查询接口
 
 static NSString *const DDMainRefreshNotification = @"DDMainRefreshNotification";
 static NSString *const DDTodoListRefreshNotification = @"DDTodoListRefreshNotification";

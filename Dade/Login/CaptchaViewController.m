@@ -138,7 +138,7 @@
     if(!error && jsonDict) {
         _captcha = [jsonDict stringForKey:@"random "];
         
-        if(DEPLOYMENT_ENVIRONMENT == 1) {
+        if(DEPLOYMENT_ENVIRONMENT != 0) {
             self.captchaTextField.text = _captcha;
         }
     }
