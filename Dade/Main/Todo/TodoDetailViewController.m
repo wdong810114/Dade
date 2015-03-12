@@ -346,7 +346,7 @@
         UIView *flowView = [[UIView alloc] initWithFrame:CGRectMake(0.0, originY, self.approvalView.frame.size.width, flowHeight)];
         flowView.backgroundColor = [UIColor clearColor];
         
-        UILabel *staffLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, flowView.frame.size.width, 30.0)];
+        UILabel *staffLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, flowView.frame.size.width, flowHeight / 3)];
         staffLabel.backgroundColor = [UIColor clearColor];
         staffLabel.font = FONT(14.0);
         staffLabel.textColor = [UIColor blackColor];
