@@ -12,14 +12,21 @@
 
 - (void)initView;
 - (BOOL)checkValidity;
+- (void)updateApprovalView;
 
 - (void)saveNotPunch;
 - (void)requestSaveNotPunchFinished:(NSString *)jsonString;
 - (void)requestSaveNotPunchFailed;
+- (void)getProcessByFileId;
+- (void)requestGetProcessByFileIdFinished:(NSString *)jsonString;
+- (void)requestGetProcessByFileIdFailed;
 
 @end
 
 @implementation NotPunchExplainViewController
+{
+    NSArray *_flowArray;
+}
 
 - (void)dealloc
 {
@@ -53,6 +60,8 @@
     [super viewDidLoad];
     
     [self initView];
+    
+    [self getProcessByFileId];
 }
 
 - (void)didReceiveMemoryWarning
@@ -192,6 +201,49 @@
     return YES;
 }
 
+- (void)updateApprovalView
+{
+    CGFloat flowHeight = 70.0;
+    
+    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.approvalView
+                                                                  attribute:NSLayoutAttributeHeight
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:nil
+                                                                  attribute:NSLayoutAttributeNotAnAttribute
+                                                                 multiplier:1
+                                                                   constant:[_flowArray count] * flowHeight];
+    [self.approvalView addConstraint:constraint];
+    
+    CGFloat originY = 0.0;
+    for(NSDictionary *flow in _flowArray) {
+        UIView *flowView = [[UIView alloc] initWithFrame:CGRectMake(0.0, originY, self.approvalView.frame.size.width, flowHeight)];
+        flowView.backgroundColor = [UIColor clearColor];
+        
+        UILabel *staffLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 0.0, flowView.frame.size.width, flowHeight / 2)];
+        staffLabel.backgroundColor = [UIColor clearColor];
+        staffLabel.font = FONT(14.0);
+        staffLabel.textColor = [UIColor blackColor];
+        staffLabel.text = [NSString stringWithFormat:@"审批人员：%@ %@", [flow stringForKey:@"grade"], [flow stringForKey:@"staff_name"]];
+        
+        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, staffLabel.frame.origin.y + staffLabel.frame.size.height, staffLabel.frame.size.width, staffLabel.frame.size.height)];
+        nameLabel.backgroundColor = [UIColor clearColor];
+        nameLabel.font = FONT(14.0);
+        nameLabel.textColor = [UIColor blackColor];
+        nameLabel.text = [NSString stringWithFormat:@"审核：%@", [flow stringForKey:@"content"]];
+        
+        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0.0, flowView.frame.size.height - 0.5, flowView.frame.size.width, 0.5)];
+        lineView.backgroundColor = [UIColor blackColor];
+        
+        [flowView addSubview:staffLabel];
+        [flowView addSubview:nameLabel];
+        [flowView addSubview:lineView];
+        
+        [self.approvalView addSubview:flowView];
+        
+        originY += flowHeight;
+    }
+}
+
 - (void)saveNotPunch
 {
     if([self checkValidity]) {
@@ -234,6 +286,42 @@
 }
 
 - (void)requestSaveNotPunchFailed
+{
+    [self stopLoading];
+}
+
+- (void)getProcessByFileId
+{
+    [self startLoading];
+    
+//    fileTypeId：（请假申请：113，未打卡说明：114）
+//    orgid：组织架构Id
+//    qyid：企业ID
+    
+    NSString *postString = [NSString stringWithFormat:@"{\"fileTypeId\":\"114\",\"orgid\":\"%@\",\"qyid\":\"%@\"}", DadeAppDelegate.userInfo.orgId, DadeAppDelegate.userInfo.qyId];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:GET_PROCESS_BY_FILE_ID_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestGetProcessByFileIdFinished:) didFailSelector:@selector(requestGetProcessByFileIdFailed)];
+}
+
+- (void)requestGetProcessByFileIdFinished:(NSString *)jsonString
+{
+    [self stopLoading];
+    
+    NSError *error = nil;
+    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonArray) {
+        _flowArray = [[NSMutableArray alloc] initWithArray:jsonArray];
+        
+        if([_flowArray count] > 0) {
+            [self updateApprovalView];
+        }
+    }
+}
+
+- (void)requestGetProcessByFileIdFailed
 {
     [self stopLoading];
 }

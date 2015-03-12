@@ -267,18 +267,18 @@
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="hzR-dw-zos" userLabel="ApprovalView">
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
                     <constraints>
                         <constraint firstItem="R1r-O0-hDS" firstAttribute="top" secondItem="ahU-Fl-Qbe" secondAttribute="bottom" constant="15" id="4fh-4i-Tba"/>
                         <constraint firstItem="eUq-5O-EmP" firstAttribute="width" secondItem="WFQ-6U-cHQ" secondAttribute="width" id="6Ix-Fi-Qap"/>
-                        <constraint firstAttribute="bottom" secondItem="hzR-dw-zos" secondAttribute="bottom" constant="15" id="6V5-cD-ksc"/>
+                        <constraint firstAttribute="bottom" secondItem="hzR-dw-zos" secondAttribute="bottom" id="6V5-cD-ksc"/>
                         <constraint firstItem="WFQ-6U-cHQ" firstAttribute="leading" secondItem="qbk-DQ-DKw" secondAttribute="leading" constant="10" id="6fI-hT-dtM"/>
                         <constraint firstItem="eUq-5O-EmP" firstAttribute="top" secondItem="YTQ-ur-54c" secondAttribute="bottom" constant="15" id="FYm-OO-hwF"/>
                         <constraint firstItem="YTQ-ur-54c" firstAttribute="top" secondItem="T5H-Fv-kLC" secondAttribute="bottom" constant="15" id="Hc6-iy-L2F"/>
                         <constraint firstItem="DTx-Af-8TX" firstAttribute="leading" secondItem="WFQ-6U-cHQ" secondAttribute="leading" id="JDG-Vs-fjM"/>
-                        <constraint firstItem="hzR-dw-zos" firstAttribute="top" secondItem="DTx-Af-8TX" secondAttribute="bottom" id="OP4-h6-Q5C"/>
+                        <constraint firstItem="hzR-dw-zos" firstAttribute="top" secondItem="DTx-Af-8TX" secondAttribute="bottom" constant="5" id="OP4-h6-Q5C"/>
                         <constraint firstItem="DTx-Af-8TX" firstAttribute="top" secondItem="R1r-O0-hDS" secondAttribute="bottom" constant="15" id="Odh-on-GXl"/>
                         <constraint firstItem="YTQ-ur-54c" firstAttribute="width" secondItem="WFQ-6U-cHQ" secondAttribute="width" id="Pt1-eB-5dq"/>
                         <constraint firstItem="R1r-O0-hDS" firstAttribute="leading" secondItem="WFQ-6U-cHQ" secondAttribute="leading" id="R5x-28-dRX"/>

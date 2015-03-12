@@ -370,7 +370,7 @@
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="ZdR-a1-a9U" userLabel="ApprovalView">
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
                     <constraints>
@@ -390,7 +390,7 @@
                         <constraint firstItem="oja-9c-ZHx" firstAttribute="leading" secondItem="yh8-or-0UM" secondAttribute="leading" id="IB3-qP-aDB"/>
                         <constraint firstItem="Rn0-Dj-t2V" firstAttribute="width" secondItem="yh8-or-0UM" secondAttribute="width" id="L4A-c9-CHs"/>
                         <constraint firstItem="yh8-or-0UM" firstAttribute="leading" secondItem="8In-Wu-l2u" secondAttribute="leading" id="OEw-cG-hpa"/>
-                        <constraint firstAttribute="bottom" secondItem="ZdR-a1-a9U" secondAttribute="bottom" constant="15" id="PNJ-34-0ZE"/>
+                        <constraint firstAttribute="bottom" secondItem="ZdR-a1-a9U" secondAttribute="bottom" id="PNJ-34-0ZE"/>
                         <constraint firstItem="gEw-vo-Bxu" firstAttribute="leading" secondItem="yh8-or-0UM" secondAttribute="leading" id="Pa3-1q-Rpd"/>
                         <constraint firstItem="oja-9c-ZHx" firstAttribute="width" secondItem="yh8-or-0UM" secondAttribute="width" id="Q15-TM-6Oz"/>
                         <constraint firstItem="Rn0-Dj-t2V" firstAttribute="leading" secondItem="yh8-or-0UM" secondAttribute="leading" id="Ql0-nB-irX"/>
@@ -401,7 +401,7 @@
                         <constraint firstItem="8In-Wu-l2u" firstAttribute="top" secondItem="oja-9c-ZHx" secondAttribute="bottom" constant="15" id="Vtr-cN-DlB"/>
                         <constraint firstItem="p75-dP-QYD" firstAttribute="top" secondItem="WcY-Pb-d2X" secondAttribute="bottom" constant="15" id="dy3-dm-Kr0"/>
                         <constraint firstItem="EgJ-jY-LvK" firstAttribute="leading" secondItem="yh8-or-0UM" secondAttribute="leading" id="f9Y-YT-ndA"/>
-                        <constraint firstItem="ZdR-a1-a9U" firstAttribute="top" secondItem="659-Dh-w5E" secondAttribute="bottom" id="gtf-eR-TaE"/>
+                        <constraint firstItem="ZdR-a1-a9U" firstAttribute="top" secondItem="659-Dh-w5E" secondAttribute="bottom" constant="5" id="gtf-eR-TaE"/>
                         <constraint firstItem="Ujg-Gr-AiZ" firstAttribute="top" secondItem="p75-dP-QYD" secondAttribute="bottom" constant="15" id="hts-UM-1B6"/>
                         <constraint firstItem="Ujg-Gr-AiZ" firstAttribute="width" secondItem="yh8-or-0UM" secondAttribute="width" id="kKR-Ml-0kb"/>
                         <constraint firstItem="WcY-Pb-d2X" firstAttribute="width" secondItem="yh8-or-0UM" secondAttribute="width" id="nhK-cM-pUr"/>
