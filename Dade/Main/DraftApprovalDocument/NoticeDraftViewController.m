@@ -187,7 +187,10 @@
         self.departmentLabel.preferredMaxLayoutWidth = self.departmentLabel.bounds.size.width;
     }
     
-    self.departmentLabel.text = DadeAppDelegate.userInfo.department;
+    // 第三阶段---未完
+    OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[0];
+    
+    self.departmentLabel.text = orgInfo.department;
     
     self.feedbackLabel.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(feedbackClicked)];
@@ -250,8 +253,11 @@
 //        temp：部门(由org_id|qyid|depOrgid组成，以“|”间隔)
 //        isEnd：是否完结
         
+        // 第三阶段---未完
+        OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[0];
+        
         NSString *staffIds = [_recipientIdArray componentsJoinedByString:@"|"];
-        NSString *temp = [NSString stringWithFormat:@"%@|%@|%@", DadeAppDelegate.userInfo.orgId, DadeAppDelegate.userInfo.qyId, DadeAppDelegate.userInfo.depOrgId];
+        NSString *temp = [NSString stringWithFormat:@"%@|%@|%@", orgInfo.orgId, orgInfo.qyId, orgInfo.depOrgId];
         NSString *isEnd = _isFeedback ? @"1" : @"0";
         
         NSString *postString = [NSString stringWithFormat:@"{\"userId\":\"%@\",\"fileTypeId\":\"5\",\"displayvalue\":\"%@\",\"filenum\":\"\",\"content\":\"%@\",\"staffIds\":\"%@\",\"temp\":\"%@\",\"isEnd\":\"%@\"}", DadeAppDelegate.userInfo.staffId, self.subjectTextField.text, self.contentTextView.text, staffIds, temp, isEnd];

@@ -170,7 +170,7 @@
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonArray) {
-        [DadeAppDelegate.userInfo parseOrganizationDict:[jsonArray objectAtIndex:0]];
+        [DadeAppDelegate.userInfo parseOrganizationArray:jsonArray];
         
         [DadeAppDelegate performSelector:@selector(loginSuccessed)];
     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B196DB21ADFB7F5006DBD18 /* OrganizationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B196DB11ADFB7F5006DBD18 /* OrganizationInfo.m */; };
 		8B1AEFE91A89B94F00AD2CAF /* WorkContactListReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1AEFE71A89B94F00AD2CAF /* WorkContactListReplyViewController.m */; };
 		8B1AEFEA1A89B94F00AD2CAF /* WorkContactListReplyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B1AEFE81A89B94F00AD2CAF /* WorkContactListReplyViewController.xib */; };
 		8B1AEFEE1A89F2B500AD2CAF /* WorkContactListEvaluateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1AEFEC1A89F2B500AD2CAF /* WorkContactListEvaluateViewController.m */; };
@@ -124,6 +125,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8B196DB01ADFB7F5006DBD18 /* OrganizationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrganizationInfo.h; sourceTree = "<group>"; };
+		8B196DB11ADFB7F5006DBD18 /* OrganizationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrganizationInfo.m; sourceTree = "<group>"; };
 		8B1AEFE61A89B94F00AD2CAF /* WorkContactListReplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkContactListReplyViewController.h; sourceTree = "<group>"; };
 		8B1AEFE71A89B94F00AD2CAF /* WorkContactListReplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkContactListReplyViewController.m; sourceTree = "<group>"; };
 		8B1AEFE81A89B94F00AD2CAF /* WorkContactListReplyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WorkContactListReplyViewController.xib; sourceTree = "<group>"; };
@@ -333,6 +336,8 @@
 			children = (
 				8B54E1201A7F6CD30036E443 /* UserInfo.h */,
 				8B54E1211A7F6CD30036E443 /* UserInfo.m */,
+				8B196DB01ADFB7F5006DBD18 /* OrganizationInfo.h */,
+				8B196DB11ADFB7F5006DBD18 /* OrganizationInfo.m */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -811,6 +816,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B196DB21ADFB7F5006DBD18 /* OrganizationInfo.m in Sources */,
 				8BBE12411A70CA5A009D894F /* NoticeListViewController.m in Sources */,
 				8BAD9FFC1A7B8A2F00F43D8B /* ASIAuthenticationDialog.m in Sources */,
 				8B2991D41A78869A00C32F4F /* NotPunchExplainViewController.m in Sources */,

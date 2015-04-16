@@ -149,8 +149,11 @@
         self.departmentLabel.preferredMaxLayoutWidth = self.departmentLabel.bounds.size.width;
     }
     
+    // 第三阶段---未完
+    OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[0];
+    
     self.nameLabel.text = DadeAppDelegate.userInfo.staffName;
-    self.departmentLabel.text = DadeAppDelegate.userInfo.department;
+    self.departmentLabel.text = orgInfo.department;
     
     [self.reportButton setBackgroundImage:[Util imageWithColor:RED_BUTTON_BG_NORMAL_COLOR] forState:UIControlStateNormal];
     [self.reportButton setBackgroundImage:[Util imageWithColor:RED_BUTTON_BG_HIGHLIGHTED_COLOR] forState:UIControlStateHighlighted];
@@ -259,7 +262,10 @@
 //        depOrgId：部门组织架构ID
 //        userId：用户Id
         
-        NSString *postString = [NSString stringWithFormat:@"{\"attendance\":\"%@\",\"cardDate\":\"%@\",\"content\":\"%@\",\"exaContent\":\"%@\",\"orgId\":\"%@\",\"depOrgId\":\"%@\",\"userId\":\"%@\"}", @""/*self.numberTextField.text*/, self.dateTextField.text, self.notPunchTextView.text, self.explainTextView.text, DadeAppDelegate.userInfo.orgId, DadeAppDelegate.userInfo.depOrgId, DadeAppDelegate.userInfo.staffId];
+        // 第三阶段---未完
+        OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[0];
+        
+        NSString *postString = [NSString stringWithFormat:@"{\"attendance\":\"%@\",\"cardDate\":\"%@\",\"content\":\"%@\",\"exaContent\":\"%@\",\"orgId\":\"%@\",\"depOrgId\":\"%@\",\"userId\":\"%@\"}", @""/*self.numberTextField.text*/, self.dateTextField.text, self.notPunchTextView.text, self.explainTextView.text, orgInfo.orgId, orgInfo.depOrgId, DadeAppDelegate.userInfo.staffId];
         NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:SAVE_NOT_PUNCH_REQUEST_URL];
@@ -298,7 +304,10 @@
 //    orgid：组织架构Id
 //    qyid：企业ID
     
-    NSString *postString = [NSString stringWithFormat:@"{\"fileTypeId\":\"114\",\"orgid\":\"%@\",\"qyid\":\"%@\"}", DadeAppDelegate.userInfo.orgId, DadeAppDelegate.userInfo.qyId];
+    // 第三阶段---未完
+    OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[0];
+    
+    NSString *postString = [NSString stringWithFormat:@"{\"fileTypeId\":\"114\",\"orgid\":\"%@\",\"qyid\":\"%@\"}", orgInfo.orgId, orgInfo.qyId];
     NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:GET_PROCESS_BY_FILE_ID_REQUEST_URL];

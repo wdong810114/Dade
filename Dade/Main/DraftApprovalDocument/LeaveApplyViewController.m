@@ -215,10 +215,13 @@
         self.positionLabel.preferredMaxLayoutWidth = self.positionLabel.bounds.size.width;
     }
     
+    // 第三阶段---未完
+    OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[0];
+    
     self.subjectLabel.text = DadeAppDelegate.userInfo.staffName;
     self.senderLabel.text = DadeAppDelegate.userInfo.staffName;
-    self.departmentLabel.text = DadeAppDelegate.userInfo.department;
-    self.positionLabel.text = DadeAppDelegate.userInfo.gradeName;
+    self.departmentLabel.text = orgInfo.department;
+    self.positionLabel.text = orgInfo.gradeName;
     self.leaveTypeLabel.text = [_leaveTypes objectAtIndex:0];
     
     self.leaveTypeLabel.userInteractionEnabled = YES;
@@ -357,8 +360,10 @@
 //        ruzhiDate：请假天数
         
         NSString *leavesTypeId = [NSString stringWithFormat:@"%i", (int)[_leaveTypes indexOfObject:self.leaveTypeLabel.text] + 1];
+        // 第三阶段---未完
+        OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[0];
         
-        NSString *postString = [NSString stringWithFormat:@"{\"leavesTypeId\":\"%@\",\"leavesTypeName\":\"%@\",\"leavesTypeContent\":\"\",\"leavesDate\":\"%@\",\"content\":\"%@\",\"exaContent\":\"%@\",\"orgId\":\"%@\",\"depOrgId\":\"%@\",\"userId\":\"%@\",\"ruzhiDate\":\"%@\"}", leavesTypeId, self.leaveTypeLabel.text, self.leaveDateTextField.text, self.contentTextView.text, self.explainTextView.text, DadeAppDelegate.userInfo.orgId, DadeAppDelegate.userInfo.depOrgId, DadeAppDelegate.userInfo.staffId, self.leaveDaysTextField.text];
+        NSString *postString = [NSString stringWithFormat:@"{\"leavesTypeId\":\"%@\",\"leavesTypeName\":\"%@\",\"leavesTypeContent\":\"\",\"leavesDate\":\"%@\",\"content\":\"%@\",\"exaContent\":\"%@\",\"orgId\":\"%@\",\"depOrgId\":\"%@\",\"userId\":\"%@\",\"ruzhiDate\":\"%@\"}", leavesTypeId, self.leaveTypeLabel.text, self.leaveDateTextField.text, self.contentTextView.text, self.explainTextView.text, orgInfo.orgId, orgInfo.depOrgId, DadeAppDelegate.userInfo.staffId, self.leaveDaysTextField.text];
         NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:SAVE_LEAVE_APPLICATION_REQUEST_URL];
@@ -397,7 +402,10 @@
 //    orgid：组织架构Id
 //    qyid：企业ID
     
-    NSString *postString = [NSString stringWithFormat:@"{\"fileTypeId\":\"113\",\"orgid\":\"%@\",\"qyid\":\"%@\"}", DadeAppDelegate.userInfo.orgId, DadeAppDelegate.userInfo.qyId];
+    // 第三阶段---未完
+    OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[0];
+    
+    NSString *postString = [NSString stringWithFormat:@"{\"fileTypeId\":\"113\",\"orgid\":\"%@\",\"qyid\":\"%@\"}", orgInfo.orgId, orgInfo.qyId];
     NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:GET_PROCESS_BY_FILE_ID_REQUEST_URL];

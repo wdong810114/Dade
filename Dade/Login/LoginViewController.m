@@ -95,7 +95,7 @@
     self.codeLabel.text = [self randomCode];
     
     if(DEPLOYMENT_ENVIRONMENT == 2) {
-        self.usernameTextField.text = @"gaoxs";
+        self.usernameTextField.text = @"zhaogc";
         self.passwordTextField.text = @"123456";
         self.codeTextField.text = @"9999";
         self.codeLabel.text = @"9999";

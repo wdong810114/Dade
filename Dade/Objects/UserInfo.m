@@ -25,20 +25,20 @@
     return self;
 }
 
-- (void)parseOrganizationDict:(NSDictionary *)dict
+- (void)parseOrganizationArray:(NSArray *)array
 {
-    self.orgId = [dict stringForKey:@"org_id"];
-    self.qyId = [dict stringForKey:@"qyid"];
-    self.depId = [dict stringForKey:@"depid"];
-    self.org = [dict stringForKey:@"org"];
-    self.dep = [dict stringForKey:@"dep"];
-    self.company = [dict stringForKey:@"company"];
-    self.department = [dict stringForKey:@"department"];
-    self.depOrgId = [dict stringForKey:@"depOrgid"];
-    self.gradeName = [dict stringForKey:@"gradenm"];
-    self.gradeId = [dict stringForKey:@"gradeid"];
-    self.gradeCode = [dict stringForKey:@"grade_code"];
-    self.staffName = [dict stringForKey:@"staffname"];
+    NSMutableArray *orgArray = [[NSMutableArray alloc] initWithCapacity:array.count];
+    
+    for(NSDictionary *dict in array) {
+        OrganizationInfo *orgInfo = [[OrganizationInfo alloc] initWithDict:dict];
+        [orgArray addObject:orgInfo];
+
+        if(!self.staffName) {
+            self.staffName = orgInfo.staffName;
+        }
+    }
+    
+    self.organizationArray = [[NSArray alloc] initWithArray:orgArray];
 }
 
 @end
