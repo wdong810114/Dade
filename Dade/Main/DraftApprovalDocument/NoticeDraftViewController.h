@@ -11,13 +11,15 @@
 
 #import "PersonnelListViewController.h"
 
-@interface NoticeDraftViewController : BaseViewController <PersonnelListViewControllerDelegate>
+@interface NoticeDraftViewController : BaseViewController <UIPickerViewDataSource, UIPickerViewDelegate, PersonnelListViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *noticeDraftScrollView;
 
 @property (weak, nonatomic) IBOutlet UILabel *recipientsLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
+@property (weak, nonatomic) IBOutlet UIView *departmentView;
 @property (weak, nonatomic) IBOutlet UILabel *departmentLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *departmentArrowImageView;
 @property (weak, nonatomic) IBOutlet UIView *subjectView;
 @property (weak, nonatomic) IBOutlet UITextField *subjectTextField;
 @property (weak, nonatomic) IBOutlet UILabel *feedbackLabel;

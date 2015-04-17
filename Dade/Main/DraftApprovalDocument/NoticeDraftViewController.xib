@@ -12,7 +12,9 @@
                 <outlet property="contentPlaceholderLabel" destination="Eh8-yG-Ccl" id="eTJ-h4-tvR"/>
                 <outlet property="contentTextView" destination="Juz-Xf-885" id="4DG-lp-Kri"/>
                 <outlet property="contentView" destination="8N6-l0-A53" id="YxC-b4-mf6"/>
+                <outlet property="departmentArrowImageView" destination="Aqd-oK-fl5" id="6CI-3E-x4f"/>
                 <outlet property="departmentLabel" destination="lz6-lD-zz8" id="fYN-0Z-y31"/>
+                <outlet property="departmentView" destination="Pbm-sE-iji" id="p47-eW-qfj"/>
                 <outlet property="feedbackLabel" destination="SgC-Ky-4e9" id="0ns-mU-gWC"/>
                 <outlet property="noticeDraftScrollView" destination="9U2-hp-RAg" id="6JU-wP-i9n"/>
                 <outlet property="recipientsLabel" destination="2BF-Ts-tou" id="m1L-Vu-KLl"/>
@@ -83,20 +85,29 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="248" placeholderIntrinsicHeight="17" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lz6-lD-zz8" userLabel="DepartmentLabel">
-                                    <rect key="frame" x="47" y="8" width="248" height="17"/>
+                                    <rect key="frame" x="47" y="8" width="229" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Aqd-oK-fl5" userLabel="ArrowImageView">
+                                    <rect key="frame" x="281" y="13" width="14" height="8"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="8" id="bED-zo-5yc"/>
+                                        <constraint firstAttribute="width" constant="14" id="c7G-8w-BDT"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstAttribute="centerY" secondItem="Aqd-oK-fl5" secondAttribute="centerY" id="Asl-Nq-WwW"/>
                                 <constraint firstItem="JIM-2Y-vOx" firstAttribute="height" relation="lessThanOrEqual" secondItem="lz6-lD-zz8" secondAttribute="height" id="HF8-Dn-IC9"/>
                                 <constraint firstItem="lz6-lD-zz8" firstAttribute="leading" secondItem="JIM-2Y-vOx" secondAttribute="trailing" id="Pw8-QS-gGJ"/>
                                 <constraint firstItem="lz6-lD-zz8" firstAttribute="top" secondItem="JIM-2Y-vOx" secondAttribute="top" id="WDL-b2-ZBL"/>
                                 <constraint firstItem="JIM-2Y-vOx" firstAttribute="leading" secondItem="Pbm-sE-iji" secondAttribute="leading" constant="5" id="XA0-Lf-o4l"/>
                                 <constraint firstItem="JIM-2Y-vOx" firstAttribute="top" secondItem="Pbm-sE-iji" secondAttribute="top" constant="8" id="aiG-CT-Rie"/>
-                                <constraint firstAttribute="trailing" secondItem="lz6-lD-zz8" secondAttribute="trailing" constant="5" id="lFZ-0p-8Ma"/>
+                                <constraint firstAttribute="trailing" secondItem="Aqd-oK-fl5" secondAttribute="trailing" constant="5" id="doK-Y6-CLP"/>
+                                <constraint firstAttribute="trailing" secondItem="lz6-lD-zz8" secondAttribute="trailing" constant="24" id="lFZ-0p-8Ma"/>
                                 <constraint firstAttribute="bottom" secondItem="lz6-lD-zz8" secondAttribute="bottom" constant="8" id="qqO-5m-qb3"/>
                             </constraints>
                         </view>

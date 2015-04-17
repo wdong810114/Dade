@@ -12,6 +12,7 @@
 
 - (void)initView;
 - (BOOL)checkValidity;
+- (void)removePickerPanel;
 
 - (void)draftNoticeInfo;
 - (void)requestDraftNoticeInfoFinished:(NSString *)jsonString;
@@ -25,6 +26,10 @@
         
     NSArray *_recipientIdArray;
     BOOL _isFeedback;
+    
+    UIView *_departmentPickerPanel;
+    UIPickerView *_departmentPickerView;
+    NSArray *_departments;  // 部门
 }
 
 - (void)dealloc
@@ -49,6 +54,8 @@
                                                  selector:@selector(keyboardWillHide:)
                                                      name:UIKeyboardWillHideNotification
                                                    object:nil];
+        
+        _departments = [DadeAppDelegate.userInfo allDepartments];
     }
     
     return self;
@@ -100,6 +107,72 @@
     [self pop];
 }
 
+- (void)departmentClicked
+{
+    // 部门
+    
+    if([self isRequesting]) {
+        return;
+    }
+    
+    [self.view endEditing:YES];
+    [self removePickerPanel];
+    
+    if(!_departmentPickerPanel) {
+        _departmentPickerPanel = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height, self.view.frame.size.width, 216.0 + 44.0)];
+        _departmentPickerPanel.backgroundColor = [UIColor whiteColor];
+        
+        UIToolbar *toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0.0, 0.0, _departmentPickerPanel.frame.size.width, 44.0)];
+        toolbar.barStyle = UIBarStyleDefault;
+        UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:BAR_BUTTON_TITLE_DONE style:UIBarButtonItemStyleDone target:self action:@selector(doneDepartmentClicked)];
+        NSArray *buttonArray = [NSArray arrayWithObjects:flexibleSpace, doneButton, nil];
+        toolbar.items = buttonArray;
+        
+        UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0.0, 44.0, _departmentPickerPanel.frame.size.width, 216.0)];
+        pickerView.delegate = self;
+        pickerView.dataSource = self;
+        pickerView.showsSelectionIndicator = YES;
+        _departmentPickerView = pickerView;
+        
+        [_departmentPickerPanel addSubview:toolbar];
+        [_departmentPickerPanel addSubview:pickerView];
+        [self.view addSubview:_departmentPickerPanel];
+    }
+    
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         CGRect frame = _departmentPickerPanel.frame;
+                         frame.origin.y = self.view.frame.size.height - frame.size.height;
+                         _departmentPickerPanel.frame = frame;
+                     } completion:^(BOOL finished) {
+                     }];
+    
+    CGFloat maxOffsetY = self.departmentView.frame.origin.y;
+    CGFloat minOffsetY = self.departmentView.frame.origin.y + self.departmentView.frame.size.height + _departmentPickerPanel.frame.size.height - self.noticeDraftScrollView.frame.size.height;
+    if(maxOffsetY < self.noticeDraftScrollView.contentOffset.y) {
+        [self.noticeDraftScrollView setContentOffset:CGPointMake(0.0, maxOffsetY) animated:YES];
+    }
+    if(self.noticeDraftScrollView.contentOffset.y < minOffsetY) {
+        [self.noticeDraftScrollView setContentOffset:CGPointMake(0.0, minOffsetY) animated:YES];
+    }
+}
+
+- (void)doneDepartmentClicked
+{
+    NSString *department = [_departments objectAtIndex:[_departmentPickerView selectedRowInComponent:0]];
+    if(![department isEqualToString:self.departmentLabel.text]) {
+        self.departmentLabel.text = department;
+        
+        // 部门选择改变时，将部门名和职位名也同时改变
+        NSInteger orgIndex = [_departments indexOfObject:self.departmentLabel.text];
+        OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[orgIndex];
+        self.departmentLabel.text = orgInfo.department;
+    }
+    
+    [self removePickerPanel];
+}
+
 - (IBAction)addButtonClicked:(UIButton *)button
 {
     // 添加
@@ -107,6 +180,9 @@
     if([self isRequesting]) {
         return;
     }
+    
+    [self.view endEditing:YES];
+    [self removePickerPanel];
     
     PersonnelListViewController *viewController = [[PersonnelListViewController alloc] initWithNibName:@"PersonnelListViewController" bundle:nil];
     viewController.delegate = self;
@@ -134,6 +210,7 @@
     }
     
     [self.view endEditing:YES];
+    [self removePickerPanel];
     
     _isFeedback = !_isFeedback;
     self.checkImageView.image = _isFeedback ? [UIImage imageNamed:@"row_selected_icon"] : [UIImage imageNamed:@"row_unselected_icon"];
@@ -186,16 +263,18 @@
         self.recipientsLabel.preferredMaxLayoutWidth = self.recipientsLabel.bounds.size.width;
         self.departmentLabel.preferredMaxLayoutWidth = self.departmentLabel.bounds.size.width;
     }
-    
-    // 第三阶段---未完
+
     OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[0];
-    
     self.departmentLabel.text = orgInfo.department;
     
+    self.departmentLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGestureRecognizer1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(departmentClicked)];
+    [self.departmentLabel addGestureRecognizer:tapGestureRecognizer1];
     self.feedbackLabel.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(feedbackClicked)];
-    [self.feedbackLabel addGestureRecognizer:tapGestureRecognizer];
+    UITapGestureRecognizer *tapGestureRecognizer2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(feedbackClicked)];
+    [self.feedbackLabel addGestureRecognizer:tapGestureRecognizer2];
     
+    self.departmentArrowImageView.image = [UIImage imageNamed:@"down_arrow"];
     self.checkImageView.image = [UIImage imageNamed:@"row_unselected_icon"];
     
     [self.addButton setTitleColor:BLUE_BUTTON_TITLE_NORMAL_COLOR forState:UIControlStateNormal];
@@ -237,10 +316,25 @@
     return YES;
 }
 
+- (void)removePickerPanel
+{
+    if(_departmentPickerPanel) {
+        [UIView animateWithDuration:0.25
+                         animations:^{
+                             CGRect frame = _departmentPickerPanel.frame;
+                             frame.origin.y = self.view.frame.size.height;
+                             _departmentPickerPanel.frame = frame;
+                         }
+                         completion:NULL
+         ];
+    }
+}
+
 - (void)draftNoticeInfo
 {
     if([self checkValidity]) {
         [self.view endEditing:YES];
+        [self removePickerPanel];
         
         [self startLoading];
         
@@ -253,8 +347,8 @@
 //        temp：部门(由org_id|qyid|depOrgid组成，以“|”间隔)
 //        isEnd：是否完结
         
-        // 第三阶段---未完
-        OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[0];
+        NSInteger orgIndex = [_departments indexOfObject:self.departmentLabel.text];
+        OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[orgIndex];
         
         NSString *staffIds = [_recipientIdArray componentsJoinedByString:@"|"];
         NSString *temp = [NSString stringWithFormat:@"%@|%@|%@", orgInfo.orgId, orgInfo.qyId, orgInfo.depOrgId];
@@ -295,6 +389,7 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     [self.view endEditing:YES];
+    [self removePickerPanel];
 }
 
 #pragma mark - UITextFieldDelegate Methods
@@ -303,6 +398,8 @@
     if([self isRequesting]) {
         return NO;
     }
+    
+    [self removePickerPanel];
     
     return YES;
 }
@@ -323,6 +420,8 @@
         return NO;
     }
     
+    [self removePickerPanel];
+    
     return YES;
 }
 
@@ -335,6 +434,23 @@
             self.contentPlaceholderLabel.alpha = 0.0;
         }
     }
+}
+
+#pragma mark - UIPickerViewDataSource Methods
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [_departments count];
+}
+
+#pragma mark - UIPickerViewDelegate Methods
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [_departments objectAtIndex:row];
 }
 
 #pragma mark - PersonnelListViewControllerDelegate Methods

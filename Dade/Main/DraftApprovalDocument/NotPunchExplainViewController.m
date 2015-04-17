@@ -351,6 +351,7 @@
 {
     if([self checkValidity]) {
         [self.view endEditing:YES];
+        [self removePickerPanel];
         
         [self startLoading];
         
