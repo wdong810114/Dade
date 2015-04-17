@@ -72,7 +72,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="248" placeholderIntrinsicHeight="17" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V97-hz-2eG" userLabel="DepartmentLabel">
-                                    <rect key="frame" x="47" y="8" width="248" height="17"/>
+                                    <rect key="frame" x="47" y="8" width="229" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
@@ -91,7 +91,7 @@
                                 <constraint firstItem="V97-hz-2eG" firstAttribute="leading" secondItem="WDx-hf-VCY" secondAttribute="trailing" id="E4H-Xa-djd"/>
                                 <constraint firstItem="V97-hz-2eG" firstAttribute="top" secondItem="WDx-hf-VCY" secondAttribute="top" id="GfG-Lw-Gpv"/>
                                 <constraint firstAttribute="bottom" secondItem="V97-hz-2eG" secondAttribute="bottom" constant="8" id="H8W-ud-GpT"/>
-                                <constraint firstAttribute="trailing" secondItem="V97-hz-2eG" secondAttribute="trailing" constant="5" id="Vn3-H8-zVG"/>
+                                <constraint firstAttribute="trailing" secondItem="V97-hz-2eG" secondAttribute="trailing" constant="24" id="Vn3-H8-zVG"/>
                                 <constraint firstAttribute="trailing" secondItem="ToT-HT-RCy" secondAttribute="trailing" constant="5" id="ZT8-UT-YUb"/>
                                 <constraint firstAttribute="centerY" secondItem="ToT-HT-RCy" secondAttribute="centerY" id="cur-15-FBb"/>
                                 <constraint firstItem="WDx-hf-VCY" firstAttribute="leading" secondItem="T5H-Fv-kLC" secondAttribute="leading" constant="5" id="ffY-Ot-fV2"/>

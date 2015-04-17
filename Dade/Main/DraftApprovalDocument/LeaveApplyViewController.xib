@@ -112,7 +112,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="248" placeholderIntrinsicHeight="17" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HjA-IL-f7U" userLabel="DepartmentLabel">
-                                    <rect key="frame" x="47" y="8" width="248" height="17"/>
+                                    <rect key="frame" x="47" y="8" width="229" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
@@ -127,7 +127,7 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="HjA-IL-f7U" secondAttribute="trailing" constant="5" id="3sL-MJ-AhR"/>
+                                <constraint firstAttribute="trailing" secondItem="HjA-IL-f7U" secondAttribute="trailing" constant="24" id="3sL-MJ-AhR"/>
                                 <constraint firstItem="HjA-IL-f7U" firstAttribute="leading" secondItem="JdV-Fq-zWi" secondAttribute="trailing" id="59c-ee-siY"/>
                                 <constraint firstItem="HjA-IL-f7U" firstAttribute="top" secondItem="JdV-Fq-zWi" secondAttribute="top" id="7cE-Nx-aG8"/>
                                 <constraint firstItem="JdV-Fq-zWi" firstAttribute="top" secondItem="WcY-Pb-d2X" secondAttribute="top" constant="8" id="AEW-Rg-9eQ"/>
