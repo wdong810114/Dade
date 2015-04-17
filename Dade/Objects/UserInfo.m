@@ -41,4 +41,15 @@
     self.organizationArray = [[NSArray alloc] initWithArray:orgArray];
 }
 
+- (NSArray *)allDepartments
+{
+    NSMutableArray *departmentArray = [[NSMutableArray alloc] initWithCapacity:self.organizationArray.count];
+    
+    for(OrganizationInfo *orgInfo in self.organizationArray) {
+        [departmentArray addObject:orgInfo.department];
+    }
+    
+    return [[NSArray alloc] initWithArray:departmentArray];
+}
+
 @end

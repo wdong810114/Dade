@@ -24,5 +24,7 @@
 - (instancetype)initWithDict:(NSDictionary *)dict;
 - (void)parseOrganizationArray:(NSArray *)array;
 
+- (NSArray *)allDepartments;
+
 @end
 
