@@ -8,11 +8,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LeaveApplyViewController">
             <connections>
                 <outlet property="approvalView" destination="ZdR-a1-a9U" id="8Ba-Os-9Vg"/>
-                <outlet property="arrowImageView" destination="xX5-Ul-cbG" id="PTe-26-CEj"/>
                 <outlet property="contentPlaceholderLabel" destination="PAZ-4f-Tch" id="LXv-xG-Rin"/>
                 <outlet property="contentTextView" destination="Y8g-L7-8Pv" id="ONh-jS-tD7"/>
                 <outlet property="contentView" destination="Rn0-Dj-t2V" id="cta-Mh-onz"/>
+                <outlet property="departmentArrowImageView" destination="Uxy-je-Blz" id="NUf-39-rMh"/>
                 <outlet property="departmentLabel" destination="HjA-IL-f7U" id="YqQ-Yt-pOD"/>
+                <outlet property="departmentView" destination="WcY-Pb-d2X" id="qrL-ju-1KW"/>
                 <outlet property="explainPlaceholderLabel" destination="kl7-N8-nFf" id="Hep-oB-dmM"/>
                 <outlet property="explainTextView" destination="0cc-dB-Rz5" id="yhW-M2-BLO"/>
                 <outlet property="explainView" destination="EgJ-jY-LvK" id="yp6-05-NLv"/>
@@ -21,6 +22,7 @@
                 <outlet property="leaveDateView" destination="Ujg-Gr-AiZ" id="0Vq-Ss-5Mu"/>
                 <outlet property="leaveDaysTextField" destination="KvU-iv-hGR" id="Xg0-oc-s98"/>
                 <outlet property="leaveDaysView" destination="8In-Wu-l2u" id="MrB-mR-Yyf"/>
+                <outlet property="leaveTypeArrowImageView" destination="xX5-Ul-cbG" id="oS2-ze-mmt"/>
                 <outlet property="leaveTypeLabel" destination="cIS-9g-250" id="hxP-MK-VsN"/>
                 <outlet property="leaveTypeView" destination="oja-9c-ZHx" id="iNd-mp-lVl"/>
                 <outlet property="positionLabel" destination="pZU-Bq-9gq" id="gH4-2C-Ioy"/>
@@ -115,6 +117,13 @@
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Uxy-je-Blz" userLabel="ArrowImageView">
+                                    <rect key="frame" x="281" y="13" width="14" height="8"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="14" id="2Kb-Hu-QuG"/>
+                                        <constraint firstAttribute="height" constant="8" id="y65-er-icq"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -124,7 +133,9 @@
                                 <constraint firstItem="JdV-Fq-zWi" firstAttribute="top" secondItem="WcY-Pb-d2X" secondAttribute="top" constant="8" id="AEW-Rg-9eQ"/>
                                 <constraint firstItem="JdV-Fq-zWi" firstAttribute="leading" secondItem="WcY-Pb-d2X" secondAttribute="leading" constant="5" id="E6g-qS-sir"/>
                                 <constraint firstAttribute="bottom" secondItem="HjA-IL-f7U" secondAttribute="bottom" constant="8" id="IfZ-QR-oYt"/>
+                                <constraint firstAttribute="centerY" secondItem="Uxy-je-Blz" secondAttribute="centerY" id="Lu8-el-4GY"/>
                                 <constraint firstItem="JdV-Fq-zWi" firstAttribute="height" relation="lessThanOrEqual" secondItem="HjA-IL-f7U" secondAttribute="height" id="Qf3-SB-vA5"/>
+                                <constraint firstAttribute="trailing" secondItem="Uxy-je-Blz" secondAttribute="trailing" constant="5" id="d9t-YG-2WX"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p75-dP-QYD" userLabel="PositionView">

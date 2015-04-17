@@ -15,15 +15,17 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *subjectLabel;
 @property (weak, nonatomic) IBOutlet UILabel *senderLabel;
+@property (weak, nonatomic) IBOutlet UIView *departmentView;
 @property (weak, nonatomic) IBOutlet UILabel *departmentLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *departmentArrowImageView;
 @property (weak, nonatomic) IBOutlet UILabel *positionLabel;
 @property (weak, nonatomic) IBOutlet UIView *leaveDateView;
 @property (weak, nonatomic) IBOutlet UITextField *leaveDateTextField;
 @property (weak, nonatomic) IBOutlet UIView *leaveTypeView;
 @property (weak, nonatomic) IBOutlet UILabel *leaveTypeLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *leaveTypeArrowImageView;
 @property (weak, nonatomic) IBOutlet UIView *leaveDaysView;
 @property (weak, nonatomic) IBOutlet UITextField *leaveDaysTextField;
-@property (weak, nonatomic) IBOutlet UIImageView *arrowImageView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UITextView *contentTextView;
 @property (weak, nonatomic) IBOutlet UILabel *contentPlaceholderLabel;

@@ -10,7 +10,9 @@
                 <outlet property="approvalView" destination="hzR-dw-zos" id="7H6-pC-Cmb"/>
                 <outlet property="dateTextField" destination="OSU-AW-BaQ" id="2A3-wO-cZY"/>
                 <outlet property="dateView" destination="eUq-5O-EmP" id="82q-7Q-CwD"/>
+                <outlet property="departmentArrowImageView" destination="ToT-HT-RCy" id="t7N-sh-ha2"/>
                 <outlet property="departmentLabel" destination="V97-hz-2eG" id="txH-3z-HpQ"/>
+                <outlet property="departmentView" destination="T5H-Fv-kLC" id="ryE-hO-DV2"/>
                 <outlet property="explainPlaceholderLabel" destination="q00-o0-akU" id="SlK-8f-xnc"/>
                 <outlet property="explainTextView" destination="7rm-LY-gDQ" id="Q2e-Qx-eBt"/>
                 <outlet property="explainView" destination="R1r-O0-hDS" id="BQY-Sc-Iwi"/>
@@ -75,6 +77,13 @@
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ToT-HT-RCy" userLabel="ArrowImageView">
+                                    <rect key="frame" x="281" y="13" width="14" height="8"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="8" id="b8s-8n-zwV"/>
+                                        <constraint firstAttribute="width" constant="14" id="k4N-Ba-8Xu"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -83,6 +92,8 @@
                                 <constraint firstItem="V97-hz-2eG" firstAttribute="top" secondItem="WDx-hf-VCY" secondAttribute="top" id="GfG-Lw-Gpv"/>
                                 <constraint firstAttribute="bottom" secondItem="V97-hz-2eG" secondAttribute="bottom" constant="8" id="H8W-ud-GpT"/>
                                 <constraint firstAttribute="trailing" secondItem="V97-hz-2eG" secondAttribute="trailing" constant="5" id="Vn3-H8-zVG"/>
+                                <constraint firstAttribute="trailing" secondItem="ToT-HT-RCy" secondAttribute="trailing" constant="5" id="ZT8-UT-YUb"/>
+                                <constraint firstAttribute="centerY" secondItem="ToT-HT-RCy" secondAttribute="centerY" id="cur-15-FBb"/>
                                 <constraint firstItem="WDx-hf-VCY" firstAttribute="leading" secondItem="T5H-Fv-kLC" secondAttribute="leading" constant="5" id="ffY-Ot-fV2"/>
                                 <constraint firstItem="WDx-hf-VCY" firstAttribute="top" secondItem="T5H-Fv-kLC" secondAttribute="top" constant="8" id="rLq-xK-19d"/>
                             </constraints>

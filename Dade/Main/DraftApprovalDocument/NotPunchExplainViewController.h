@@ -9,12 +9,14 @@
 
 #import "BaseViewController.h"
 
-@interface NotPunchExplainViewController : BaseViewController
+@interface NotPunchExplainViewController : BaseViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *notPunchExplainScrollView;
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UIView *departmentView;
 @property (weak, nonatomic) IBOutlet UILabel *departmentLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *departmentArrowImageView;
 @property (weak, nonatomic) IBOutlet UIView *numberView;
 @property (weak, nonatomic) IBOutlet UITextField *numberTextField;
 @property (weak, nonatomic) IBOutlet UIView *dateView;

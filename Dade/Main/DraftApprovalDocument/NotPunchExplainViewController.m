@@ -13,6 +13,7 @@
 - (void)initView;
 - (BOOL)checkValidity;
 - (void)updateApprovalView;
+- (void)removePickerPanel;
 
 - (void)saveNotPunch;
 - (void)requestSaveNotPunchFinished:(NSString *)jsonString;
@@ -26,6 +27,11 @@
 @implementation NotPunchExplainViewController
 {
     NSArray *_flowArray;
+    NSLayoutConstraint *_approvalViewConstraint;
+    
+    UIView *_departmentPickerPanel;
+    UIPickerView *_departmentPickerView;
+    NSArray *_departments;  // 部门
 }
 
 - (void)dealloc
@@ -50,6 +56,8 @@
                                                  selector:@selector(keyboardWillHide:)
                                                      name:UIKeyboardWillHideNotification
                                                    object:nil];
+        
+        _departments = [DadeAppDelegate.userInfo allDepartments];
     }
     
     return self;
@@ -80,6 +88,75 @@
 - (void)backClicked:(UIButton *)button
 {
     [self pop];
+}
+
+- (void)departmentClicked
+{
+    // 部门
+    
+    if([self isRequesting]) {
+        return;
+    }
+    
+    [self.view endEditing:YES];
+    [self removePickerPanel];
+    
+    if(!_departmentPickerPanel) {
+        _departmentPickerPanel = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height, self.view.frame.size.width, 216.0 + 44.0)];
+        _departmentPickerPanel.backgroundColor = [UIColor whiteColor];
+        
+        UIToolbar *toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0.0, 0.0, _departmentPickerPanel.frame.size.width, 44.0)];
+        toolbar.barStyle = UIBarStyleDefault;
+        UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:BAR_BUTTON_TITLE_DONE style:UIBarButtonItemStyleDone target:self action:@selector(doneDepartmentClicked)];
+        NSArray *buttonArray = [NSArray arrayWithObjects:flexibleSpace, doneButton, nil];
+        toolbar.items = buttonArray;
+        
+        UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0.0, 44.0, _departmentPickerPanel.frame.size.width, 216.0)];
+        pickerView.delegate = self;
+        pickerView.dataSource = self;
+        pickerView.showsSelectionIndicator = YES;
+        _departmentPickerView = pickerView;
+        
+        [_departmentPickerPanel addSubview:toolbar];
+        [_departmentPickerPanel addSubview:pickerView];
+        [self.view addSubview:_departmentPickerPanel];
+    }
+    
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         CGRect frame = _departmentPickerPanel.frame;
+                         frame.origin.y = self.view.frame.size.height - frame.size.height;
+                         _departmentPickerPanel.frame = frame;
+                     } completion:^(BOOL finished) {
+                     }];
+    
+    CGFloat maxOffsetY = self.departmentView.frame.origin.y;
+    CGFloat minOffsetY = self.departmentView.frame.origin.y + self.departmentView.frame.size.height + _departmentPickerPanel.frame.size.height - self.notPunchExplainScrollView.frame.size.height;
+    if(maxOffsetY < self.notPunchExplainScrollView.contentOffset.y) {
+        [self.notPunchExplainScrollView setContentOffset:CGPointMake(0.0, maxOffsetY) animated:YES];
+    }
+    if(self.notPunchExplainScrollView.contentOffset.y < minOffsetY) {
+        [self.notPunchExplainScrollView setContentOffset:CGPointMake(0.0, minOffsetY) animated:YES];
+    }
+}
+
+- (void)doneDepartmentClicked
+{
+    NSString *department = [_departments objectAtIndex:[_departmentPickerView selectedRowInComponent:0]];
+    if(![department isEqualToString:self.departmentLabel.text]) {
+        self.departmentLabel.text = department;
+        
+        // 部门选择改变时，将部门名和职位名也同时改变
+        NSInteger orgIndex = [_departments indexOfObject:self.departmentLabel.text];
+        OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[orgIndex];
+        self.departmentLabel.text = orgInfo.department;
+        
+        // 重新查询文件审批流程
+        [self getProcessByFileId];
+    }
+    
+    [self removePickerPanel];
 }
 
 - (IBAction)reportButtonClicked:(UIButton *)button
@@ -148,12 +225,16 @@
         self.nameLabel.preferredMaxLayoutWidth = self.nameLabel.bounds.size.width;
         self.departmentLabel.preferredMaxLayoutWidth = self.departmentLabel.bounds.size.width;
     }
-    
-    // 第三阶段---未完
+
     OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[0];
-    
     self.nameLabel.text = DadeAppDelegate.userInfo.staffName;
     self.departmentLabel.text = orgInfo.department;
+    
+    self.departmentLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGestureRecognizer1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(departmentClicked)];
+    [self.departmentLabel addGestureRecognizer:tapGestureRecognizer1];
+    
+    self.departmentArrowImageView.image = [UIImage imageNamed:@"down_arrow"];
     
     [self.reportButton setBackgroundImage:[Util imageWithColor:RED_BUTTON_BG_NORMAL_COLOR] forState:UIControlStateNormal];
     [self.reportButton setBackgroundImage:[Util imageWithColor:RED_BUTTON_BG_HIGHLIGHTED_COLOR] forState:UIControlStateHighlighted];
@@ -208,14 +289,19 @@
 {
     CGFloat flowHeight = 70.0;
     
-    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.approvalView
-                                                                  attribute:NSLayoutAttributeHeight
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:nil
-                                                                  attribute:NSLayoutAttributeNotAnAttribute
-                                                                 multiplier:1
-                                                                   constant:[_flowArray count] * flowHeight];
-    [self.approvalView addConstraint:constraint];
+    if(!_approvalViewConstraint) {
+        _approvalViewConstraint = [NSLayoutConstraint constraintWithItem:self.approvalView
+                                                               attribute:NSLayoutAttributeHeight
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:nil
+                                                               attribute:NSLayoutAttributeNotAnAttribute
+                                                              multiplier:1
+                                                                constant:0.0];
+        [self.approvalView addConstraint:_approvalViewConstraint];
+    }
+    _approvalViewConstraint.constant = [_flowArray count] * flowHeight;
+    
+    [self.approvalView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     CGFloat originY = 0.0;
     for(NSDictionary *flow in _flowArray) {
@@ -247,6 +333,20 @@
     }
 }
 
+- (void)removePickerPanel
+{
+    if(_departmentPickerPanel) {
+        [UIView animateWithDuration:0.25
+                         animations:^{
+                             CGRect frame = _departmentPickerPanel.frame;
+                             frame.origin.y = self.view.frame.size.height;
+                             _departmentPickerPanel.frame = frame;
+                         }
+                         completion:NULL
+         ];
+    }
+}
+
 - (void)saveNotPunch
 {
     if([self checkValidity]) {
@@ -261,9 +361,9 @@
 //        orgId：组织架构Id
 //        depOrgId：部门组织架构ID
 //        userId：用户Id
-        
-        // 第三阶段---未完
-        OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[0];
+
+        NSInteger orgIndex = [_departments indexOfObject:self.departmentLabel.text];
+        OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[orgIndex];
         
         NSString *postString = [NSString stringWithFormat:@"{\"attendance\":\"%@\",\"cardDate\":\"%@\",\"content\":\"%@\",\"exaContent\":\"%@\",\"orgId\":\"%@\",\"depOrgId\":\"%@\",\"userId\":\"%@\"}", @""/*self.numberTextField.text*/, self.dateTextField.text, self.notPunchTextView.text, self.explainTextView.text, orgInfo.orgId, orgInfo.depOrgId, DadeAppDelegate.userInfo.staffId];
         NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
@@ -304,8 +404,8 @@
 //    orgid：组织架构Id
 //    qyid：企业ID
     
-    // 第三阶段---未完
-    OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[0];
+    NSInteger orgIndex = [_departments indexOfObject:self.departmentLabel.text];
+    OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[orgIndex];
     
     NSString *postString = [NSString stringWithFormat:@"{\"fileTypeId\":\"114\",\"orgid\":\"%@\",\"qyid\":\"%@\"}", orgInfo.orgId, orgInfo.qyId];
     NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
@@ -323,10 +423,7 @@
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonArray) {
         _flowArray = [[NSMutableArray alloc] initWithArray:jsonArray];
-        
-        if([_flowArray count] > 0) {
-            [self updateApprovalView];
-        }
+        [self updateApprovalView];
     }
 }
 
@@ -339,6 +436,8 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     [self.view endEditing:YES];
+    
+    [self removePickerPanel];
 }
 
 #pragma mark - UITextFieldDelegate Methods
@@ -347,6 +446,8 @@
     if([self isRequesting]) {
         return NO;
     }
+    
+    [self removePickerPanel];
     
     return YES;
 }
@@ -368,6 +469,8 @@
     if([self isRequesting]) {
         return NO;
     }
+    
+    [self removePickerPanel];
 
     return YES;
 }
@@ -387,6 +490,23 @@
             self.explainPlaceholderLabel.alpha = 0.0;
         }
     }
+}
+
+#pragma mark - UIPickerViewDataSource Methods
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [_departments count];
+}
+
+#pragma mark - UIPickerViewDelegate Methods
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [_departments objectAtIndex:row];
 }
 
 @end
