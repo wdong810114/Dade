@@ -107,17 +107,17 @@
     [self removePickerPanel];
     
     if(!_departmentPickerPanel) {
-        _departmentPickerPanel = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height, self.view.frame.size.width, 216.0 + 44.0)];
+        _departmentPickerPanel = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height, self.view.frame.size.width, PICKER_VIEW_HEIGHT + TOOLBAR_HEIGHT)];
         _departmentPickerPanel.backgroundColor = [UIColor whiteColor];
         
-        UIToolbar *toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0.0, 0.0, _departmentPickerPanel.frame.size.width, 44.0)];
+        UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, _departmentPickerPanel.frame.size.width, TOOLBAR_HEIGHT)];
         toolbar.barStyle = UIBarStyleDefault;
         UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:BAR_BUTTON_TITLE_DONE style:UIBarButtonItemStyleDone target:self action:@selector(doneDepartmentClicked)];
         NSArray *buttonArray = [NSArray arrayWithObjects:flexibleSpace, doneButton, nil];
         toolbar.items = buttonArray;
         
-        UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0.0, 44.0, _departmentPickerPanel.frame.size.width, 216.0)];
+        UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0.0, TOOLBAR_HEIGHT, _departmentPickerPanel.frame.size.width, PICKER_VIEW_HEIGHT)];
         pickerView.delegate = self;
         pickerView.dataSource = self;
         pickerView.showsSelectionIndicator = YES;
@@ -158,17 +158,17 @@
     [self removePickerPanel];
 
     if(!_leaveTypePickerPanel) {
-        _leaveTypePickerPanel = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height, self.view.frame.size.width, 216.0 + 44.0)];
+        _leaveTypePickerPanel = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height, self.view.frame.size.width, PICKER_VIEW_HEIGHT + TOOLBAR_HEIGHT)];
         _leaveTypePickerPanel.backgroundColor = [UIColor whiteColor];
         
-        UIToolbar *toolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0.0, 0.0, _leaveTypePickerPanel.frame.size.width, 44.0)];
+        UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, _leaveTypePickerPanel.frame.size.width, TOOLBAR_HEIGHT)];
         toolbar.barStyle = UIBarStyleDefault;
         UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:BAR_BUTTON_TITLE_DONE style:UIBarButtonItemStyleDone target:self action:@selector(doneLeaveTypeClicked)];
         NSArray *buttonArray = [NSArray arrayWithObjects:flexibleSpace, doneButton, nil];
         toolbar.items = buttonArray;
         
-        UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0.0, 44.0, _leaveTypePickerPanel.frame.size.width, 216.0)];
+        UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0.0, TOOLBAR_HEIGHT, _leaveTypePickerPanel.frame.size.width, PICKER_VIEW_HEIGHT)];
         pickerView.delegate = self;
         pickerView.dataSource = self;
         pickerView.showsSelectionIndicator = YES;
@@ -313,7 +313,7 @@
     [self.reportButton setBackgroundImage:[Util imageWithColor:RED_BUTTON_BG_HIGHLIGHTED_COLOR] forState:UIControlStateHighlighted];
     [self.reportButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    UIToolbar *inputAccessoryView = [[UIToolbar alloc]initWithFrame:CGRectMake(0.0, 0.0, DEVICE_WIDTH, INPUT_ACCESSORY_VIEW_HEIGHT)];
+    UIToolbar *inputAccessoryView = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, DEVICE_WIDTH, INPUT_ACCESSORY_VIEW_HEIGHT)];
     inputAccessoryView.barStyle = UIBarStyleDefault;
     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:BAR_BUTTON_TITLE_DONE style:UIBarButtonItemStyleDone target:self action:@selector(dismissKeyboard)];

@@ -17,6 +17,8 @@
 #define STATUS_BAR_HEIGHT               20.0    // 状态栏高度
 #define NAVIGATION_BAR_HEIGHT           44.0    // 导航栏高度
 #define INPUT_ACCESSORY_VIEW_HEIGHT     44.0    // 键盘附加视图高度
+#define PICKER_VIEW_HEIGHT              216.0   // 拾取器高度
+#define TOOLBAR_HEIGHT                  44.0    // 工具栏高度
 #define TABLEVIEW_CELL_HEIGHT           50.0    // 表视图单元格高度
 
 #define COLOR(R, G, B)                  [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:1.0]
