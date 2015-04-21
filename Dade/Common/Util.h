@@ -15,7 +15,7 @@
 + (NSString *)trimString:(NSString *)string;
 + (BOOL)isEmptyString:(NSString *)string;
 + (BOOL)isValidDate:(NSString *)dateString;
-+ (BOOL)isValidDays:(NSString *)daysString;
++ (BOOL)isValidNumber:(NSString *)numberString;
 + (BOOL)isValidScore:(NSString *)scoreString;
 
 + (CGSize)sizeOfString:(NSString *)string font:(UIFont *)font constrainedToSize:(CGSize)size;

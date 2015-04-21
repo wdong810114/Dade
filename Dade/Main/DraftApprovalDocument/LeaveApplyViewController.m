@@ -203,7 +203,7 @@
     if(![department isEqualToString:self.departmentLabel.text]) {
         self.departmentLabel.text = department;
         
-        // 部门选择改变时，将部门名和职位名也同时改变
+        // 部门选择改变时，将部门和职位也同时改变
         NSInteger orgIndex = [_departments indexOfObject:self.departmentLabel.text];
         OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[orgIndex];
         self.departmentLabel.text = orgInfo.department;
@@ -355,7 +355,7 @@
         return NO;
     }
     
-    if(![Util isValidDays:self.leaveDaysTextField.text]) {
+    if(![Util isValidNumber:self.leaveDaysTextField.text]) {
         [self showAlert:@"请假天数不合法"];
         
         return NO;

@@ -38,9 +38,9 @@
     return [predicate evaluateWithObject:dateString];
 }
 
-+ (BOOL)isValidDays:(NSString *)daysString
++ (BOOL)isValidNumber:(NSString *)numberString
 {
-    NSScanner *scanner = [NSScanner scannerWithString:daysString];
+    NSScanner *scanner = [NSScanner scannerWithString:numberString];
     NSInteger val;
     return [scanner scanInteger:&val] && [scanner isAtEnd];
 }

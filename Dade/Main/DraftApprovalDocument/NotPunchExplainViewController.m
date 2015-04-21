@@ -147,7 +147,7 @@
     if(![department isEqualToString:self.departmentLabel.text]) {
         self.departmentLabel.text = department;
         
-        // 部门选择改变时，将部门名和职位名也同时改变
+        // 部门选择改变时，将部门也同时改变
         NSInteger orgIndex = [_departments indexOfObject:self.departmentLabel.text];
         OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[orgIndex];
         self.departmentLabel.text = orgInfo.department;
