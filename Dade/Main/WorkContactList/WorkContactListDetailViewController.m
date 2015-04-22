@@ -66,21 +66,27 @@
 {
     [super viewWillAppear:animated];
     
-    self.workContactListDetailScrollView.contentOffset = CGPointZero;
+    if(!IOS_VERSION_7_OR_ABOVE) {
+        self.workContactListDetailScrollView.contentOffset = CGPointZero;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    _scrollViewContentOffset = self.workContactListDetailScrollView.contentOffset;
+    if(!IOS_VERSION_7_OR_ABOVE) {
+        _scrollViewContentOffset = self.workContactListDetailScrollView.contentOffset;
+    }
 }
 
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
     
-    self.workContactListDetailScrollView.contentOffset = _scrollViewContentOffset;
+    if(!IOS_VERSION_7_OR_ABOVE) {
+        self.workContactListDetailScrollView.contentOffset = _scrollViewContentOffset;
+    }
 }
 
 - (void)didReceiveMemoryWarning

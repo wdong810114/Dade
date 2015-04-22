@@ -38,21 +38,27 @@
 {
     [super viewWillAppear:animated];
     
-    self.mailDetailScrollView.contentOffset = CGPointZero;
+    if(!IOS_VERSION_7_OR_ABOVE) {
+        self.mailDetailScrollView.contentOffset = CGPointZero;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    _scrollViewContentOffset = self.mailDetailScrollView.contentOffset;
+    if(!IOS_VERSION_7_OR_ABOVE) {
+        _scrollViewContentOffset = self.mailDetailScrollView.contentOffset;
+    }
 }
 
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
     
-    self.mailDetailScrollView.contentOffset = _scrollViewContentOffset;
+    if(!IOS_VERSION_7_OR_ABOVE) {
+        self.mailDetailScrollView.contentOffset = _scrollViewContentOffset;
+    }
 }
 
 - (void)didReceiveMemoryWarning

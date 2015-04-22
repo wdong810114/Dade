@@ -64,21 +64,27 @@
 {
     [super viewWillAppear:animated];
     
-    self.mailDraftScrollView.contentOffset = CGPointZero;
+    if(!IOS_VERSION_7_OR_ABOVE) {
+        self.mailDraftScrollView.contentOffset = CGPointZero;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    _scrollViewContentOffset = self.mailDraftScrollView.contentOffset;
+    if(!IOS_VERSION_7_OR_ABOVE) {
+        _scrollViewContentOffset = self.mailDraftScrollView.contentOffset;
+    }
 }
 
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
     
-    self.mailDraftScrollView.contentOffset = _scrollViewContentOffset;
+    if(!IOS_VERSION_7_OR_ABOVE) {
+        self.mailDraftScrollView.contentOffset = _scrollViewContentOffset;
+    }
 }
 
 - (void)didReceiveMemoryWarning
