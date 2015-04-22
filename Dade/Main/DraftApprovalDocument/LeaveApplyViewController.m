@@ -13,6 +13,7 @@
 - (void)initView;
 - (BOOL)checkValidity;
 - (void)updateApprovalView;
+- (void)initPickerPanel;
 - (void)removePickerPanel;
 
 - (void)saveLeaveApplication;
@@ -73,6 +74,7 @@
     [super viewDidLoad];
     
     [self initView];
+    [self initPickerPanel];
     
     [self getProcessByFileId];
 }
@@ -106,28 +108,6 @@
     [self.view endEditing:YES];
     [self removePickerPanel];
     
-    if(!_departmentPickerPanel) {
-        _departmentPickerPanel = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height, self.view.frame.size.width, PICKER_VIEW_HEIGHT + TOOLBAR_HEIGHT)];
-        _departmentPickerPanel.backgroundColor = [UIColor whiteColor];
-        
-        UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, _departmentPickerPanel.frame.size.width, TOOLBAR_HEIGHT)];
-        toolbar.barStyle = UIBarStyleDefault;
-        UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:BAR_BUTTON_TITLE_DONE style:UIBarButtonItemStyleDone target:self action:@selector(doneDepartmentClicked)];
-        NSArray *buttonArray = [NSArray arrayWithObjects:flexibleSpace, doneButton, nil];
-        toolbar.items = buttonArray;
-        
-        UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0.0, TOOLBAR_HEIGHT, _departmentPickerPanel.frame.size.width, PICKER_VIEW_HEIGHT)];
-        pickerView.delegate = self;
-        pickerView.dataSource = self;
-        pickerView.showsSelectionIndicator = YES;
-        _departmentPickerView = pickerView;
-        
-        [_departmentPickerPanel addSubview:toolbar];
-        [_departmentPickerPanel addSubview:pickerView];
-        [self.view addSubview:_departmentPickerPanel];
-    }
-    
     [UIView animateWithDuration:0.25
                      animations:^{
                          CGRect frame = _departmentPickerPanel.frame;
@@ -138,11 +118,19 @@
     
     CGFloat maxOffsetY = self.departmentView.frame.origin.y;
     CGFloat minOffsetY = self.departmentView.frame.origin.y + self.departmentView.frame.size.height + _departmentPickerPanel.frame.size.height - self.leaveApplyScrollView.frame.size.height;
+    
     if(maxOffsetY < self.leaveApplyScrollView.contentOffset.y) {
         [self.leaveApplyScrollView setContentOffset:CGPointMake(0.0, maxOffsetY) animated:YES];
     }
     if(self.leaveApplyScrollView.contentOffset.y < minOffsetY) {
-        [self.leaveApplyScrollView setContentOffset:CGPointMake(0.0, minOffsetY) animated:YES];
+        CGFloat scrollMaxOffsetY = self.leaveApplyScrollView.contentSize.height - self.leaveApplyScrollView.frame.size.height;
+        
+        self.leaveApplyScrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, minOffsetY - scrollMaxOffsetY, 0.0);
+        [UIView animateWithDuration:0.25
+                         animations:^{
+                             self.leaveApplyScrollView.contentOffset = CGPointMake(0.0, minOffsetY);
+                         }
+         ];
     }
 }
 
@@ -157,28 +145,6 @@
     [self.view endEditing:YES];
     [self removePickerPanel];
 
-    if(!_leaveTypePickerPanel) {
-        _leaveTypePickerPanel = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height, self.view.frame.size.width, PICKER_VIEW_HEIGHT + TOOLBAR_HEIGHT)];
-        _leaveTypePickerPanel.backgroundColor = [UIColor whiteColor];
-        
-        UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, _leaveTypePickerPanel.frame.size.width, TOOLBAR_HEIGHT)];
-        toolbar.barStyle = UIBarStyleDefault;
-        UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:BAR_BUTTON_TITLE_DONE style:UIBarButtonItemStyleDone target:self action:@selector(doneLeaveTypeClicked)];
-        NSArray *buttonArray = [NSArray arrayWithObjects:flexibleSpace, doneButton, nil];
-        toolbar.items = buttonArray;
-        
-        UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0.0, TOOLBAR_HEIGHT, _leaveTypePickerPanel.frame.size.width, PICKER_VIEW_HEIGHT)];
-        pickerView.delegate = self;
-        pickerView.dataSource = self;
-        pickerView.showsSelectionIndicator = YES;
-        _leaveTypePickerView = pickerView;
-        
-        [_leaveTypePickerPanel addSubview:toolbar];
-        [_leaveTypePickerPanel addSubview:pickerView];
-        [self.view addSubview:_leaveTypePickerPanel];
-    }
-
     [UIView animateWithDuration:0.25
                      animations:^{
                          CGRect frame = _leaveTypePickerPanel.frame;
@@ -186,14 +152,22 @@
                          _leaveTypePickerPanel.frame = frame;
                      } completion:^(BOOL finished) {
                      }];
-
+    
     CGFloat maxOffsetY = self.leaveTypeView.frame.origin.y;
     CGFloat minOffsetY = self.leaveTypeView.frame.origin.y + self.leaveTypeView.frame.size.height + _leaveTypePickerPanel.frame.size.height - self.leaveApplyScrollView.frame.size.height;
+    
     if(maxOffsetY < self.leaveApplyScrollView.contentOffset.y) {
         [self.leaveApplyScrollView setContentOffset:CGPointMake(0.0, maxOffsetY) animated:YES];
     }
     if(self.leaveApplyScrollView.contentOffset.y < minOffsetY) {
-        [self.leaveApplyScrollView setContentOffset:CGPointMake(0.0, minOffsetY) animated:YES];
+        CGFloat scrollMaxOffsetY = self.leaveApplyScrollView.contentSize.height - self.leaveApplyScrollView.frame.size.height;
+        
+        self.leaveApplyScrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, minOffsetY - scrollMaxOffsetY, 0.0);
+        [UIView animateWithDuration:0.25
+                         animations:^{
+                             self.leaveApplyScrollView.contentOffset = CGPointMake(0.0, minOffsetY);
+                         }
+         ];
     }
 }
 
@@ -214,6 +188,17 @@
     }
     
     [self removePickerPanel];
+    
+    self.leaveApplyScrollView.contentInset = UIEdgeInsetsZero;
+    
+    CGFloat scrollMaxOffsetY = self.leaveApplyScrollView.contentSize.height - self.leaveApplyScrollView.frame.size.height;
+    if(self.leaveApplyScrollView.contentOffset.y > scrollMaxOffsetY) {
+        if(scrollMaxOffsetY < 0) {
+            self.leaveApplyScrollView.contentOffset = CGPointZero;
+        } else {
+            self.leaveApplyScrollView.contentOffset = CGPointMake(0.0, scrollMaxOffsetY);
+        }
+    }
 }
 
 - (void)doneLeaveTypeClicked
@@ -221,6 +206,17 @@
     self.leaveTypeLabel.text = [_leaveTypes objectAtIndex:[_leaveTypePickerView selectedRowInComponent:0]];
     
     [self removePickerPanel];
+    
+    self.leaveApplyScrollView.contentInset = UIEdgeInsetsZero;
+    
+    CGFloat scrollMaxOffsetY = self.leaveApplyScrollView.contentSize.height - self.leaveApplyScrollView.frame.size.height;
+    if(self.leaveApplyScrollView.contentOffset.y > scrollMaxOffsetY) {
+        if(scrollMaxOffsetY < 0) {
+            self.leaveApplyScrollView.contentOffset = CGPointZero;
+        } else {
+            self.leaveApplyScrollView.contentOffset = CGPointMake(0.0, scrollMaxOffsetY);
+        }
+    }
 }
 
 - (IBAction)reportButtonClicked:(UIButton *)button
@@ -237,6 +233,7 @@
 - (void)keyboardWillShow:(NSNotification *)notification
 {
     CGRect keyboardFrame = [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    NSTimeInterval animationDuration = [[notification.userInfo valueForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     CGFloat maxOffsetY, minOffsetY;
     
     if([self.leaveDateTextField isFirstResponder]) {
@@ -257,12 +254,21 @@
         [self.leaveApplyScrollView setContentOffset:CGPointMake(0.0, maxOffsetY) animated:YES];
     }
     if(self.leaveApplyScrollView.contentOffset.y < minOffsetY) {
-        [self.leaveApplyScrollView setContentOffset:CGPointMake(0.0, minOffsetY) animated:YES];
+        CGFloat scrollMaxOffsetY = self.leaveApplyScrollView.contentSize.height - self.leaveApplyScrollView.frame.size.height;
+        
+        self.leaveApplyScrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, minOffsetY - scrollMaxOffsetY, 0.0);
+        [UIView animateWithDuration:animationDuration
+                         animations:^{
+                             self.leaveApplyScrollView.contentOffset = CGPointMake(0.0, minOffsetY);
+                         }
+         ];
     }
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
+    self.leaveApplyScrollView.contentInset = UIEdgeInsetsZero;
+    
     CGFloat scrollMaxOffsetY = self.leaveApplyScrollView.contentSize.height - self.leaveApplyScrollView.frame.size.height;
     if(self.leaveApplyScrollView.contentOffset.y > scrollMaxOffsetY) {
         if(scrollMaxOffsetY < 0) {
@@ -412,6 +418,57 @@
     }
 }
 
+- (void)initPickerPanel
+{
+    if(!_departmentPickerPanel || !_departmentPickerView) {
+        UIView *pickerPanel = [[UIView alloc] initWithFrame:CGRectMake(0.0, DEVICE_HEIGHT, DEVICE_WIDTH, PICKER_VIEW_HEIGHT + TOOLBAR_HEIGHT)];
+        pickerPanel.backgroundColor = [UIColor whiteColor];
+        
+        UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, pickerPanel.frame.size.width, TOOLBAR_HEIGHT)];
+        toolbar.barStyle = UIBarStyleDefault;
+        UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:BAR_BUTTON_TITLE_DONE style:UIBarButtonItemStyleDone target:self action:@selector(doneDepartmentClicked)];
+        NSArray *buttonArray = [NSArray arrayWithObjects:flexibleSpace, doneButton, nil];
+        toolbar.items = buttonArray;
+        
+        UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0.0, TOOLBAR_HEIGHT, pickerPanel.frame.size.width, PICKER_VIEW_HEIGHT)];
+        pickerView.delegate = self;
+        pickerView.dataSource = self;
+        pickerView.showsSelectionIndicator = YES;
+        
+        [pickerPanel addSubview:toolbar];
+        [pickerPanel addSubview:pickerView];
+        [self.view addSubview:pickerPanel];
+        
+        _departmentPickerView = pickerView;
+        _departmentPickerPanel = pickerPanel;
+    }
+    
+    if(!_leaveTypePickerPanel || !_leaveTypePickerView) {
+        UIView *pickerPanel = [[UIView alloc] initWithFrame:CGRectMake(0.0, DEVICE_HEIGHT, DEVICE_WIDTH, PICKER_VIEW_HEIGHT + TOOLBAR_HEIGHT)];
+        pickerPanel.backgroundColor = [UIColor whiteColor];
+        
+        UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, pickerPanel.frame.size.width, TOOLBAR_HEIGHT)];
+        toolbar.barStyle = UIBarStyleDefault;
+        UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:BAR_BUTTON_TITLE_DONE style:UIBarButtonItemStyleDone target:self action:@selector(doneLeaveTypeClicked)];
+        NSArray *buttonArray = [NSArray arrayWithObjects:flexibleSpace, doneButton, nil];
+        toolbar.items = buttonArray;
+        
+        UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0.0, TOOLBAR_HEIGHT, pickerPanel.frame.size.width, PICKER_VIEW_HEIGHT)];
+        pickerView.delegate = self;
+        pickerView.dataSource = self;
+        pickerView.showsSelectionIndicator = YES;
+        
+        [pickerPanel addSubview:toolbar];
+        [pickerPanel addSubview:pickerView];
+        [self.view addSubview:pickerPanel];
+        
+        _leaveTypePickerView = pickerView;
+        _leaveTypePickerPanel = pickerPanel;
+    }
+}
+
 - (void)removePickerPanel
 {
     if(_departmentPickerPanel) {
@@ -440,8 +497,6 @@
 - (void)saveLeaveApplication
 {
     if([self checkValidity]) {
-        [self.view endEditing:YES];
-        
         [self startLoading];
         
 //        leavesTypeId：请假类型
@@ -529,9 +584,12 @@
 #pragma mark - UIScrollViewDelegate Methods
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    [self.view endEditing:YES];
-
-    [self removePickerPanel];
+    if(scrollView == self.leaveApplyScrollView) {
+        self.leaveApplyScrollView.contentInset = UIEdgeInsetsZero;
+        
+        [self.view endEditing:YES];
+        [self removePickerPanel];
+    }
 }
 
 #pragma mark - UITextFieldDelegate Methods

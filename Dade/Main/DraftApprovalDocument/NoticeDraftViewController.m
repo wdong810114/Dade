@@ -583,7 +583,7 @@
 #pragma mark - UIScrollViewDelegate Methods
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    if(scrollView == _noticeDraftScrollView) {
+    if(scrollView == self.noticeDraftScrollView) {
         self.noticeDraftScrollView.contentInset = UIEdgeInsetsZero;
         
         [self.view endEditing:YES];

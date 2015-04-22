@@ -13,6 +13,7 @@
 - (void)initView;
 - (BOOL)checkValidity;
 - (void)updateApprovalView;
+- (void)initPickerPanel;
 - (void)removePickerPanel;
 
 - (void)saveNotPunch;
@@ -68,6 +69,7 @@
     [super viewDidLoad];
     
     [self initView];
+    [self initPickerPanel];
     
     [self getProcessByFileId];
 }
@@ -99,29 +101,6 @@
     }
     
     [self.view endEditing:YES];
-    [self removePickerPanel];
-    
-    if(!_departmentPickerPanel) {
-        _departmentPickerPanel = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height, self.view.frame.size.width, PICKER_VIEW_HEIGHT + TOOLBAR_HEIGHT)];
-        _departmentPickerPanel.backgroundColor = [UIColor whiteColor];
-        
-        UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, _departmentPickerPanel.frame.size.width, TOOLBAR_HEIGHT)];
-        toolbar.barStyle = UIBarStyleDefault;
-        UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:BAR_BUTTON_TITLE_DONE style:UIBarButtonItemStyleDone target:self action:@selector(doneDepartmentClicked)];
-        NSArray *buttonArray = [NSArray arrayWithObjects:flexibleSpace, doneButton, nil];
-        toolbar.items = buttonArray;
-        
-        UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0.0, TOOLBAR_HEIGHT, _departmentPickerPanel.frame.size.width, PICKER_VIEW_HEIGHT)];
-        pickerView.delegate = self;
-        pickerView.dataSource = self;
-        pickerView.showsSelectionIndicator = YES;
-        _departmentPickerView = pickerView;
-        
-        [_departmentPickerPanel addSubview:toolbar];
-        [_departmentPickerPanel addSubview:pickerView];
-        [self.view addSubview:_departmentPickerPanel];
-    }
     
     [UIView animateWithDuration:0.25
                      animations:^{
@@ -133,11 +112,19 @@
     
     CGFloat maxOffsetY = self.departmentView.frame.origin.y;
     CGFloat minOffsetY = self.departmentView.frame.origin.y + self.departmentView.frame.size.height + _departmentPickerPanel.frame.size.height - self.notPunchExplainScrollView.frame.size.height;
+    
     if(maxOffsetY < self.notPunchExplainScrollView.contentOffset.y) {
         [self.notPunchExplainScrollView setContentOffset:CGPointMake(0.0, maxOffsetY) animated:YES];
     }
     if(self.notPunchExplainScrollView.contentOffset.y < minOffsetY) {
-        [self.notPunchExplainScrollView setContentOffset:CGPointMake(0.0, minOffsetY) animated:YES];
+        CGFloat scrollMaxOffsetY = self.notPunchExplainScrollView.contentSize.height - self.notPunchExplainScrollView.frame.size.height;
+        
+        self.notPunchExplainScrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, minOffsetY - scrollMaxOffsetY, 0.0);
+        [UIView animateWithDuration:0.25
+                         animations:^{
+                             self.notPunchExplainScrollView.contentOffset = CGPointMake(0.0, minOffsetY);
+                         }
+         ];
     }
 }
 
@@ -157,6 +144,17 @@
     }
     
     [self removePickerPanel];
+    
+    self.notPunchExplainScrollView.contentInset = UIEdgeInsetsZero;
+    
+    CGFloat scrollMaxOffsetY = self.notPunchExplainScrollView.contentSize.height - self.notPunchExplainScrollView.frame.size.height;
+    if(self.notPunchExplainScrollView.contentOffset.y > scrollMaxOffsetY) {
+        if(scrollMaxOffsetY < 0) {
+            self.notPunchExplainScrollView.contentOffset = CGPointZero;
+        } else {
+            self.notPunchExplainScrollView.contentOffset = CGPointMake(0.0, scrollMaxOffsetY);
+        }
+    }
 }
 
 - (IBAction)reportButtonClicked:(UIButton *)button
@@ -173,6 +171,7 @@
 - (void)keyboardWillShow:(NSNotification *)notification
 {
     CGRect keyboardFrame = [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    NSTimeInterval animationDuration = [[notification.userInfo valueForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     CGFloat maxOffsetY, minOffsetY;
     
     if([self.numberTextField isFirstResponder]) {
@@ -193,12 +192,21 @@
         [self.notPunchExplainScrollView setContentOffset:CGPointMake(0.0, maxOffsetY) animated:YES];
     }
     if(self.notPunchExplainScrollView.contentOffset.y < minOffsetY) {
-        [self.notPunchExplainScrollView setContentOffset:CGPointMake(0.0, minOffsetY) animated:YES];
+        CGFloat scrollMaxOffsetY = self.notPunchExplainScrollView.contentSize.height - self.notPunchExplainScrollView.frame.size.height;
+        
+        self.notPunchExplainScrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, minOffsetY - scrollMaxOffsetY, 0.0);
+        [UIView animateWithDuration:animationDuration
+                         animations:^{
+                             self.notPunchExplainScrollView.contentOffset = CGPointMake(0.0, minOffsetY);
+                         }
+         ];
     }
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
+    self.notPunchExplainScrollView.contentInset = UIEdgeInsetsZero;
+    
     CGFloat scrollMaxOffsetY = self.notPunchExplainScrollView.contentSize.height - self.notPunchExplainScrollView.frame.size.height;
     if(self.notPunchExplainScrollView.contentOffset.y > scrollMaxOffsetY) {
         if(scrollMaxOffsetY < 0) {
@@ -333,6 +341,33 @@
     }
 }
 
+- (void)initPickerPanel
+{
+    if(!_departmentPickerPanel || !_departmentPickerView) {
+        UIView *pickerPanel = [[UIView alloc] initWithFrame:CGRectMake(0.0, DEVICE_HEIGHT, DEVICE_WIDTH, PICKER_VIEW_HEIGHT + TOOLBAR_HEIGHT)];
+        pickerPanel.backgroundColor = [UIColor whiteColor];
+        
+        UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, pickerPanel.frame.size.width, TOOLBAR_HEIGHT)];
+        toolbar.barStyle = UIBarStyleDefault;
+        UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:BAR_BUTTON_TITLE_DONE style:UIBarButtonItemStyleDone target:self action:@selector(doneDepartmentClicked)];
+        NSArray *buttonArray = [NSArray arrayWithObjects:flexibleSpace, doneButton, nil];
+        toolbar.items = buttonArray;
+        
+        UIPickerView *pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0.0, TOOLBAR_HEIGHT, pickerPanel.frame.size.width, PICKER_VIEW_HEIGHT)];
+        pickerView.delegate = self;
+        pickerView.dataSource = self;
+        pickerView.showsSelectionIndicator = YES;
+        
+        [pickerPanel addSubview:toolbar];
+        [pickerPanel addSubview:pickerView];
+        [self.view addSubview:pickerPanel];
+        
+        _departmentPickerView = pickerView;
+        _departmentPickerPanel = pickerPanel;
+    }
+}
+
 - (void)removePickerPanel
 {
     if(_departmentPickerPanel) {
@@ -350,9 +385,6 @@
 - (void)saveNotPunch
 {
     if([self checkValidity]) {
-        [self.view endEditing:YES];
-        [self removePickerPanel];
-        
         [self startLoading];
         
 //        attendance：考勤号
@@ -436,9 +468,12 @@
 #pragma mark - UIScrollViewDelegate Methods
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    [self.view endEditing:YES];
-    
-    [self removePickerPanel];
+    if(scrollView == self.notPunchExplainScrollView) {
+        self.notPunchExplainScrollView.contentInset = UIEdgeInsetsZero;
+        
+        [self.view endEditing:YES];
+        [self removePickerPanel];
+    }
 }
 
 #pragma mark - UITextFieldDelegate Methods
