@@ -369,6 +369,21 @@
     NSArray *buttonArray = [NSArray arrayWithObjects:flexibleSpace, doneButton, nil];
     inputAccessoryView.items = buttonArray;
     self.contentTextView.inputAccessoryView = inputAccessoryView;
+    
+    if(DEPLOYMENT_ENVIRONMENT == 2) {
+        self.subjectTextField.text = @"测试通知";
+        self.contentTextView.text = @"这是一个测试通知";
+        self.yearTextField.text = @"2015";
+        self.monthTextField.text = @"05";
+        self.dayTextField.text = @"10";
+        self.copiesTextField.text = @"15";
+        self.smsAlertDaysTextField.text = @"2";
+        self.subjectWordsTextField.text = @"测试关键词";
+        self.markYearTextField.text = @"2015";
+        self.markNumberTextField.text = @"001";
+        
+        self.contentPlaceholderLabel.alpha = 0.0;
+    }
 }
 
 - (BOOL)checkValidity
