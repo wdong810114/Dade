@@ -23,6 +23,26 @@
     NSMutableArray *_noticeArray;
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:DDNoticeListRefreshNotification
+                                                  object:nil];
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if(self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(refreshView:)
+                                                     name:DDNoticeListRefreshNotification
+                                                   object:nil];
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -50,6 +70,11 @@
 - (void)backClicked:(UIButton *)button
 {
     [self pop];
+}
+
+- (void)refreshView:(NSNotification *)notification
+{
+    [self queryNoticeList];
 }
 
 #pragma mark - Private Methods
