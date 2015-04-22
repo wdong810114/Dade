@@ -70,27 +70,34 @@
     [super viewDidLoad];
     
     [self initView];
+    [self initPickerPanel];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    self.noticeDraftScrollView.contentOffset = CGPointZero;
+    if(!IOS_VERSION_7_OR_ABOVE) {
+        self.noticeDraftScrollView.contentOffset = CGPointZero;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     
-    _scrollViewContentOffset = self.noticeDraftScrollView.contentOffset;
+    if(!IOS_VERSION_7_OR_ABOVE) {
+        _scrollViewContentOffset = self.noticeDraftScrollView.contentOffset;
+    }
 }
 
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
     
-    self.noticeDraftScrollView.contentOffset = _scrollViewContentOffset;
+    if(!IOS_VERSION_7_OR_ABOVE) {
+        self.noticeDraftScrollView.contentOffset = _scrollViewContentOffset;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -113,7 +120,7 @@
 
 - (void)departmentClicked
 {
-    // 部门
+    // 部门-->发文
     
     if([self isRequesting]) {
         return;
@@ -131,11 +138,19 @@
     
     CGFloat maxOffsetY = self.departmentView.frame.origin.y;
     CGFloat minOffsetY = self.departmentView.frame.origin.y + self.departmentView.frame.size.height + _departmentPickerPanel.frame.size.height - self.noticeDraftScrollView.frame.size.height;
+
     if(maxOffsetY < self.noticeDraftScrollView.contentOffset.y) {
         [self.noticeDraftScrollView setContentOffset:CGPointMake(0.0, maxOffsetY) animated:YES];
     }
     if(self.noticeDraftScrollView.contentOffset.y < minOffsetY) {
-        [self.noticeDraftScrollView setContentOffset:CGPointMake(0.0, minOffsetY) animated:YES];
+        CGFloat scrollMaxOffsetY = self.noticeDraftScrollView.contentSize.height - self.noticeDraftScrollView.frame.size.height;
+        
+        self.noticeDraftScrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, minOffsetY - scrollMaxOffsetY, 0.0);
+        [UIView animateWithDuration:0.25
+                         animations:^{
+                             self.noticeDraftScrollView.contentOffset = CGPointMake(0.0, minOffsetY);
+                         }
+         ];
     }
 }
 
@@ -154,12 +169,14 @@
     
     [self removePickerPanel];
     
+    self.noticeDraftScrollView.contentInset = UIEdgeInsetsZero;
+    
     CGFloat scrollMaxOffsetY = self.noticeDraftScrollView.contentSize.height - self.noticeDraftScrollView.frame.size.height;
     if(self.noticeDraftScrollView.contentOffset.y > scrollMaxOffsetY) {
         if(scrollMaxOffsetY < 0) {
-            [self.noticeDraftScrollView setContentOffset:CGPointZero animated:YES];
+            self.noticeDraftScrollView.contentOffset = CGPointZero;
         } else {
-            [self.noticeDraftScrollView setContentOffset:CGPointMake(0.0, scrollMaxOffsetY) animated:YES];
+            self.noticeDraftScrollView.contentOffset = CGPointMake(0.0, scrollMaxOffsetY);
         }
     }
 }
@@ -171,6 +188,8 @@
     if([self isRequesting]) {
         return;
     }
+    
+    self.noticeDraftScrollView.contentInset = UIEdgeInsetsZero;
     
     [self.view endEditing:YES];
     [self removePickerPanel];
@@ -190,6 +209,8 @@
     if([self isRequesting]) {
         return;
     }
+    
+    self.noticeDraftScrollView.contentInset = UIEdgeInsetsZero;
     
     [self.view endEditing:YES];
     [self removePickerPanel];
@@ -221,9 +242,6 @@
         return;
     }
     
-    [self.view endEditing:YES];
-    [self removePickerPanel];
-    
     _isFeedback = !_isFeedback;
     self.feedbackCheckImageView.image = _isFeedback ? [UIImage imageNamed:@"row_selected_icon"] : [UIImage imageNamed:@"row_unselected_icon"];
 }
@@ -236,9 +254,6 @@
         return;
     }
     
-    [self.view endEditing:YES];
-    [self removePickerPanel];
-    
     _isSMSAlert = !_isSMSAlert;
     self.smsAlertCheckImageView.image = _isSMSAlert ? [UIImage imageNamed:@"row_selected_icon"] : [UIImage imageNamed:@"row_unselected_icon"];
 }
@@ -246,6 +261,7 @@
 - (void)keyboardWillShow:(NSNotification *)notification
 {
     CGRect keyboardFrame = [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    NSTimeInterval animationDuration = [[notification.userInfo valueForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     CGFloat maxOffsetY, minOffsetY;
     
     if([self.markYearTextField isFirstResponder] || [self.markNumberTextField isFirstResponder]) {
@@ -272,18 +288,27 @@
         [self.noticeDraftScrollView setContentOffset:CGPointMake(0.0, maxOffsetY) animated:YES];
     }
     if(self.noticeDraftScrollView.contentOffset.y < minOffsetY) {
-        [self.noticeDraftScrollView setContentOffset:CGPointMake(0.0, minOffsetY) animated:YES];
+        CGFloat scrollMaxOffsetY = self.noticeDraftScrollView.contentSize.height - self.noticeDraftScrollView.frame.size.height;
+        
+        self.noticeDraftScrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, minOffsetY - scrollMaxOffsetY, 0.0);
+        [UIView animateWithDuration:animationDuration
+                         animations:^{
+                             self.noticeDraftScrollView.contentOffset = CGPointMake(0.0, minOffsetY);
+                         }
+         ];
     }
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
+    self.noticeDraftScrollView.contentInset = UIEdgeInsetsZero;
+    
     CGFloat scrollMaxOffsetY = self.noticeDraftScrollView.contentSize.height - self.noticeDraftScrollView.frame.size.height;
     if(self.noticeDraftScrollView.contentOffset.y > scrollMaxOffsetY) {
         if(scrollMaxOffsetY < 0) {
-            [self.noticeDraftScrollView setContentOffset:CGPointZero animated:YES];
+            self.noticeDraftScrollView.contentOffset = CGPointZero;
         } else {
-            [self.noticeDraftScrollView setContentOffset:CGPointMake(0.0, scrollMaxOffsetY) animated:YES];
+            self.noticeDraftScrollView.contentOffset = CGPointMake(0.0, scrollMaxOffsetY);
         }
     }
 }
@@ -307,7 +332,7 @@
     }
     
     NSDateComponents *dateComponents = [[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:[NSDate date]];
-    self.markYearTextField.text = [NSString stringWithFormat:@"%i", dateComponents.year];
+    self.markYearTextField.text = [NSString stringWithFormat:@"%i", (int)dateComponents.year];
 
     OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[0];
     self.handleLabel.text = orgInfo.department;
@@ -344,8 +369,6 @@
     NSArray *buttonArray = [NSArray arrayWithObjects:flexibleSpace, doneButton, nil];
     inputAccessoryView.items = buttonArray;
     self.contentTextView.inputAccessoryView = inputAccessoryView;
-    
-    [self initPickerPanel];
 }
 
 - (BOOL)checkValidity
@@ -436,8 +459,8 @@
 
 - (void)initPickerPanel
 {
-    if(!_departmentPickerPanel) {
-        UIView *pickerPanel = [[UIView alloc] initWithFrame:CGRectMake(0.0, self.view.frame.size.height, self.view.frame.size.width, PICKER_VIEW_HEIGHT + TOOLBAR_HEIGHT)];
+    if(!_departmentPickerPanel || !_departmentPickerView) {
+        UIView *pickerPanel = [[UIView alloc] initWithFrame:CGRectMake(0.0, DEVICE_HEIGHT, DEVICE_WIDTH, PICKER_VIEW_HEIGHT + TOOLBAR_HEIGHT)];
         pickerPanel.backgroundColor = [UIColor whiteColor];
         
         UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, pickerPanel.frame.size.width, TOOLBAR_HEIGHT)];
@@ -478,9 +501,6 @@
 - (void)draftNoticeInfo
 {
     if([self checkValidity]) {
-        [self.view endEditing:YES];
-        [self removePickerPanel];
-        
         [self startLoading];
         
 //        userId ：用户Id
@@ -563,8 +583,12 @@
 #pragma mark - UIScrollViewDelegate Methods
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    [self.view endEditing:YES];
-    [self removePickerPanel];
+    if(scrollView == _noticeDraftScrollView) {
+        self.noticeDraftScrollView.contentInset = UIEdgeInsetsZero;
+        
+        [self.view endEditing:YES];
+        [self removePickerPanel];
+    }
 }
 
 #pragma mark - UITextFieldDelegate Methods
