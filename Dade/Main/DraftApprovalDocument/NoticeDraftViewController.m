@@ -560,9 +560,8 @@
         NSString *char7 = self.yearTextField.text;
         NSString *char8 = self.monthTextField.text;
         NSString *char9 = self.dayTextField.text;
-        NSString *text1 = [_reportsIdArray componentsJoinedByString:@"|"];;
+        NSString *text1 = [_reportsIdArray componentsJoinedByString:@"|"];
         NSString *text2 = self.reportsLabel.text;
-        
         
         NSString *postString = [NSString stringWithFormat:@"{\"userId\":\"%@\",\"fileTypeId\":\"%@\",\"displayvalue\":\"%@\",\"filenum\":\"%@\",\"content\":\"%@\",\"staffIds\":\"%@\",\"temp\":\"%@\",\"isEnd\":\"%@\",\"phone\":\"%@\",\"date_ph\":\"%@\",\"char2\":\"%@\",\"char3\":\"%@\",\"char4\":\"%@\",\"char5\":\"%@\",\"char6\":\"%@\",\"char7\":\"%@\",\"char8\":\"%@\",\"char9\":\"%@\",\"text1\":\"%@\",\"text2\":\"%@\"}", userId, fileTypeId, displayvalue, filenum, content, staffIds, temp, isEnd, phone, date_ph, char2, char3, char4, char5, char6, char7, char8, char9, text1, text2];
         NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
