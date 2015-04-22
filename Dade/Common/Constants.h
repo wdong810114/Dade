@@ -55,6 +55,7 @@
 #define QUERY_NOTICE_LIST_REQUEST_URL                   @"%@/QueryNoticeList"               // 通知文件查询列表接口
 #define SHOW_NOTICE_VIEW_BY_ID_REQUEST_URL              @"%@/ShowNoticeViewById"            // 通知详细信息接口
 #define SHOW_NOTICE_FLOW_INFO_REQUEST_URL               @"%@/ShowNoticeFlowInfoList"        // 通知人员列表接口
+#define IS_END_NOTICE_REQUEST_URL                       @"%@/IsEndNotice"                   // 通知查收确认接口
 #define QUERY_NEWS_LIST_REQUEST_URL                     @"%@/QueryNewsList"                 // 邮件查询列表接口
 #define QUERY_MAIL_INFO_BY_ID_REQUEST_URL               @"%@/QueryMailInfoById"             // 邮件详细信息查询接口
 #define REPLY_MAIL_REQUEST_URL                          @"%@/ReplyMail"                     // 邮件回复接口

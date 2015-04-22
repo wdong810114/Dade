@@ -18,6 +18,9 @@
 - (void)showNoticeFlowInfoList;
 - (void)requestShowNoticeFlowInfoListFinished:(NSString *)jsonString;
 - (void)requestShowNoticeFlowInfoListFailed;
+- (void)isEndNotice;
+- (void)requestIsEndNoticeFinished:(NSString *)jsonString;
+- (void)requestIsEndNoticeFailed;
 
 @end
 
@@ -71,8 +74,12 @@
     [self startLoading];
     
 //    id ：文件主表Id
+//    userId：当前登录人Id
     
-    NSString *postString = [NSString stringWithFormat:@"{\"id\":\"%@\"}", self.noticeId];
+    NSString *fileinfoId = self.noticeId;
+    NSString *userId = DadeAppDelegate.userInfo.staffId;
+    
+    NSString *postString = [NSString stringWithFormat:@"{\"id\":\"%@\",\"userId\":\"%@\"}", fileinfoId, userId];
     NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:SHOW_NOTICE_VIEW_BY_ID_REQUEST_URL];
@@ -111,8 +118,12 @@
 //    fileinfoId：文件主表Id
 //    filetypeid：文件类型ID
 //    userId：当前登录人Id
+ 
+    NSString *fileinfoId = self.noticeId;
+    NSString *filetypeid = self.fileTypeId;
+    NSString *userId = DadeAppDelegate.userInfo.staffId;
     
-    NSString *postString = [NSString stringWithFormat:@"{\"fileinfoId\":\"%@\",\"filetypeid\":\"%@\",\"userId\":\"%@\"}", self.noticeId, self.fileTypeId, DadeAppDelegate.userInfo.staffId];
+    NSString *postString = [NSString stringWithFormat:@"{\"fileinfoId\":\"%@\",\"filetypeid\":\"%@\",\"userId\":\"%@\"}", fileinfoId, filetypeid, userId];
     NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
     ASIFormDataRequest *request = [self requestWithRelativeURL:SHOW_NOTICE_FLOW_INFO_REQUEST_URL];
@@ -144,6 +155,46 @@
     if([self isSingleRequesting]) {
         [self stopLoading];
     }
+}
+
+- (void)isEndNotice
+{
+    [self startLoading];
+    
+//    userId：用户Id
+//    fileinfoId：通知Id
+    
+    NSString *userId = DadeAppDelegate.userInfo.staffId;
+    NSString *fileinfoId = self.noticeId;
+    
+    NSString *postString = [NSString stringWithFormat:@"{\"userId\":\"%@\",\"fileinfoId\":\"%@\"}", userId, fileinfoId];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:IS_END_NOTICE_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestIsEndNoticeFinished:) didFailSelector:@selector(requestIsEndNoticeFailed)];
+}
+
+- (void)requestIsEndNoticeFinished:(NSString *)jsonString
+{
+    [self stopLoading];
+    
+    NSError *error = nil;
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonDict) {
+        NSString *ajaxToken = [jsonDict stringForKey:@"ajax_token"];
+        if([ajaxToken integerValue] != 0) {
+            NSString *ajaxMessage = [jsonDict stringForKey:@"ajax_message"];
+            [self showAlert:ajaxMessage];
+        } else {
+            [self performSelector:@selector(pop)];
+        }
+    }
+}
+
+- (void)requestIsEndNoticeFailed
+{
+    [self stopLoading];
 }
 
 @end
