@@ -382,6 +382,9 @@
                         </button>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="ZdR-a1-a9U" userLabel="ApprovalView">
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" placeholder="YES" id="RW6-9A-p5p"/>
+                            </constraints>
                         </view>
                     </subviews>
                     <constraints>
@@ -412,7 +415,7 @@
                         <constraint firstItem="8In-Wu-l2u" firstAttribute="top" secondItem="oja-9c-ZHx" secondAttribute="bottom" constant="15" id="Vtr-cN-DlB"/>
                         <constraint firstItem="p75-dP-QYD" firstAttribute="top" secondItem="WcY-Pb-d2X" secondAttribute="bottom" constant="15" id="dy3-dm-Kr0"/>
                         <constraint firstItem="EgJ-jY-LvK" firstAttribute="leading" secondItem="yh8-or-0UM" secondAttribute="leading" id="f9Y-YT-ndA"/>
-                        <constraint firstItem="ZdR-a1-a9U" firstAttribute="top" secondItem="659-Dh-w5E" secondAttribute="bottom" constant="5" id="gtf-eR-TaE"/>
+                        <constraint firstItem="ZdR-a1-a9U" firstAttribute="top" secondItem="659-Dh-w5E" secondAttribute="bottom" constant="15" id="gtf-eR-TaE"/>
                         <constraint firstItem="Ujg-Gr-AiZ" firstAttribute="top" secondItem="p75-dP-QYD" secondAttribute="bottom" constant="15" id="hts-UM-1B6"/>
                         <constraint firstItem="Ujg-Gr-AiZ" firstAttribute="width" secondItem="yh8-or-0UM" secondAttribute="width" id="kKR-Ml-0kb"/>
                         <constraint firstItem="WcY-Pb-d2X" firstAttribute="width" secondItem="yh8-or-0UM" secondAttribute="width" id="nhK-cM-pUr"/>

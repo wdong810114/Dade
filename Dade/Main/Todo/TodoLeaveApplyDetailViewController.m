@@ -36,6 +36,8 @@
 
 @implementation TodoLeaveApplyDetailViewController
 {
+    NSLayoutConstraint *_approvalViewConstraint;
+    
     NSInteger _selectedRadio;
     
     NSArray *_flowArray;
@@ -176,6 +178,17 @@
         self.leaveTypeLabel.preferredMaxLayoutWidth = self.leaveTypeLabel.bounds.size.width;
         self.leaveDaysLabel.preferredMaxLayoutWidth = self.leaveDaysLabel.bounds.size.width;
         self.contentLabel.preferredMaxLayoutWidth = self.contentLabel.bounds.size.width;
+    }
+    
+    if(!_approvalViewConstraint) {
+        _approvalViewConstraint = [NSLayoutConstraint constraintWithItem:self.approvalView
+                                                               attribute:NSLayoutAttributeHeight
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:nil
+                                                               attribute:NSLayoutAttributeNotAnAttribute
+                                                              multiplier:1
+                                                                constant:0.0];
+        [self.approvalView addConstraint:_approvalViewConstraint];
     }
     
     UIToolbar *inputAccessoryView = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, DEVICE_WIDTH, INPUT_ACCESSORY_VIEW_HEIGHT)];
@@ -334,16 +347,13 @@
 
 - (void)updateApprovalView
 {
-    CGFloat flowHeight = 90.0;
+    CGFloat flowHeight = 75.0;
     
-    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.approvalView
-                                                                  attribute:NSLayoutAttributeHeight
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:nil
-                                                                  attribute:NSLayoutAttributeNotAnAttribute
-                                                                 multiplier:1
-                                                                   constant:[_flowArray count] * flowHeight];
-    [self.approvalView addConstraint:constraint];
+    if(_flowArray.count > 0) {
+        _approvalViewConstraint.constant = [_flowArray count] * flowHeight + 15.0;
+    } else {
+        _approvalViewConstraint.constant = 0.0;
+    }
     
     CGFloat originY = 0.0;
     for(NSDictionary *flow in _flowArray) {

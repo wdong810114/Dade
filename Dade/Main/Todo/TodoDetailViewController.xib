@@ -286,6 +286,9 @@
                         </view>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="MIC-E2-nbW" userLabel="ApprovalView">
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" placeholder="YES" id="vzL-PX-rFH"/>
+                            </constraints>
                         </view>
                     </subviews>
                     <constraints>
@@ -309,7 +312,7 @@
                         <constraint firstAttribute="trailing" secondItem="PiM-T1-kVG" secondAttribute="trailing" constant="10" id="aqM-YC-Glg"/>
                         <constraint firstItem="PiM-T1-kVG" firstAttribute="leading" secondItem="JF0-UY-ZGN" secondAttribute="leading" id="bXQ-dz-ixK"/>
                         <constraint firstAttribute="centerX" secondItem="PiM-T1-kVG" secondAttribute="centerX" id="eNi-fv-GaH"/>
-                        <constraint firstItem="MIC-E2-nbW" firstAttribute="top" secondItem="NKz-xT-O2K" secondAttribute="bottom" constant="5" id="g8t-bP-cDo"/>
+                        <constraint firstItem="MIC-E2-nbW" firstAttribute="top" secondItem="NKz-xT-O2K" secondAttribute="bottom" constant="15" id="g8t-bP-cDo"/>
                         <constraint firstItem="NME-Gv-4PP" firstAttribute="width" secondItem="PiM-T1-kVG" secondAttribute="width" id="h7k-FY-DUD"/>
                         <constraint firstItem="JEo-qp-b2r" firstAttribute="width" secondItem="PiM-T1-kVG" secondAttribute="width" id="hbv-Ce-ejM"/>
                         <constraint firstItem="GhV-H8-gWs" firstAttribute="top" secondItem="M8f-Z0-T3k" secondAttribute="bottom" constant="15" id="iua-V7-xP6"/>

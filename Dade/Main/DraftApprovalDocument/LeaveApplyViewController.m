@@ -297,6 +297,17 @@
         self.departmentLabel.preferredMaxLayoutWidth = self.departmentLabel.bounds.size.width;
         self.positionLabel.preferredMaxLayoutWidth = self.positionLabel.bounds.size.width;
     }
+    
+    if(!_approvalViewConstraint) {
+        _approvalViewConstraint = [NSLayoutConstraint constraintWithItem:self.approvalView
+                                                               attribute:NSLayoutAttributeHeight
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:nil
+                                                               attribute:NSLayoutAttributeNotAnAttribute
+                                                              multiplier:1
+                                                                constant:0.0];
+        [self.approvalView addConstraint:_approvalViewConstraint];
+    }
 
     OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[0];
     self.subjectLabel.text = DadeAppDelegate.userInfo.staffName;
@@ -372,19 +383,13 @@
 
 - (void)updateApprovalView
 {
-    CGFloat flowHeight = 70.0;
+    CGFloat flowHeight = 50.0;
 
-    if(!_approvalViewConstraint) {
-        _approvalViewConstraint = [NSLayoutConstraint constraintWithItem:self.approvalView
-                                                                      attribute:NSLayoutAttributeHeight
-                                                                      relatedBy:NSLayoutRelationEqual
-                                                                         toItem:nil
-                                                                      attribute:NSLayoutAttributeNotAnAttribute
-                                                                     multiplier:1
-                                                                       constant:0.0];
-        [self.approvalView addConstraint:_approvalViewConstraint];
+    if(_flowArray.count > 0) {
+        _approvalViewConstraint.constant = [_flowArray count] * flowHeight + 15.0;
+    } else {
+        _approvalViewConstraint.constant = 0.0;
     }
-    _approvalViewConstraint.constant = [_flowArray count] * flowHeight;
 
     [self.approvalView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
@@ -571,7 +576,7 @@
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonArray) {
-        _flowArray = [[NSMutableArray alloc] initWithArray:jsonArray];
+        _flowArray = [[NSArray alloc] initWithArray:jsonArray];
         [self updateApprovalView];
     }
 }
