@@ -236,7 +236,7 @@
 
 - (void)feedbackClicked
 {
-    // 完结回馈
+    // 是否查收确认
     
     if([self isRequesting]) {
         return;

@@ -397,7 +397,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VBA-wr-w56" userLabel="DateView">
                             <rect key="frame" x="10" y="541" width="300" height="33"/>
                             <subviews>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="yyyy" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1YC-wO-pZV" userLabel="YearTextField">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="yyyy" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1YC-wO-pZV" userLabel="YearTextField">
                                     <rect key="frame" x="5" y="7" width="50" height="19"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="19" id="7TG-EX-R7V"/>
@@ -415,7 +415,7 @@
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="MM" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NT5-w5-ffU" userLabel="MonthTextField">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="MM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NT5-w5-ffU" userLabel="MonthTextField">
                                     <rect key="frame" x="71" y="7" width="30" height="19"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="30" id="e8T-Dg-GtO"/>
@@ -433,7 +433,7 @@
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="dd" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xzC-8L-9zp" userLabel="DayTextField">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="dd" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xzC-8L-9zp" userLabel="DayTextField">
                                     <rect key="frame" x="117" y="7" width="30" height="19"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="30" id="cmb-DZ-PHO"/>
@@ -457,7 +457,7 @@
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="份数" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1JD-89-svi" userLabel="CopiesTextField">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="份数" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1JD-89-svi" userLabel="CopiesTextField">
                                     <rect key="frame" x="229" y="7" width="40" height="19"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="40" id="I30-Lv-PpV"/>
@@ -608,7 +608,7 @@
                                 <constraint firstAttribute="height" constant="44" id="Rmi-Mj-fSe"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <state key="normal" title="发送">
+                            <state key="normal" title="确认发送">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
