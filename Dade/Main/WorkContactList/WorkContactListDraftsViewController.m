@@ -137,7 +137,7 @@
     if(!error && jsonArray) {
         _draftArray = [[NSMutableArray alloc] initWithArray:jsonArray];
         
-        [self setNavigationBarTitle:[NSString stringWithFormat:@"工作联系单草稿(%i)", (int)[_draftArray count]]];
+        [self setNavigationBarTitle:[NSString stringWithFormat:@"工作联系单草稿(%i)", (int)_draftArray.count]];
         [self.workContactListDraftsTableView reloadData];
     }
 }
@@ -182,7 +182,7 @@
             
             _willDeleteIndexPath = nil;
             
-            [self setNavigationBarTitle:[NSString stringWithFormat:@"工作联系单草稿(%i)", (int)[_draftArray count]]];
+            [self setNavigationBarTitle:[NSString stringWithFormat:@"工作联系单草稿(%i)", (int)_draftArray.count]];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:DDWorkContactListNumberRefreshNotification object:nil];
         }
@@ -205,7 +205,7 @@
 #pragma mark - UITableViewDataSource Methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_draftArray count];
+    return _draftArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

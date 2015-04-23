@@ -137,7 +137,7 @@
         _heightConstraint = nil;
     }
     
-    CGFloat totalHeight = [_recipientArray count] * TABLEVIEW_CELL_HEIGHT;
+    CGFloat totalHeight = _recipientArray.count * TABLEVIEW_CELL_HEIGHT;
     
     _heightConstraint = [NSLayoutConstraint constraintWithItem:self.recipientsListView
                                                      attribute:NSLayoutAttributeHeight
@@ -247,7 +247,7 @@
 #pragma mark - UITableViewDataSource Methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_recipientArray count];
+    return _recipientArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -300,7 +300,7 @@
     
     // 判断是否评价最后一个联系人
     BOOL isLastEvaluate = YES;
-    for(NSInteger index = 0; index < [_recipientArray count]; index++) {
+    for(NSInteger index = 0; index < _recipientArray.count; index++) {
         if(index == indexPath.row) {
             continue;
         }

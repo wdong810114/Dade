@@ -96,7 +96,7 @@
 {
     // 确定
     
-    NSMutableArray *nameArray = [[NSMutableArray alloc] initWithCapacity:[self.selectedIdArray count]];
+    NSMutableArray *nameArray = [[NSMutableArray alloc] initWithCapacity:self.selectedIdArray.count];
     for(NSDictionary *personnel in _personnelArray) {
         if([self checkSelected:personnel]) {
             [nameArray addObject:[Util trimString:[personnel stringForKey:@"staffName"]]];
@@ -234,7 +234,7 @@
 #pragma mark - UITableViewDataSource Methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_searchPersonnelArray count];
+    return _searchPersonnelArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

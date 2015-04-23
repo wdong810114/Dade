@@ -659,7 +659,7 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [_departments count];
+    return _departments.count;
 }
 
 #pragma mark - UIPickerViewDelegate Methods

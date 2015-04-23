@@ -103,10 +103,10 @@
     if(!error && jsonArray) {
         _todoArray = [[NSMutableArray alloc] initWithArray:jsonArray];
         
-        [self setNavigationBarTitle:[NSString stringWithFormat:@"待办(%i)", (int)[_todoArray count]]];
+        [self setNavigationBarTitle:[NSString stringWithFormat:@"待办(%i)", (int)_todoArray.count]];
         [self.todoListTableView reloadData];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:DDMainRefreshNotification object:@{@"type":@1, @"count":[NSNumber numberWithInteger:[_todoArray count]]}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:DDMainRefreshNotification object:@{@"type":@1, @"count":[NSNumber numberWithInteger:_todoArray.count]}];
     }
 }
 
@@ -118,7 +118,7 @@
 #pragma mark - UITableViewDataSource Methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_todoArray count];
+    return _todoArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

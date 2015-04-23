@@ -81,7 +81,7 @@
     if(!error && jsonArray) {
         _workListArray = [[NSMutableArray alloc] initWithArray:jsonArray];
         
-        [self setNavigationBarTitle:[NSString stringWithFormat:@"监督工作联系单(%i)", (int)[_workListArray count]]];
+        [self setNavigationBarTitle:[NSString stringWithFormat:@"监督工作联系单(%i)", (int)_workListArray.count]];
         [self.supervisionWorkContactListTableView reloadData];
     }
 }
@@ -94,7 +94,7 @@
 #pragma mark - UITableViewDataSource Methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_workListArray count];
+    return _workListArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

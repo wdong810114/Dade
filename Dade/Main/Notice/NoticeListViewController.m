@@ -101,10 +101,10 @@
     if(!error && jsonArray) {
         _noticeArray = [[NSMutableArray alloc] initWithArray:jsonArray];
         
-        [self setNavigationBarTitle:[NSString stringWithFormat:@"通知(%i)", (int)[_noticeArray count]]];
+        [self setNavigationBarTitle:[NSString stringWithFormat:@"通知(%i)", (int)_noticeArray.count]];
         [self.noticeListTableView reloadData];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:DDMainRefreshNotification object:@{@"type":@2, @"count":[NSNumber numberWithInteger:[_noticeArray count]]}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:DDMainRefreshNotification object:@{@"type":@2, @"count":[NSNumber numberWithInteger:_noticeArray.count]}];
     }
 }
 
@@ -116,7 +116,7 @@
 #pragma mark - UITableViewDataSource Methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_noticeArray count];
+    return _noticeArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

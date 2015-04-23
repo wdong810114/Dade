@@ -183,7 +183,7 @@
     CGFloat recipientHeight = 75.0;
 
     if(_recipientArray.count > 0) {
-        _recipientsViewConstraint.constant = [_recipientArray count] * recipientHeight + 15.0;
+        _recipientsViewConstraint.constant = _recipientArray.count * recipientHeight + 15.0;
     } else {
         _recipientsViewConstraint.constant = 0.0;
     }

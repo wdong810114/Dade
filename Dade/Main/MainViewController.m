@@ -131,7 +131,7 @@
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonArray) {
-        _todoCount = [jsonArray count];
+        _todoCount = jsonArray.count;
         
         [self.mainTableView reloadData];
     }
@@ -158,7 +158,7 @@
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonArray) {
-        _noticeCount = [jsonArray count];
+        _noticeCount = jsonArray.count;
 
         [self.mainTableView reloadData];
     }
@@ -185,7 +185,7 @@
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonArray) {
-        _mailCount = [jsonArray count];
+        _mailCount = jsonArray.count;
 
         [self.mainTableView reloadData];
     }

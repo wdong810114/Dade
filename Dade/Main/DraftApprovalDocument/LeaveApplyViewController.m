@@ -386,7 +386,7 @@
     CGFloat flowHeight = 50.0;
 
     if(_flowArray.count > 0) {
-        _approvalViewConstraint.constant = [_flowArray count] * flowHeight + 15.0;
+        _approvalViewConstraint.constant = _flowArray.count * flowHeight + 15.0;
     } else {
         _approvalViewConstraint.constant = 0.0;
     }
@@ -658,9 +658,9 @@
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     if(pickerView == _departmentPickerView) {
-        return [_departments count];
+        return _departments.count;
     } else {
-        return [_leaveTypes count];
+        return _leaveTypes.count;
     }
 }
 

@@ -109,7 +109,7 @@
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonArray) {
-        _todoCount = [jsonArray count];
+        _todoCount = jsonArray.count;
         
         [self.workContactListTableView reloadData];
     }
@@ -136,7 +136,7 @@
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonArray) {
-        _supervisionCount = [jsonArray count];
+        _supervisionCount = jsonArray.count;
         
         [self.workContactListTableView reloadData];
     }
@@ -163,7 +163,7 @@
     NSError *error = nil;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonArray) {
-        _draftCount = [jsonArray count];
+        _draftCount = jsonArray.count;
         
         [self.workContactListTableView reloadData];
     }

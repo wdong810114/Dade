@@ -76,10 +76,10 @@
     if(!error && jsonArray) {
         _mailArray = [[NSMutableArray alloc] initWithArray:jsonArray];
         
-        [self setNavigationBarTitle:[NSString stringWithFormat:@"邮件(%i)", (int)[_mailArray count]]];
+        [self setNavigationBarTitle:[NSString stringWithFormat:@"邮件(%i)", (int)_mailArray.count]];
         [self.mailListTableView reloadData];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:DDMainRefreshNotification object:@{@"type":@3, @"count":[NSNumber numberWithInteger:[_mailArray count]]}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:DDMainRefreshNotification object:@{@"type":@3, @"count":[NSNumber numberWithInteger:_mailArray.count]}];
     }
 }
 
@@ -91,7 +91,7 @@
 #pragma mark - UITableViewDataSource Methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_mailArray count];
+    return _mailArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

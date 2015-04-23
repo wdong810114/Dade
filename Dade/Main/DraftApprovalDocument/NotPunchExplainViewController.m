@@ -309,7 +309,7 @@
     CGFloat flowHeight = 50.0;
 
     if(_flowArray.count > 0) {
-        _approvalViewConstraint.constant = [_flowArray count] * flowHeight + 15.0;
+        _approvalViewConstraint.constant = _flowArray.count * flowHeight + 15.0;
     } else {
         _approvalViewConstraint.constant = 0.0;
     }
@@ -541,7 +541,7 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return [_departments count];
+    return _departments.count;
 }
 
 #pragma mark - UIPickerViewDelegate Methods
