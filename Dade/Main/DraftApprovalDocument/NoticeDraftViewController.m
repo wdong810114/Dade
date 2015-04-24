@@ -378,7 +378,6 @@
         self.monthTextField.text = @"05";
         self.dayTextField.text = @"10";
         self.copiesTextField.text = @"15";
-        self.smsAlertDaysTextField.text = @"2";
         self.subjectWordsTextField.text = @"测试关键词";
         self.markYearTextField.text = @"2015";
         self.markNumberTextField.text = @"001";
@@ -536,7 +535,7 @@
         NSString *displayvalue = self.subjectTextField.text;
         NSString *filenum = @"";
         NSString *content = self.contentTextView.text;
-        NSString *staffIds = [_recipientIdArray componentsJoinedByString:@"|"];
+        NSString *staffIds = _recipientIdArray.count == 0 ? @"" : [_recipientIdArray componentsJoinedByString:@"|"];
         NSString *temp = [NSString stringWithFormat:@"%@|%@|%@", orgInfo.orgId, orgInfo.qyId, orgInfo.depOrgId];
         NSString *isEnd = _isFeedback ? @"1" : @"0";
         NSString *phone = _isSMSAlert ? @"1" : @"0";
@@ -549,7 +548,7 @@
         NSString *char7 = [Util trimString:self.yearTextField.text];
         NSString *char8 = [Util trimString:self.monthTextField.text];
         NSString *char9 = [Util trimString:self.dayTextField.text];
-        NSString *text1 = [_reportsIdArray componentsJoinedByString:@"|"];
+        NSString *text1 = _reportsIdArray.count == 0 ? @"" : [_reportsIdArray componentsJoinedByString:@"|"];
         NSString *text2 = self.reportsLabel.text;
         
         NSString *postString = [NSString stringWithFormat:@"{\"userId\":\"%@\",\"fileTypeId\":\"%@\",\"displayvalue\":\"%@\",\"filenum\":\"%@\",\"content\":\"%@\",\"staffIds\":\"%@\",\"temp\":\"%@\",\"isEnd\":\"%@\",\"phone\":\"%@\",\"date_ph\":\"%@\",\"char2\":\"%@\",\"char3\":\"%@\",\"char4\":\"%@\",\"char5\":\"%@\",\"char6\":\"%@\",\"char7\":\"%@\",\"char8\":\"%@\",\"char9\":\"%@\",\"text1\":\"%@\",\"text2\":\"%@\"}", userId, fileTypeId, displayvalue, filenum, content, staffIds, temp, isEnd, phone, date_ph, char2, char3, char4, char5, char6, char7, char8, char9, text1, text2];
