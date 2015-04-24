@@ -172,9 +172,13 @@
     if(_isUrgency) {
         _feedbackViewConstraint.constant = 33.0 + 15.0;
         _sendButtonViewConstraint.constant = 44.0 + 15.0;
+        _feedbackView.alpha = 1.0;
+        _sendButtonView.alpha = 1.0;
     } else {
         _feedbackViewConstraint.constant = 0.0;
         _sendButtonViewConstraint.constant = 0.0;
+        _feedbackView.alpha = 0.0;
+        _sendButtonView.alpha = 0.0;
     }
 }
 
@@ -184,8 +188,10 @@
 
     if(_recipientArray.count > 0) {
         _recipientsViewConstraint.constant = _recipientArray.count * recipientHeight + 15.0;
+        _recipientsView.alpha = 1.0;
     } else {
         _recipientsViewConstraint.constant = 0.0;
+        _recipientsView.alpha = 0.0;
     }
     
     [self.recipientsView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
@@ -274,8 +280,7 @@
     NSError *error = nil;
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonDict) {
-        self.markYearLabel.text = [jsonDict stringForKey:@"char4"];
-        self.markNumberLabel.text = [jsonDict stringForKey:@"char5"];
+        self.markLabel.text = [NSString stringWithFormat:@"辽德字[%@]%@号", [jsonDict stringForKey:@"char4"], [jsonDict stringForKey:@"char5"]];
         self.contentLabel.text = [jsonDict stringForKey:@"content"];
         self.subjectLabel.text = [jsonDict stringForKey:@"displayvalue"];
         self.subjectWordsLabel.text = [jsonDict stringForKey:@"char2"];

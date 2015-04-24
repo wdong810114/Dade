@@ -13,8 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *noticeDetailScrollView;
 
-@property (weak, nonatomic) IBOutlet UILabel *markYearLabel;
-@property (weak, nonatomic) IBOutlet UILabel *markNumberLabel;
+@property (weak, nonatomic) IBOutlet UILabel *markLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subjectLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subjectWordsLabel;

@@ -17,8 +17,7 @@
                 <outlet property="feedbackView" destination="0ko-4M-9Hf" id="d7G-Ah-Izc"/>
                 <outlet property="handleLabel" destination="lCA-Dm-fsV" id="C8j-aG-ENC"/>
                 <outlet property="handlerLabel" destination="XFk-b8-OYO" id="W8b-rb-tjg"/>
-                <outlet property="markNumberLabel" destination="3zI-7G-3xP" id="hae-hP-a31"/>
-                <outlet property="markYearLabel" destination="ZH9-5X-CgH" id="i6i-65-wgs"/>
+                <outlet property="markLabel" destination="6W5-dn-n7E" id="ZGD-8Z-Hls"/>
                 <outlet property="monthLabel" destination="ap1-Tb-XcE" id="nMj-8G-rwd"/>
                 <outlet property="noticeDetailScrollView" destination="rmM-aW-qTw" id="INB-aK-3Sn"/>
                 <outlet property="recipientsView" destination="Rzc-Vr-12C" id="HcK-6G-8kl"/>
@@ -41,62 +40,31 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zds-eV-cur" userLabel="MarkView">
-                            <rect key="frame" x="10" y="15" width="300" height="33"/>
+                            <rect key="frame" x="10" y="15" width="300" height="43"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="辽德字 [" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsI-eN-d9R" userLabel="MTitleLabel1">
-                                    <rect key="frame" x="5" y="8" width="50" height="17"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="辽宁大德实业集团有限公司" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CsY-WX-YrZ" userLabel="CompanyLabel">
+                                    <rect key="frame" x="48" y="0.0" width="204" height="21"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                    <color key="textColor" red="0.81176470590000005" green="0.23137254900000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="80" placeholderIntrinsicHeight="17" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZH9-5X-CgH" userLabel="MarkYearLabel">
-                                    <rect key="frame" x="60" y="8" width="80" height="17"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="80" id="JDX-hp-Nb2"/>
-                                    </constraints>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="辽德字[]号" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6W5-dn-n7E" userLabel="MarkLabel">
+                                    <rect key="frame" x="118" y="26" width="64" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYW-qU-i6b" userLabel="MTitleLabel2">
-                                    <rect key="frame" x="145" y="8" width="4" height="17"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="17" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3zI-7G-3xP" userLabel="MarkNumberLabel">
-                                    <rect key="frame" x="154" y="8" width="100" height="17"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="100" id="y1D-fc-dVI"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="号" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sne-oD-exh" userLabel="MTitleLabel3">
-                                    <rect key="frame" x="256" y="8" width="14" height="17"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="dYW-qU-i6b" firstAttribute="centerY" secondItem="rsI-eN-d9R" secondAttribute="centerY" id="1tC-nO-qiH"/>
-                                <constraint firstItem="3zI-7G-3xP" firstAttribute="leading" secondItem="dYW-qU-i6b" secondAttribute="trailing" constant="5" id="8Iq-lk-NC7"/>
-                                <constraint firstItem="3zI-7G-3xP" firstAttribute="centerY" secondItem="rsI-eN-d9R" secondAttribute="centerY" id="SgB-Ie-Dpa"/>
-                                <constraint firstItem="sne-oD-exh" firstAttribute="leading" secondItem="3zI-7G-3xP" secondAttribute="trailing" constant="2" id="XhP-PI-3GI"/>
-                                <constraint firstItem="ZH9-5X-CgH" firstAttribute="centerY" secondItem="rsI-eN-d9R" secondAttribute="centerY" id="Ygj-01-Icg"/>
-                                <constraint firstItem="sne-oD-exh" firstAttribute="centerY" secondItem="rsI-eN-d9R" secondAttribute="centerY" id="fDy-Gt-twv"/>
-                                <constraint firstItem="rsI-eN-d9R" firstAttribute="leading" secondItem="Zds-eV-cur" secondAttribute="leading" constant="5" id="h1z-xk-E4d"/>
-                                <constraint firstItem="rsI-eN-d9R" firstAttribute="centerY" secondItem="Zds-eV-cur" secondAttribute="centerY" id="l0Z-yJ-38T"/>
-                                <constraint firstItem="dYW-qU-i6b" firstAttribute="leading" secondItem="ZH9-5X-CgH" secondAttribute="trailing" constant="5" id="lOf-YI-fgD"/>
-                                <constraint firstItem="ZH9-5X-CgH" firstAttribute="leading" secondItem="rsI-eN-d9R" secondAttribute="trailing" constant="5" id="qZS-Py-ROj"/>
-                                <constraint firstItem="rsI-eN-d9R" firstAttribute="top" secondItem="Zds-eV-cur" secondAttribute="top" constant="8" id="zn6-sL-yP3"/>
+                                <constraint firstItem="CsY-WX-YrZ" firstAttribute="top" secondItem="Zds-eV-cur" secondAttribute="top" id="6fq-gM-9Qh"/>
+                                <constraint firstAttribute="centerX" secondItem="CsY-WX-YrZ" secondAttribute="centerX" id="fex-pw-ydk"/>
+                                <constraint firstAttribute="bottom" secondItem="6W5-dn-n7E" secondAttribute="bottom" id="nEz-cQ-8ft"/>
+                                <constraint firstAttribute="centerX" secondItem="6W5-dn-n7E" secondAttribute="centerX" id="r5e-Ug-GOq"/>
+                                <constraint firstItem="6W5-dn-n7E" firstAttribute="top" secondItem="CsY-WX-YrZ" secondAttribute="bottom" constant="5" id="xKh-2U-PkH"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cpw-V4-ptN" userLabel="ContentView">
-                            <rect key="frame" x="10" y="63" width="300" height="67"/>
+                            <rect key="frame" x="10" y="73" width="300" height="67"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="内容：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oYy-Jg-BBb" userLabel="CTitleLabel">
                                     <rect key="frame" x="5" y="5" width="42" height="17"/>
@@ -126,7 +94,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pmX-JW-rgi" userLabel="SubjectView">
-                            <rect key="frame" x="10" y="145" width="300" height="33"/>
+                            <rect key="frame" x="10" y="155" width="300" height="33"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="主题：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Npz-e6-RrK" userLabel="STitleLabel">
                                     <rect key="frame" x="5" y="8" width="42" height="17"/>
@@ -201,7 +169,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7G2-Pn-v74" userLabel="SubjectWordsView">
-                            <rect key="frame" x="10" y="193" width="300" height="33"/>
+                            <rect key="frame" x="10" y="203" width="300" height="33"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="主题词：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sO3-r8-FZy" userLabel="STitleLabel">
                                     <rect key="frame" x="5" y="8" width="56" height="17"/>
@@ -229,7 +197,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GGw-d8-PlZ" userLabel="ReportsView">
-                            <rect key="frame" x="10" y="241" width="300" height="67"/>
+                            <rect key="frame" x="10" y="251" width="300" height="67"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="抄报：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQH-38-Xa1" userLabel="RTitleLabel">
                                     <rect key="frame" x="5" y="5" width="42" height="17"/>
@@ -259,7 +227,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ShR-7s-zlw" userLabel="HandleView">
-                            <rect key="frame" x="10" y="323" width="300" height="33"/>
+                            <rect key="frame" x="10" y="333" width="300" height="33"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="经办：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R32-Id-o1R" userLabel="HTitleLabel">
                                     <rect key="frame" x="5" y="8" width="42" height="17"/>
@@ -286,7 +254,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kmJ-oD-lQO" userLabel="HandlerView">
-                            <rect key="frame" x="10" y="371" width="300" height="33"/>
+                            <rect key="frame" x="10" y="381" width="300" height="33"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="经办人：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qwx-Ns-rMy" userLabel="HTitleLabel">
                                     <rect key="frame" x="5" y="8" width="56" height="17"/>
@@ -313,7 +281,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lvq-VX-PB3" userLabel="DepartmentView">
-                            <rect key="frame" x="10" y="419" width="300" height="33"/>
+                            <rect key="frame" x="10" y="429" width="300" height="33"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="发文：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bro-uo-O64" userLabel="DTitleLabel">
                                     <rect key="frame" x="5" y="8" width="42" height="17"/>
@@ -341,7 +309,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BYw-tu-yCx" userLabel="DateView">
-                            <rect key="frame" x="10" y="467" width="300" height="33"/>
+                            <rect key="frame" x="10" y="477" width="300" height="33"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="42" placeholderIntrinsicHeight="17" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4aZ-5F-IDO" userLabel="YearLabel">
                                     <rect key="frame" x="5" y="8" width="50" height="17"/>
@@ -438,7 +406,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UhZ-0W-tiH" userLabel="SMSAlertView">
-                            <rect key="frame" x="10" y="515" width="300" height="32"/>
+                            <rect key="frame" x="10" y="525" width="300" height="32"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="短信提醒" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="odj-sK-AEM" userLabel="STitleLabel1">
                                     <rect key="frame" x="5" y="8" width="56" height="17"/>
