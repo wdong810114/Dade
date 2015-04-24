@@ -229,7 +229,7 @@
 //        content 邮件内容
 //        userId ：用户Id
         
-        NSString *staffIds = [_recipientIdArray componentsJoinedByString:@"|"];
+        NSString *staffIds = _recipientIdArray.count == 0 ? @"" : [_recipientIdArray componentsJoinedByString:@"|"];
         
         NSString *postString = [NSString stringWithFormat:@"{\"staffIds\":\"%@\",\"displayvalue\":\"%@\",\"content\":\"%@\",\"userId\":\"%@\"}", staffIds, self.subjectTextField.text, self.contentTextView.text, DadeAppDelegate.userInfo.staffId];
         NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];

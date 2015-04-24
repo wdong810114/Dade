@@ -327,7 +327,7 @@
 //        staffId：发件人ID
         
         NSString *doType = [NSString stringWithFormat:@"%i", (int)type];
-        NSString *staffIds = [_recipientIdArray componentsJoinedByString:@","];
+        NSString *staffIds = _recipientIdArray.count == 0 ? @"" : [_recipientIdArray componentsJoinedByString:@","];
         NSString *isSMSAlert = [Util isEmptyString:self.smsAlertTextField.text] ? @"0" : @"1";
         NSString *wordId = self.workId ? self.workId : @"";
         
