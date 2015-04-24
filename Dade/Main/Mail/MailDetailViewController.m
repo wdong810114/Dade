@@ -88,7 +88,7 @@
     }
     
     MailReplyViewController *viewController = [[MailReplyViewController alloc] initWithNibName:@"MailReplyViewController" bundle:nil];
-    viewController.recipient = self.senderLabel.text;
+    viewController.subject = self.subjectLabel.text;
     viewController.mailId = self.mailId;
     [self.navigationController pushViewController:viewController animated:YES];
 }

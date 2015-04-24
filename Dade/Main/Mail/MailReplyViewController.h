@@ -19,7 +19,7 @@
 
 - (IBAction)replyButtonClicked:(UIButton *)button;
 
-@property (copy, nonatomic) NSString *recipient;    // 收件人
+@property (copy, nonatomic) NSString *subject;      // 主题
 @property (copy, nonatomic) NSString *mailId;
 
 @end
