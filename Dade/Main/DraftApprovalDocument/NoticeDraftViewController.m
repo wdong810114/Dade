@@ -256,6 +256,7 @@
     
     _isSMSAlert = !_isSMSAlert;
     self.smsAlertCheckImageView.image = _isSMSAlert ? [UIImage imageNamed:@"row_selected_icon"] : [UIImage imageNamed:@"row_unselected_icon"];
+    self.smsAlertDaysTextField.text = _isSMSAlert ? @"0" : @"";
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification
@@ -418,12 +419,6 @@
         return NO;
     }
     
-    if([[Util trimString:self.reportsLabel.text] isEqualToString:@""]) {
-        [self showAlert:@"抄报不能为空"];
-        
-        return NO;
-    }
-    
     if([[Util trimString:self.yearTextField.text] isEqualToString:@""] ||
        [[Util trimString:self.monthTextField.text] isEqualToString:@""] ||
        [[Util trimString:self.dayTextField.text] isEqualToString:@""]) {
@@ -444,26 +439,20 @@
         return NO;
     }
     
-    if([[Util trimString:self.smsAlertDaysTextField.text] isEqualToString:@""]) {
-        [self showAlert:@"短信提醒天数不能为空"];
-        
-        return NO;
-    }
-    
-    NSString *printDate = [NSString stringWithFormat:@"%@-%@-%@", self.yearTextField.text, self.monthTextField.text, self.dayTextField.text];
+    NSString *printDate = [NSString stringWithFormat:@"%@-%@-%@", [Util trimString:self.yearTextField.text], [Util trimString:self.monthTextField.text], [Util trimString:self.dayTextField.text]];
     if(![Util isValidDate:printDate]) {
         [self showAlert:@"印发日期不合法"];
         
         return NO;
     }
     
-    if(![Util isValidNumber:self.copiesTextField.text]) {
+    if(![Util isValidNumber:[Util trimString:self.copiesTextField.text]]) {
         [self showAlert:@"印发份数不合法"];
         
         return NO;
     }
     
-    if(![Util isValidNumber:self.smsAlertDaysTextField.text]) {
+    if(![[Util trimString:self.smsAlertDaysTextField.text] isEqualToString:@""] && ![Util isValidNumber:[Util trimString:self.smsAlertDaysTextField.text]]) {
         [self showAlert:@"短信提醒天数不合法"];
         
         return NO;
@@ -551,15 +540,15 @@
         NSString *temp = [NSString stringWithFormat:@"%@|%@|%@", orgInfo.orgId, orgInfo.qyId, orgInfo.depOrgId];
         NSString *isEnd = _isFeedback ? @"1" : @"0";
         NSString *phone = _isSMSAlert ? @"1" : @"0";
-        NSString *date_ph = self.smsAlertDaysTextField.text;
+        NSString *date_ph = [Util trimString:self.smsAlertDaysTextField.text];
         NSString *char2 = self.subjectWordsTextField.text;
         NSString *char3 = self.handleLabel.text;
-        NSString *char4 = self.markYearTextField.text;
-        NSString *char5 = self.markNumberTextField.text;
-        NSString *char6 = self.copiesTextField.text;
-        NSString *char7 = self.yearTextField.text;
-        NSString *char8 = self.monthTextField.text;
-        NSString *char9 = self.dayTextField.text;
+        NSString *char4 = [Util trimString:self.markYearTextField.text];
+        NSString *char5 = [Util trimString:self.markNumberTextField.text];
+        NSString *char6 = [Util trimString:self.copiesTextField.text];
+        NSString *char7 = [Util trimString:self.yearTextField.text];
+        NSString *char8 = [Util trimString:self.monthTextField.text];
+        NSString *char9 = [Util trimString:self.dayTextField.text];
         NSString *text1 = [_reportsIdArray componentsJoinedByString:@"|"];
         NSString *text2 = self.reportsLabel.text;
         

@@ -50,8 +50,14 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9U2-hp-RAg" userLabel="NoticeDraftScrollView">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                     <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="辽宁大德实业集团有限公司" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0v-7a-pF7" userLabel="CompanyLabel">
+                            <rect key="frame" x="58" y="15" width="204" height="21"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <color key="textColor" red="0.81176470590000005" green="0.23137254900000001" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XeY-Df-4Fw" userLabel="MarkView">
-                            <rect key="frame" x="10" y="15" width="300" height="33"/>
+                            <rect key="frame" x="10" y="50" width="300" height="33"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="辽德字 [" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dty-L1-Xnv" userLabel="MTitleLabel1">
                                     <rect key="frame" x="5" y="8" width="50" height="17"/>
@@ -112,7 +118,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8N6-l0-A53" userLabel="ContentView">
-                            <rect key="frame" x="10" y="63" width="300" height="127"/>
+                            <rect key="frame" x="10" y="98" width="300" height="127"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="内容：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J2x-nr-Hab" userLabel="CTitleLabel">
                                     <rect key="frame" x="5" y="5" width="42" height="17"/>
@@ -164,7 +170,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R2C-jy-LoR" userLabel="SubjectView">
-                            <rect key="frame" x="10" y="205" width="300" height="33"/>
+                            <rect key="frame" x="10" y="240" width="300" height="33"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="主题：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4HB-Zj-fWi" userLabel="STitleLabel">
                                     <rect key="frame" x="5" y="8" width="42" height="17"/>
@@ -195,7 +201,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HuI-PH-v36" userLabel="FeedbackView">
-                            <rect key="frame" x="10" y="253" width="300" height="33"/>
+                            <rect key="frame" x="10" y="288" width="300" height="33"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="是否查收确认" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mec-Tu-7Ta" userLabel="FTitleLabel">
                                     <rect key="frame" x="5" y="8" width="84" height="17"/>
@@ -231,7 +237,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6mg-iR-x3E" userLabel="SubjectWordsView">
-                            <rect key="frame" x="10" y="301" width="300" height="33"/>
+                            <rect key="frame" x="10" y="336" width="300" height="33"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="主题词：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hoM-DP-D7J" userLabel="STitleLabel">
                                     <rect key="frame" x="5" y="8" width="56" height="17"/>
@@ -262,7 +268,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YZF-rq-DTK" userLabel="ReportsView">
-                            <rect key="frame" x="10" y="349" width="300" height="33"/>
+                            <rect key="frame" x="10" y="384" width="300" height="33"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="抄报：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3p6-12-U4t" userLabel="RTitleLabel">
                                     <rect key="frame" x="5" y="8" width="42" height="17"/>
@@ -305,7 +311,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m0e-N9-yfx" userLabel="HandleView">
-                            <rect key="frame" x="10" y="397" width="300" height="33"/>
+                            <rect key="frame" x="10" y="432" width="300" height="33"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="经办：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NuF-fg-1ku" userLabel="HTitleLabel">
                                     <rect key="frame" x="5" y="8" width="42" height="17"/>
@@ -332,7 +338,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9T9-sX-4qA" userLabel="HandlerView">
-                            <rect key="frame" x="10" y="445" width="300" height="33"/>
+                            <rect key="frame" x="10" y="480" width="300" height="33"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="经办人：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WpL-ck-hjX" userLabel="HTitleLabel">
                                     <rect key="frame" x="5" y="8" width="56" height="17"/>
@@ -359,7 +365,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pbm-sE-iji" userLabel="DepartmentView">
-                            <rect key="frame" x="10" y="493" width="300" height="33"/>
+                            <rect key="frame" x="10" y="528" width="300" height="33"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="发文：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JIM-2Y-vOx" userLabel="DTitleLabel">
                                     <rect key="frame" x="5" y="8" width="42" height="17"/>
@@ -395,7 +401,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VBA-wr-w56" userLabel="DateView">
-                            <rect key="frame" x="10" y="541" width="300" height="33"/>
+                            <rect key="frame" x="10" y="576" width="300" height="33"/>
                             <subviews>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="yyyy" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1YC-wO-pZV" userLabel="YearTextField">
                                     <rect key="frame" x="5" y="7" width="50" height="19"/>
@@ -500,7 +506,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vvw-cz-cxv" userLabel="RecipientsView">
-                            <rect key="frame" x="10" y="589" width="300" height="33"/>
+                            <rect key="frame" x="10" y="624" width="300" height="33"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="收件人：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pbp-Tf-tpP" userLabel="RTitleLabel">
                                     <rect key="frame" x="5" y="8" width="56" height="17"/>
@@ -543,7 +549,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="shE-RW-B5k" userLabel="SMSAlertView">
-                            <rect key="frame" x="10" y="637" width="300" height="33"/>
+                            <rect key="frame" x="10" y="672" width="300" height="33"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="短信提醒" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gvL-AO-DII" userLabel="STitleLabel1">
                                     <rect key="frame" x="5" y="8" width="56" height="17"/>
@@ -603,7 +609,7 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VvU-pc-Hfp" userLabel="SendButton">
-                            <rect key="frame" x="10" y="685" width="300" height="44"/>
+                            <rect key="frame" x="10" y="720" width="300" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="Rmi-Mj-fSe"/>
                             </constraints>
@@ -618,6 +624,7 @@
                     </subviews>
                     <constraints>
                         <constraint firstItem="XeY-Df-4Fw" firstAttribute="leading" secondItem="9U2-hp-RAg" secondAttribute="leading" constant="10" id="19L-j0-ogb"/>
+                        <constraint firstAttribute="centerX" secondItem="p0v-7a-pF7" secondAttribute="centerX" id="1Y1-Tk-PAf"/>
                         <constraint firstItem="shE-RW-B5k" firstAttribute="leading" secondItem="8N6-l0-A53" secondAttribute="leading" id="25F-RK-nhq"/>
                         <constraint firstItem="9T9-sX-4qA" firstAttribute="top" secondItem="m0e-N9-yfx" secondAttribute="bottom" constant="15" id="44W-7x-X3U"/>
                         <constraint firstItem="6mg-iR-x3E" firstAttribute="top" secondItem="HuI-PH-v36" secondAttribute="bottom" constant="15" id="4PU-fJ-Kwt"/>
@@ -632,7 +639,7 @@
                         <constraint firstItem="8N6-l0-A53" firstAttribute="leading" secondItem="9U2-hp-RAg" secondAttribute="leading" constant="10" id="KgG-J4-na8"/>
                         <constraint firstItem="Pbm-sE-iji" firstAttribute="top" secondItem="9T9-sX-4qA" secondAttribute="bottom" constant="15" id="Knl-31-6WN"/>
                         <constraint firstItem="R2C-jy-LoR" firstAttribute="width" secondItem="8N6-l0-A53" secondAttribute="width" id="Mr4-pV-hSZ"/>
-                        <constraint firstItem="XeY-Df-4Fw" firstAttribute="top" secondItem="9U2-hp-RAg" secondAttribute="top" constant="15" id="OVA-ed-SDM"/>
+                        <constraint firstItem="XeY-Df-4Fw" firstAttribute="top" secondItem="9U2-hp-RAg" secondAttribute="top" constant="50" id="OVA-ed-SDM"/>
                         <constraint firstItem="8N6-l0-A53" firstAttribute="width" secondItem="Pbm-sE-iji" secondAttribute="width" id="PpJ-gv-jjE"/>
                         <constraint firstItem="8N6-l0-A53" firstAttribute="leading" secondItem="9T9-sX-4qA" secondAttribute="leading" id="QTf-bG-TA3"/>
                         <constraint firstItem="HuI-PH-v36" firstAttribute="top" secondItem="R2C-jy-LoR" secondAttribute="bottom" constant="15" id="T3d-yv-phc"/>
@@ -641,6 +648,7 @@
                         <constraint firstAttribute="trailing" secondItem="XeY-Df-4Fw" secondAttribute="trailing" constant="10" id="WZR-V6-xBH"/>
                         <constraint firstItem="HuI-PH-v36" firstAttribute="leading" secondItem="8N6-l0-A53" secondAttribute="leading" id="Wfv-rL-uqD"/>
                         <constraint firstItem="8N6-l0-A53" firstAttribute="width" secondItem="m0e-N9-yfx" secondAttribute="width" id="b4N-Sc-YGm"/>
+                        <constraint firstItem="p0v-7a-pF7" firstAttribute="top" secondItem="9U2-hp-RAg" secondAttribute="top" constant="15" id="e62-wi-M1m"/>
                         <constraint firstAttribute="trailing" secondItem="8N6-l0-A53" secondAttribute="trailing" constant="10" id="fMY-J5-8gN"/>
                         <constraint firstItem="8N6-l0-A53" firstAttribute="leading" secondItem="Pbm-sE-iji" secondAttribute="leading" id="fjw-Em-g4V"/>
                         <constraint firstItem="vvw-cz-cxv" firstAttribute="top" secondItem="VBA-wr-w56" secondAttribute="bottom" constant="15" id="fvF-mf-8n6"/>
