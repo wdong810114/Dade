@@ -137,6 +137,10 @@
                                                                 constant:0.0];
         [self.sendButtonView addConstraint:_sendButtonViewConstraint];
     }
+    
+    _feedbackView.alpha = 0.0;
+    _recipientsView.alpha = 0.0;
+    _sendButtonView.alpha = 0.0;
 
     self.feedbackCheckImageView.image = [UIImage imageNamed:@"row_unselected_icon"];
     self.smsAlertCheckImageView.image = [UIImage imageNamed:@"row_unselected_icon"];

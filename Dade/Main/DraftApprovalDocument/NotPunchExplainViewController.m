@@ -244,6 +244,8 @@
                                                                 constant:0.0];
         [self.approvalView addConstraint:_approvalViewConstraint];
     }
+    
+    _approvalView.alpha = 0.0;
 
     OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[0];
     self.nameLabel.text = DadeAppDelegate.userInfo.staffName;
@@ -307,11 +309,13 @@
 - (void)updateApprovalView
 {
     CGFloat flowHeight = 50.0;
-
+    
     if(_flowArray.count > 0) {
         _approvalViewConstraint.constant = _flowArray.count * flowHeight + 15.0;
+        _approvalView.alpha = 1.0;
     } else {
         _approvalViewConstraint.constant = 0.0;
+        _approvalView.alpha = 0.0;
     }
     
     [self.approvalView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];

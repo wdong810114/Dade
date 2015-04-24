@@ -187,6 +187,8 @@
         [self.approvalView addConstraint:_approvalViewConstraint];
     }
     
+    _approvalView.alpha = 0.0;
+    
     UIToolbar *inputAccessoryView = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, DEVICE_WIDTH, INPUT_ACCESSORY_VIEW_HEIGHT)];
     inputAccessoryView.barStyle = UIBarStyleDefault;
     UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -347,8 +349,10 @@
     
     if(_flowArray.count > 0) {
         _approvalViewConstraint.constant = _flowArray.count * flowHeight + 15.0;
+        _approvalView.alpha = 1.0;
     } else {
         _approvalViewConstraint.constant = 0.0;
+        _approvalView.alpha = 0.0;
     }
     
     CGFloat originY = 0.0;
