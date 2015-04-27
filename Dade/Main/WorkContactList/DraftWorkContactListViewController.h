@@ -19,7 +19,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *recipientsLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (weak, nonatomic) IBOutlet UIView *dateView;
-@property (weak, nonatomic) IBOutlet UITextField *dateTextField;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *dateArrowImageView;
 @property (weak, nonatomic) IBOutlet UIView *smsAlertView;
 @property (weak, nonatomic) IBOutlet UITextField *smsAlertTextField;
 @property (weak, nonatomic) IBOutlet UIView *subjectView;

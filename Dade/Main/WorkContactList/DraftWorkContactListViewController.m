@@ -12,6 +12,8 @@
 
 - (void)initView;
 - (BOOL)checkValidity;
+- (void)initPickerPanel;
+- (void)removePickerPanel;
 
 - (void)queryTodoWorkInfo;
 - (void)requestQueryTodoWorkInfoFinished:(NSString *)jsonString;
@@ -25,6 +27,9 @@
 @implementation DraftWorkContactListViewController
 {
     CGPoint _scrollViewContentOffset;   // 解决iOS6下bug
+    
+    UIView *_datePickerPanel;
+    UIDatePicker *_datePickerView;
     
     NSArray *_recipientIdArray;
 }
@@ -61,6 +66,7 @@
     [super viewDidLoad];
     
     [self initView];
+    [self initPickerPanel];
     
     if(self.workId) {
         [self queryTodoWorkInfo];
@@ -128,6 +134,60 @@
     [self saveOrUpdateTodoWord:0];
 }
 
+- (void)dateClicked
+{
+    // 未打卡日期
+    
+    if([self isRequesting]) {
+        return;
+    }
+    
+    [self.view endEditing:YES];
+    
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         CGRect frame = _datePickerPanel.frame;
+                         frame.origin.y = self.view.frame.size.height - frame.size.height;
+                         _datePickerPanel.frame = frame;
+                     } completion:^(BOOL finished) {
+                     }];
+    
+    CGFloat maxOffsetY = self.dateView.frame.origin.y;
+    CGFloat minOffsetY = self.dateView.frame.origin.y + self.dateView.frame.size.height + _datePickerPanel.frame.size.height - self.draftWorkContactListScrollView.frame.size.height;
+    
+    if(maxOffsetY < self.draftWorkContactListScrollView.contentOffset.y) {
+        [self.draftWorkContactListScrollView setContentOffset:CGPointMake(0.0, maxOffsetY) animated:YES];
+    }
+    if(self.draftWorkContactListScrollView.contentOffset.y < minOffsetY) {
+        CGFloat scrollMaxOffsetY = self.draftWorkContactListScrollView.contentSize.height - self.draftWorkContactListScrollView.frame.size.height;
+        
+        self.draftWorkContactListScrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, minOffsetY - scrollMaxOffsetY, 0.0);
+        [UIView animateWithDuration:0.25
+                         animations:^{
+                             self.draftWorkContactListScrollView.contentOffset = CGPointMake(0.0, minOffsetY);
+                         }
+         ];
+    }
+}
+
+- (void)doneDateClicked
+{
+    self.dateLabel.text = [Util stringFromDate:_datePickerView.date];
+    
+    [self removePickerPanel];
+    
+    self.draftWorkContactListScrollView.contentInset = UIEdgeInsetsZero;
+    
+    CGFloat scrollMaxOffsetY = self.draftWorkContactListScrollView.contentSize.height - self.draftWorkContactListScrollView.frame.size.height;
+    if(self.draftWorkContactListScrollView.contentOffset.y > scrollMaxOffsetY) {
+        if(scrollMaxOffsetY < 0) {
+            self.draftWorkContactListScrollView.contentOffset = CGPointZero;
+        } else {
+            self.draftWorkContactListScrollView.contentOffset = CGPointMake(0.0, scrollMaxOffsetY);
+        }
+    }
+}
+
 - (IBAction)sendButtonClicked:(UIButton *)button
 {
     // 发送
@@ -156,12 +216,10 @@
 - (void)keyboardWillShow:(NSNotification *)notification
 {
     CGRect keyboardFrame = [[notification.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    NSTimeInterval animationDuration = [[notification.userInfo valueForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     CGFloat maxOffsetY, minOffsetY;
     
-    if([self.dateTextField isFirstResponder]) {
-        maxOffsetY = self.dateView.frame.origin.y;
-        minOffsetY = self.dateView.frame.origin.y + self.dateView.frame.size.height + keyboardFrame.size.height - self.draftWorkContactListScrollView.frame.size.height;
-    } else if([self.smsAlertTextField isFirstResponder]) {
+    if([self.smsAlertTextField isFirstResponder]) {
         maxOffsetY = self.smsAlertView.frame.origin.y;
         minOffsetY = self.smsAlertView.frame.origin.y + self.smsAlertView.frame.size.height + keyboardFrame.size.height - self.draftWorkContactListScrollView.frame.size.height;
     } else if([self.subjectTextField isFirstResponder]) {
@@ -171,20 +229,33 @@
         maxOffsetY = self.contentView.frame.origin.y;
         minOffsetY = self.contentView.frame.origin.y + self.contentView.frame.size.height + keyboardFrame.size.height - self.draftWorkContactListScrollView.frame.size.height;
     }
-    
+
     if(maxOffsetY < self.draftWorkContactListScrollView.contentOffset.y) {
         [self.draftWorkContactListScrollView setContentOffset:CGPointMake(0.0, maxOffsetY) animated:YES];
     }
     if(self.draftWorkContactListScrollView.contentOffset.y < minOffsetY) {
-        [self.draftWorkContactListScrollView setContentOffset:CGPointMake(0.0, minOffsetY) animated:YES];
+        CGFloat scrollMaxOffsetY = self.draftWorkContactListScrollView.contentSize.height - self.draftWorkContactListScrollView.frame.size.height;
+        
+        self.draftWorkContactListScrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, minOffsetY - scrollMaxOffsetY, 0.0);
+        [UIView animateWithDuration:animationDuration
+                         animations:^{
+                             self.draftWorkContactListScrollView.contentOffset = CGPointMake(0.0, minOffsetY);
+                         }
+         ];
     }
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
+    self.draftWorkContactListScrollView.contentInset = UIEdgeInsetsZero;
+    
     CGFloat scrollMaxOffsetY = self.draftWorkContactListScrollView.contentSize.height - self.draftWorkContactListScrollView.frame.size.height;
     if(self.draftWorkContactListScrollView.contentOffset.y > scrollMaxOffsetY) {
-        [self.draftWorkContactListScrollView setContentOffset:CGPointMake(0.0, scrollMaxOffsetY) animated:YES];
+        if(scrollMaxOffsetY < 0) {
+            [self.draftWorkContactListScrollView setContentOffset:CGPointZero animated:YES];
+        } else {
+            [self.draftWorkContactListScrollView setContentOffset:CGPointMake(0.0, scrollMaxOffsetY) animated:YES];
+        }
     }
 }
 
@@ -199,11 +270,18 @@
 - (void)initView
 {
     if(!IOS_VERSION_7_OR_ABOVE) {
+        self.dateLabel.preferredMaxLayoutWidth = self.dateLabel.bounds.size.width;
         self.senderLabel.preferredMaxLayoutWidth = self.senderLabel.bounds.size.width;
         self.recipientsLabel.preferredMaxLayoutWidth = self.recipientsLabel.bounds.size.width;
     }
     
     self.senderLabel.text = DadeAppDelegate.userInfo.staffName;
+    
+    self.dateLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dateClicked)];
+    [self.dateLabel addGestureRecognizer:tapGestureRecognizer];
+    
+    self.dateArrowImageView.image = [UIImage imageNamed:@"down_arrow"];
     
     [self.addButton setTitleColor:BLUE_BUTTON_TITLE_NORMAL_COLOR forState:UIControlStateNormal];
     [self.addButton setTitleColor:BLUE_BUTTON_TITLE_HIGHLIGHTED_COLOR forState:UIControlStateHighlighted];
@@ -223,13 +301,13 @@
 
 - (BOOL)checkValidity
 {
-    if([[Util trimString:self.senderLabel.text] isEqualToString:@""]) {
+    if([[Util trimString:self.recipientsLabel.text] isEqualToString:@""]) {
         [self showAlert:@"收件人不能为空"];
         
         return NO;
     }
     
-    if([[Util trimString:self.dateTextField.text] isEqualToString:@""]) {
+    if([[Util trimString:self.dateLabel.text] isEqualToString:@""]) {
         [self showAlert:@"指定完成时间不能为空"];
         
         return NO;
@@ -247,13 +325,52 @@
         return NO;
     }
     
-    if(![Util isValidDate:self.dateTextField.text]) {
-        [self showAlert:@"指定完成时间不合法"];
-        
-        return NO;
-    }
+//    if(![Util isValidDate:self.dateLabel.text]) {
+//        [self showAlert:@"指定完成时间不合法"];
+//        
+//        return NO;
+//    }
     
     return YES;
+}
+
+- (void)initPickerPanel
+{
+    if(!_datePickerPanel || !_datePickerView) {
+        UIView *pickerPanel = [[UIView alloc] initWithFrame:CGRectMake(0.0, DEVICE_HEIGHT, DEVICE_WIDTH, PICKER_VIEW_HEIGHT + TOOLBAR_HEIGHT)];
+        pickerPanel.backgroundColor = [UIColor whiteColor];
+        
+        UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, pickerPanel.frame.size.width, TOOLBAR_HEIGHT)];
+        toolbar.barStyle = UIBarStyleDefault;
+        UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:BAR_BUTTON_TITLE_DONE style:UIBarButtonItemStyleDone target:self action:@selector(doneDateClicked)];
+        NSArray *buttonArray = [NSArray arrayWithObjects:flexibleSpace, doneButton, nil];
+        toolbar.items = buttonArray;
+        
+        UIDatePicker *pickerView = [[UIDatePicker alloc] initWithFrame:CGRectMake(0.0, TOOLBAR_HEIGHT, pickerPanel.frame.size.width, PICKER_VIEW_HEIGHT)];
+        pickerView.datePickerMode = UIDatePickerModeDate;
+        
+        [pickerPanel addSubview:toolbar];
+        [pickerPanel addSubview:pickerView];
+        [self.view addSubview:pickerPanel];
+        
+        _datePickerView = pickerView;
+        _datePickerPanel = pickerPanel;
+    }
+}
+
+- (void)removePickerPanel
+{
+    if(_datePickerPanel) {
+        [UIView animateWithDuration:0.25
+                         animations:^{
+                             CGRect frame = _datePickerPanel.frame;
+                             frame.origin.y = self.view.frame.size.height;
+                             _datePickerPanel.frame = frame;
+                         }
+                         completion:NULL
+         ];
+    }
 }
 
 - (void)queryTodoWorkInfo
@@ -278,9 +395,10 @@
     NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
     if(!error && jsonDict) {
         self.senderLabel.text = [jsonDict stringForKey:@"staffName"];
-        self.dateTextField.text = [jsonDict stringForKey:@"appointTime"];
+        self.dateLabel.text = [jsonDict stringForKey:@"appointTime"];
         self.smsAlertTextField.text = [jsonDict stringForKey:@"datePh"];
         self.subjectTextField.text = [jsonDict stringForKey:@"displayvalue"];
+        _datePickerView.date = [Util dateFromString:self.dateLabel.text];
         
         NSString *content = [jsonDict stringForKey:@"content"];
         if(content.length > 0) {
@@ -331,7 +449,7 @@
         NSString *isSMSAlert = [Util isEmptyString:self.smsAlertTextField.text] ? @"0" : @"1";
         NSString *wordId = self.workId ? self.workId : @"";
         
-        NSString *postString = [NSString stringWithFormat:@"{\"doType\":\"%@\",\"staffIds\":\"%@\",\"phone\":\"%@\",\"date_ph\":\"%@\",\"appoint_time\":\"%@\",\"displayvalue\":\"%@\",\"content\":\"%@\",\"wordId\":\"%@\",\"staffId\":\"%@\"}", doType, staffIds, isSMSAlert, self.smsAlertTextField.text, self.dateTextField.text, self.subjectTextField.text, self.contentTextView.text, wordId, DadeAppDelegate.userInfo.staffId];
+        NSString *postString = [NSString stringWithFormat:@"{\"doType\":\"%@\",\"staffIds\":\"%@\",\"phone\":\"%@\",\"date_ph\":\"%@\",\"appoint_time\":\"%@\",\"displayvalue\":\"%@\",\"content\":\"%@\",\"wordId\":\"%@\",\"staffId\":\"%@\"}", doType, staffIds, isSMSAlert, self.smsAlertTextField.text, self.dateLabel.text, self.subjectTextField.text, self.contentTextView.text, wordId, DadeAppDelegate.userInfo.staffId];
         NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:SAVE_OR_UPDATE_TODO_WORD_REQUEST_URL];
@@ -366,7 +484,12 @@
 #pragma mark - UIScrollViewDelegate Methods
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    [self.view endEditing:YES];
+    if(scrollView == self.draftWorkContactListScrollView) {
+        self.draftWorkContactListScrollView.contentInset = UIEdgeInsetsZero;
+        
+        [self.view endEditing:YES];
+        [self removePickerPanel];
+    }
 }
 
 #pragma mark - UITextFieldDelegate Methods
@@ -376,15 +499,14 @@
         return NO;
     }
     
+    [self removePickerPanel];
+    
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if(textField == self.dateTextField) {
-        [self.dateTextField resignFirstResponder];
-        [self.smsAlertTextField becomeFirstResponder];
-    } else if(textField == self.smsAlertTextField) {
+    if(textField == self.smsAlertTextField) {
         [self.smsAlertTextField resignFirstResponder];
         [self.subjectTextField becomeFirstResponder];
     } else if(textField == self.subjectTextField) {
@@ -400,6 +522,8 @@
     if([self isRequesting]) {
         return NO;
     }
+    
+    [self removePickerPanel];
     
     return YES;
 }
