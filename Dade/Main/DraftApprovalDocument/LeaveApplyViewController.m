@@ -368,11 +368,11 @@
         return NO;
     }
     
-    if(![Util isValidDate:self.leaveDateTextField.text]) {
-        [self showAlert:@"请假日期不合法"];
-        
-        return NO;
-    }
+//    if(![Util isValidDate:self.leaveDateTextField.text]) {
+//        [self showAlert:@"请假日期不合法"];
+//        
+//        return NO;
+//    }
     
     if(![Util isValidNumber:self.leaveDaysTextField.text]) {
         [self showAlert:@"请假天数不合法"];
