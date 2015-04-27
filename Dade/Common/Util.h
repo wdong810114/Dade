@@ -18,6 +18,9 @@
 + (BOOL)isValidNumber:(NSString *)numberString;
 + (BOOL)isValidScore:(NSString *)scoreString;
 
++ (NSString *)stringFromDate:(NSDate *)date;
++ (NSDate *)dateFromString:(NSString *)string;
+
 + (CGSize)sizeOfString:(NSString *)string font:(UIFont *)font constrainedToSize:(CGSize)size;
 + (CGSize)sizeOfString:(NSString *)string font:(UIFont *)font constrainedToSize:(CGSize)size lineBreakMode:(NSLineBreakMode)lineBreakMode;
 

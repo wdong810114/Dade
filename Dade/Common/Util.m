@@ -8,6 +8,8 @@
 
 #import "Util.h"
 
+static NSDateFormatter *_DateFormatter = nil;
+
 @implementation Util
 
 + (NSString *)trimString:(NSString *)string
@@ -51,6 +53,26 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     
     return [predicate evaluateWithObject:scoreString];
+}
+
++ (NSString *)stringFromDate:(NSDate *)date
+{
+    if(!_DateFormatter) {
+        _DateFormatter = [[NSDateFormatter alloc] init];
+        _DateFormatter.dateFormat = @"yyyy-MM-dd";
+    }
+
+    return [_DateFormatter stringFromDate:date];
+}
+
++ (NSDate *)dateFromString:(NSString *)string
+{
+    if(!_DateFormatter) {
+        _DateFormatter = [[NSDateFormatter alloc] init];
+        _DateFormatter.dateFormat = @"yyyy-MM-dd";
+    }
+
+    return [_DateFormatter dateFromString:string];
 }
 
 + (CGSize)sizeOfString:(NSString *)string font:(UIFont *)font constrainedToSize:(CGSize)size
