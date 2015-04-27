@@ -33,6 +33,9 @@
     UIView *_departmentPickerPanel;
     UIPickerView *_departmentPickerView;
     NSArray *_departments;  // 部门
+    
+    UIView *_datePickerPanel;
+    UIDatePicker *_datePickerView;
 }
 
 - (void)dealloc
@@ -101,6 +104,7 @@
     }
     
     [self.view endEditing:YES];
+    [self removePickerPanel];
     
     [UIView animateWithDuration:0.25
                      animations:^{
@@ -112,6 +116,43 @@
     
     CGFloat maxOffsetY = self.departmentView.frame.origin.y;
     CGFloat minOffsetY = self.departmentView.frame.origin.y + self.departmentView.frame.size.height + _departmentPickerPanel.frame.size.height - self.notPunchExplainScrollView.frame.size.height;
+    
+    if(maxOffsetY < self.notPunchExplainScrollView.contentOffset.y) {
+        [self.notPunchExplainScrollView setContentOffset:CGPointMake(0.0, maxOffsetY) animated:YES];
+    }
+    if(self.notPunchExplainScrollView.contentOffset.y < minOffsetY) {
+        CGFloat scrollMaxOffsetY = self.notPunchExplainScrollView.contentSize.height - self.notPunchExplainScrollView.frame.size.height;
+        
+        self.notPunchExplainScrollView.contentInset = UIEdgeInsetsMake(0.0, 0.0, minOffsetY - scrollMaxOffsetY, 0.0);
+        [UIView animateWithDuration:0.25
+                         animations:^{
+                             self.notPunchExplainScrollView.contentOffset = CGPointMake(0.0, minOffsetY);
+                         }
+         ];
+    }
+}
+
+- (void)dateClicked
+{
+    // 未打卡日期
+    
+    if([self isRequesting]) {
+        return;
+    }
+    
+    [self.view endEditing:YES];
+    [self removePickerPanel];
+    
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         CGRect frame = _datePickerPanel.frame;
+                         frame.origin.y = self.view.frame.size.height - frame.size.height;
+                         _datePickerPanel.frame = frame;
+                     } completion:^(BOOL finished) {
+                     }];
+    
+    CGFloat maxOffsetY = self.dateView.frame.origin.y;
+    CGFloat minOffsetY = self.dateView.frame.origin.y + self.dateView.frame.size.height + _datePickerPanel.frame.size.height - self.notPunchExplainScrollView.frame.size.height;
     
     if(maxOffsetY < self.notPunchExplainScrollView.contentOffset.y) {
         [self.notPunchExplainScrollView setContentOffset:CGPointMake(0.0, maxOffsetY) animated:YES];
@@ -157,6 +198,24 @@
     }
 }
 
+- (void)doneDateClicked
+{
+    self.dateLabel.text = [Util stringFromDate:_datePickerView.date];
+    
+    [self removePickerPanel];
+    
+    self.notPunchExplainScrollView.contentInset = UIEdgeInsetsZero;
+    
+    CGFloat scrollMaxOffsetY = self.notPunchExplainScrollView.contentSize.height - self.notPunchExplainScrollView.frame.size.height;
+    if(self.notPunchExplainScrollView.contentOffset.y > scrollMaxOffsetY) {
+        if(scrollMaxOffsetY < 0) {
+            self.notPunchExplainScrollView.contentOffset = CGPointZero;
+        } else {
+            self.notPunchExplainScrollView.contentOffset = CGPointMake(0.0, scrollMaxOffsetY);
+        }
+    }
+}
+
 - (IBAction)reportButtonClicked:(UIButton *)button
 {
     // 呈报
@@ -177,9 +236,6 @@
     if([self.numberTextField isFirstResponder]) {
         maxOffsetY = self.numberView.frame.origin.y;
         minOffsetY = self.numberView.frame.origin.y + self.numberView.frame.size.height + keyboardFrame.size.height - self.notPunchExplainScrollView.frame.size.height;
-    } else if([self.dateTextField isFirstResponder]) {
-        maxOffsetY = self.dateView.frame.origin.y;
-        minOffsetY = self.dateView.frame.origin.y + self.dateView.frame.size.height + keyboardFrame.size.height - self.notPunchExplainScrollView.frame.size.height;
     } else if([self.notPunchTextView isFirstResponder]) {
         maxOffsetY = self.notPunchView.frame.origin.y;
         minOffsetY = self.notPunchView.frame.origin.y + self.notPunchView.frame.size.height + keyboardFrame.size.height - self.notPunchExplainScrollView.frame.size.height;
@@ -232,6 +288,7 @@
     if(!IOS_VERSION_7_OR_ABOVE) {
         self.nameLabel.preferredMaxLayoutWidth = self.nameLabel.bounds.size.width;
         self.departmentLabel.preferredMaxLayoutWidth = self.departmentLabel.bounds.size.width;
+        self.dateLabel.preferredMaxLayoutWidth = self.dateLabel.bounds.size.width;
     }
     
     if(!_approvalViewConstraint) {
@@ -254,8 +311,12 @@
     self.departmentLabel.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapGestureRecognizer1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(departmentClicked)];
     [self.departmentLabel addGestureRecognizer:tapGestureRecognizer1];
+    self.dateLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGestureRecognizer2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dateClicked)];
+    [self.dateLabel addGestureRecognizer:tapGestureRecognizer2];
     
     self.departmentArrowImageView.image = [UIImage imageNamed:@"down_arrow"];
+    self.dateArrowImageView.image = [UIImage imageNamed:@"down_arrow"];
     
     [self.reportButton setBackgroundImage:[Util imageWithColor:RED_BUTTON_BG_NORMAL_COLOR] forState:UIControlStateNormal];
     [self.reportButton setBackgroundImage:[Util imageWithColor:RED_BUTTON_BG_HIGHLIGHTED_COLOR] forState:UIControlStateHighlighted];
@@ -279,7 +340,7 @@
 //        return NO;
 //    }
     
-    if([[Util trimString:self.dateTextField.text] isEqualToString:@""]) {
+    if([[Util trimString:self.dateLabel.text] isEqualToString:@""]) {
         [self showAlert:@"未打卡日期不能为空"];
         
         return NO;
@@ -297,11 +358,11 @@
         return NO;
     }
     
-    if(![Util isValidDate:self.dateTextField.text]) {
-        [self showAlert:@"未打卡日期不合法"];
-        
-        return NO;
-    }
+//    if(![Util isValidDate:self.dateLabel.text]) {
+//        [self showAlert:@"未打卡日期不合法"];
+//        
+//        return NO;
+//    }
     
     return YES;
 }
@@ -375,6 +436,28 @@
         _departmentPickerView = pickerView;
         _departmentPickerPanel = pickerPanel;
     }
+    
+    if(!_datePickerPanel || !_datePickerView) {
+        UIView *pickerPanel = [[UIView alloc] initWithFrame:CGRectMake(0.0, DEVICE_HEIGHT, DEVICE_WIDTH, PICKER_VIEW_HEIGHT + TOOLBAR_HEIGHT)];
+        pickerPanel.backgroundColor = [UIColor whiteColor];
+        
+        UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, pickerPanel.frame.size.width, TOOLBAR_HEIGHT)];
+        toolbar.barStyle = UIBarStyleDefault;
+        UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:BAR_BUTTON_TITLE_DONE style:UIBarButtonItemStyleDone target:self action:@selector(doneDateClicked)];
+        NSArray *buttonArray = [NSArray arrayWithObjects:flexibleSpace, doneButton, nil];
+        toolbar.items = buttonArray;
+        
+        UIDatePicker *pickerView = [[UIDatePicker alloc] initWithFrame:CGRectMake(0.0, TOOLBAR_HEIGHT, pickerPanel.frame.size.width, PICKER_VIEW_HEIGHT)];
+        pickerView.datePickerMode = UIDatePickerModeDate;
+        
+        [pickerPanel addSubview:toolbar];
+        [pickerPanel addSubview:pickerView];
+        [self.view addSubview:pickerPanel];
+        
+        _datePickerView = pickerView;
+        _datePickerPanel = pickerPanel;
+    }
 }
 
 - (void)removePickerPanel
@@ -385,6 +468,17 @@
                              CGRect frame = _departmentPickerPanel.frame;
                              frame.origin.y = self.view.frame.size.height;
                              _departmentPickerPanel.frame = frame;
+                         }
+                         completion:NULL
+         ];
+    }
+    
+    if(_datePickerPanel) {
+        [UIView animateWithDuration:0.25
+                         animations:^{
+                             CGRect frame = _datePickerPanel.frame;
+                             frame.origin.y = self.view.frame.size.height;
+                             _datePickerPanel.frame = frame;
                          }
                          completion:NULL
          ];
@@ -407,7 +501,7 @@
         NSInteger orgIndex = [_departments indexOfObject:self.departmentLabel.text];
         OrganizationInfo *orgInfo = DadeAppDelegate.userInfo.organizationArray[orgIndex];
         
-        NSString *postString = [NSString stringWithFormat:@"{\"attendance\":\"%@\",\"cardDate\":\"%@\",\"content\":\"%@\",\"exaContent\":\"%@\",\"orgId\":\"%@\",\"depOrgId\":\"%@\",\"userId\":\"%@\"}", @""/*self.numberTextField.text*/, self.dateTextField.text, self.notPunchTextView.text, self.explainTextView.text, orgInfo.orgId, orgInfo.depOrgId, DadeAppDelegate.userInfo.staffId];
+        NSString *postString = [NSString stringWithFormat:@"{\"attendance\":\"%@\",\"cardDate\":\"%@\",\"content\":\"%@\",\"exaContent\":\"%@\",\"orgId\":\"%@\",\"depOrgId\":\"%@\",\"userId\":\"%@\"}", @""/*self.numberTextField.text*/, self.dateLabel.text, self.notPunchTextView.text, self.explainTextView.text, orgInfo.orgId, orgInfo.depOrgId, DadeAppDelegate.userInfo.staffId];
         NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
         
         ASIFormDataRequest *request = [self requestWithRelativeURL:SAVE_NOT_PUNCH_REQUEST_URL];
@@ -502,9 +596,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if(textField == self.numberTextField) {
-        [self.dateTextField becomeFirstResponder];
-    } else if(textField == self.dateTextField) {
-        [self.dateTextField resignFirstResponder];
+        [self.numberTextField resignFirstResponder];
     }
     
     return YES;

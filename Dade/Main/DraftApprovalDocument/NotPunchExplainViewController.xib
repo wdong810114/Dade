@@ -8,8 +8,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NotPunchExplainViewController">
             <connections>
                 <outlet property="approvalView" destination="hzR-dw-zos" id="7H6-pC-Cmb"/>
-                <outlet property="dateTextField" destination="OSU-AW-BaQ" id="2A3-wO-cZY"/>
-                <outlet property="dateView" destination="eUq-5O-EmP" id="82q-7Q-CwD"/>
+                <outlet property="dateArrowImageView" destination="jDK-8I-otr" id="W1l-P7-MRu"/>
+                <outlet property="dateLabel" destination="tSo-1z-CPc" id="DQt-TO-mdv"/>
+                <outlet property="dateView" destination="kaO-ft-xWm" id="fJm-6b-zIW"/>
                 <outlet property="departmentArrowImageView" destination="ToT-HT-RCy" id="t7N-sh-ha2"/>
                 <outlet property="departmentLabel" destination="V97-hz-2eG" id="txH-3z-HpQ"/>
                 <outlet property="departmentView" destination="T5H-Fv-kLC" id="ryE-hO-DV2"/>
@@ -113,7 +114,7 @@
                                         <constraint firstAttribute="height" constant="19" id="EJ2-m0-Mvw"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
+                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="ODZ-St-K0w"/>
                                     </connections>
@@ -129,35 +130,40 @@
                                 <constraint firstAttribute="centerY" secondItem="xVG-1x-o3U" secondAttribute="centerY" id="ujm-ju-ydV"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eUq-5O-EmP" userLabel="DateView">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kaO-ft-xWm" userLabel="DateView">
                             <rect key="frame" x="10" y="159" width="300" height="33"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="未打卡日期：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E53-ea-vh9" userLabel="DTitleLabel">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="未打卡日期：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OHv-t4-L38" userLabel="DTitleLabel">
                                     <rect key="frame" x="5" y="8" width="84" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="yyyy-MM-dd" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="OSU-AW-BaQ" userLabel="DateTextField">
-                                    <rect key="frame" x="89" y="7" width="211" height="19"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="19" id="64l-VO-zeQ"/>
-                                    </constraints>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="248" placeholderIntrinsicHeight="17" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tSo-1z-CPc" userLabel="DateLabel">
+                                    <rect key="frame" x="89" y="8" width="187" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done"/>
-                                    <connections>
-                                        <outlet property="delegate" destination="-1" id="RVx-dI-9V5"/>
-                                    </connections>
-                                </textField>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jDK-8I-otr" userLabel="ArrowImageView">
+                                    <rect key="frame" x="281" y="13" width="14" height="8"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="14" id="4ki-0l-Nst"/>
+                                        <constraint firstAttribute="height" constant="8" id="Mxi-UR-UcB"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="OSU-AW-BaQ" firstAttribute="top" secondItem="eUq-5O-EmP" secondAttribute="top" constant="7" id="OZ9-Wf-O03"/>
-                                <constraint firstItem="E53-ea-vh9" firstAttribute="centerY" secondItem="eUq-5O-EmP" secondAttribute="centerY" id="RWG-YR-hq4"/>
-                                <constraint firstAttribute="trailing" secondItem="OSU-AW-BaQ" secondAttribute="trailing" id="l06-nG-iSb"/>
-                                <constraint firstItem="E53-ea-vh9" firstAttribute="leading" secondItem="eUq-5O-EmP" secondAttribute="leading" constant="5" id="lVh-rV-wLG"/>
-                                <constraint firstItem="OSU-AW-BaQ" firstAttribute="centerY" secondItem="eUq-5O-EmP" secondAttribute="centerY" id="qGX-im-mSC"/>
-                                <constraint firstItem="OSU-AW-BaQ" firstAttribute="leading" secondItem="E53-ea-vh9" secondAttribute="trailing" id="tCM-zy-ehE"/>
+                                <constraint firstItem="tSo-1z-CPc" firstAttribute="top" secondItem="OHv-t4-L38" secondAttribute="top" id="L54-Ky-qFq"/>
+                                <constraint firstAttribute="trailing" secondItem="tSo-1z-CPc" secondAttribute="trailing" constant="24" id="NFW-jv-DYq"/>
+                                <constraint firstItem="OHv-t4-L38" firstAttribute="top" secondItem="kaO-ft-xWm" secondAttribute="top" constant="8" id="RSS-EL-o4p"/>
+                                <constraint firstItem="tSo-1z-CPc" firstAttribute="leading" secondItem="OHv-t4-L38" secondAttribute="trailing" id="TuT-ko-YJ4"/>
+                                <constraint firstItem="OHv-t4-L38" firstAttribute="height" relation="lessThanOrEqual" secondItem="tSo-1z-CPc" secondAttribute="height" id="jPO-Qc-tBY"/>
+                                <constraint firstAttribute="bottom" secondItem="tSo-1z-CPc" secondAttribute="bottom" constant="8" id="laD-mb-8Eg"/>
+                                <constraint firstAttribute="centerY" secondItem="jDK-8I-otr" secondAttribute="centerY" id="mtB-oN-S8W"/>
+                                <constraint firstItem="OHv-t4-L38" firstAttribute="leading" secondItem="kaO-ft-xWm" secondAttribute="leading" constant="5" id="sbT-g6-iDz"/>
+                                <constraint firstAttribute="trailing" secondItem="jDK-8I-otr" secondAttribute="trailing" constant="5" id="u1f-bR-NWd"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ahU-Fl-Qbe" userLabel="NotPunchView">
@@ -286,11 +292,11 @@
                     </subviews>
                     <constraints>
                         <constraint firstItem="R1r-O0-hDS" firstAttribute="top" secondItem="ahU-Fl-Qbe" secondAttribute="bottom" constant="15" id="4fh-4i-Tba"/>
-                        <constraint firstItem="eUq-5O-EmP" firstAttribute="width" secondItem="WFQ-6U-cHQ" secondAttribute="width" id="6Ix-Fi-Qap"/>
                         <constraint firstAttribute="bottom" secondItem="hzR-dw-zos" secondAttribute="bottom" id="6V5-cD-ksc"/>
                         <constraint firstItem="WFQ-6U-cHQ" firstAttribute="leading" secondItem="qbk-DQ-DKw" secondAttribute="leading" constant="10" id="6fI-hT-dtM"/>
-                        <constraint firstItem="eUq-5O-EmP" firstAttribute="top" secondItem="YTQ-ur-54c" secondAttribute="bottom" constant="15" id="FYm-OO-hwF"/>
+                        <constraint firstItem="kaO-ft-xWm" firstAttribute="width" secondItem="WFQ-6U-cHQ" secondAttribute="width" id="8SY-k8-v6z"/>
                         <constraint firstItem="YTQ-ur-54c" firstAttribute="top" secondItem="T5H-Fv-kLC" secondAttribute="bottom" constant="15" id="Hc6-iy-L2F"/>
+                        <constraint firstItem="ahU-Fl-Qbe" firstAttribute="top" secondItem="kaO-ft-xWm" secondAttribute="bottom" constant="15" id="HqZ-vb-buS"/>
                         <constraint firstItem="DTx-Af-8TX" firstAttribute="leading" secondItem="WFQ-6U-cHQ" secondAttribute="leading" id="JDG-Vs-fjM"/>
                         <constraint firstItem="hzR-dw-zos" firstAttribute="top" secondItem="DTx-Af-8TX" secondAttribute="bottom" constant="15" id="OP4-h6-Q5C"/>
                         <constraint firstItem="DTx-Af-8TX" firstAttribute="top" secondItem="R1r-O0-hDS" secondAttribute="bottom" constant="15" id="Odh-on-GXl"/>
@@ -304,12 +310,12 @@
                         <constraint firstItem="T5H-Fv-kLC" firstAttribute="leading" secondItem="WFQ-6U-cHQ" secondAttribute="leading" id="d3F-P5-Rt1"/>
                         <constraint firstItem="hzR-dw-zos" firstAttribute="width" secondItem="WFQ-6U-cHQ" secondAttribute="width" id="dcO-hM-7Q5"/>
                         <constraint firstItem="YTQ-ur-54c" firstAttribute="leading" secondItem="WFQ-6U-cHQ" secondAttribute="leading" id="eE9-QL-8zy"/>
-                        <constraint firstItem="ahU-Fl-Qbe" firstAttribute="top" secondItem="eUq-5O-EmP" secondAttribute="bottom" constant="15" id="gWJ-bK-XWH"/>
                         <constraint firstItem="hzR-dw-zos" firstAttribute="leading" secondItem="WFQ-6U-cHQ" secondAttribute="leading" id="iGs-Sd-gVq"/>
-                        <constraint firstItem="eUq-5O-EmP" firstAttribute="leading" secondItem="WFQ-6U-cHQ" secondAttribute="leading" id="pep-X5-O9q"/>
+                        <constraint firstItem="kaO-ft-xWm" firstAttribute="leading" secondItem="WFQ-6U-cHQ" secondAttribute="leading" id="iK8-hN-X7y"/>
                         <constraint firstAttribute="trailing" secondItem="WFQ-6U-cHQ" secondAttribute="trailing" constant="10" id="pnq-Sy-JCJ"/>
                         <constraint firstItem="ahU-Fl-Qbe" firstAttribute="width" secondItem="WFQ-6U-cHQ" secondAttribute="width" id="qoa-GI-7ez"/>
                         <constraint firstItem="T5H-Fv-kLC" firstAttribute="width" secondItem="WFQ-6U-cHQ" secondAttribute="width" id="xkp-OV-23R"/>
+                        <constraint firstItem="kaO-ft-xWm" firstAttribute="top" secondItem="YTQ-ur-54c" secondAttribute="bottom" constant="15" id="y2U-Je-1jg"/>
                         <constraint firstItem="WFQ-6U-cHQ" firstAttribute="centerX" secondItem="qbk-DQ-DKw" secondAttribute="centerX" id="zUh-bz-lfa"/>
                     </constraints>
                     <connections>

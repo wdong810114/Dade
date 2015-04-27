@@ -20,7 +20,8 @@
 @property (weak, nonatomic) IBOutlet UIView *numberView;
 @property (weak, nonatomic) IBOutlet UITextField *numberTextField;
 @property (weak, nonatomic) IBOutlet UIView *dateView;
-@property (weak, nonatomic) IBOutlet UITextField *dateTextField;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *dateArrowImageView;
 @property (weak, nonatomic) IBOutlet UIView *notPunchView;
 @property (weak, nonatomic) IBOutlet UITextView *notPunchTextView;
 @property (weak, nonatomic) IBOutlet UILabel *notPunchPlaceholderLabel;
