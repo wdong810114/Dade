@@ -140,7 +140,7 @@
 
 - (ASIFormDataRequest *)requestWithRelativeURL:(NSString *)relativeURL
 {
-    NSString *url = [NSString stringWithFormat:relativeURL, BASE_REQUEST_URL];
+    NSString *url = [NSString stringWithFormat:relativeURL, (DEPLOYMENT_ENVIRONMENT == 0 ? DIS_BASE_REQUEST_URL : DEV_BASE_REQUEST_URL)];
     NSURL *requstURL = [NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     ASIFormDataRequest *request = [[ASIFormDataRequest alloc] initWithURL:requstURL];
     
