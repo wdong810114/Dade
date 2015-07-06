@@ -62,7 +62,6 @@
 		8BAAED021A6F90DE00464655 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAED011A6F90DE00464655 /* main.m */; };
 		8BAAED051A6F90DE00464655 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAED041A6F90DE00464655 /* AppDelegate.m */; };
 		8BAAED0D1A6F90DE00464655 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BAAED0C1A6F90DE00464655 /* Images.xcassets */; };
-		8BAAED1C1A6F90DE00464655 /* DadeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAED1B1A6F90DE00464655 /* DadeTests.m */; };
 		8BAAED301A6F99E700464655 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAED2F1A6F99E700464655 /* BaseViewController.m */; };
 		8BAAED341A6F9E3A00464655 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAED331A6F9E3A00464655 /* Util.m */; };
 		8BAAED381A6FA03A00464655 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BAAED361A6FA03A00464655 /* MainViewController.m */; };
@@ -113,16 +112,6 @@
 		8BBE12631A70CDCE009D894F /* work_contact_list_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BBE12551A70CDCE009D894F /* work_contact_list_icon@2x.png */; };
 		8BBE12641A70CDCE009D894F /* work_contact_list_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BBE12561A70CDCE009D894F /* work_contact_list_icon@3x.png */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		8BAAED161A6F90DE00464655 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8BAAECF41A6F90DE00464655 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8BAAECFB1A6F90DE00464655;
-			remoteInfo = Dade;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		8B196DB01ADFB7F5006DBD18 /* OrganizationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrganizationInfo.h; sourceTree = "<group>"; };
@@ -206,9 +195,6 @@
 		8BAAED031A6F90DE00464655 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8BAAED041A6F90DE00464655 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		8BAAED0C1A6F90DE00464655 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		8BAAED151A6F90DE00464655 /* DadeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DadeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8BAAED1A1A6F90DE00464655 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8BAAED1B1A6F90DE00464655 /* DadeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DadeTests.m; sourceTree = "<group>"; };
 		8BAAED2E1A6F99E700464655 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		8BAAED2F1A6F99E700464655 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		8BAAED311A6F9A3F00464655 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -299,13 +285,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8BAAED121A6F90DE00464655 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -347,7 +326,6 @@
 			children = (
 				8BAAECFE1A6F90DE00464655 /* Dade */,
 				8BADA0081A7B8AFE00F43D8B /* Libraries */,
-				8BAAED181A6F90DE00464655 /* DadeTests */,
 				8BAAECFD1A6F90DE00464655 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -356,7 +334,6 @@
 			isa = PBXGroup;
 			children = (
 				8BAAECFC1A6F90DE00464655 /* Dade.app */,
-				8BAAED151A6F90DE00464655 /* DadeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -383,23 +360,6 @@
 			children = (
 				8BAAED001A6F90DE00464655 /* Info.plist */,
 				8BAAED011A6F90DE00464655 /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		8BAAED181A6F90DE00464655 /* DadeTests */ = {
-			isa = PBXGroup;
-			children = (
-				8BAAED1B1A6F90DE00464655 /* DadeTests.m */,
-				8BAAED191A6F90DE00464655 /* Supporting Files */,
-			);
-			path = DadeTests;
-			sourceTree = "<group>";
-		};
-		8BAAED191A6F90DE00464655 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				8BAAED1A1A6F90DE00464655 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -686,24 +646,6 @@
 			productReference = 8BAAECFC1A6F90DE00464655 /* Dade.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8BAAED141A6F90DE00464655 /* DadeTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8BAAED221A6F90DE00464655 /* Build configuration list for PBXNativeTarget "DadeTests" */;
-			buildPhases = (
-				8BAAED111A6F90DE00464655 /* Sources */,
-				8BAAED121A6F90DE00464655 /* Frameworks */,
-				8BAAED131A6F90DE00464655 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8BAAED171A6F90DE00464655 /* PBXTargetDependency */,
-			);
-			name = DadeTests;
-			productName = DadeTests;
-			productReference = 8BAAED151A6F90DE00464655 /* DadeTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -715,10 +657,7 @@
 				TargetAttributes = {
 					8BAAECFB1A6F90DE00464655 = {
 						CreatedOnToolsVersion = 6.1.1;
-					};
-					8BAAED141A6F90DE00464655 = {
-						CreatedOnToolsVersion = 6.1.1;
-						TestTargetID = 8BAAECFB1A6F90DE00464655;
+						DevelopmentTeam = 87J84HV7NQ;
 					};
 				};
 			};
@@ -736,7 +675,6 @@
 			projectRoot = "";
 			targets = (
 				8BAAECFB1A6F90DE00464655 /* Dade */,
-				8BAAED141A6F90DE00464655 /* DadeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -802,13 +740,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8BAAED131A6F90DE00464655 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -865,23 +796,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8BAAED111A6F90DE00464655 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8BAAED1C1A6F90DE00464655 /* DadeTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		8BAAED171A6F90DE00464655 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8BAAECFB1A6F90DE00464655 /* Dade */;
-			targetProxy = 8BAAED161A6F90DE00464655 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		8BAAED1D1A6F90DE00464655 /* Debug */ = {
@@ -922,7 +837,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "7fa0fb5b-5e99-4f31-8de8-389c9084dfc7";
+				PROVISIONING_PROFILE = "8f7c6b3b-7e1d-4015-b806-efe3d28b2b00";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -958,7 +873,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "7fa0fb5b-5e99-4f31-8de8-389c9084dfc7";
+				PROVISIONING_PROFILE = "8f7c6b3b-7e1d-4015-b806-efe3d28b2b00";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -980,7 +895,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7fa0fb5b-5e99-4f31-8de8-389c9084dfc7";
+				PROVISIONING_PROFILE = "8f7c6b3b-7e1d-4015-b806-efe3d28b2b00";
 			};
 			name = Debug;
 		};
@@ -1000,43 +915,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7fa0fb5b-5e99-4f31-8de8-389c9084dfc7";
-			};
-			name = Release;
-		};
-		8BAAED231A6F90DE00464655 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = DadeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7fa0fb5b-5e99-4f31-8de8-389c9084dfc7";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dade.app/Dade";
-			};
-			name = Debug;
-		};
-		8BAAED241A6F90DE00464655 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = DadeTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7fa0fb5b-5e99-4f31-8de8-389c9084dfc7";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dade.app/Dade";
+				PROVISIONING_PROFILE = "8f7c6b3b-7e1d-4015-b806-efe3d28b2b00";
 			};
 			name = Release;
 		};
@@ -1057,15 +936,6 @@
 			buildConfigurations = (
 				8BAAED201A6F90DE00464655 /* Debug */,
 				8BAAED211A6F90DE00464655 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8BAAED221A6F90DE00464655 /* Build configuration list for PBXNativeTarget "DadeTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8BAAED231A6F90DE00464655 /* Debug */,
-				8BAAED241A6F90DE00464655 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

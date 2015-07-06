@@ -39,7 +39,8 @@
 #define BAR_BUTTON_TITLE_DONE           @"完成"
 
 // 接口定义
-#define BASE_REQUEST_URL                                @"http://218.60.29.216:8080/kinghorse"
+#define DEV_BASE_REQUEST_URL                            @"http://218.60.29.216:8080/kinghorse"
+#define DIS_BASE_REQUEST_URL                            @"http://218.24.14.69:9090/dade"
 
 #define LOGIN_USER_REQUEST_URL                          @"%@/LoginUser"                     // 用户登录身份验证接口
 #define SEND_TEXT_REQUEST_URL                           @"%@/SendText"                      // 发送短信验证码接口
