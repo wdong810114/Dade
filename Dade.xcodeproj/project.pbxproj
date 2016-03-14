@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4CFE9D7E1C924D7700B8BB34 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CFE9D7D1C924D7700B8BB34 /* libz.tbd */; };
 		8B196DB21ADFB7F5006DBD18 /* OrganizationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B196DB11ADFB7F5006DBD18 /* OrganizationInfo.m */; };
 		8B1AEFE91A89B94F00AD2CAF /* WorkContactListReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B1AEFE71A89B94F00AD2CAF /* WorkContactListReplyViewController.m */; };
 		8B1AEFEA1A89B94F00AD2CAF /* WorkContactListReplyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B1AEFE81A89B94F00AD2CAF /* WorkContactListReplyViewController.xib */; };
@@ -93,7 +94,6 @@
 		8BADA00B1A7B8B7600F43D8B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BADA00A1A7B8B7600F43D8B /* SystemConfiguration.framework */; };
 		8BADA00D1A7B8B9900F43D8B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BADA00C1A7B8B9900F43D8B /* MobileCoreServices.framework */; };
 		8BADA00F1A7B8BAD00F43D8B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BADA00E1A7B8BAD00F43D8B /* CoreGraphics.framework */; };
-		8BADA0111A7B8BDE00F43D8B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BADA0101A7B8BDE00F43D8B /* libz.dylib */; };
 		8BADA0171A7B8D5300F43D8B /* ASIWebPageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BADA0161A7B8D5300F43D8B /* ASIWebPageRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		8BBE12411A70CA5A009D894F /* NoticeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBE123F1A70CA5A009D894F /* NoticeListViewController.m */; };
 		8BBE12421A70CA5A009D894F /* NoticeListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BBE12401A70CA5A009D894F /* NoticeListViewController.xib */; };
@@ -114,6 +114,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4CFE9D7D1C924D7700B8BB34 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		8B196DB01ADFB7F5006DBD18 /* OrganizationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrganizationInfo.h; sourceTree = "<group>"; };
 		8B196DB11ADFB7F5006DBD18 /* OrganizationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrganizationInfo.m; sourceTree = "<group>"; };
 		8B1AEFE61A89B94F00AD2CAF /* WorkContactListReplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkContactListReplyViewController.h; sourceTree = "<group>"; };
@@ -249,7 +250,6 @@
 		8BADA00A1A7B8B7600F43D8B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		8BADA00C1A7B8B9900F43D8B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		8BADA00E1A7B8BAD00F43D8B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		8BADA0101A7B8BDE00F43D8B /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		8BADA0151A7B8D5300F43D8B /* ASIWebPageRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIWebPageRequest.h; sourceTree = "<group>"; };
 		8BADA0161A7B8D5300F43D8B /* ASIWebPageRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIWebPageRequest.m; sourceTree = "<group>"; };
 		8BBE123E1A70CA5A009D894F /* NoticeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeListViewController.h; sourceTree = "<group>"; };
@@ -277,7 +277,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BADA0111A7B8BDE00F43D8B /* libz.dylib in Frameworks */,
+				4CFE9D7E1C924D7700B8BB34 /* libz.tbd in Frameworks */,
 				8BADA00F1A7B8BAD00F43D8B /* CoreGraphics.framework in Frameworks */,
 				8BADA00D1A7B8B9900F43D8B /* MobileCoreServices.framework in Frameworks */,
 				8BADA00B1A7B8B7600F43D8B /* SystemConfiguration.framework in Frameworks */,
@@ -589,7 +589,7 @@
 		8BADA0081A7B8AFE00F43D8B /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				8BADA0101A7B8BDE00F43D8B /* libz.dylib */,
+				4CFE9D7D1C924D7700B8BB34 /* libz.tbd */,
 				8BADA00E1A7B8BAD00F43D8B /* CoreGraphics.framework */,
 				8BADA00C1A7B8B9900F43D8B /* MobileCoreServices.framework */,
 				8BADA00A1A7B8B7600F43D8B /* SystemConfiguration.framework */,
@@ -885,7 +885,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: wang dongdong (4SQWD692US)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -895,7 +896,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8f7c6b3b-7e1d-4015-b806-efe3d28b2b00";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -905,7 +906,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: wang dongdong (4SQWD692US)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -915,7 +917,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-lxml2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8f7c6b3b-7e1d-4015-b806-efe3d28b2b00";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

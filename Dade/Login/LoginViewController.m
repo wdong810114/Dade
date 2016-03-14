@@ -20,7 +20,11 @@
 - (void)login;
 - (void)requestLoginFinished:(NSString *)jsonString;
 - (void)requestLoginFailed;
-
+// Added on 2016-3-14 ------Start
+- (void)queryOrganization;
+- (void)requestQueryOrganizationFinished:(NSString *)jsonString;
+- (void)requestQueryOrganizationFailed;
+// Added on 2016-3-14 ------End
 - (void)queryVersionNumber;
 - (void)requestQueryVersionNumberFinished:(NSString *)jsonString;
 - (void)requestQueryVersionNumberFailed;
@@ -95,7 +99,7 @@
     self.codeLabel.text = [self randomCode];
     
     if(DEPLOYMENT_ENVIRONMENT == 2) {
-        self.usernameTextField.text = @"zhaogc";
+        self.usernameTextField.text = @"admin";
         self.passwordTextField.text = @"123456";
         self.codeTextField.text = @"9999";
         self.codeLabel.text = @"9999";
@@ -151,8 +155,11 @@
         if([ajaxToken integerValue] == 0) {
             DadeAppDelegate.userInfo = [[UserInfo alloc] initWithDict:jsonDict];
             
-            CaptchaViewController *viewController = [[CaptchaViewController alloc] initWithNibName:@"CaptchaViewController" bundle:nil];
-            [self.navigationController pushViewController:viewController animated:YES];
+            // Modified on 2016-3-14 ------Start
+            // CaptchaViewController *viewController = [[CaptchaViewController alloc] initWithNibName:@"CaptchaViewController" bundle:nil];
+            // [self.navigationController pushViewController:viewController animated:YES];
+            [self queryOrganization];
+            // Modified on 2016-3-14 ------End
         } else {
             NSString *ajaxMessage = [jsonDict stringForKey:@"ajax_message"];
             [self showAlert:ajaxMessage];
@@ -166,6 +173,40 @@
 {
     [self stopLoading];
 }
+
+// Added on 2016-3-14 ------Start
+- (void)queryOrganization
+{
+    [self startLoading];
+    
+//    userId ：用户Id
+    
+    NSString *postString = [NSString stringWithFormat:@"{\"userId\":\"%@\"}", DadeAppDelegate.userInfo.staffId];
+    NSMutableData *postData = [[NSMutableData alloc] initWithData:[postString dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    ASIFormDataRequest *request = [self requestWithRelativeURL:QUERY_ORGANIZATION_REQUEST_URL];
+    [request setPostBody:postData];
+    [self startRequest:request didFinishSelector:@selector(requestQueryOrganizationFinished:) didFailSelector:@selector(requestQueryOrganizationFailed)];
+}
+
+- (void)requestQueryOrganizationFinished:(NSString *)jsonString
+{
+    [self stopLoading];
+    
+    NSError *error = nil;
+    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingMutableContainers error:&error];
+    if(!error && jsonArray) {
+        [DadeAppDelegate.userInfo parseOrganizationArray:jsonArray];
+        
+        [DadeAppDelegate performSelector:@selector(loginSuccessed)];
+    }
+}
+
+- (void)requestQueryOrganizationFailed
+{
+    [self stopLoading];
+}
+// Added on 2016-3-14 ------End
 
 - (void)queryVersionNumber
 {
